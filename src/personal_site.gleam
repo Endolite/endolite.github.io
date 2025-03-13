@@ -19,7 +19,9 @@ import pages/writings/tuples
 
 pub fn main() {
   let app =
-    lustre.application(init, update, fn(x) { x |> view |> mathjax_wrapper })
+    lustre.application(init, update, fn(x) {
+      x |> view |> styling.mathjax_wrapper
+    })
   let assert Ok(_) = lustre.start(app, "#app", Nil)
 }
 
@@ -97,7 +99,9 @@ fn view_nav() {
       styling.hoverable_text(
         html.a([attribute.href("/resume")], [element.text("Resume")]),
       ),
-      styling.hoverable_text(html.a([attribute.href("/")], [element.text("Home")])),
+      styling.hoverable_text(
+        html.a([attribute.href("/")], [element.text("Home")]),
+      ),
       styling.hoverable_text(
         html.a([attribute.href("/writings")], [element.text("Writings")]),
       ),
@@ -154,67 +158,36 @@ fn view_writing(title: String) {
       )
     False ->
       ui.centre(
-        [cluster.align_centre(), attribute.style([#("margin", "20px")])],
-        ui.cluster([], case list.filter(writings, fn(x) { x.0 == title }) {
-          [a] -> [
-            html.h1(
-              [
-                attribute.style([
-                  #("font-size", "24pt"),
-                  #("text-align", "center"),
-                ]),
-              ],
-              [a.1],
-            ),
-            html.h2(
-              [
-                attribute.style([
-                  #("font-size", "12pt"),
-                  #("text-align", "center"),
-                ]),
-              ],
-              [element.text(a.3)],
-            ),
-            a.2(),
-          ]
-          _ -> panic
-        }),
+        [cluster.align_centre()],
+        ui.cluster(
+          [attribute.style([])],
+          case list.filter(writings, fn(x) { x.0 == title }) {
+            [a] -> [
+              html.h1(
+                [
+                  attribute.style([
+                    #("font-size", "24pt"),
+                    #("text-align", "center"),
+                  ]),
+                ],
+                [a.1],
+              ),
+              html.h2(
+                [
+                  attribute.style([
+                    #("font-size", "12pt"),
+                    #("text-align", "center"),
+                  ]),
+                ],
+                [element.text(a.3)],
+              ),
+              a.2(),
+            ]
+            _ -> panic
+          },
+        ),
       )
   }
-}
-
-const styles = [
-  #("font-family", "CMU Serif"),
-  #("font-weight", "575"),
-  #("font-size", "13pt"),
-  #("color", "White"),
-  #("background-color", "#20201E"),
-  #("min-height", "100vh"),
-  #("height", "100%"),
-  #("margin", "0"),
-]
-
-pub fn mathjax_wrapper(page) {
-  html.html([attribute.style(styles)], [
-    html.head([], [
-      html.script(
-        [
-          attribute.src(
-            "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js",
-          ),
-          attribute.id("MathJax-script"),
-        ],
-        "",
-      ),
-      html.link([
-        attribute.rel("stylesheet"),
-        attribute.href(
-          "https://cdn.jsdelivr.net/gh/bitmaks/cm-web-fonts@latest/fonts.css",
-        ),
-      ]),
-    ]),
-    html.body([attribute.style([#("padding", "20px")])], [ui.box([], [page])]),
-  ])
 }
 
 @external(javascript, "./refresh.ffi.mjs", "refresh")

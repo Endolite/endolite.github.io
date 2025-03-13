@@ -1762,7 +1762,7 @@ function createElementNode({ prev, next, dispatch, stack: stack3 }) {
   const prevHandlers = canMorph ? new Set(handlersForEl.keys()) : null;
   const prevAttributes = canMorph ? new Set(Array.from(prev.attributes, (a2) => a2.name)) : null;
   let className = null;
-  let style2 = null;
+  let style3 = null;
   let innerHTML = null;
   if (canMorph && next.tag === "textarea") {
     const innertText = next.children[Symbol.iterator]().next().value?.content;
@@ -1805,7 +1805,7 @@ function createElementNode({ prev, next, dispatch, stack: stack3 }) {
     } else if (name === "class") {
       className = className === null ? value : className + " " + value;
     } else if (name === "style") {
-      style2 = style2 === null ? value : style2 + value;
+      style3 = style3 === null ? value : style3 + value;
     } else if (name === "dangerous-unescaped-html") {
       innerHTML = value;
     } else {
@@ -1822,8 +1822,8 @@ function createElementNode({ prev, next, dispatch, stack: stack3 }) {
     if (canMorph)
       prevAttributes.delete("class");
   }
-  if (style2 !== null) {
-    el.setAttribute("style", style2);
+  if (style3 !== null) {
+    el.setAttribute("style", style3);
     if (canMorph)
       prevAttributes.delete("style");
   }
@@ -2300,6 +2300,9 @@ function head(attrs, children2) {
 function link(attrs) {
   return element("link", attrs, toList([]));
 }
+function style2(attrs, css) {
+  return element("style", attrs, toList([text2(css)]));
+}
 function body(attrs, children2) {
   return element("body", attrs, children2);
 }
@@ -2539,25 +2542,36 @@ function init2(handler) {
 // build/dev/javascript/personal_site/pages/home.mjs
 function view() {
   return p(
-    toList([style(toList([["margin", "20px"]]))]),
+    toList([
+      class$("center"),
+      style(toList([["margin-top", "20px"]]))
+    ]),
     toList([
       text(
-        "Hi, I'm an undergraduate UWaterloo CS/Math 27' student. I made this website for no reason other than wanting to learn Gleam, and I'm very happy I did."
+        "Hi, I'm an undergraduate UWaterloo BCS 27'. I made this website for no reason other than wanting to learn "
       ),
+      a(
+        toList([
+          href("https://gleam.run/"),
+          class$("clickable")
+        ]),
+        toList([text("Gleam")])
+      ),
+      text(" (which was a great decision!)."),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text(
-        "Right now, I'm learning about formal language theory (CS 442), topology (Munkres ofc), and boolean algebras with application to analysis (Vladimirov)."
+        "On my own time, I'm currently learning about formal language theory (CS 442), topology (Munkres ofc), and boolean algebras with application to analysis (Vladimirov)."
       ),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text("I'm "),
       a(
         toList([
           href("https://github.com/Endolite"),
-          style(toList([["color", "#d8b4fe"]]))
+          class$("clickable")
         ]),
-        toList([text("Endolite on GitHub ")])
+        toList([text("Endolite on GitHub")])
       ),
-      text("and @endolite on Discord")
+      text(" and @endolite on Discord.")
     ])
   );
 }
@@ -2565,7 +2579,10 @@ function view() {
 // build/dev/javascript/personal_site/pages/resume.mjs
 function view2() {
   return div(
-    toList([style(toList([["margin", "20px"]]))]),
+    toList([
+      class$("center"),
+      style(toList([["margin-top", "20px"]]))
+    ]),
     toList([
       h1(
         toList([style(toList([["font-size", "16pt"]]))]),
@@ -2591,7 +2608,7 @@ function view2() {
         toList([style(toList([["margin-left", "4em"]]))]),
         toList([
           text(
-            "A relaxed introduction linear algebra course I was long overdue for and ended up really liking thanks to its emphasis on proofs"
+            "Relaxed introduction to linear algebra I was long overdue for and ended up really liking thanks to its emphasis on proofs"
           )
         ])
       ),
@@ -2615,7 +2632,7 @@ function view2() {
         toList([style(toList([["margin-left", "4em"]]))]),
         toList([
           text(
-            "This course was entirely review, so not much to say; integrals are pretty fun"
+            "Entirely review, so not much to say; integrals are pretty fun"
           )
         ])
       ),
@@ -2627,7 +2644,7 @@ function view2() {
         toList([style(toList([["margin-left", "4em"]]))]),
         toList([
           text(
-            "This course was half review and half-new material, all of which was computational; a tolerable covering of vector calculus and Fourier series/transforms"
+            "Half review and half new material, all of which was computational; a tolerable covering of vector calculus and Fourier series/transforms"
           )
         ])
       ),
@@ -2665,7 +2682,7 @@ function view2() {
         toList([style(toList([["margin-left", "4em"]]))]),
         toList([
           text(
-            "Lebesgue integration has been my white whale in math for a long time, and it this course was certainly as difficult as I expected, though maybe moreso due to the Fourier analysis; still really fun even, and finally motivated the material from MATH 235"
+            "Lebesgue integration has been my white whale in math for a long time, and it this course was certainly as difficult as I expected, though maybe moreso due to the Fourier analysis; still really fun even, and finally motivated the material from Linear Algebra 2"
           )
         ])
       ),
@@ -2677,7 +2694,7 @@ function view2() {
         toList([style(toList([["margin-left", "4em"]]))]),
         toList([
           text(
-            "A course with a lot of fun proofs that made me feel clever and stupid; graph theory was a bit less engaging, though"
+            "Lots of fun proofs that made me feel clever and stupid; graph theory was a bit less engaging, though"
           )
         ])
       ),
@@ -2699,7 +2716,7 @@ function view2() {
               href(
                 "https://gist.github.com/Endolite/aa8024db78eb546dd36d7ba1be0de34e"
               ),
-              style(toList([["color", "#d8b4fe"]]))
+              class$("clickable")
             ]),
             toList([text("Kanata config")])
           )
@@ -2766,7 +2783,7 @@ function view2() {
         toList([style(toList([["margin-left", "4em"]]))]),
         toList([
           text(
-            "A pretty useless course on academic writing; writing essays is fun, though"
+            "Pretty basic course on academic writing; writing essays is fun, though"
           )
         ])
       ),
@@ -2778,7 +2795,7 @@ function view2() {
         toList([style(toList([["margin-left", "4em"]]))]),
         toList([
           text(
-            "Another relatively useless course, though it both was more interesting and more tedious"
+            "Another relatively basic course, though it both was more interesting and more tedious"
           )
         ])
       ),
@@ -2790,7 +2807,7 @@ function view2() {
         toList([style(toList([["margin-left", "4em"]]))]),
         toList([
           text(
-            "Decent writing practice but didn't learn anything since it just covered the first half of Genki \u2161; I definitely need more speaking practice"
+            "Decent writing practice, but I didn't learn anything since it just covered the first half of Genki \u2161; I definitely need more speaking practice"
           )
         ])
       ),
@@ -2819,7 +2836,7 @@ function view2() {
         toList([style(toList([["margin-left", "4em"]]))]),
         toList([
           text(
-            "A very straightforward, computational primer on multivariable and vector calculus"
+            "Very straightforward, computational primer on multivariable and vector calculus"
           )
         ])
       ),
@@ -2831,7 +2848,7 @@ function view2() {
         toList([style(toList([["margin-left", "4em"]]))]),
         toList([
           text(
-            "A thoroughly computationally rigorous introduction to differential equations; I gravely oversetimated the imporatnce of differential equations for my career"
+            "Thoroughly computationally rigorous introduction to differential equations; I gravely oversetimated the imporatnce of differential equations for my career"
           )
         ])
       ),
@@ -2843,7 +2860,7 @@ function view2() {
         toList([style(toList([["margin-left", "4em"]]))]),
         toList([
           text(
-            "A sporadic, unrigorous introduction to number theory, enumeration, graph theory, propositional logic, set theory, and discrete probability (in that order?)"
+            "Sporadic, unrigorous introduction to number theory, enumeration, graph theory, propositional logic, set theory, and discrete probability (in that order?)"
           )
         ])
       ),
@@ -2856,7 +2873,7 @@ function view2() {
         toList([style(toList([["margin-left", "4em"]]))]),
         toList([
           text(
-            "A relaxed introduction to basic C++ and object-oriented programming more generally; my only background was Java, which was slightly suboptimal"
+            "Relaxed introduction to basic C++ and object-oriented programming more generally; my only background was Java, which was slightly suboptimal"
           )
         ])
       ),
@@ -2869,7 +2886,7 @@ function view2() {
         toList([style(toList([["margin-left", "4em"]]))]),
         toList([
           text(
-            "A largely conceptual survey of modern physics, with computation for motivation and simply examples; classical relativity, special relativity, wave-particle duality, quantum mechanics, modelling atoms, nuclear physics, astrophysics, and general relativity"
+            "Largely conceptual survey of modern physics, with computation for motivation and simply examples; classical relativity, special relativity, wave-particle duality, quantum mechanics, modelling atoms, nuclear physics, astrophysics, and general relativity"
           )
         ])
       )
@@ -2880,7 +2897,10 @@ function view2() {
 // build/dev/javascript/personal_site/pages/writings/tuples.mjs
 function view3() {
   return p(
-    toList([style(toList([["text-align", "justify"]]))]),
+    toList([
+      class$("center"),
+      style(toList([["text-align", "justify"]]))
+    ]),
     toList([
       text(
         "Consider the humble pair, \\((x, y)\\). It's not exactly groundbreaking, but it's not immediately trivial from the ZF axioms either, since a set \\(\\{x, y\\}\\) is inherently unordered. The traditional definition of a pair is\n          \\[(x, y) \\triangleq \\{\\{x\\}, \\{\\{x, y\\}\\}\\]\n      Ah, so a tuple is just a set ordered by inclusion, how simple! Surely, then,\n        \\[(x_i)_{i = 1}^n = \\left\\{\\{x_i\\}_{i = 1}^j\\right\\}_{j = 1}^n\\]\n      This is what I genuinely believed for an embarrassingly long time, but the trouble with this is that an ordered set is "
@@ -2905,7 +2925,7 @@ function view3() {
       ),
       i(toList([]), toList([text("choose ")])),
       text("an element from a given index. The "),
-      i(toList([]), toList([text("product ")])),
+      b(toList([]), toList([text("product ")])),
       text(
         "over the collection is the set of all such choice functions. When each \\(X_y\\) is the same, this can be regarded as the \\(Y\\)-fold product of \\(X\\), or \\(X^Y\\). This is a simply collection of functions \\(f: Y \\to X\\) such that for each \\(y \\in Y\\), \\(f(y) \\in X\\), which happens to characterize functions \\(f: Y \\to X\\). A crucial consideration to make is that natural numbers are themselves sets (as Von Neumann ordinals), defined recursively with \\(0 \\triangleq \\varnothing\\) and \\(n + 1 \\triangleq n \\cup \\{n\\}\\). In general, \\(n = \\{i\\}_{i = 0}^{n - 1}\\), so an element of \\(X^n\\) is a function that takes a natural number less than \\(n\\) and maps it to an element of \\(X\\). (This can be thought of as a 0-index list.) Expaning definitions, this yields\n        \\[X^2 = \\{f \\in \\mathcal{P}(2 \\times X) \\mid \\forall n \\in 2, \\exists! x \\in X, (n, x) \\in f\\}\\]\n      An element of \\(X^2\\) is a function \\(f: 2 \\to X\\) of the form \\(\\{(0, x_0), (1, x_1)\\}\\), which is decidedly not a pair \\((x_0, x_1)\\). This is analogous to a sequence, though, as an element of \\(X^\\mathbb{N}\\). This should be clear from the definition alone, since \\(\\mathbb{N}\\) can be regarded as the limit of \\(n\\) as you keep adding 1, being the union of "
       ),
@@ -2962,7 +2982,7 @@ function view3() {
           )
         ])
       ),
-      text("Pairing \\(X\\) with an ordering \\(<\\) yields a "),
+      text("Pairing \\(X\\) with such an ordering \\(<\\) yields a "),
       b(toList([]), toList([text("strictly ordered set ")])),
       text(
         "\\((X, {<})\\). Not only does this pair require a preexisting definition of a tuple, but so too does the relation, as established above, so while this is perhaps the most straightforward, axiomatic way to define ordering, it cannot be the most foundational one."
@@ -2993,6 +3013,53 @@ function hoverable_text(el) {
       )
     ]),
     toList([el])
+  );
+}
+var styles = /* @__PURE__ */ toList([
+  ["font-family", "CMU Serif"],
+  ["font-weight", "575"],
+  ["font-size", "13pt"],
+  ["color", "White"],
+  ["background-color", "#20201E"],
+  ["min-height", "100vh"],
+  ["height", "100%"],
+  ["margin", "0"]
+]);
+function mathjax_wrapper(page) {
+  return html(
+    toList([style(styles)]),
+    toList([
+      head(
+        toList([]),
+        toList([
+          script(
+            toList([
+              src(
+                "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+              ),
+              id("MathJax-script")
+            ]),
+            ""
+          ),
+          link(
+            toList([
+              rel("stylesheet"),
+              href(
+                "https://cdn.jsdelivr.net/gh/bitmaks/cm-web-fonts@latest/fonts.css"
+              )
+            ])
+          ),
+          style2(
+            toList([]),
+            "\n        .clickable {\n          color: #d8b4fe;\n        }\n        .center {\n          margin: auto;\n          max-width: min(700px, 100vw);\n        }\n\n        body {\n          background-color: rgba(0, 0, 0, 0.25)\n        }\n      "
+          )
+        ])
+      ),
+      body(
+        toList([style(toList([["padding", "20px"]]))]),
+        toList([box2(toList([]), toList([page]))])
+      )
+    ])
   );
 }
 
@@ -3146,12 +3213,9 @@ function view_writing(title) {
     );
   } else {
     return centre2(
-      toList([
-        align_centre(),
-        style(toList([["margin", "20px"]]))
-      ]),
+      toList([align_centre()]),
       cluster2(
-        toList([]),
+        toList([style(toList([]))]),
         (() => {
           let $1 = filter(writings, (x) => {
             return x[0] === title;
@@ -3181,7 +3245,7 @@ function view_writing(title) {
             throw makeError(
               "panic",
               "personal_site",
-              180,
+              186,
               "view_writing",
               "`panic` expression evaluated.",
               {}
@@ -3226,49 +3290,6 @@ function update(_, msg) {
     ];
   }
 }
-var styles = /* @__PURE__ */ toList([
-  ["font-family", "CMU Serif"],
-  ["font-weight", "575"],
-  ["font-size", "13pt"],
-  ["color", "White"],
-  ["background-color", "#20201E"],
-  ["min-height", "100vh"],
-  ["height", "100%"],
-  ["margin", "0"]
-]);
-function mathjax_wrapper(page) {
-  return html(
-    toList([style(styles)]),
-    toList([
-      head(
-        toList([]),
-        toList([
-          script(
-            toList([
-              src(
-                "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-              ),
-              id("MathJax-script")
-            ]),
-            ""
-          ),
-          link(
-            toList([
-              rel("stylesheet"),
-              href(
-                "https://cdn.jsdelivr.net/gh/bitmaks/cm-web-fonts@latest/fonts.css"
-              )
-            ])
-          )
-        ])
-      ),
-      body(
-        toList([style(toList([["padding", "20px"]]))]),
-        toList([box2(toList([]), toList([page]))])
-      )
-    ])
-  );
-}
 function main() {
   let app = application(
     init3,
@@ -3284,7 +3305,7 @@ function main() {
     throw makeError(
       "let_assert",
       "personal_site",
-      23,
+      25,
       "main",
       "Pattern match failed, no pattern matched the value.",
       { value: $ }
