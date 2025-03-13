@@ -8,9 +8,11 @@ import lustre/element.{type Element}
 import lustre/element/html
 import lustre/ui
 import lustre/ui/cluster
-import lustre/ui/colour
 import modem
 
+import styling
+
+import pages/home
 import pages/resume
 
 import pages/writings/tuples
@@ -39,7 +41,6 @@ fn init(_flags) -> #(Model, Effect(Msg)) {
         modem.initial_uri() |> result.unwrap(uri.empty) |> on_route_change
       {
         OnRouteChange(x) -> x
-        _ -> panic
       },
     ),
     modem.init(on_route_change),
@@ -58,16 +59,11 @@ fn on_route_change(uri: Uri) -> Msg {
 // Update
 pub opaque type Msg {
   OnRouteChange(Route)
-  OnClick(String)
 }
 
-fn update(model: Model, msg: Msg) -> #(Model, Effect(Msg)) {
+fn update(_model: Model, msg: Msg) -> #(Model, Effect(Msg)) {
   case msg {
     OnRouteChange(route) -> #(Model(route:), {
-      refresh()
-      effect.none()
-    })
-    _ -> #(model, {
       refresh()
       effect.none()
     })
@@ -75,32 +71,14 @@ fn update(model: Model, msg: Msg) -> #(Model, Effect(Msg)) {
 }
 
 // View
-const styles = [
-  #("margin", "2vh"),
-  #("font-family", "CMU Serif"),
-  #("font-weight", "575"),
-  #("font-size", "14pt"),
-]
-
-fn theme() {
-  ui.Theme(
-    primary: colour.slate_dark(),
-    greyscale: colour.grey_dark(),
-    error: colour.amber_dark(),
-    warning: colour.gold_dark(),
-    success: colour.sage_dark(),
-    info: colour.red_dark(),
-  )
-}
-
 fn view(model: Model) -> Element(Msg) {
   let page = case model.route {
     Resume -> resume.view()
     Writings(title) -> view_writing(title)
-    _ -> view_home()
+    _ -> home.view()
   }
 
-  ui.stack([attribute.style(styles)], [
+  ui.stack([], [
     ui.centre([cluster.align_start()], ui.cluster([], [view_nav(), page])),
   ])
 }
@@ -111,19 +89,20 @@ fn view_nav() {
       attribute.style([
         #("display", "flex"),
         #("justify-content", "space-between"),
+        #("font-size", "16pt"),
       ]),
       ui.variant(ui.Primary),
     ],
     [
-      html.a([attribute.href("/resume")], [element.text("Resume")]),
-      html.a([attribute.href("/")], [element.text("Home")]),
-      html.a([attribute.href("/writings")], [element.text("Writings")]),
+      styling.hoverable_text(
+        html.a([attribute.href("/resume")], [element.text("Resume")]),
+      ),
+      styling.hoverable_text(html.a([attribute.href("/")], [element.text("Home")])),
+      styling.hoverable_text(
+        html.a([attribute.href("/writings")], [element.text("Writings")]),
+      ),
     ],
   )
-}
-
-fn view_home() {
-  html.h1([], [element.text("come one come all")])
 }
 
 fn view_writing(title: String) {
@@ -141,30 +120,41 @@ fn view_writing(title: String) {
   case title == "" {
     True ->
       ui.centre(
-        [cluster.align_start()],
+        [cluster.align_start(), attribute.style([#("margin", "20px")])],
         ui.cluster(
           [],
           list.map(writings, fn(x) {
-            ui.box(
-              [
-                attribute.style([
-                  #("display", "flex"),
-                  #("justify-content", "space-between"),
-                  #("padding-left", "100px"),
-                  #("padding-right", "100px"),
-                ]),
-              ],
-              [
-                html.a([attribute.href("/writings/" <> x.0)], [x.1]),
-                html.p([], [element.text(x.3)]),
-              ],
-            )
+            html.div([], [
+              styling.hoverable_text(
+                html.a(
+                  [
+                    attribute.href("/writings/" <> x.0),
+                    attribute.style([
+                      #("position", "fixed"),
+                      #("left", "50%"),
+                      #("transform", "translate(-200px)"),
+                    ]),
+                  ],
+                  [x.1],
+                ),
+              ),
+              html.p(
+                [
+                  attribute.style([
+                    #("position", "fixed"),
+                    #("left", "50%"),
+                    #("transform", "translate(100px)"),
+                  ]),
+                ],
+                [element.text(x.3)],
+              ),
+            ])
           }),
         ),
       )
     False ->
       ui.centre(
-        [cluster.align_centre()],
+        [cluster.align_centre(), attribute.style([#("margin", "20px")])],
         ui.cluster([], case list.filter(writings, fn(x) { x.0 == title }) {
           [a] -> [
             html.h1(
@@ -193,8 +183,19 @@ fn view_writing(title: String) {
   }
 }
 
+const styles = [
+  #("font-family", "CMU Serif"),
+  #("font-weight", "575"),
+  #("font-size", "13pt"),
+  #("color", "White"),
+  #("background-color", "#20201E"),
+  #("min-height", "100vh"),
+  #("height", "100%"),
+  #("margin", "0"),
+]
+
 pub fn mathjax_wrapper(page) {
-  html.html([], [
+  html.html([attribute.style(styles)], [
     html.head([], [
       html.script(
         [
@@ -208,17 +209,12 @@ pub fn mathjax_wrapper(page) {
       html.link([
         attribute.rel("stylesheet"),
         attribute.href(
-          "https://fonts.googleapis.com/css2?family=CM+U+Serif+MX&family=CMU+Concrete&family=CMU+Typewriter+Text+1&family=Latin+Modern+Math&family=TeX+Gyre+Termes&family=TeX+Gyre+DejaVu+Math&display=swap",
+          "https://cdn.jsdelivr.net/gh/bitmaks/cm-web-fonts@latest/fonts.css",
         ),
       ]),
     ]),
-    html.body([attribute.style(styles)], [page]),
+    html.body([attribute.style([#("padding", "20px")])], [ui.box([], [page])]),
   ])
-}
-
-@external(javascript, "./refresh.ffi.mjs", "log_test")
-fn log_test() -> Nil {
-  Nil
 }
 
 @external(javascript, "./refresh.ffi.mjs", "refresh")

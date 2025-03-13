@@ -186,8 +186,8 @@ var BitArray = class {
     } else {
       for (let i2 = 0; i2 < wholeByteCount; i2++) {
         const a2 = bitArrayByteAt(this.rawBuffer, this.bitOffset, i2);
-        const b = bitArrayByteAt(other.rawBuffer, other.bitOffset, i2);
-        if (a2 !== b) {
+        const b2 = bitArrayByteAt(other.rawBuffer, other.bitOffset, i2);
+        if (a2 !== b2) {
           return false;
         }
       }
@@ -198,13 +198,13 @@ var BitArray = class {
           this.bitOffset,
           wholeByteCount
         );
-        const b = bitArrayByteAt(
+        const b2 = bitArrayByteAt(
           other.rawBuffer,
           other.bitOffset,
           wholeByteCount
         );
         const unusedLowBitCount = 8 - trailingBitsCount;
-        if (a2 >> unusedLowBitCount !== b >> unusedLowBitCount) {
+        if (a2 >> unusedLowBitCount !== b2 >> unusedLowBitCount) {
           return false;
         }
       }
@@ -255,8 +255,8 @@ function bitArrayByteAt(buffer, bitOffset, index3) {
     return buffer[index3] ?? 0;
   } else {
     const a2 = buffer[index3] << bitOffset & 255;
-    const b = buffer[index3 + 1] >> 8 - bitOffset;
-    return a2 | b;
+    const b2 = buffer[index3 + 1] >> 8 - bitOffset;
+    return a2 | b2;
   }
 }
 var isBitArrayDeprecationMessagePrinted = {};
@@ -299,18 +299,18 @@ function isEqual(x, y) {
   let values2 = [x, y];
   while (values2.length) {
     let a2 = values2.pop();
-    let b = values2.pop();
-    if (a2 === b)
+    let b2 = values2.pop();
+    if (a2 === b2)
       continue;
-    if (!isObject(a2) || !isObject(b))
+    if (!isObject(a2) || !isObject(b2))
       return false;
-    let unequal = !structurallyCompatibleObjects(a2, b) || unequalDates(a2, b) || unequalBuffers(a2, b) || unequalArrays(a2, b) || unequalMaps(a2, b) || unequalSets(a2, b) || unequalRegExps(a2, b);
+    let unequal = !structurallyCompatibleObjects(a2, b2) || unequalDates(a2, b2) || unequalBuffers(a2, b2) || unequalArrays(a2, b2) || unequalMaps(a2, b2) || unequalSets(a2, b2) || unequalRegExps(a2, b2);
     if (unequal)
       return false;
     const proto = Object.getPrototypeOf(a2);
     if (proto !== null && typeof proto.equals === "function") {
       try {
-        if (a2.equals(b))
+        if (a2.equals(b2))
           continue;
         else
           return false;
@@ -319,7 +319,7 @@ function isEqual(x, y) {
     }
     let [keys2, get] = getters(a2);
     for (let k of keys2(a2)) {
-      values2.push(get(a2, k), get(b, k));
+      values2.push(get(a2, k), get(b2, k));
     }
   }
   return true;
@@ -332,34 +332,34 @@ function getters(object3) {
     return [(x) => [...extra, ...Object.keys(x)], (x, y) => x[y]];
   }
 }
-function unequalDates(a2, b) {
-  return a2 instanceof Date && (a2 > b || a2 < b);
+function unequalDates(a2, b2) {
+  return a2 instanceof Date && (a2 > b2 || a2 < b2);
 }
-function unequalBuffers(a2, b) {
-  return !(a2 instanceof BitArray) && a2.buffer instanceof ArrayBuffer && a2.BYTES_PER_ELEMENT && !(a2.byteLength === b.byteLength && a2.every((n, i2) => n === b[i2]));
+function unequalBuffers(a2, b2) {
+  return !(a2 instanceof BitArray) && a2.buffer instanceof ArrayBuffer && a2.BYTES_PER_ELEMENT && !(a2.byteLength === b2.byteLength && a2.every((n, i2) => n === b2[i2]));
 }
-function unequalArrays(a2, b) {
-  return Array.isArray(a2) && a2.length !== b.length;
+function unequalArrays(a2, b2) {
+  return Array.isArray(a2) && a2.length !== b2.length;
 }
-function unequalMaps(a2, b) {
-  return a2 instanceof Map && a2.size !== b.size;
+function unequalMaps(a2, b2) {
+  return a2 instanceof Map && a2.size !== b2.size;
 }
-function unequalSets(a2, b) {
-  return a2 instanceof Set && (a2.size != b.size || [...a2].some((e) => !b.has(e)));
+function unequalSets(a2, b2) {
+  return a2 instanceof Set && (a2.size != b2.size || [...a2].some((e) => !b2.has(e)));
 }
-function unequalRegExps(a2, b) {
-  return a2 instanceof RegExp && (a2.source !== b.source || a2.flags !== b.flags);
+function unequalRegExps(a2, b2) {
+  return a2 instanceof RegExp && (a2.source !== b2.source || a2.flags !== b2.flags);
 }
 function isObject(a2) {
   return typeof a2 === "object" && a2 !== null;
 }
-function structurallyCompatibleObjects(a2, b) {
-  if (typeof a2 !== "object" && typeof b !== "object" && (!a2 || !b))
+function structurallyCompatibleObjects(a2, b2) {
+  if (typeof a2 !== "object" && typeof b2 !== "object" && (!a2 || !b2))
     return false;
   let nonstructural = [Promise, WeakSet, WeakMap, Function];
   if (nonstructural.some((c) => a2 instanceof c))
     return false;
-  return a2.constructor === b.constructor;
+  return a2.constructor === b2.constructor;
 }
 function makeError(variant2, module, line, fn, message, extra) {
   let error = new globalThis.Error(message);
@@ -440,8 +440,8 @@ function hashByReference(o) {
   referenceMap.set(o, hash);
   return hash;
 }
-function hashMerge(a2, b) {
-  return a2 ^ b + 2654435769 + (a2 << 6) + (a2 >> 2) | 0;
+function hashMerge(a2, b2) {
+  return a2 ^ b2 + 2654435769 + (a2 << 6) + (a2 >> 2) | 0;
 }
 function hashString(s) {
   let hash = 0;
@@ -2008,13 +2008,13 @@ var LustreClientApplication = class _LustreClientApplication {
    *
    * @returns {Gleam.Ok<(action: Lustre.Action<Lustre.Client, Msg>>) => void>}
    */
-  static start({ init: init4, update: update2, view: view4 }, selector, flags) {
+  static start({ init: init4, update: update2, view: view5 }, selector, flags) {
     if (!is_browser())
       return new Error(new NotABrowser());
     const root = selector instanceof HTMLElement ? selector : document.querySelector(selector);
     if (!root)
       return new Error(new ElementNotFound(selector));
-    const app = new _LustreClientApplication(root, init4(flags), update2, view4);
+    const app = new _LustreClientApplication(root, init4(flags), update2, view5);
     return new Ok((action) => app.send(action));
   }
   /**
@@ -2025,11 +2025,11 @@ var LustreClientApplication = class _LustreClientApplication {
    *
    * @returns {LustreClientApplication}
    */
-  constructor(root, [init4, effects], update2, view4) {
+  constructor(root, [init4, effects], update2, view5) {
     this.root = root;
     this.#model = init4;
     this.#update = update2;
-    this.#view = view4;
+    this.#view = view5;
     this.#tickScheduled = window.setTimeout(
       () => this.#tick(effects.all.toArray(), true),
       0
@@ -2144,20 +2144,20 @@ var LustreClientApplication = class _LustreClientApplication {
 };
 var start = LustreClientApplication.start;
 var LustreServerApplication = class _LustreServerApplication {
-  static start({ init: init4, update: update2, view: view4, on_attribute_change }, flags) {
+  static start({ init: init4, update: update2, view: view5, on_attribute_change }, flags) {
     const app = new _LustreServerApplication(
       init4(flags),
       update2,
-      view4,
+      view5,
       on_attribute_change
     );
     return new Ok((action) => app.send(action));
   }
-  constructor([model, effects], update2, view4, on_attribute_change) {
+  constructor([model, effects], update2, view5, on_attribute_change) {
     this.#model = model;
     this.#update = update2;
-    this.#view = view4;
-    this.#html = view4(model);
+    this.#view = view5;
+    this.#html = view5(model);
     this.#onAttributeChange = on_attribute_change;
     this.#renderers = /* @__PURE__ */ new Map();
     this.#handlers = handlers(this.#html);
@@ -2258,11 +2258,11 @@ var is_browser = () => globalThis.window && window.document;
 
 // build/dev/javascript/lustre/lustre.mjs
 var App = class extends CustomType {
-  constructor(init4, update2, view4, on_attribute_change) {
+  constructor(init4, update2, view5, on_attribute_change) {
     super();
     this.init = init4;
     this.update = update2;
-    this.view = view4;
+    this.view = view5;
     this.on_attribute_change = on_attribute_change;
   }
 };
@@ -2274,8 +2274,8 @@ var ElementNotFound = class extends CustomType {
 };
 var NotABrowser = class extends CustomType {
 };
-function application(init4, update2, view4) {
-  return new App(init4, update2, view4, new None());
+function application(init4, update2, view5) {
+  return new App(init4, update2, view5, new None());
 }
 function start2(app, selector, flags) {
   return guard(
@@ -2309,14 +2309,32 @@ function h1(attrs, children2) {
 function h2(attrs, children2) {
   return element("h2", attrs, children2);
 }
+function h3(attrs, children2) {
+  return element("h3", attrs, children2);
+}
+function h4(attrs, children2) {
+  return element("h4", attrs, children2);
+}
 function div(attrs, children2) {
   return element("div", attrs, children2);
+}
+function li(attrs, children2) {
+  return element("li", attrs, children2);
+}
+function ol(attrs, children2) {
+  return element("ol", attrs, children2);
 }
 function p(attrs, children2) {
   return element("p", attrs, children2);
 }
 function a(attrs, children2) {
   return element("a", attrs, children2);
+}
+function b(attrs, children2) {
+  return element("b", attrs, children2);
+}
+function br(attrs) {
+  return element("br", attrs, toList([]));
 }
 function i(attrs, children2) {
   return element("i", attrs, children2);
@@ -2518,23 +2536,442 @@ function init2(handler) {
   );
 }
 
-// build/dev/javascript/personal_site/pages/resume.mjs
+// build/dev/javascript/personal_site/pages/home.mjs
 function view() {
-  return div(
-    toList([]),
+  return p(
+    toList([style(toList([["margin", "20px"]]))]),
     toList([
-      p(toList([]), toList([text("I am not qualified \u{1F970}")]))
+      text(
+        "Hi, I'm an undergraduate UWaterloo CS/Math 27' student. I made this website for no reason other than wanting to learn Gleam, and I'm very happy I did."
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text(
+        "Right now, I'm learning about formal language theory (CS 442), topology (Munkres ofc), and boolean algebras with application to analysis (Vladimirov)."
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text("I'm "),
+      a(
+        toList([
+          href("https://github.com/Endolite"),
+          style(toList([["color", "#d8b4fe"]]))
+        ]),
+        toList([text("Endolite on GitHub ")])
+      ),
+      text("and @endolite on Discord")
+    ])
+  );
+}
+
+// build/dev/javascript/personal_site/pages/resume.mjs
+function view2() {
+  return div(
+    toList([style(toList([["margin", "20px"]]))]),
+    toList([
+      h1(
+        toList([style(toList([["font-size", "16pt"]]))]),
+        toList([text("Education")])
+      ),
+      h2(
+        toList([
+          style(
+            toList([["font-size", "14pt"], ["margin-left", "1em"]])
+          )
+        ]),
+        toList([text("University of Waterloo (BCS 23\u201327)")])
+      ),
+      h3(
+        toList([style(toList([["margin-left", "2em"]]))]),
+        toList([text("Courses")])
+      ),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([text("MATH 136 \u2013 Linear Algebra 1")])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "A relaxed introduction linear algebra course I was long overdue for and ended up really liking thanks to its emphasis on proofs"
+          )
+        ])
+      ),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([text("MATH 235 \u2013 Linear Algebra 2")])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "Spent way too long on abstract vector spaces, which is review from the previous course, and then crammed in a bunch of unmotivated computation in the second half; not a great time, but certainly useful for at least one other course"
+          )
+        ])
+      ),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([text("MATH 138 \u2013 Calculus 2")])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "This course was entirely review, so not much to say; integrals are pretty fun"
+          )
+        ])
+      ),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([text("AMATH 231 \u2013 Calculus 4")])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "This course was half review and half-new material, all of which was computational; a tolerable covering of vector calculus and Fourier series/transforms"
+          )
+        ])
+      ),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([text("PMATH 333 \u2013 Introduction to Analysis")])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "While this course made me realize that I like analysis more than algebra, it came at the cost really annoying proofs that were quite computational and required a lot of memorization"
+          )
+        ])
+      ),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([text("PMATH 351 \u2013 Real Analysis")])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "Easily my favourite course I've taken so far, covering a lot in depth in a straightforward manner with motivation that never made it feel overly difficult to intuit the progression"
+          )
+        ])
+      ),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([
+          text("PMATH 450 \u2013 Lebesgue Integration and Fourier Analysis")
+        ])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "Lebesgue integration has been my white whale in math for a long time, and it this course was certainly as difficult as I expected, though maybe moreso due to the Fourier analysis; still really fun even, and finally motivated the material from MATH 235"
+          )
+        ])
+      ),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([text("MATH 249 \u2013 Introduction to Combinatorics")])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "A course with a lot of fun proofs that made me feel clever and stupid; graph theory was a bit less engaging, though"
+          )
+        ])
+      ),
+      br(toList([])),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([
+          text("CS 145 \u2013 Introduction to Functional Programming")
+        ])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "Racket is a really fun language; this course really prepared me for making my "
+          ),
+          a(
+            toList([
+              href(
+                "https://gist.github.com/Endolite/aa8024db78eb546dd36d7ba1be0de34e"
+              ),
+              style(toList([["color", "#d8b4fe"]]))
+            ]),
+            toList([text("Kanata config")])
+          )
+        ])
+      ),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([
+          text(
+            "CS 146 \u2013 Elementary Algorithm Design and Data Abstraction"
+          )
+        ])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "Course title is the vaguest possible for a CS course, but it was a great well-motivated introduction to imperative programming; now I can pretend to understand compilers"
+          )
+        ])
+      ),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([text("CS 241E \u2013 Foundations of Sequential Programs")])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "Another vague title, but this was focused on implementing abstractions from machine code, going from a verison of MIPS implemeted in Scala to a toy language Lacs with some of Scala's functionality; the final was disproportionately representative language theory, which was my favourite part of the course; now I can pretend to understand compilers a bit more confidently"
+          )
+        ])
+      ),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([text("CS 245 \u2013 Logic and Computation")])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "I'm more of a math guy, so an introduction to formal logic with some connections to model theory was much appreciated"
+          )
+        ])
+      ),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([text("CS 246 \u2013 Object-Oriented Software Development")])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "Didn't go to a single lecture but still somehow passed; C++ is certainly a language"
+          )
+        ])
+      ),
+      br(toList([])),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([text("ENGL 109 \u2013 Introduction to Academic Writing")])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "A pretty useless course on academic writing; writing essays is fun, though"
+          )
+        ])
+      ),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([text("ENGL 210E \u2013 Genres of Technical Communication")])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "Another relatively useless course, though it both was more interesting and more tedious"
+          )
+        ])
+      ),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([text("JAPAN 201R \u2013 Second-Year Japanese 1")])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "Decent writing practice but didn't learn anything since it just covered the first half of Genki \u2161; I definitely need more speaking practice"
+          )
+        ])
+      ),
+      br(toList([])),
+      h2(
+        toList([
+          style(
+            toList([["font-size", "14pt"], ["margin-left", "1em"]])
+          )
+        ]),
+        toList([
+          text(
+            "Lawrence Technological University (Dual Enrollment 22\u201323)"
+          )
+        ])
+      ),
+      h3(
+        toList([style(toList([["margin-left", "2em"]]))]),
+        toList([text("Courses")])
+      ),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([text("MCS 2414 \u2013 Calculus 3")])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "A very straightforward, computational primer on multivariable and vector calculus"
+          )
+        ])
+      ),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([text("MCS 2423 \u2013 Differential Equations")])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "A thoroughly computationally rigorous introduction to differential equations; I gravely oversetimated the imporatnce of differential equations for my career"
+          )
+        ])
+      ),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([text("MCS 2523 \u2013 Discrete Math")])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "A sporadic, unrigorous introduction to number theory, basic enumeration, graph theory, propositional logic, set theory, and discrete probability (in that order?)"
+          )
+        ])
+      ),
+      br(toList([])),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([text("MCS 2514 \u2013 Computer Science 2")])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "A relaxed introduction to basic C++ and object-oriented programming more generally; my only background was Java, which was slightly suboptimal"
+          )
+        ])
+      ),
+      br(toList([])),
+      h4(
+        toList([style(toList([["margin-left", "3em"]]))]),
+        toList([text("PHY 3653 \u2013 Contemporary Physics")])
+      ),
+      p(
+        toList([style(toList([["margin-left", "4em"]]))]),
+        toList([
+          text(
+            "A largely conceptual survey of modern physics, with computation for motivation and simply examples; classical relativity, special relativity, wave-particle duality, quantum mechanics, modelling atoms, nuclear physics, astrophysics, and general relativity"
+          )
+        ])
+      )
     ])
   );
 }
 
 // build/dev/javascript/personal_site/pages/writings/tuples.mjs
-function view2() {
-  return div(
+function view3() {
+  return p(
     toList([style(toList([["text-align", "justify"]]))]),
     toList([
       text(
-        "\n        Consider the humble pair, \\((x, y)\\). It's not exactly groundbreaking, but it's not immediately evident from the ZF axioms either, since a set \\(\\{x, y\\}\\) is inherently unordered. The traditional definition of a pair is\n          \\[(x, y) \\triangleq \\{\\{x\\}, \\{\\{x, y\\}\\}\\]\n        Ah, so a tuple is just a set ordered by inclusion, how simple! Surely, then,\n          \\[(x_i)_{i = 1}^n = \\left\\{\\{x_i\\}_{i = 1}^j \\ \\middle|\\ j \\in \\{1, \\ldots, n\\}\\right\\}\\]\n        This is what I genuinely believed for an embarassingly long time, but the trouble with this is that an ordered set is \\(\\it{itself}\\) a pair of a set and a relation, and a relation is also just a set of pairs. We just got past Russell's paradox, so we can't exactly afford any more self-reference. (I know this can be defined as a separate isomorhic entity; that's kind of the point of this as you'll soon find out.) Tuples are instead recursively defined with nesting (in a manner resembling lists in the \\(\\lambda\\)-calculus):\n          \\[\\begin{align*}\n            (x, y, z) &\\triangleq \\bigl(x, (y, z)\\bigr) \\\\\n              &:= \\{\\{x\\}, \\{x, (y, z)\\}\\} \\\\\n              &:= \\{\\{x\\}, \\{x, \\{\\{y\\}, \\{y, z\\}\\}\\}\\}\n          \\end{align*}\\]\n        Okay, this isn't the prettiest thing in the world, but it certainly does work. It also implies that cartesian exponentiation is right-associative, which is interesting.\n      "
+        "Consider the humble pair, \\((x, y)\\). It's not exactly groundbreaking, but it's not immediately trivial from the ZF axioms either, since a set \\(\\{x, y\\}\\) is inherently unordered. The traditional definition of a pair is\n          \\[(x, y) \\triangleq \\{\\{x\\}, \\{\\{x, y\\}\\}\\]\n      Ah, so a tuple is just a set ordered by inclusion, how simple! Surely, then,\n        \\[(x_i)_{i = 1}^n = \\left\\{\\{x_i\\}_{i = 1}^j\\right\\}_{j = 1}^n\\]\n      This is what I genuinely believed for an embarrassingly long time, but the trouble with this is that an ordered set is "
+      ),
+      i(toList([]), toList([text("itself ")])),
+      text(
+        "a pair of a set and a relation, and a relation is also just a set of pairs. We just got past Russell's paradox, so we can't exactly afford any more self-reference. (I know this can be defined as a separate isomorhic entity; that's kind of the point of this, as you'll soon find out.) Tuples are instead recursively defined with nesting (in a manner resembling lists in the \\(\\lambda\\)-calculus):\n        \\[\\begin{align*}\n          (x, y, z) &\\triangleq \\bigl(x, (y, z)\\bigr) \\\\\n            &= \\{\\{x\\}, \\{x, (y, z)\\}\\} \\\\\n            &= \\{\\{x\\}, \\{x, \\{\\{y\\}, \\{y, z\\}\\}\\}\\}\n        \\end{align*}\\]\n      Okay, this isn't the prettiest thing in the world, but it certainly does work. It also implies that Cartesian exponentiation is right-associative, which is interesting. Speaking of which, Cartesian and set exponentiation differ. To see this, let us first review the set-theoretic notions of relations and functions."
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text("A "),
+      b(toList([]), toList([text("relation ")])),
+      text(
+        "with domain \\(X\\) and codomain \\(Y\\) is some\n        \\[R \\subseteq X \\times Y \\triangleq \\{(x, y) \\mid x \\in X, y \\in Y\\}\\]\n      \\(x \\in X\\) is related \\(y \\in Y\\) by \\(R\\) when \\((x, y) \\in R\\). A"
+      ),
+      b(toList([]), toList([text(" function ")])),
+      text(
+        "is simply a relation such that each \\(x \\in X\\) is related to exactly one \\(y \\in Y\\) (passing the vertical-line test, so to speak). A\n       "
+      ),
+      b(toList([]), toList([text("choice function ")])),
+      text(
+        "on an indexed family of sets \\(\\{X_\\lambda\\}_{y \\in Y}\\) is a function \\(f: Y \\to \\bigcup_{y \\in Y} X_y\\) such that each \\(y \\in Y\\) maps to an element of \\(X_y\\); that is, a choice function is a way to "
+      ),
+      i(toList([]), toList([text("choose ")])),
+      text("an element from a given index. The "),
+      i(toList([]), toList([text("product ")])),
+      text(
+        "over the collection is the set of all such choice functions. When each \\(X_y\\) is the same, this can be regarded as the \\(Y\\)-fold product of \\(X\\), or \\(X^Y\\). This is a simply collection of functions \\(f: Y \\to X\\) such that for each \\(y \\in Y\\), \\(f(y) \\in X\\), which happens to characterize functions \\(f: Y \\to X\\). A crucial consideration to make is that natural numbers are themselves sets, defined recursively with \\(0 \\triangleq \\varnothing\\) and \\(n + 1 \\triangleq n \\cup \\{n\\}\\). In general, \\(n = \\{i\\}_{i = 0}^{n - 1}\\), so an element of \\(X^n\\) is a function that takes a natural number less than \\(n\\) and maps it to an element of \\(X\\). (This can be thought of as a 0-index list.) Expaning definitions, this yields\n        \\[X^2 = \\{f \\in \\mathcal{P}(2 \\times X) \\mid \\forall n \\in 2, \\exists! x \\in X, (n, x) \\in f\\}\\]\n      An element of \\(X^2\\) is a function \\(f: 2 \\to X\\) of the form \\(\\{(0, x_0), (1, x_1)\\}\\), which is decidedly not a pair \\((x_0, x_1)\\). This is analogous to a sequence, though, as an element of \\(X^\\mathbb{N}\\). This should be clear from the definition alone, since \\(\\mathbb{N}\\) can be regarded as the limit of \\(n\\) as you keep adding 1, being the union of "
+      ),
+      i(toList([]), toList([text("all ")])),
+      text("natural numbers as opposed to just the first \\(n\\). "),
+      i(
+        toList([]),
+        toList([
+          text(
+            "(If only there were a conventint term for this exact thing.) "
+          )
+        ])
+      ),
+      text(
+        "The defiition of exponentiation as a set of finite sequences rather than tuples means that \\(X^n \\subseteq X^*\\), where \\(*\\) is the "
+      ),
+      b(toList([]), toList([text("Kleene star operator, ")])),
+      text(
+        "with \\(X^*\\) defined as the set of finite sequences (strings) with elements (characters) in \\(X\\) (the alphabet). "
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text("Maybe we don't even need functions, though. A "),
+      b(toList([]), toList([text("strict order relation ")])),
+      text(
+        " on \\(X\\) is a binary relation \\({<} \\subseteq X \\times X\\) such that for \\(x, y, z \\in X\\),"
+      ),
+      ol(
+        toList([
+          style(
+            toList([
+              ["list-style", "decimal"],
+              ["list-style-position", "inside"],
+              ["margin-left", "1em"]
+            ])
+          )
+        ]),
+        toList([
+          li(
+            toList([]),
+            toList([
+              text("exactly one of \\(x < y\\) or \\(y < x\\) is true")
+            ])
+          ),
+          li(toList([]), toList([text("\\(x \\not< x\\), and")])),
+          li(
+            toList([]),
+            toList([
+              text(
+                "\\(x < y\\) and \\(y < z\\) implies that \\(x < z\\)."
+              )
+            ])
+          )
+        ])
+      ),
+      text("Pairing \\(X\\) with an ordering \\(<\\) yields a "),
+      b(toList([]), toList([text("strictly ordered set ")])),
+      text(
+        "\\((X, {<})\\). Not only does this pair require a preexisting definition of a tuple, but so too does the relation, as established above, so while this is perhaps the most straightforward, axiomatic way to define ordering, it cannot be the most foundational one."
+      ),
+      br(toList([])),
+      text(
+        "My supposed definition of an \\(n\\)-tuple can be derived from this by letting \\({<} = {\\subseteq}\\) and denoting each set by its first element not in any smaller set (with a choice function!)."
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text(
+        "It's trivial to see that all of these definitions are equivalent for most purposes, so this amounts to pedantry; while abuse of notation can certainly be an issue in mathematics, it's good to know when to draw the line. I'm no set-theorist, so I think I'll leave it at that."
       )
     ])
   );
@@ -2544,6 +2981,18 @@ function view2() {
 var refresh = () => {
   window.location.reload();
 };
+
+// build/dev/javascript/personal_site/styling.mjs
+function hoverable_text(el) {
+  return div(
+    toList([
+      class$(
+        "transition-colors duration-200 ease-in-out hover:text-purple-300"
+      )
+    ]),
+    toList([el])
+  );
+}
 
 // build/dev/javascript/personal_site/personal_site.mjs
 var Model2 = class extends CustomType {
@@ -2590,18 +3039,9 @@ function init3(_) {
           let _pipe$1 = unwrap(_pipe, empty);
           return on_route_change(_pipe$1);
         })();
-        if ($ instanceof OnRouteChange) {
+        {
           let x = $[0];
           return x;
-        } else {
-          throw makeError(
-            "panic",
-            "personal_site",
-            42,
-            "init",
-            "`panic` expression evaluated.",
-            {}
-          );
         }
       })()
     ),
@@ -2612,25 +3052,32 @@ function view_nav() {
   return box2(
     toList([
       style(
-        toList([["display", "flex"], ["justify-content", "space-between"]])
+        toList([
+          ["display", "flex"],
+          ["justify-content", "space-between"],
+          ["font-size", "16pt"]
+        ])
       ),
       variant(new Primary())
     ]),
     toList([
-      a(
-        toList([href("/resume")]),
-        toList([text("Resume")])
+      hoverable_text(
+        a(
+          toList([href("/resume")]),
+          toList([text("Resume")])
+        )
       ),
-      a(toList([href("/")]), toList([text("Home")])),
-      a(
-        toList([href("/writings")]),
-        toList([text("Writings")])
+      hoverable_text(
+        a(toList([href("/")]), toList([text("Home")]))
+      ),
+      hoverable_text(
+        a(
+          toList([href("/writings")]),
+          toList([text("Writings")])
+        )
       )
     ])
   );
-}
-function view_home() {
-  return h1(toList([]), toList([text("come one come all")]));
 }
 function view_writing(title) {
   let writings = toList([
@@ -2643,36 +3090,52 @@ function view_writing(title) {
           text(" are tuples?")
         ])
       ),
-      view2,
+      view3,
       "2025/03/12"
     ]
   ]);
   let $ = title === "";
   if ($) {
     return centre2(
-      toList([align_start()]),
+      toList([
+        align_start(),
+        style(toList([["margin", "20px"]]))
+      ]),
       cluster2(
         toList([]),
         map(
           writings,
           (x) => {
-            return box2(
+            return div(
+              toList([]),
               toList([
-                style(
-                  toList([
-                    ["display", "flex"],
-                    ["justify-content", "space-between"],
-                    ["padding-left", "100px"],
-                    ["padding-right", "100px"]
-                  ])
-                )
-              ]),
-              toList([
-                a(
-                  toList([href("/writings/" + x[0])]),
-                  toList([x[1]])
+                hoverable_text(
+                  a(
+                    toList([
+                      href("/writings/" + x[0]),
+                      style(
+                        toList([
+                          ["position", "fixed"],
+                          ["left", "50%"],
+                          ["transform", "translate(-200px)"]
+                        ])
+                      )
+                    ]),
+                    toList([x[1]])
+                  )
                 ),
-                p(toList([]), toList([text(x[3])]))
+                p(
+                  toList([
+                    style(
+                      toList([
+                        ["position", "fixed"],
+                        ["left", "50%"],
+                        ["transform", "translate(100px)"]
+                      ])
+                    )
+                  ]),
+                  toList([text(x[3])])
+                )
               ])
             );
           }
@@ -2681,7 +3144,10 @@ function view_writing(title) {
     );
   } else {
     return centre2(
-      toList([align_centre()]),
+      toList([
+        align_centre(),
+        style(toList([["margin", "20px"]]))
+      ]),
       cluster2(
         toList([]),
         (() => {
@@ -2713,7 +3179,7 @@ function view_writing(title) {
             throw makeError(
               "panic",
               "personal_site",
-              190,
+              180,
               "view_writing",
               "`panic` expression evaluated.",
               {}
@@ -2724,46 +3190,20 @@ function view_writing(title) {
     );
   }
 }
-function update(model, msg) {
-  if (msg instanceof OnRouteChange) {
-    let route = msg[0];
-    return [
-      new Model2(route),
-      (() => {
-        refresh();
-        return none();
-      })()
-    ];
-  } else {
-    return [
-      model,
-      (() => {
-        refresh();
-        return none();
-      })()
-    ];
-  }
-}
-var styles = /* @__PURE__ */ toList([
-  ["margin", "2vh"],
-  ["font-family", "CMU Serif"],
-  ["font-weight", "575"],
-  ["font-size", "14pt"]
-]);
-function view3(model) {
+function view4(model) {
   let page = (() => {
     let $ = model.route;
     if ($ instanceof Resume2) {
-      return view();
+      return view2();
     } else if ($ instanceof Writings) {
       let title = $[0];
       return view_writing(title);
     } else {
-      return view_home();
+      return view();
     }
   })();
   return stack2(
-    toList([style(styles)]),
+    toList([]),
     toList([
       centre2(
         toList([align_start()]),
@@ -2772,9 +3212,31 @@ function view3(model) {
     ])
   );
 }
+function update(_, msg) {
+  {
+    let route = msg[0];
+    return [
+      new Model2(route),
+      (() => {
+        refresh();
+        return none();
+      })()
+    ];
+  }
+}
+var styles = /* @__PURE__ */ toList([
+  ["font-family", "CMU Serif"],
+  ["font-weight", "575"],
+  ["font-size", "13pt"],
+  ["color", "White"],
+  ["background-color", "#20201E"],
+  ["min-height", "100vh"],
+  ["height", "100%"],
+  ["margin", "0"]
+]);
 function mathjax_wrapper(page) {
   return html(
-    toList([]),
+    toList([style(styles)]),
     toList([
       head(
         toList([]),
@@ -2792,13 +3254,16 @@ function mathjax_wrapper(page) {
             toList([
               rel("stylesheet"),
               href(
-                "https://fonts.googleapis.com/css2?family=CM+U+Serif+MX&family=CMU+Concrete&family=CMU+Typewriter+Text+1&family=Latin+Modern+Math&family=TeX+Gyre+Termes&family=TeX+Gyre+DejaVu+Math&display=swap"
+                "https://cdn.jsdelivr.net/gh/bitmaks/cm-web-fonts@latest/fonts.css"
               )
             ])
           )
         ])
       ),
-      body(toList([style(styles)]), toList([page]))
+      body(
+        toList([style(toList([["padding", "20px"]]))]),
+        toList([box2(toList([]), toList([page]))])
+      )
     ])
   );
 }
@@ -2808,7 +3273,7 @@ function main() {
     update,
     (x) => {
       let _pipe = x;
-      let _pipe$1 = view3(_pipe);
+      let _pipe$1 = view4(_pipe);
       return mathjax_wrapper(_pipe$1);
     }
   );
@@ -2817,7 +3282,7 @@ function main() {
     throw makeError(
       "let_assert",
       "personal_site",
-      21,
+      23,
       "main",
       "Pattern match failed, no pattern matched the value.",
       { value: $ }
