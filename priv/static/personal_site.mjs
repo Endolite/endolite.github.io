@@ -2692,7 +2692,7 @@ function view2() {
         toList([style(toList([["margin-left", "4em"]]))]),
         toList([
           text(
-            "Racket is a really fun language; this course really prepared me for making my "
+            "Racket is a fun language, can't wait to use it in the real world; this course really prepared me for making my "
           ),
           a(
             toList([
@@ -2843,7 +2843,7 @@ function view2() {
         toList([style(toList([["margin-left", "4em"]]))]),
         toList([
           text(
-            "A sporadic, unrigorous introduction to number theory, basic enumeration, graph theory, propositional logic, set theory, and discrete probability (in that order?)"
+            "A sporadic, unrigorous introduction to number theory, enumeration, graph theory, propositional logic, set theory, and discrete probability (in that order?)"
           )
         ])
       ),
@@ -2901,13 +2901,13 @@ function view3() {
       ),
       b(toList([]), toList([text("choice function ")])),
       text(
-        "on an indexed family of sets \\(\\{X_\\lambda\\}_{y \\in Y}\\) is a function \\(f: Y \\to \\bigcup_{y \\in Y} X_y\\) such that each \\(y \\in Y\\) maps to an element of \\(X_y\\); that is, a choice function is a way to "
+        "on an indexed family of sets \\(\\{X_y\\}_{y \\in Y}\\) is a function \\(f: Y \\to \\bigcup_{y \\in Y} X_y\\) such that each \\(y \\in Y\\) maps to an element of \\(X_y\\); that is, a choice function is a way to "
       ),
       i(toList([]), toList([text("choose ")])),
       text("an element from a given index. The "),
       i(toList([]), toList([text("product ")])),
       text(
-        "over the collection is the set of all such choice functions. When each \\(X_y\\) is the same, this can be regarded as the \\(Y\\)-fold product of \\(X\\), or \\(X^Y\\). This is a simply collection of functions \\(f: Y \\to X\\) such that for each \\(y \\in Y\\), \\(f(y) \\in X\\), which happens to characterize functions \\(f: Y \\to X\\). A crucial consideration to make is that natural numbers are themselves sets, defined recursively with \\(0 \\triangleq \\varnothing\\) and \\(n + 1 \\triangleq n \\cup \\{n\\}\\). In general, \\(n = \\{i\\}_{i = 0}^{n - 1}\\), so an element of \\(X^n\\) is a function that takes a natural number less than \\(n\\) and maps it to an element of \\(X\\). (This can be thought of as a 0-index list.) Expaning definitions, this yields\n        \\[X^2 = \\{f \\in \\mathcal{P}(2 \\times X) \\mid \\forall n \\in 2, \\exists! x \\in X, (n, x) \\in f\\}\\]\n      An element of \\(X^2\\) is a function \\(f: 2 \\to X\\) of the form \\(\\{(0, x_0), (1, x_1)\\}\\), which is decidedly not a pair \\((x_0, x_1)\\). This is analogous to a sequence, though, as an element of \\(X^\\mathbb{N}\\). This should be clear from the definition alone, since \\(\\mathbb{N}\\) can be regarded as the limit of \\(n\\) as you keep adding 1, being the union of "
+        "over the collection is the set of all such choice functions. When each \\(X_y\\) is the same, this can be regarded as the \\(Y\\)-fold product of \\(X\\), or \\(X^Y\\). This is a simply collection of functions \\(f: Y \\to X\\) such that for each \\(y \\in Y\\), \\(f(y) \\in X\\), which happens to characterize functions \\(f: Y \\to X\\). A crucial consideration to make is that natural numbers are themselves sets (as Von Neumann ordinals), defined recursively with \\(0 \\triangleq \\varnothing\\) and \\(n + 1 \\triangleq n \\cup \\{n\\}\\). In general, \\(n = \\{i\\}_{i = 0}^{n - 1}\\), so an element of \\(X^n\\) is a function that takes a natural number less than \\(n\\) and maps it to an element of \\(X\\). (This can be thought of as a 0-index list.) Expaning definitions, this yields\n        \\[X^2 = \\{f \\in \\mathcal{P}(2 \\times X) \\mid \\forall n \\in 2, \\exists! x \\in X, (n, x) \\in f\\}\\]\n      An element of \\(X^2\\) is a function \\(f: 2 \\to X\\) of the form \\(\\{(0, x_0), (1, x_1)\\}\\), which is decidedly not a pair \\((x_0, x_1)\\). This is analogous to a sequence, though, as an element of \\(X^\\mathbb{N}\\). This should be clear from the definition alone, since \\(\\mathbb{N}\\) can be regarded as the limit of \\(n\\) as you keep adding 1, being the union of "
       ),
       i(toList([]), toList([text("all ")])),
       text("natural numbers as opposed to just the first \\(n\\). "),
@@ -2915,7 +2915,7 @@ function view3() {
         toList([]),
         toList([
           text(
-            "(If only there were a conventint term for this exact thing.) "
+            "(If only there were a convenient term for this exact thing.) "
           )
         ])
       ),
@@ -2946,7 +2946,9 @@ function view3() {
           li(
             toList([]),
             toList([
-              text("exactly one of \\(x < y\\) or \\(y < x\\) is true")
+              text(
+                "exactly one of \\(x < y\\) or \\(y < x\\) is true,"
+              )
             ])
           ),
           li(toList([]), toList([text("\\(x \\not< x\\), and")])),
