@@ -15,7 +15,7 @@ pub fn view() {
       ),
       html.i([], [element.text("itself ")]),
       element.text(
-        "a pair of a set and a relation, and a relation is also just a set of pairs. We just got past Russell's paradox, so we can't exactly afford any more self-reference. (I know this can be defined as a separate isomorhic entity; that's kind of the point of this, as you'll soon find out.) Tuples are instead recursively defined with nesting (in a manner resembling lists in the \\(\\lambda\\)-calculus):
+        "a pair of a set and a relation, and a relation is also just a set of pairs. We just got past Russell's paradox, so we can't exactly afford any more self-reference. (I know this can be defined as a separate isomorphic entity; that's kind of the point of this, as you'll soon find out.) Tuples are instead recursively defined with nesting (in a manner resembling lists in the \\(\\lambda\\)-calculus):
         \\[\\begin{align*}
           (x, y, z) &\\triangleq \\bigl(x, (y, z)\\bigr) \\\\
             &= \\{\\{x\\}, \\{x, (y, z)\\}\\} \\\\
@@ -44,7 +44,7 @@ pub fn view() {
       element.text("an element from a given index. The "),
       html.b([], [element.text("product ")]),
       element.text(
-        "over the collection is the set of all such choice functions. When each \\(X_y\\) is the same, this can be regarded as the \\(Y\\)-fold product of \\(X\\), or \\(X^Y\\). This is a simply collection of functions \\(f: Y \\to X\\) such that for each \\(y \\in Y\\), \\(f(y) \\in X\\), which happens to characterize functions \\(f: Y \\to X\\). A crucial consideration to make is that natural numbers are themselves sets (as Von Neumann ordinals), defined recursively with \\(0 \\triangleq \\varnothing\\) and \\(n + 1 \\triangleq n \\cup \\{n\\}\\). In general, \\(n = \\{i\\}_{i = 0}^{n - 1}\\), so an element of \\(X^n\\) is a function that takes a natural number less than \\(n\\) and maps it to an element of \\(X\\). (This can be thought of as a 0-index list.) Expaning definitions, this yields
+        "over the collection is the set of all such choice functions. When each \\(X_y\\) is the same, this can be regarded as the \\(Y\\)-fold product of \\(X\\), or \\(X^Y\\). This is a simply collection of functions \\(f: Y \\to X\\) such that for each \\(y \\in Y\\), \\(f(y) \\in X\\), which happens to characterize functions \\(f: Y \\to X\\). A crucial consideration to make is that natural numbers are themselves sets (as Von Neumann ordinals), defined recursively with \\(0 \\triangleq \\varnothing\\) and \\(n + 1 \\triangleq n \\cup \\{n\\}\\). In general, \\(n = \\{i\\}_{i = 0}^{n - 1}\\), so an element of \\(X^n\\) is a function that takes a natural number less than \\(n\\) and maps it to an element of \\(X\\). (This can be thought of as a 0-index list.) Expanding definitions, this yields
         \\[X^2 = \\{f \\in \\mathcal{P}(2 \\times X) \\mid \\forall n \\in 2, \\exists! x \\in X, (n, x) \\in f\\}\\]
       An element of \\(X^2\\) is a function \\(f: 2 \\to X\\) of the form \\(\\{(0, x_0), (1, x_1)\\}\\), which is decidedly not a pair \\((x_0, x_1)\\). This is analogous to a sequence, though, as an element of \\(X^\\mathbb{N}\\). This should be clear from the definition alone, since \\(\\mathbb{N}\\) can be regarded as the limit of \\(n\\) as you keep adding 1, being the union of ",
       ),
@@ -56,7 +56,7 @@ pub fn view() {
         ),
       ]),
       element.text(
-        "The defiition of exponentiation as a set of finite sequences rather than tuples means that \\(X^n \\subseteq X^*\\), where \\(*\\) is the ",
+        "The definition of exponentiation as a set of finite sequences rather than tuples means that \\(X^n \\subseteq X^*\\), where \\(*\\) is the ",
       ),
       html.b([], [element.text("Kleene star operator, ")]),
       element.text(
@@ -99,7 +99,7 @@ pub fn view() {
       ),
       html.br([attribute.style([#("margin-bottom", "0.5em")])]),
       element.text(
-        "It's trivial to see that all of these definitions are equivalent for most purposes, so this amounts to pedantry; while abuse of notation can certainly be an issue in mathematics, it's good to know when to draw the line. I'm no set-theorist, so I think I'll leave it at that.",
+        "It's trivial to see that all of these definitions are equivalent for most purposes, so this amounts to pedantry; while abuse of notation can certainly be an issue in mathematics, it's good to know when to draw the line. I'm no set theorist, so I think I'll leave it at that.",
       ),
     ],
   )

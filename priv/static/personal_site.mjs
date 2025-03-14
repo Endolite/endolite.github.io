@@ -2912,19 +2912,19 @@ function view3() {
     ]),
     toList([
       text(
-        "I don't know whether it's part of human nature to defer to authority, or if we're socialized to be this way. It's hopelessly easy to be pessimistic about humanity, but I think that largely comes down to the fact that those with power are the most vocal by social construction. The history of the West is, to my (admittedly little) knowledge, a story of a few people doing "
+        "I don't know whether it's part of human nature to defer to authority or if we're socialized to be this way. It's hopelessly easy to be pessimistic about humanity, but I think that largely comes down to the fact that those with power are the most vocal by social construction. The history of the West is, to my (admittedly little) knowledge, a story of a few people doing "
       ),
       i(toList([]), toList([text("something ")])),
       text(
-        "to rationalize their power as the natural order, be it through religion, eugenics, or capitalism; by presenting a single source of authority that's advantageous to themselves, they consolidate power until that status quo is inevitably challenged, at which point conflict dictate who's turn is next to be at the top of the pecking order. So if human nature is truly compassionate, how does this cycle remain unbroken?"
+        "to rationalize their power as the natural order, be it through religion, eugenics, or capitalism; by presenting a single source of authority that's advantageous to themselves, they consolidate power until that status quo is inevitably challenged, at which point conflict dictates whose turn is next to be at the top of the pecking order. So if human nature is truly compassionate, how does this cycle remain unbroken?"
       ),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text(
-        "When faced with despair, you can only do so much to cope. Dissociating isn't all too productive, so eventually, some decision must be made to continue on. Rejecting the status quo requires action, which is often difficult and dangerous. Of course, collective action is safer, but when people act purely in their own interest, they aren't exactly wont to do something that draws their very existence into question. The notion of existence I refer to here is not the state of living but rather the state of percieved stability on a micro level\u2014a life without risk of significant interruption, good or bad. As long as you can find "
+        "When faced with despair, you can only do so much to cope. Dissociating isn't all too productive, so eventually, some decision must be made to continue on. Rejecting the status quo requires action, which is often difficult and dangerous. Of course, collective action is safer, but when people act purely in their own interest, they aren't exactly wont to do something that draws their very existence into question. The notion of existence I refer to here is not the state of living but rather the state of perceived stability on a micro level\u2014a life without risk of significant interruption, good or bad. As long as you can find "
       ),
       i(toList([]), toList([text("something ")])),
       text(
-        "you don't want to give up, you can justify doing nothing under the guise of protecting what little you have. After all, why risk if you'll potentially be rewarded for staying docile, be it in this life or the next? If enough people can rationalize their own condition, good or bad, significant revolt can be suppressed, since organizing becomes much more difficult with lesser numbers."
+        "you don't want to give up, you can justify doing nothing under the guise of protecting what little you have. After all, why risk it if you'll potentially be rewarded for staying docile, be it in this life or the next? If enough people can rationalize their own condition, good or bad, significant revolt can be suppressed, since organizing becomes much more difficult with lesser numbers."
       ),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text(
@@ -2960,11 +2960,11 @@ function view3() {
         toList([text("Flint (For the Unemployed and Underpaid)")])
       ),
       text(
-        ", painting a picture of a Flint resident's embrace of emptiness. Its instrumentation is fittingly sparse, with accompinament mostly coming from piano and heavily reverbed trumpet. The latter instrument builds with repetition of of the lyric "
+        ", painting a picture of a Flint resident's embrace of emptiness. Its instrumentation is fittingly sparse, with accompaniment mostly coming from piano and heavily reverbed trumpet. The latter instrument builds with repetition of the lyric "
       ),
       q(toList([]), toList([text("Even if I died alone")])),
       text(
-        " to express resignment to and eventual proclamation of this line."
+        " to express resignation to and eventual proclamation of this line."
       ),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text("The subsequent "),
@@ -3031,7 +3031,7 @@ function view3() {
         ])
       ),
       text(
-        " is perhaps the most direct look at reality, taking a more detached and cynical tone in observance of the rein wrought on Detroit through the intense proliferation and stark abandomnemt of industry, returning to the upbeat 5/4 of"
+        " is perhaps the most direct look at reality, taking a more detached and cynical tone in observance of the ruin wrought on Detroit through the intense proliferation and stark abandonment of industry, returning to the upbeat 5/4 of "
       ),
       cite(toList([]), toList([text("All Good Naysayers")])),
       text(" in an almost mocking contrast."),
@@ -3085,7 +3085,7 @@ function view3() {
         ])
       ),
       text(
-        " nonetheless searches again for divine comfort and judgement while the narrator question's the relationship between their own perception of righteousness and that of God's ("
+        " nonetheless searches again for divine comfort and judgement while the narrator questions the relationship between their own perception of righteousness and that of God's ("
       ),
       q(toList([]), toList([text("Oh God, hold me now")])),
       text(", "),
@@ -3113,7 +3113,7 @@ function view3() {
         ])
       ),
       text(
-        ", quelling the prior doubt by asserting that all is as ordained by univeral, divine love, and serving as a cathartic epilogue of sorts to the album. Repeating this like a matra, this expresses an internal resolution and restored faith, despite it all."
+        "), quelling the prior doubt by asserting that all is as ordained by universal, divine love, and serving as a cathartic epilogue of sorts to the album. Repeating this like a mantra, this expresses an internal resolution and restored faith, despite it all."
       ),
       hr(
         toList([
@@ -3135,7 +3135,7 @@ function view3() {
       ),
       text("The 2004 follow-up "),
       cite(toList([]), toList([text("Seven Swans")])),
-      text(" is not a the canonical sequel to "),
+      text(" is not the canonical sequel to "),
       cite(toList([]), toList([text("Michigan")])),
       text(" (that title goes to the seminal 2005 work "),
       cite(toList([]), toList([text("Illinois")])),
@@ -3145,12 +3145,12 @@ function view3() {
       cite(
         toList([]),
         toList([
-          text("All the Trees of the Field Will Clap Their Hands")
+          text("All the Trees of the Field Will Clap Their Hands ")
         ])
       ),
       text("kicks off in a darker place than "),
       cite(toList([]), toList([text("Flint")])),
-      text(", both musically and lyrically ("),
+      text("both musically and lyrically ("),
       q(
         toList([]),
         toList([text("If I am alive this time next year")])
@@ -3189,7 +3189,7 @@ function view3() {
         ])
       ),
       text(
-        " yet maintaining a placid tone, seeing this as an opportunity to meet God rather than as a threat ("
+        ") yet maintaining a placid tone, seeing this as an opportunity to meet God rather than as a threat ("
       ),
       q(
         toList([]),
@@ -3229,7 +3229,7 @@ function view3() {
         ])
       ),
       text(
-        " in so doing casting doubt on the innocence of all complicit in the system through comparison ("
+        ") in so doing casting doubt on the innocence of all complicit in the system through comparison ("
       ),
       q(
         toList([]),
@@ -3265,7 +3265,7 @@ function view3() {
         ])
       ),
       text(
-        " with a correspondingly booming piano part, Sufjan's icy falsetto sitting above the dark, swirling colours evoking fate, finally resolving peacefully."
+        ") with a correspondingly booming piano part, Sufjan's icy falsetto sitting above the dark, swirling colours evoking fate, finally resolving peacefully."
       ),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       cite(toList([]), toList([text("The Transfiguration")])),
@@ -3274,7 +3274,7 @@ function view3() {
       ),
       cite(toList([]), toList([text("Chicago")])),
       text(
-        ", the final track, is more upbeat, being told from the perspective of a truely benevolent diety tending to humanity as a parent ("
+        "), being told from the perspective of a truly benevolent deity tending to humanity as a parent ("
       ),
       q(
         toList([]),
@@ -3282,7 +3282,7 @@ function view3() {
           text("Lost in the cloud, a voice/Lamb of God, we draw near")
         ])
       ),
-      text("."),
+      text(")."),
       hr(
         toList([
           style(
@@ -3291,15 +3291,15 @@ function view3() {
         ])
       ),
       text(
-        "In my eyes, these albums exemplify the relationship between hope, faith, fear, despair, and authority. Power structures serve both to pull us up and to put us back down, and it is up to us to figure out how to respond to that. In a vacuum, faith is easy to sustain, as there is no alternative. Even when other options are present, sufficient propagandization can warp reality to the point that they aren't seriously observed. This alone is enough for many; they choose to view the advancement of humanity as a result of these systems rather than an incuded side effect that was produced in spite of them."
+        "In my eyes, these albums exemplify the relationship between hope, faith, fear, despair, and authority. Power structures serve both to pull us up and to put us back down, and it is up to us to figure out how to respond to that. In a vacuum, faith is easy to sustain, as there is no alternative. Even when other options are present, sufficient propagandization can warp reality to the point that they aren't seriously observed. This alone is enough for many; they choose to view the advancement of humanity as a result of these systems rather than an induced side effect that was produced in spite of them."
       ),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text(
-        "Choosing to be blind to alternatives is one thing, but there's only so much that can be done to deny immediate reality. Again, the relationship between those for and against the system are opposed, each attributing deficiencies in a stalemate that benefits the former by virtue of incumbency. Dissatisfaction with the status quo leads very quickly to dissatisfaction, which is of course untenable. If this yields despair, the status quo is unchanged; further, this despair may beget even deeper devotion out of othering and deflection. "
+        "Choosing to be blind to alternatives is one thing, but there's only so much that can be done to deny immediate reality. Again, those for and against the system are mutually opposed, each attributing deficiencies to the other in a stalemate that benefits the former by virtue of incumbency. Dissatisfaction with the status quo leads very quickly to dissatisfaction, which is of course untenable. If this yields despair, the status quo is unchanged; further, this despair may beget even deeper devotion out of othering and deflection. "
       ),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text(
-        "It's always in the best interest of those in power to make themselves out to be the natural leaders. Blind acceptance is often the simplest option when it comes to complex issues made only more complex by intentional muddying of the waters from vested-interests due to impossibility of third-party without some vested interest. This has always been true and will always be true for as long as there is a ruling class. But that doesn't make it okay to do nothing; from the throes of despair, the fact that getting here is possible "
+        "It's always in the best interest of those in power to make themselves out to be the natural leaders. Blind acceptance is often the simplest option when it comes to complex issues made only more complex by intentional muddying of the waters due to the impossibility of a third party without some vested interest. This has always been true and will always be true for as long as there is a ruling class. But that doesn't make it okay to do nothing; from the throes of despair, the fact that getting here is possible "
       ),
       i(toList([]), toList([text("despite")])),
       text(" its historical constancy is proof enough to recover.")
@@ -3320,7 +3320,7 @@ function view4() {
       ),
       i(toList([]), toList([text("itself ")])),
       text(
-        "a pair of a set and a relation, and a relation is also just a set of pairs. We just got past Russell's paradox, so we can't exactly afford any more self-reference. (I know this can be defined as a separate isomorhic entity; that's kind of the point of this, as you'll soon find out.) Tuples are instead recursively defined with nesting (in a manner resembling lists in the \\(\\lambda\\)-calculus):\n        \\[\\begin{align*}\n          (x, y, z) &\\triangleq \\bigl(x, (y, z)\\bigr) \\\\\n            &= \\{\\{x\\}, \\{x, (y, z)\\}\\} \\\\\n            &= \\{\\{x\\}, \\{x, \\{\\{y\\}, \\{y, z\\}\\}\\}\\}\n        \\end{align*}\\]\n      Okay, this isn't the prettiest thing in the world, but it certainly does work. It also implies that Cartesian exponentiation is right-associative, which is interesting. Speaking of which, Cartesian and set exponentiation differ. To see this, let us first review the set-theoretic notions of relations and functions."
+        "a pair of a set and a relation, and a relation is also just a set of pairs. We just got past Russell's paradox, so we can't exactly afford any more self-reference. (I know this can be defined as a separate isomorphic entity; that's kind of the point of this, as you'll soon find out.) Tuples are instead recursively defined with nesting (in a manner resembling lists in the \\(\\lambda\\)-calculus):\n        \\[\\begin{align*}\n          (x, y, z) &\\triangleq \\bigl(x, (y, z)\\bigr) \\\\\n            &= \\{\\{x\\}, \\{x, (y, z)\\}\\} \\\\\n            &= \\{\\{x\\}, \\{x, \\{\\{y\\}, \\{y, z\\}\\}\\}\\}\n        \\end{align*}\\]\n      Okay, this isn't the prettiest thing in the world, but it certainly does work. It also implies that Cartesian exponentiation is right-associative, which is interesting. Speaking of which, Cartesian and set exponentiation differ. To see this, let us first review the set-theoretic notions of relations and functions."
       ),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text("A "),
@@ -3340,7 +3340,7 @@ function view4() {
       text("an element from a given index. The "),
       b(toList([]), toList([text("product ")])),
       text(
-        "over the collection is the set of all such choice functions. When each \\(X_y\\) is the same, this can be regarded as the \\(Y\\)-fold product of \\(X\\), or \\(X^Y\\). This is a simply collection of functions \\(f: Y \\to X\\) such that for each \\(y \\in Y\\), \\(f(y) \\in X\\), which happens to characterize functions \\(f: Y \\to X\\). A crucial consideration to make is that natural numbers are themselves sets (as Von Neumann ordinals), defined recursively with \\(0 \\triangleq \\varnothing\\) and \\(n + 1 \\triangleq n \\cup \\{n\\}\\). In general, \\(n = \\{i\\}_{i = 0}^{n - 1}\\), so an element of \\(X^n\\) is a function that takes a natural number less than \\(n\\) and maps it to an element of \\(X\\). (This can be thought of as a 0-index list.) Expaning definitions, this yields\n        \\[X^2 = \\{f \\in \\mathcal{P}(2 \\times X) \\mid \\forall n \\in 2, \\exists! x \\in X, (n, x) \\in f\\}\\]\n      An element of \\(X^2\\) is a function \\(f: 2 \\to X\\) of the form \\(\\{(0, x_0), (1, x_1)\\}\\), which is decidedly not a pair \\((x_0, x_1)\\). This is analogous to a sequence, though, as an element of \\(X^\\mathbb{N}\\). This should be clear from the definition alone, since \\(\\mathbb{N}\\) can be regarded as the limit of \\(n\\) as you keep adding 1, being the union of "
+        "over the collection is the set of all such choice functions. When each \\(X_y\\) is the same, this can be regarded as the \\(Y\\)-fold product of \\(X\\), or \\(X^Y\\). This is a simply collection of functions \\(f: Y \\to X\\) such that for each \\(y \\in Y\\), \\(f(y) \\in X\\), which happens to characterize functions \\(f: Y \\to X\\). A crucial consideration to make is that natural numbers are themselves sets (as Von Neumann ordinals), defined recursively with \\(0 \\triangleq \\varnothing\\) and \\(n + 1 \\triangleq n \\cup \\{n\\}\\). In general, \\(n = \\{i\\}_{i = 0}^{n - 1}\\), so an element of \\(X^n\\) is a function that takes a natural number less than \\(n\\) and maps it to an element of \\(X\\). (This can be thought of as a 0-index list.) Expanding definitions, this yields\n        \\[X^2 = \\{f \\in \\mathcal{P}(2 \\times X) \\mid \\forall n \\in 2, \\exists! x \\in X, (n, x) \\in f\\}\\]\n      An element of \\(X^2\\) is a function \\(f: 2 \\to X\\) of the form \\(\\{(0, x_0), (1, x_1)\\}\\), which is decidedly not a pair \\((x_0, x_1)\\). This is analogous to a sequence, though, as an element of \\(X^\\mathbb{N}\\). This should be clear from the definition alone, since \\(\\mathbb{N}\\) can be regarded as the limit of \\(n\\) as you keep adding 1, being the union of "
       ),
       i(toList([]), toList([text("all ")])),
       text("natural numbers as opposed to just the first \\(n\\). "),
@@ -3353,7 +3353,7 @@ function view4() {
         ])
       ),
       text(
-        "The defiition of exponentiation as a set of finite sequences rather than tuples means that \\(X^n \\subseteq X^*\\), where \\(*\\) is the "
+        "The definition of exponentiation as a set of finite sequences rather than tuples means that \\(X^n \\subseteq X^*\\), where \\(*\\) is the "
       ),
       b(toList([]), toList([text("Kleene star operator, ")])),
       text(
@@ -3406,7 +3406,7 @@ function view4() {
       ),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text(
-        "It's trivial to see that all of these definitions are equivalent for most purposes, so this amounts to pedantry; while abuse of notation can certainly be an issue in mathematics, it's good to know when to draw the line. I'm no set-theorist, so I think I'll leave it at that."
+        "It's trivial to see that all of these definitions are equivalent for most purposes, so this amounts to pedantry; while abuse of notation can certainly be an issue in mathematics, it's good to know when to draw the line. I'm no set theorist, so I think I'll leave it at that."
       )
     ])
   );
