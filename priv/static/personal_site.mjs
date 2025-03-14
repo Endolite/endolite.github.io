@@ -2008,13 +2008,13 @@ var LustreClientApplication = class _LustreClientApplication {
    *
    * @returns {Gleam.Ok<(action: Lustre.Action<Lustre.Client, Msg>>) => void>}
    */
-  static start({ init: init4, update: update2, view: view5 }, selector, flags) {
+  static start({ init: init4, update: update2, view: view6 }, selector, flags) {
     if (!is_browser())
       return new Error(new NotABrowser());
     const root = selector instanceof HTMLElement ? selector : document.querySelector(selector);
     if (!root)
       return new Error(new ElementNotFound(selector));
-    const app = new _LustreClientApplication(root, init4(flags), update2, view5);
+    const app = new _LustreClientApplication(root, init4(flags), update2, view6);
     return new Ok((action) => app.send(action));
   }
   /**
@@ -2025,11 +2025,11 @@ var LustreClientApplication = class _LustreClientApplication {
    *
    * @returns {LustreClientApplication}
    */
-  constructor(root, [init4, effects], update2, view5) {
+  constructor(root, [init4, effects], update2, view6) {
     this.root = root;
     this.#model = init4;
     this.#update = update2;
-    this.#view = view5;
+    this.#view = view6;
     this.#tickScheduled = window.setTimeout(
       () => this.#tick(effects.all.toArray(), true),
       0
@@ -2144,20 +2144,20 @@ var LustreClientApplication = class _LustreClientApplication {
 };
 var start = LustreClientApplication.start;
 var LustreServerApplication = class _LustreServerApplication {
-  static start({ init: init4, update: update2, view: view5, on_attribute_change }, flags) {
+  static start({ init: init4, update: update2, view: view6, on_attribute_change }, flags) {
     const app = new _LustreServerApplication(
       init4(flags),
       update2,
-      view5,
+      view6,
       on_attribute_change
     );
     return new Ok((action) => app.send(action));
   }
-  constructor([model, effects], update2, view5, on_attribute_change) {
+  constructor([model, effects], update2, view6, on_attribute_change) {
     this.#model = model;
     this.#update = update2;
-    this.#view = view5;
-    this.#html = view5(model);
+    this.#view = view6;
+    this.#html = view6(model);
     this.#onAttributeChange = on_attribute_change;
     this.#renderers = /* @__PURE__ */ new Map();
     this.#handlers = handlers(this.#html);
@@ -2258,11 +2258,11 @@ var is_browser = () => globalThis.window && window.document;
 
 // build/dev/javascript/lustre/lustre.mjs
 var App = class extends CustomType {
-  constructor(init4, update2, view5, on_attribute_change) {
+  constructor(init4, update2, view6, on_attribute_change) {
     super();
     this.init = init4;
     this.update = update2;
-    this.view = view5;
+    this.view = view6;
     this.on_attribute_change = on_attribute_change;
   }
 };
@@ -2274,8 +2274,8 @@ var ElementNotFound = class extends CustomType {
 };
 var NotABrowser = class extends CustomType {
 };
-function application(init4, update2, view5) {
-  return new App(init4, update2, view5, new None());
+function application(init4, update2, view6) {
+  return new App(init4, update2, view6, new None());
 }
 function start2(app, selector, flags) {
   return guard(
@@ -2321,6 +2321,9 @@ function h4(attrs, children2) {
 function div(attrs, children2) {
   return element("div", attrs, children2);
 }
+function hr(attrs) {
+  return element("hr", attrs, toList([]));
+}
 function li(attrs, children2) {
   return element("li", attrs, children2);
 }
@@ -2339,8 +2342,17 @@ function b(attrs, children2) {
 function br(attrs) {
   return element("br", attrs, toList([]));
 }
+function cite(attrs, children2) {
+  return element("cite", attrs, children2);
+}
 function i(attrs, children2) {
   return element("i", attrs, children2);
+}
+function q(attrs, children2) {
+  return element("q", attrs, children2);
+}
+function img(attrs) {
+  return element("img", attrs, toList([]));
 }
 function script(attrs, js) {
   return element("script", attrs, toList([text2(js)]));
@@ -2380,9 +2392,6 @@ function cluster(attributes, children2) {
 }
 function align_start() {
   return class$("align-start");
-}
-function align_centre() {
-  return class$("align-centre");
 }
 
 // build/dev/javascript/lustre_ui/lustre/ui/stack.mjs
@@ -2682,7 +2691,7 @@ function view2() {
         toList([style(toList([["margin-left", "4em"]]))]),
         toList([
           text(
-            "Lebesgue integration has been my white whale in math for a long time, and it this course was certainly as difficult as I expected, though maybe moreso due to the Fourier analysis; still really fun even, and finally motivated the material from Linear Algebra 2"
+            "Lebesgue integration has been my white whale in math for a long time, and it this course was certainly as difficult as I expected, though maybe moreso due to the Fourier analysis; still really fun, and finally motivated the material from Linear Algebra 2"
           )
         ])
       ),
@@ -2894,8 +2903,412 @@ function view2() {
   );
 }
 
-// build/dev/javascript/personal_site/pages/writings/tuples.mjs
+// build/dev/javascript/personal_site/pages/writings/authority_despair_michigan.mjs
 function view3() {
+  return p(
+    toList([
+      class$("center"),
+      style(toList([["text-align", "justify"]]))
+    ]),
+    toList([
+      text(
+        "I don't know whether it's part of human nature to defer to authority, or if we're socialized to be this way. It's hopelessly easy to be pessimistic about humanity, but I think that largely comes down to the fact that those with power are the most vocal by social construction. The history of the West is, to my (admittedly little) knowledge, a story of a few people doing "
+      ),
+      i(toList([]), toList([text("something ")])),
+      text(
+        "to rationalize their power as the natural order, be it through religion, eugenics, or capitalism; by presenting a single source of authority that's advantageous to themselves, they consolidate power until that status quo is inevitably challenged, at which point conflict dictate who's turn is next to be at the top of the pecking order. So if human nature is truly compassionate, how does this cycle remain unbroken?"
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text(
+        "When faced with despair, you can only do so much to cope. Dissociating isn't all too productive, so eventually, some decision must be made to continue on. Rejecting the status quo requires action, which is often difficult and dangerous. Of course, collective action is safer, but when people act purely in their own interest, they aren't exactly wont to do something that draws their very existence into question. The notion of existence I refer to here is not the state of living but rather the state of percieved stability on a micro level\u2014a life without risk of significant interruption, good or bad. As long as you can find "
+      ),
+      i(toList([]), toList([text("something ")])),
+      text(
+        "you don't want to give up, you can justify doing nothing under the guise of protecting what little you have. After all, why risk if you'll potentially be rewarded for staying docile, be it in this life or the next? If enough people can rationalize their own condition, good or bad, significant revolt can be suppressed, since organizing becomes much more difficult with lesser numbers."
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text(
+        "Anything can be justified through deference: if you're not the one making the final judgement\u2014if you're just doing your best in someone else's world\u2014you're shielded from your complicity. Having individuals as figureheads allows misgivings of the system to be attributed to a few bad actors rather than the system itself, again rationalizing its perpetuation. When a society is complicit, to act against the system is to act without thinking of the harm that could be brought to others through said action, so it's never deontologically viable to risk it."
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text(
+        "This transfer of guilt to the authority of a higher power\u2014be it God, the natural order, or the economy\u2014from those responsible for and benefitting from the source of said guilt is what allows an exploitative system to keep functioning. This abstraction away from humanity towards a projection of true authority directly justifies and rewards a lack of empathy. But even still, kind people can always be found. And progress can always be made, no matter how gradual."
+      ),
+      hr(
+        toList([
+          style(
+            toList([["margin-top", "0.5em"], ["margin-bottom", "0.5em"]])
+          )
+        ])
+      ),
+      img(
+        toList([
+          src(
+            "\n            https://f4.bcbits.com/img/a3087694239_10.jpg"
+          ),
+          style(
+            toList([["max-height", "350px"], ["padding", "20px"]])
+          ),
+          class$("center")
+        ])
+      ),
+      text("Sufjan Steven's 2003 album "),
+      cite(toList([]), toList([text("Michigan ")])),
+      text("starts on a somber note with "),
+      cite(
+        toList([]),
+        toList([text("Flint (For the Unemployed and Underpaid)")])
+      ),
+      text(
+        ", painting a picture of a Flint resident's embrace of emptiness. Its instrumentation is fittingly sparse, with accompinament mostly coming from piano and heavily reverbed trumpet. The latter instrument builds with repetition of of the lyric "
+      ),
+      q(toList([]), toList([text("Even if I died alone")])),
+      text(
+        " to express resignment to and eventual proclamation of this line."
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text("The subsequent "),
+      cite(
+        toList([]),
+        toList([
+          text(
+            "All Good Naysayers, Speak Up! Or Forever Hold Your Peace!"
+          )
+        ])
+      ),
+      text(
+        " introduces the other aspect to this recurring dialogue with the pathological appeal deficiencies in society as they are ("
+      ),
+      q(
+        toList([]),
+        toList([
+          text(
+            "Often not the state is advocation/If we forma power of recognition"
+          )
+        ])
+      ),
+      text(", "),
+      q(
+        toList([]),
+        toList([
+          text(
+            "Entertain ideas of great communion/Shelter not materials in union"
+          )
+        ])
+      ),
+      text(
+        "). It makes no call to action beyond acknowledgement, and its innocent motivation is accentuated by the exclamation in the title and the song itself's jaunty 5/4. This pseudo-na\xEFvet\xE9 continues into the reminiscence and appreciation of "
+      ),
+      cite(toList([]), toList([text("Say Yes! to M!ch!gan!")])),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text(
+        "Facing the bleakness of reality can lead to the empty despair described in "
+      ),
+      cite(toList([]), toList([text("Flint")])),
+      text(" as exemplified by the end of "),
+      cite(toList([]), toList([text("The Upper Peninsula")])),
+      text(
+        " with the panicking synth rising in prominence from the line "
+      ),
+      q(
+        toList([]),
+        toList([
+          text(
+            "I lost my mind, I lost my life/I lost my job, I lost my wife"
+          )
+        ])
+      ),
+      text(
+        " until suddenly giving way to a gentle guitar chord, as though abruptly resigning."
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      cite(
+        toList([]),
+        toList([
+          text(
+            "Oh Detroit, Lift Up Your Weary Head! (Rebuild! Restore! Reconsider!)"
+          )
+        ])
+      ),
+      text(
+        " is perhaps the most direct look at reality, taking a more detached and cynical tone in observance of the rein wrought on Detroit through the intense proliferation and stark abandomnemt of industry, returning to the upbeat 5/4 of"
+      ),
+      cite(toList([]), toList([text("All Good Naysayers")])),
+      text(" in an almost mocking contrast."),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text("The more laid-back "),
+      cite(
+        toList([]),
+        toList([text("Sleeping Bear, Sault Ste. Marie")])
+      ),
+      text(
+        " expresses not frustration but rather counsel, expressing hope for God's "
+      ),
+      q(toList([]), toList([text("perfect design")])),
+      text(
+        " before eventually pleading with nature, reflecting on the forgotten pain of the buried Surgeon Bay and the drowned of Saint Marie. "
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text("The proceeding "),
+      cite(
+        toList([]),
+        toList([
+          text(
+            "They Also Mourn Who Do Not Wear Black (For the Homeless in Muskegon)"
+          )
+        ])
+      ),
+      text(
+        " returns to a more hopeful place, seeing the justification for perpetual mourning and apathy and using it to instead choose to at least attempt to motivate change for the better; rather than waiting for something better in the next life, the system of the advantageous is criticized for preventing growth and societal actualization altogether in the name of their own interests ("
+      ),
+      q(
+        toList([]),
+        toList([
+          text(
+            "If the advantageous/Reprimand misgivings/We won't grow/We will not ever know"
+          )
+        ])
+      ),
+      text("). The final proclamation of "),
+      q(
+        toList([]),
+        toList([text("Lift my life in healthy places!")])
+      ),
+      text(" asserts the intent to at least do something."),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      cite(
+        toList([]),
+        toList([
+          text(
+            "Oh God Where Are You Now? (In Pickerel Lake? Pigeon? Marquette? Mackinaw?)"
+          )
+        ])
+      ),
+      text(
+        " nonetheless searches again for divine comfort and judgement while the narrator question's the relationship between their own perception of righteousness and that of God's ("
+      ),
+      q(toList([]), toList([text("Oh God, hold me now")])),
+      text(", "),
+      q(
+        toList([]),
+        toList([
+          text(
+            "Would the righteous still remain?/Would my body stay the same?"
+          )
+        ])
+      ),
+      text(") in light of the pleading in "),
+      cite(toList([]), toList([text("Sleeping Bear")])),
+      text("."),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text(" This respite is beautifully offered by "),
+      cite(toList([]), toList([text("Vito's Ordination Song")])),
+      text(" ("),
+      q(
+        toList([]),
+        toList([
+          text(
+            "Rest in my arms/Sleep in my bet/There's a design/To what I did and said"
+          )
+        ])
+      ),
+      text(
+        ", quelling the prior doubt by asserting that all is as ordained by univeral, divine love, and serving as a cathartic epilogue of sorts to the album. Repeating this like a matra, this expresses an internal resolution and restored faith, despite it all."
+      ),
+      hr(
+        toList([
+          style(
+            toList([["margin-top", "0.5em"], ["margin-bottom", "0.5em"]])
+          )
+        ])
+      ),
+      img(
+        toList([
+          src(
+            "\n            https://imagescdn.juno.co.uk/full/CS788496-01A-BIG.jpg"
+          ),
+          style(
+            toList([["max-height", "350px"], ["padding", "20px"]])
+          ),
+          class$("center")
+        ])
+      ),
+      text("The 2004 follow-up "),
+      cite(toList([]), toList([text("Seven Swans")])),
+      text(" is not a the canonical sequel to "),
+      cite(toList([]), toList([text("Michigan")])),
+      text(" (that title goes to the seminal 2005 work "),
+      cite(toList([]), toList([text("Illinois")])),
+      text(
+        "), its even more overt Christian themes serve as a fearful yet accepting reflection of the journey of the prior album. "
+      ),
+      cite(
+        toList([]),
+        toList([
+          text("All the Trees of the Field Will Clap Their Hands")
+        ])
+      ),
+      text("kicks off in a darker place than "),
+      cite(toList([]), toList([text("Flint")])),
+      text(", both musically and lyrically ("),
+      q(
+        toList([]),
+        toList([text("If I am alive this time next year")])
+      ),
+      text(
+        ") but defers to the divine despite expressed concern over whether they are on the right side of the outcome ("
+      ),
+      q(
+        toList([]),
+        toList([
+          text(
+            "And will I be invited to the sound?/And will I be a part of what you've made?"
+          )
+        ])
+      ),
+      text(") similarly to "),
+      cite(
+        toList([]),
+        toList([text("Oh God Where Are You Now?")])
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text("In accordance with this, "),
+      cite(
+        toList([]),
+        toList([text("In The Devil's Territory")])
+      ),
+      text(
+        " matter-of-factly dubs the world as having already fallen, portending the end of times as something inevitable to be anticipated ("
+      ),
+      q(
+        toList([]),
+        toList([
+          text(
+            "Be still and know your sign/The beast will arrive in time"
+          )
+        ])
+      ),
+      text(
+        " yet maintaining a placid tone, seeing this as an opportunity to meet God rather than as a threat ("
+      ),
+      q(
+        toList([]),
+        toList([
+          text(
+            "We stayed a long, long time/But I'm not afraid to die/To see you/To meet you/To see you/At last"
+          )
+        ])
+      ),
+      text(
+        ") aided by the light banjo, ephemeral vocals, and whistling synths. "
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text(
+        "The subsequent few tracks exemplify the overt Christian theming with direct gratitude towards Jesus and Abraham, and "
+      ),
+      cite(
+        toList([]),
+        toList([text("We Won't Need Legs To Stand")])
+      ),
+      text(
+        " looks forward to the burdenless afterlife as a final reward for the unchanging present, approaching the subject with a dark yet optimistically resolvent tone. Inversely, "
+      ),
+      cite(
+        toList([]),
+        toList([text("A Good Man Is Hard To Find")])
+      ),
+      text(
+        " displays an acceptance of Hell as a result of failing to satisfactorily better oneself after costing another ("
+      ),
+      q(
+        toList([]),
+        toList([
+          text(
+            "And so I go to Hell/I wait for it but someone's left me creased"
+          )
+        ])
+      ),
+      text(
+        " in so doing casting doubt on the innocence of all complicit in the system through comparison ("
+      ),
+      q(
+        toList([]),
+        toList([text("Once in the backyard/She was once like me")])
+      ),
+      text(
+        "). The gravitas of this seeming contradiction is hauntingly emphasized by the detuned vocals present in the bridge."
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text("The title track capitalizes on this by recalling "),
+      cite(
+        toList([]),
+        toList([text("In The Devil's Territory")])
+      ),
+      text(", actually showing the judgement alluded to ("),
+      q(
+        toList([]),
+        toList([
+          text(
+            "I saw a sign in the sky/Seven horns, Seven horns, Seven horns"
+          )
+        ])
+      ),
+      text(
+        "). The vocals cycle between rising hopefully and falling back down, quieting to a whisper. After reassurance of God's presence comes a grave proclamation of omnipotence that communicates universal compassion in a manner akin to a threat ("
+      ),
+      q(
+        toList([]),
+        toList([
+          text(
+            "He will take you/If you run, He will chase you/'Cause He is the Lord"
+          )
+        ])
+      ),
+      text(
+        " with a correspondingly booming piano part, Sufjan's icy falsetto sitting above the dark, swirling colours evoking fate, finally resolving peacefully."
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      cite(toList([]), toList([text("The Transfiguration")])),
+      text(
+        ", the final track, is more upbeat (with a melody eventually evoked by "
+      ),
+      cite(toList([]), toList([text("Chicago")])),
+      text(
+        ", the final track, is more upbeat, being told from the perspective of a truely benevolent diety tending to humanity as a parent ("
+      ),
+      q(
+        toList([]),
+        toList([
+          text("Lost in the cloud, a voice/Lamb of God, we draw near")
+        ])
+      ),
+      text("."),
+      hr(
+        toList([
+          style(
+            toList([["margin-top", "0.5em"], ["margin-bottom", "0.5em"]])
+          )
+        ])
+      ),
+      text(
+        "In my eyes, these albums exemplify the relationship between hope, faith, fear, despair, and authority. Power structures serve both to pull us up and to put us back down, and it is up to us to figure out how to respond to that. In a vacuum, faith is easy to sustain, as there is no alternative. Even when other options are present, sufficient propagandization can warp reality to the point that they aren't seriously observed. This alone is enough for many; they choose to view the advancement of humanity as a result of these systems rather than an incuded side effect that was produced in spite of them."
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text(
+        "Choosing to be blind to alternatives is one thing, but there's only so much that can be done to deny immediate reality. Again, the relationship between those for and against the system are opposed, each attributing deficiencies in a stalemate that benefits the former by virtue of incumbency. Dissatisfaction with the status quo leads very quickly to dissatisfaction, which is of course untenable. If this yields despair, the status quo is unchanged; further, this despair may beget even deeper devotion out of othering and deflection. "
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text(
+        "It's always in the best interest of those in power to make themselves out to be the natural leaders. Blind acceptance is often the simplest option when it comes to complex issues made only more complex by intentional muddying of the waters from vested-interests due to impossibility of third-party without some vested interest. This has always been true and will always be true for as long as there is a ruling class. But that doesn't make it okay to do nothing; from the throes of despair, the fact that getting here is possible "
+      ),
+      i(toList([]), toList([text("despite")])),
+      text(" its historical constancy is proof enough to recover.")
+    ])
+  );
+}
+
+// build/dev/javascript/personal_site/pages/writings/tuples.mjs
+function view4() {
   return p(
     toList([
       class$("center"),
@@ -3016,8 +3429,7 @@ function hoverable_text(el) {
   );
 }
 var styles = /* @__PURE__ */ toList([
-  ["font-family", "CMU Serif"],
-  ["font-weight", "575"],
+  ["font-family", "CMU Serif-Regular !important"],
   ["font-size", "13pt"],
   ["color", "White"],
   ["background-color", "#20201E"],
@@ -3051,7 +3463,7 @@ function mathjax_wrapper(page) {
           ),
           style2(
             toList([]),
-            "\n        .clickable {\n          color: #d8b4fe;\n        }\n        .center {\n          margin: auto;\n          max-width: min(700px, 100vw);\n        }\n\n        body {\n          background-color: rgba(0, 0, 0, 0.25)\n        }\n      "
+            "\n        .clickable {\n          color: #d8b4fe;\n        }\n        .center {\n          margin: auto;\n          max-width: min(1000px, 90vw);\n        }\n      "
           )
         ])
       ),
@@ -3133,7 +3545,7 @@ function view_nav() {
       hoverable_text(
         a(
           toList([href("/resume")]),
-          toList([text("Resume")])
+          toList([text("R\xE9sum\xE9")])
         )
       ),
       hoverable_text(
@@ -3151,6 +3563,12 @@ function view_nav() {
 function view_writing(title) {
   let writings = toList([
     [
+      "authority_despair_michigan",
+      text("Authority, Despair, and M!ch!gan!"),
+      view3,
+      "2025/03/13"
+    ],
+    [
       "tuples",
       div(
         toList([]),
@@ -3159,104 +3577,84 @@ function view_writing(title) {
           text(" are tuples?")
         ])
       ),
-      view3,
+      view4,
       "2025/03/12"
     ]
   ]);
   let $ = title === "";
   if ($) {
-    return centre2(
-      toList([
-        align_start(),
-        style(toList([["margin", "20px"]]))
-      ]),
-      cluster2(
-        toList([]),
-        map(
-          writings,
-          (x) => {
-            return div(
-              toList([]),
-              toList([
-                hoverable_text(
-                  a(
-                    toList([
-                      href("/writings/" + x[0]),
-                      style(
-                        toList([
-                          ["position", "fixed"],
-                          ["left", "50%"],
-                          ["transform", "translate(-200px)"]
-                        ])
-                      )
-                    ]),
-                    toList([x[1]])
-                  )
-                ),
-                p(
-                  toList([
-                    style(
-                      toList([
-                        ["position", "fixed"],
-                        ["left", "50%"],
-                        ["transform", "translate(100px)"]
-                      ])
-                    )
-                  ]),
-                  toList([text(x[3])])
+    return div(
+      toList([style(toList([["margin", "20px"]]))]),
+      map(
+        writings,
+        (x) => {
+          return div(
+            toList([
+              class$("center"),
+              style(
+                toList([
+                  ["display", "flex"],
+                  ["justify-content", "space-between"],
+                  ["max-width", "400px"]
+                ])
+              )
+            ]),
+            toList([
+              hoverable_text(
+                a(
+                  toList([href("/writings/" + x[0])]),
+                  toList([x[1]])
                 )
-              ])
-            );
-          }
-        )
+              ),
+              p(toList([]), toList([text(x[3])]))
+            ])
+          );
+        }
       )
     );
   } else {
-    return centre2(
-      toList([align_centre()]),
-      cluster2(
-        toList([style(toList([]))]),
-        (() => {
-          let $1 = filter(writings, (x) => {
-            return x[0] === title;
-          });
-          if ($1.hasLength(1)) {
-            let a2 = $1.head;
-            return toList([
-              h1(
-                toList([
-                  style(
-                    toList([["font-size", "24pt"], ["text-align", "center"]])
-                  )
-                ]),
-                toList([a2[1]])
-              ),
-              h2(
-                toList([
-                  style(
-                    toList([["font-size", "12pt"], ["text-align", "center"]])
-                  )
-                ]),
-                toList([text(a2[3])])
-              ),
-              a2[2]()
-            ]);
-          } else {
-            throw makeError(
-              "panic",
-              "personal_site",
-              186,
-              "view_writing",
-              "`panic` expression evaluated.",
-              {}
-            );
-          }
-        })()
-      )
+    return div(
+      toList([]),
+      (() => {
+        let $1 = filter(writings, (x) => {
+          return x[0] === title;
+        });
+        if ($1.hasLength(1)) {
+          let a2 = $1.head;
+          return toList([
+            h1(
+              toList([
+                style(
+                  toList([["font-size", "24pt"], ["text-align", "center"]])
+                )
+              ]),
+              toList([a2[1]])
+            ),
+            h2(
+              toList([
+                style(
+                  toList([["font-size", "12pt"], ["text-align", "center"]])
+                )
+              ]),
+              toList([text(a2[3])])
+            ),
+            a2[2]()
+          ]);
+        } else {
+          throw makeError(
+            "panic",
+            "personal_site",
+            180,
+            "view_writing",
+            "`panic` expression evaluated.",
+            {}
+          );
+        }
+      })()
     );
   }
 }
-function view4(model) {
+function view5(model) {
   let page = (() => {
     let $ = model.route;
     if ($ instanceof Resume2) {
@@ -3296,7 +3694,7 @@ function main() {
     update,
     (x) => {
       let _pipe = x;
-      let _pipe$1 = view4(_pipe);
+      let _pipe$1 = view5(_pipe);
       return mathjax_wrapper(_pipe$1);
     }
   );
@@ -3305,7 +3703,7 @@ function main() {
     throw makeError(
       "let_assert",
       "personal_site",
-      25,
+      26,
       "main",
       "Pattern match failed, no pattern matched the value.",
       { value: $ }

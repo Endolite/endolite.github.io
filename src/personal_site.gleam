@@ -16,6 +16,7 @@ import pages/home
 import pages/resume
 
 import pages/writings/tuples
+import pages/writings/authority_despair_michigan
 
 pub fn main() {
   let app =
@@ -97,7 +98,7 @@ fn view_nav() {
     ],
     [
       styling.hoverable_text(
-        html.a([attribute.href("/resume")], [element.text("Resume")]),
+        html.a([attribute.href("/resume")], [element.text("Résumé")]),
       ),
       styling.hoverable_text(
         html.a([attribute.href("/")], [element.text("Home")]),
@@ -112,6 +113,12 @@ fn view_nav() {
 fn view_writing(title: String) {
   let writings = [
     #(
+      "authority_despair_michigan",
+      element.text("Authority, Despair, and M!ch!gan!"),
+      authority_despair_michigan.view,
+      "2025/03/13"
+    ),
+    #(
       "tuples",
       html.div([], [
         html.i([], [element.text("How")]),
@@ -119,48 +126,35 @@ fn view_writing(title: String) {
       ]),
       tuples.view,
       "2025/03/12",
-    ),
+    )
   ]
   case title == "" {
     True ->
-      ui.centre(
-        [cluster.align_start(), attribute.style([#("margin", "20px")])],
-        ui.cluster(
-          [],
+        html.div(
+          [attribute.style([#("margin", "20px")])],
           list.map(writings, fn(x) {
-            html.div([], [
+            html.div([attribute.class("center"), attribute.style([
+              #("display", "flex"),
+              #("justify-content", "space-between"),
+              #("max-width", "400px")
+            ])], [
               styling.hoverable_text(
                 html.a(
                   [
                     attribute.href("/writings/" <> x.0),
-                    attribute.style([
-                      #("position", "fixed"),
-                      #("left", "50%"),
-                      #("transform", "translate(-200px)"),
-                    ]),
                   ],
                   [x.1],
                 ),
               ),
               html.p(
-                [
-                  attribute.style([
-                    #("position", "fixed"),
-                    #("left", "50%"),
-                    #("transform", "translate(100px)"),
-                  ]),
-                ],
+                [],
                 [element.text(x.3)],
               ),
             ])
-          }),
-        ),
-      )
+          }))
     False ->
-      ui.centre(
-        [cluster.align_centre()],
-        ui.cluster(
-          [attribute.style([])],
+        html.div(
+          [],
           case list.filter(writings, fn(x) { x.0 == title }) {
             [a] -> [
               html.h1(
@@ -185,8 +179,7 @@ fn view_writing(title: String) {
             ]
             _ -> panic
           },
-        ),
-      )
+        )
   }
 }
 

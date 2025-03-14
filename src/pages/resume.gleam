@@ -69,7 +69,7 @@ pub fn view() {
       ]),
       html.p([attribute.style([#("margin-left", "4em")])], [
         element.text(
-          "Lebesgue integration has been my white whale in math for a long time, and it this course was certainly as difficult as I expected, though maybe moreso due to the Fourier analysis; still really fun even, and finally motivated the material from Linear Algebra 2",
+          "Lebesgue integration has been my white whale in math for a long time, and it this course was certainly as difficult as I expected, though maybe moreso due to the Fourier analysis; still really fun, and finally motivated the material from Linear Algebra 2",
         ),
       ]),
       html.h4([attribute.style([#("margin-left", "3em")])], [

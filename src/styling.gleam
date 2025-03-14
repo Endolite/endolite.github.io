@@ -14,8 +14,8 @@ pub fn hoverable_text(el) {
 }
 
 const styles = [
-  #("font-family", "CMU Serif"),
-  #("font-weight", "575"),
+  #("font-family", "CMU Serif-Regular !important"),
+  //#("font-weight", "575"),
   #("font-size", "13pt"),
   #("color", "White"),
   #("background-color", "#20201E"),
@@ -50,11 +50,7 @@ pub fn mathjax_wrapper(page) {
         }
         .center {
           margin: auto;
-          max-width: min(700px, 100vw);
-        }
-
-        body {
-          background-color: rgba(0, 0, 0, 0.25)
+          max-width: min(1000px, 90vw);
         }
       ",
       ),
