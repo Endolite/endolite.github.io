@@ -2315,9 +2315,6 @@ function h2(attrs, children2) {
 function h3(attrs, children2) {
   return element("h3", attrs, children2);
 }
-function h4(attrs, children2) {
-  return element("h4", attrs, children2);
-}
 function div(attrs, children2) {
   return element("div", attrs, children2);
 }
@@ -2356,6 +2353,12 @@ function img(attrs) {
 }
 function script(attrs, js) {
   return element("script", attrs, toList([text2(js)]));
+}
+function details(attrs, children2) {
+  return element("details", attrs, children2);
+}
+function summary(attrs, children2) {
+  return element("summary", attrs, children2);
 }
 
 // build/dev/javascript/lustre_ui/lustre/ui/box.mjs
@@ -2548,6 +2551,24 @@ function init2(handler) {
   );
 }
 
+// build/dev/javascript/personal_site/model.mjs
+var Model2 = class extends CustomType {
+  constructor(route) {
+    super();
+    this.route = route;
+  }
+};
+var Home = class extends CustomType {
+};
+var Resume2 = class extends CustomType {
+};
+var Writings = class extends CustomType {
+  constructor(x0) {
+    super();
+    this[0] = x0;
+  }
+};
+
 // build/dev/javascript/personal_site/pages/home.mjs
 function view() {
   return p(
@@ -2586,319 +2607,231 @@ function view() {
 }
 
 // build/dev/javascript/personal_site/pages/resume.mjs
+function heading(elem) {
+  return h1(
+    toList([style(toList([["font-size", "16pt"]]))]),
+    toList([elem])
+  );
+}
+function subheading(elem) {
+  return h2(
+    toList([
+      style(toList([["margin-left", "1em"], ["font-size", "14pt"]]))
+    ]),
+    toList([elem])
+  );
+}
+function subsubheading(elem) {
+  return h3(
+    toList([style(toList([["margin-left", "2em"]]))]),
+    toList([elem])
+  );
+}
+function details2(label2, margin, child) {
+  return details(
+    toList([style(toList([["margin-left", margin]]))]),
+    toList([summary(toList([]), toList([label2])), child])
+  );
+}
+function p_margin(elem) {
+  return p(
+    toList([style(toList([["margin-left", "1em"]]))]),
+    toList([elem])
+  );
+}
+function descriptions(content) {
+  return div(
+    toList([]),
+    map(
+      content,
+      (x) => {
+        {
+          let a2 = x[0];
+          let b2 = x[1];
+          return details2(a2, "1em", p_margin(b2));
+        }
+      }
+    )
+  );
+}
 function view2() {
+  let courses_math = map(
+    toList([
+      [
+        "MATH 136 \u2013 Linear Algebra 1",
+        "Relaxed introduction to linear algebra I was long overdue for and ended up really liking thanks to its emphasis on proofs"
+      ],
+      [
+        "MATH 235 \u2013 Linear Algebra 2",
+        "Spent way too long on abstract vector spaces, which is review from the previous course, and then crammed in a bunch of unmotivated computation in the second half; not a great time, but certainly useful for at least one other course"
+      ],
+      [
+        "MATH 138 \u2013 Calculus 2",
+        "Entirely review, so not much to say; integrals are pretty fun"
+      ],
+      [
+        "AMATH 231 \u2013 Calculus 4",
+        "Half review and half new material, all of which was computational; a tolerable covering of vector calculus and Fourier series/transforms"
+      ],
+      [
+        "PMATH 333 \u2013 Introduction to Analysis",
+        "While this course made me realize that I like analysis more than algebra, it came at the cost really annoying proofs that were quite computational and required a lot of memorization"
+      ],
+      [
+        "PMATH 351 \u2013 Real Analysis",
+        "Easily my favourite course I've taken so far, covering a lot in depth in a straightforward manner with motivation that never made it feel overly difficult to intuit the progression"
+      ],
+      [
+        "PMATH 450 \u2013 Lebesgue Integration and Fourier Analysis",
+        "Lebesgue integration has been my white whale in math for a long time, and it this course was certainly as difficult as I expected, though maybe moreso due to the Fourier analysis; still really fun, and finally motivated the material from Linear Algebra 2"
+      ],
+      [
+        "MATH 249 \u2013 Introduction to Combinatorics",
+        "Intro to algebraic combinatorics with lots of fun proofs that made me feel clever and stupid; graph theory was a bit less engaging, though"
+      ]
+    ]),
+    (x) => {
+      {
+        let a2 = x[0];
+        let b2 = x[1];
+        return [text(a2), text(b2)];
+      }
+    }
+  );
+  let courses_cs = map(
+    toList([
+      [
+        "CS 145 \u2013 Introduction to Functional Programming",
+        p(
+          toList([]),
+          toList([
+            text(
+              "Racket is a fun language, can't wait to use it in the real world; this course really prepared me for making my "
+            ),
+            a(
+              toList([
+                href(
+                  "https://gist.github.com/Endolite/aa8024db78eb546dd36d7ba1be0de34e"
+                ),
+                class$("clickable")
+              ]),
+              toList([text("Kanata config")])
+            )
+          ])
+        )
+      ],
+      [
+        "CS 146 \u2013 Elementary Algorithm Design and Data Abstraction",
+        text(
+          "Course title is the vaguest possible for a CS course, but it was a great well-motivated introduction to imperative programming; now I can pretend to understand compilers"
+        )
+      ],
+      [
+        "CS 136L \u2013 Tools and Techniques for Software Development",
+        text(
+          "Intro to tools like Linux and git which are really useful; unfortunately I have dementia (\xB4\uFF1B\u03C9\uFF1B`)"
+        )
+      ],
+      [
+        "CS 241E \u2013 Foundations of Sequential Programs",
+        text(
+          "Another vague title, but this was focused on implementing abstractions from machine code, going from a verison of MIPS implemeted in Scala to a toy language Lacs with some of Scala's functionality; the final was disproportionately representative language theory, which was my favourite part of the course; now I can pretend to understand compilers a bit more confidently"
+        )
+      ],
+      [
+        "CS 245 \u2013 Logic and Computation",
+        text(
+          "I'm more of a math guy, so an introduction to formal logic with some connections to model theory was much appreciated"
+        )
+      ],
+      [
+        "CS 246 \u2013 Object-Oriented Software Development",
+        text(
+          "Didn't go to a single lecture but still somehow passed; C++ is certainly a language"
+        )
+      ]
+    ]),
+    (x) => {
+      {
+        let a2 = x[0];
+        let b2 = x[1];
+        return [text(a2), b2];
+      }
+    }
+  );
+  let courses_other = map(
+    toList([
+      [
+        "ENGL 109 \u2013 Introduction to Academic Writing",
+        "Pretty basic course on academic writing; writing essays is fun, though"
+      ],
+      [
+        "ENGL 210E \u2013 Genres of Technical Communication",
+        "Another relatively basic course, though it both was more interesting and more tedious"
+      ],
+      [
+        "JAPAN 201R \u2013 Second-Year Japanese 1",
+        "Decent writing practice, but I didn't learn anything since it just covered the first half of Genki \u2161; I definitely need more speaking practice"
+      ],
+      ["MUSIC 116/117 \u2013 Music Ensemble", "I love jazz -=iii=<()"]
+    ]),
+    (x) => {
+      {
+        let a2 = x[0];
+        let b2 = x[1];
+        return [text(a2), text(b2)];
+      }
+    }
+  );
+  let courses_ltu = map(
+    toList([
+      [
+        "MCS 2414 \u2013 Calculus 3",
+        "Very straightforward, computational primer on multivariable and vector calculus"
+      ],
+      [
+        "MCS 2423 \u2013 Differential Equations",
+        "Thoroughly computationally rigorous introduction to differential equations; I gravely oversetimated the imporatnce of differential equations for my career"
+      ],
+      [
+        "MCS 2523 \u2013 Discrete Math",
+        "Sporadic, unrigorous introduction to number theory, enumeration, graph theory, propositional logic, set theory, and discrete probability (in that order?)"
+      ],
+      [
+        "MCS 2514 \u2013 Computer Science 2",
+        "Relaxed introduction to basic C++ and object-oriented programming more generally; my only background was Java, which was slightly suboptimal"
+      ],
+      [
+        "PHY 3653 \u2013 Contemporary Physics",
+        "Largely conceptual survey of modern physics, with computation for motivation and simply examples; classical relativity, special relativity, wave-particle duality, quantum mechanics, modelling atoms, nuclear physics, astrophysics, and general relativity"
+      ]
+    ]),
+    (x) => {
+      {
+        let a2 = x[0];
+        let b2 = x[1];
+        return [text(a2), text(b2)];
+      }
+    }
+  );
   return div(
     toList([
       class$("center"),
       style(toList([["margin-top", "20px"]]))
     ]),
     toList([
-      h1(
-        toList([style(toList([["font-size", "16pt"]]))]),
-        toList([text("Education")])
+      heading(text("Courses")),
+      subheading(text("University of Waterloo (BCS 23\u201327)")),
+      subsubheading(text("Courses")),
+      details2(text("Math"), "3em", descriptions(courses_math)),
+      details2(text("CS"), "3em", descriptions(courses_cs)),
+      details2(text("Electives"), "3em", descriptions(courses_other)),
+      subheading(
+        text(
+          "Lawrence Technological University (Dual Enrollment 22\u201323)"
+        )
       ),
-      h2(
-        toList([
-          style(
-            toList([["font-size", "14pt"], ["margin-left", "1em"]])
-          )
-        ]),
-        toList([text("University of Waterloo (BCS 23\u201327)")])
-      ),
-      h3(
-        toList([style(toList([["margin-left", "2em"]]))]),
-        toList([text("Courses")])
-      ),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([text("MATH 136 \u2013 Linear Algebra 1")])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Relaxed introduction to linear algebra I was long overdue for and ended up really liking thanks to its emphasis on proofs"
-          )
-        ])
-      ),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([text("MATH 235 \u2013 Linear Algebra 2")])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Spent way too long on abstract vector spaces, which is review from the previous course, and then crammed in a bunch of unmotivated computation in the second half; not a great time, but certainly useful for at least one other course"
-          )
-        ])
-      ),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([text("MATH 138 \u2013 Calculus 2")])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Entirely review, so not much to say; integrals are pretty fun"
-          )
-        ])
-      ),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([text("AMATH 231 \u2013 Calculus 4")])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Half review and half new material, all of which was computational; a tolerable covering of vector calculus and Fourier series/transforms"
-          )
-        ])
-      ),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([text("PMATH 333 \u2013 Introduction to Analysis")])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "While this course made me realize that I like analysis more than algebra, it came at the cost really annoying proofs that were quite computational and required a lot of memorization"
-          )
-        ])
-      ),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([text("PMATH 351 \u2013 Real Analysis")])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Easily my favourite course I've taken so far, covering a lot in depth in a straightforward manner with motivation that never made it feel overly difficult to intuit the progression"
-          )
-        ])
-      ),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([
-          text("PMATH 450 \u2013 Lebesgue Integration and Fourier Analysis")
-        ])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Lebesgue integration has been my white whale in math for a long time, and it this course was certainly as difficult as I expected, though maybe moreso due to the Fourier analysis; still really fun, and finally motivated the material from Linear Algebra 2"
-          )
-        ])
-      ),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([text("MATH 249 \u2013 Introduction to Combinatorics")])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Lots of fun proofs that made me feel clever and stupid; graph theory was a bit less engaging, though"
-          )
-        ])
-      ),
-      br(toList([])),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([
-          text("CS 145 \u2013 Introduction to Functional Programming")
-        ])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Racket is a fun language, can't wait to use it in the real world; this course really prepared me for making my "
-          ),
-          a(
-            toList([
-              href(
-                "https://gist.github.com/Endolite/aa8024db78eb546dd36d7ba1be0de34e"
-              ),
-              class$("clickable")
-            ]),
-            toList([text("Kanata config")])
-          )
-        ])
-      ),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([
-          text(
-            "CS 146 \u2013 Elementary Algorithm Design and Data Abstraction"
-          )
-        ])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Course title is the vaguest possible for a CS course, but it was a great well-motivated introduction to imperative programming; now I can pretend to understand compilers"
-          )
-        ])
-      ),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([text("CS 241E \u2013 Foundations of Sequential Programs")])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Another vague title, but this was focused on implementing abstractions from machine code, going from a verison of MIPS implemeted in Scala to a toy language Lacs with some of Scala's functionality; the final was disproportionately representative language theory, which was my favourite part of the course; now I can pretend to understand compilers a bit more confidently"
-          )
-        ])
-      ),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([text("CS 245 \u2013 Logic and Computation")])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "I'm more of a math guy, so an introduction to formal logic with some connections to model theory was much appreciated"
-          )
-        ])
-      ),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([text("CS 246 \u2013 Object-Oriented Software Development")])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Didn't go to a single lecture but still somehow passed; C++ is certainly a language"
-          )
-        ])
-      ),
-      br(toList([])),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([text("ENGL 109 \u2013 Introduction to Academic Writing")])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Pretty basic course on academic writing; writing essays is fun, though"
-          )
-        ])
-      ),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([text("ENGL 210E \u2013 Genres of Technical Communication")])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Another relatively basic course, though it both was more interesting and more tedious"
-          )
-        ])
-      ),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([text("JAPAN 201R \u2013 Second-Year Japanese 1")])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Decent writing practice, but I didn't learn anything since it just covered the first half of Genki \u2161; I definitely need more speaking practice"
-          )
-        ])
-      ),
-      br(toList([])),
-      h2(
-        toList([
-          style(
-            toList([["font-size", "14pt"], ["margin-left", "1em"]])
-          )
-        ]),
-        toList([
-          text(
-            "Lawrence Technological University (Dual Enrollment 22\u201323)"
-          )
-        ])
-      ),
-      h3(
-        toList([style(toList([["margin-left", "2em"]]))]),
-        toList([text("Courses")])
-      ),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([text("MCS 2414 \u2013 Calculus 3")])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Very straightforward, computational primer on multivariable and vector calculus"
-          )
-        ])
-      ),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([text("MCS 2423 \u2013 Differential Equations")])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Thoroughly computationally rigorous introduction to differential equations; I gravely oversetimated the imporatnce of differential equations for my career"
-          )
-        ])
-      ),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([text("MCS 2523 \u2013 Discrete Math")])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Sporadic, unrigorous introduction to number theory, enumeration, graph theory, propositional logic, set theory, and discrete probability (in that order?)"
-          )
-        ])
-      ),
-      br(toList([])),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([text("MCS 2514 \u2013 Computer Science 2")])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Relaxed introduction to basic C++ and object-oriented programming more generally; my only background was Java, which was slightly suboptimal"
-          )
-        ])
-      ),
-      br(toList([])),
-      h4(
-        toList([style(toList([["margin-left", "3em"]]))]),
-        toList([text("PHY 3653 \u2013 Contemporary Physics")])
-      ),
-      p(
-        toList([style(toList([["margin-left", "4em"]]))]),
-        toList([
-          text(
-            "Largely conceptual survey of modern physics, with computation for motivation and simply examples; classical relativity, special relativity, wave-particle duality, quantum mechanics, modelling atoms, nuclear physics, astrophysics, and general relativity"
-          )
-        ])
-      )
+      details2(text("Courses"), "2em", descriptions(courses_ltu))
     ])
   );
 }
@@ -3140,7 +3073,7 @@ function view3() {
       text(" (that title goes to the seminal 2005 work "),
       cite(toList([]), toList([text("Illinois")])),
       text(
-        "), its even more overt Christian themes serve as a fearful yet accepting reflection of the journey of the prior album. "
+        "), but its even more overt Christian themes serve as a fearful yet accepting reflection of the journey of the prior album. "
       ),
       cite(
         toList([]),
@@ -3476,22 +3409,6 @@ function mathjax_wrapper(page) {
 }
 
 // build/dev/javascript/personal_site/personal_site.mjs
-var Model2 = class extends CustomType {
-  constructor(route) {
-    super();
-    this.route = route;
-  }
-};
-var Home = class extends CustomType {
-};
-var Resume2 = class extends CustomType {
-};
-var Writings = class extends CustomType {
-  constructor(x0) {
-    super();
-    this[0] = x0;
-  }
-};
 var OnRouteChange = class extends CustomType {
   constructor(x0) {
     super();
@@ -3644,7 +3561,7 @@ function view_writing(title) {
           throw makeError(
             "panic",
             "personal_site",
-            180,
+            168,
             "view_writing",
             "`panic` expression evaluated.",
             {}
@@ -3703,7 +3620,7 @@ function main() {
     throw makeError(
       "let_assert",
       "personal_site",
-      26,
+      27,
       "main",
       "Pattern match failed, no pattern matched the value.",
       { value: $ }
