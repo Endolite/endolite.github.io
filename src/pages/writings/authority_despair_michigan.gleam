@@ -189,7 +189,7 @@ pub fn view() {
       ]),
       element.text("kicks off in a darker place than "),
       html.cite([], [element.text("Flint")]),
-      element.text("both musically and lyrically ("),
+      element.text(" both musically and lyrically ("),
       html.q([], [element.text("If I am alive this time next year")]),
       element.text(
         ") but defers to the divine despite expressed concern over whether they are on the right side of the outcome (",

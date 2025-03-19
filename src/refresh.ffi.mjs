@@ -1,3 +1,5 @@
 export const refresh = () => {
-  window.location.reload();
+  setTimeout(() => {
+    MathJax.typeset();
+  }, 0);
 };
