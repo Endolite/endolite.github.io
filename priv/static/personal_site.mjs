@@ -3336,7 +3336,7 @@ function view4() {
     ]),
     toList([
       text(
-        "The Pebble watch has always been really interesting to me. I don't want very much from a smartwatch, and an e-paper display seemed perfect, as did the customizability. Unfortunately, Pebble was eaten by Fitbit, which was in turn absored by Google, where technologies go to die. After much harassment, the valiant "
+        "The Pebble watch has always been really interesting to me. I don't want very much from a smartwatch, and an e-paper display seemed perfect, as did the customizability. Unfortunately, Pebble was eaten by Fitbit, which was in turn absorbed by Google, where technologies go to die. After much harassment, the valiant "
       ),
       href_text("https://ericmigi.com/", "Eric Migicovsky"),
       text(
@@ -3353,7 +3353,7 @@ function view4() {
       text(")."),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text(
-        "Seeing Apple's malevolence for the umpteenth time, I reflected again on why I switched back to iOS to begin with. I don't think I had much of a reason apart from wanting to see what iOS on a phone after so long (and the fact that my Android broke ( \u0361\xB0 \u0296\u032F \u0361\xB0)). I miss being excited by hardware technology, growing up with the rapid improvement of the first half of the 2010s. It seems like very little has changed in the world of consumer technology since around 2017. Sure, things get faster, but to what end? I think the laman was satisfied long ago, and even I've been disinterested for a while apart from foldables and Apple silicon. "
+        "Seeing Apple's malevolence for the umpteenth time, I reflected again on why I switched back to iOS to begin with. I don't think I had much of a reason apart from wanting to see what iOS was like on a phone after so long (and the fact that my Android broke ( \u0361\xB0 \u0296\u032F \u0361\xB0)). I miss being excited by hardware technology, growing up with the rapid improvement of the first half of the 2010s. It seems like very little has changed in the world of consumer technology since around 2017. Sure, things get faster, but to what end? I think the layman was satisfied long ago, and even I've been disinterested for a while apart from foldables and Apple silicon. "
       ),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text(
@@ -3372,7 +3372,7 @@ function view4() {
       ),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text(
-        "To me, this is a michrocosm of the tyranny of the majority inherent to capitalism. Demand does not mean demand, as it measures not only how large a group wants something but also how much they are willing to pay for it, and how often. Anecdotally speaking, people with small phones tend not to upgrade very often (though this may just be a byproduct of how slim their options are), and since the screen size is smaller, a compactified sku is typically sold at a lower price and with smaller margins (even if only marginally so). So when the majority are satisfied with something that everyone needs, what's the issue with forcing the minority to conform? After all, what else can they do?"
+        "To me, this is a microcosm of the tyranny of the majority inherent to capitalism. Demand does not mean demand, as it measures not only how large a group wants something but also how much they are willing to pay for it, and how often. Anecdotally speaking, people with small phones tend not to upgrade very often (though this may just be a byproduct of how slim their options are), and since the screen size is smaller, a compactified sku is typically sold at a lower price and with smaller margins (even if only marginally so). So when the majority are satisfied with something that everyone needs, what's the issue with forcing the minority to conform? After all, what else can they do?"
       ),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text(
