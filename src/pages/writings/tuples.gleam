@@ -2,6 +2,22 @@ import lustre/attribute
 import lustre/element
 import lustre/element/html
 
+pub fn meta(acc) {
+  [
+    #(
+      "tuples",
+      "How are tuples?",
+      html.div([], [
+        html.i([], [element.text("How")]),
+        element.text(" are tuples?"),
+      ]),
+      view,
+      "2025-03-12",
+    ),
+    ..acc
+  ]
+}
+
 pub fn view() {
   html.div([], [
     html.p(

@@ -17,6 +17,7 @@ import pages/home
 import pages/resume
 
 import pages/writings/authority_despair_michigan
+import pages/writings/small_phone
 import pages/writings/tuples
 
 pub fn main() {
@@ -43,10 +44,16 @@ fn init(_flags) -> #(model.Model, Effect(Msg)) {
 
 fn on_route_change(uri: Uri) -> Msg {
   case uri.path_segments(uri.path) {
-    ["resume"] -> OnRouteChange(model.Resume)
+    ["resume"] -> {
+      retitle("Résumé")
+      OnRouteChange(model.Resume)
+    }
     ["writings", title] -> OnRouteChange(model.Writings(title))
     ["writings"] -> OnRouteChange(model.Writings(""))
-    _ -> OnRouteChange(model.Home)
+    _ -> {
+      retitle("Endolite")
+      OnRouteChange(model.Home)
+    }
   }
 }
 
@@ -102,25 +109,14 @@ fn view_nav() {
 }
 
 fn view_writing(title: String) {
-  let writings = [
-    #(
-      "authority_despair_michigan",
-      element.text("Authority, Despair, and M!ch!gan!"),
-      authority_despair_michigan.view,
-      "2025/03/13",
-    ),
-    #(
-      "tuples",
-      html.div([], [
-        html.i([], [element.text("How")]),
-        element.text(" are tuples?"),
-      ]),
-      tuples.view,
-      "2025/03/12",
-    ),
-  ]
+  let writings =
+    []
+    |> tuples.meta
+    |> authority_despair_michigan.meta
+    |> small_phone.meta
   case title == "" {
-    True ->
+    True -> {
+      retitle("Writings")
       html.div(
         [attribute.style([#("margin", "20px")])],
         list.map(writings, fn(x) {
@@ -135,36 +131,40 @@ fn view_writing(title: String) {
             ],
             [
               styling.hoverable_text(
-                html.a([attribute.href("/writings/" <> x.0)], [x.1]),
+                html.a([attribute.href("/writings/" <> x.0)], [x.2]),
               ),
-              html.p([], [element.text(x.3)]),
+              html.p([], [element.text(x.4)]),
             ],
           )
         }),
       )
+    }
     False ->
       html.div([], case list.filter(writings, fn(x) { x.0 == title }) {
-        [a] -> [
-          html.h1(
-            [
-              attribute.style([
-                #("font-size", "24pt"),
-                #("text-align", "center"),
-              ]),
-            ],
-            [a.1],
-          ),
-          html.h2(
-            [
-              attribute.style([
-                #("font-size", "12pt"),
-                #("text-align", "center"),
-              ]),
-            ],
-            [element.text(a.3)],
-          ),
-          a.2(),
-        ]
+        [a] -> {
+          retitle(a.1)
+          [
+            html.h1(
+              [
+                attribute.style([
+                  #("font-size", "24pt"),
+                  #("text-align", "center"),
+                ]),
+              ],
+              [a.2],
+            ),
+            html.div([attribute.style([#("text-align", "center")])], [
+              html.time(
+                [
+                  attribute.style([#("font-size", "12pt")]),
+                  attribute.attribute("datetime", a.4),
+                ],
+                [element.text(a.4)],
+              ),
+            ]),
+            a.3(),
+          ]
+        }
         _ -> panic
       })
   }
@@ -172,5 +172,10 @@ fn view_writing(title: String) {
 
 @external(javascript, "./refresh.ffi.mjs", "refresh")
 fn refresh() -> Nil {
+  Nil
+}
+
+@external(javascript, "./refresh.ffi.mjs", "retitle")
+fn retitle(_title: String) -> Nil {
   Nil
 }

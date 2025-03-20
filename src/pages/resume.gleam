@@ -75,6 +75,14 @@ pub fn view() {
           "MATH 249 – Introduction to Combinatorics",
           "Intro to algebraic combinatorics with lots of fun proofs that made me feel clever and stupid; graph theory was a bit less engaging, though",
         ),
+        #(
+          "STAT 230 – Probability",
+          "Simple introduction to probability with annoying problems and an emphasis on knowing the applicability of distributions; sadly untheoretical, I wanted measure theory ( • ᴖ • ｡)"
+        ),
+        #(
+          "STAT 231 – Statistics",
+          "Rigorous introduction to theoretical statistics focusing on estimation and emphasizing consciousness of assumptions; also tested R for some reason; lots and lots of memorization, but open-note ʅ(°_°)ʃ"
+        )
       ],
       fn(x) {
         case x {
@@ -186,7 +194,7 @@ pub fn view() {
         ),
         #(
           "PHY 3653 – Contemporary Physics",
-          "Largely conceptual survey of modern physics, with computation for motivation and simply examples; classical relativity, special relativity, wave-particle duality, quantum mechanics, modelling atoms, nuclear physics, astrophysics, and general relativity",
+          "Largely conceptual survey of modern physics, with computation for motivation and simple examples; classical and special relativity, wave-particle duality, quantum mechanics, modelling atoms, nuclear physics, astrophysics, and general relativity",
         ),
       ],
       fn(x) {
@@ -199,7 +207,7 @@ pub fn view() {
   html.div(
     [attribute.class("center"), attribute.style([#("margin-top", "20px")])],
     [
-      heading(element.text("Courses")),
+      heading(element.text("Education")),
       subheading(element.text("University of Waterloo (BCS 23–27)")),
       subsubheading(element.text("Courses")),
       details(element.text("Math"), "3em", descriptions(courses_math)),

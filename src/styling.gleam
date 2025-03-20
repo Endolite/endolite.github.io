@@ -1,4 +1,5 @@
 import lustre/attribute
+import lustre/element
 import lustre/element/html
 import lustre/ui
 
@@ -10,6 +11,16 @@ pub fn hoverable_text(el) {
       ),
     ],
     [el],
+  )
+}
+
+pub fn href_text(link, text) {
+  html.a(
+    [
+      attribute.href(link),
+      attribute.class("clickable")
+    ],
+    [element.text(text)]
   )
 }
 
@@ -51,6 +62,9 @@ pub fn mathjax_wrapper(page) {
         .center {
           margin: auto;
           max-width: min(1000px, 90vw);
+        }
+        a:hover {
+          text-decoration: underline;
         }
       ",
       ),

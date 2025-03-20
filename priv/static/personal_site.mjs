@@ -2008,13 +2008,13 @@ var LustreClientApplication = class _LustreClientApplication {
    *
    * @returns {Gleam.Ok<(action: Lustre.Action<Lustre.Client, Msg>>) => void>}
    */
-  static start({ init: init4, update: update2, view: view6 }, selector, flags) {
+  static start({ init: init4, update: update2, view: view7 }, selector, flags) {
     if (!is_browser())
       return new Error(new NotABrowser());
     const root = selector instanceof HTMLElement ? selector : document.querySelector(selector);
     if (!root)
       return new Error(new ElementNotFound(selector));
-    const app = new _LustreClientApplication(root, init4(flags), update2, view6);
+    const app = new _LustreClientApplication(root, init4(flags), update2, view7);
     return new Ok((action) => app.send(action));
   }
   /**
@@ -2025,11 +2025,11 @@ var LustreClientApplication = class _LustreClientApplication {
    *
    * @returns {LustreClientApplication}
    */
-  constructor(root, [init4, effects], update2, view6) {
+  constructor(root, [init4, effects], update2, view7) {
     this.root = root;
     this.#model = init4;
     this.#update = update2;
-    this.#view = view6;
+    this.#view = view7;
     this.#tickScheduled = window.setTimeout(
       () => this.#tick(effects.all.toArray(), true),
       0
@@ -2144,20 +2144,20 @@ var LustreClientApplication = class _LustreClientApplication {
 };
 var start = LustreClientApplication.start;
 var LustreServerApplication = class _LustreServerApplication {
-  static start({ init: init4, update: update2, view: view6, on_attribute_change }, flags) {
+  static start({ init: init4, update: update2, view: view7, on_attribute_change }, flags) {
     const app = new _LustreServerApplication(
       init4(flags),
       update2,
-      view6,
+      view7,
       on_attribute_change
     );
     return new Ok((action) => app.send(action));
   }
-  constructor([model, effects], update2, view6, on_attribute_change) {
+  constructor([model, effects], update2, view7, on_attribute_change) {
     this.#model = model;
     this.#update = update2;
-    this.#view = view6;
-    this.#html = view6(model);
+    this.#view = view7;
+    this.#html = view7(model);
     this.#onAttributeChange = on_attribute_change;
     this.#renderers = /* @__PURE__ */ new Map();
     this.#handlers = handlers(this.#html);
@@ -2258,11 +2258,11 @@ var is_browser = () => globalThis.window && window.document;
 
 // build/dev/javascript/lustre/lustre.mjs
 var App = class extends CustomType {
-  constructor(init4, update2, view6, on_attribute_change) {
+  constructor(init4, update2, view7, on_attribute_change) {
     super();
     this.init = init4;
     this.update = update2;
-    this.view = view6;
+    this.view = view7;
     this.on_attribute_change = on_attribute_change;
   }
 };
@@ -2274,8 +2274,8 @@ var ElementNotFound = class extends CustomType {
 };
 var NotABrowser = class extends CustomType {
 };
-function application(init4, update2, view6) {
-  return new App(init4, update2, view6, new None());
+function application(init4, update2, view7) {
+  return new App(init4, update2, view7, new None());
 }
 function start2(app, selector, flags) {
   return guard(
@@ -2347,6 +2347,9 @@ function i(attrs, children2) {
 }
 function q(attrs, children2) {
   return element("q", attrs, children2);
+}
+function time(attrs, children2) {
+  return element("time", attrs, children2);
 }
 function img(attrs) {
   return element("img", attrs, toList([]));
@@ -2688,6 +2691,14 @@ function view2() {
       [
         "MATH 249 \u2013 Introduction to Combinatorics",
         "Intro to algebraic combinatorics with lots of fun proofs that made me feel clever and stupid; graph theory was a bit less engaging, though"
+      ],
+      [
+        "STAT 230 \u2013 Probability",
+        "Simple introduction to probability with annoying problems and an emphasis on knowing the applicability of distributions; sadly untheoretical, I wanted measure theory ( \u2022 \u1D16 \u2022 \uFF61)"
+      ],
+      [
+        "STAT 231 \u2013 Statistics",
+        "Rigorous introduction to theoretical statistics focusing on estimation and emphasizing consciousness of assumptions; also tested R for some reason; lots and lots of memorization, but open-note \u0285(\xB0_\xB0)\u0283"
       ]
     ]),
     (x) => {
@@ -2803,7 +2814,7 @@ function view2() {
       ],
       [
         "PHY 3653 \u2013 Contemporary Physics",
-        "Largely conceptual survey of modern physics, with computation for motivation and simply examples; classical relativity, special relativity, wave-particle duality, quantum mechanics, modelling atoms, nuclear physics, astrophysics, and general relativity"
+        "Largely conceptual survey of modern physics, with computation for motivation and simple examples; classical and special relativity, wave-particle duality, quantum mechanics, modelling atoms, nuclear physics, astrophysics, and general relativity"
       ]
     ]),
     (x) => {
@@ -2820,7 +2831,7 @@ function view2() {
       style(toList([["margin-top", "20px"]]))
     ]),
     toList([
-      heading(text("Courses")),
+      heading(text("Education")),
       subheading(text("University of Waterloo (BCS 23\u201327)")),
       subsubheading(text("Courses")),
       details2(text("Math"), "3em", descriptions(courses_math)),
@@ -3137,7 +3148,7 @@ function view3() {
       ),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text(
-        "The subsequent few tracks exemplify the overt Christian theming with direct gratitude towards Jesus and Abraham, and "
+        "The subsequent few tracks exemplify the overt Christian theming with direct gratitude towards Jesus and Abraham. "
       ),
       cite(
         toList([]),
@@ -3228,7 +3239,7 @@ function view3() {
       ),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text(
-        "Choosing to be blind to alternatives is one thing, but there's only so much that can be done to deny immediate reality. Again, those for and against the system are mutually opposed, each attributing deficiencies to the other in a stalemate that benefits the former by virtue of incumbency. Dissatisfaction with the status quo leads very quickly to dissatisfaction, which is of course untenable. If this yields despair, the status quo is unchanged; further, this despair may beget even deeper devotion out of othering and deflection. "
+        "Choosing to be blind to alternatives is one thing, but there's only so much that can be done to deny immediate reality. Again, those for and against the system are mutually opposed, each attributing deficiencies to the other in a stalemate that benefits the former by virtue of incumbency. Dissatisfaction with the status quo leads very quickly to apathy, which is of course untenable. If this yields despair, the status quo is unchanged; further, this despair may beget even deeper devotion out of othering and deflection. "
       ),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text(
@@ -3239,9 +3250,197 @@ function view3() {
     ])
   );
 }
+function meta(acc) {
+  return prepend(
+    [
+      "authority_despair_michigan",
+      "Authority, Despair, and M!ch!gan!",
+      text("Authority, Despair, and M!ch!gan!"),
+      view3,
+      "2025-03-13"
+    ],
+    acc
+  );
+}
+
+// build/dev/javascript/personal_site/styling.mjs
+function hoverable_text(el) {
+  return div(
+    toList([
+      class$(
+        "transition-colors duration-200 ease-in-out hover:text-purple-300"
+      )
+    ]),
+    toList([el])
+  );
+}
+function href_text(link2, text3) {
+  return a(
+    toList([href(link2), class$("clickable")]),
+    toList([text(text3)])
+  );
+}
+var styles = /* @__PURE__ */ toList([
+  ["font-family", "CMU Serif-Regular !important"],
+  ["font-size", "13pt"],
+  ["color", "White"],
+  ["background-color", "#20201E"],
+  ["min-height", "100vh"],
+  ["height", "100%"],
+  ["margin", "0"]
+]);
+function mathjax_wrapper(page) {
+  return html(
+    toList([style(styles)]),
+    toList([
+      head(
+        toList([]),
+        toList([
+          script(
+            toList([
+              src(
+                "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+              ),
+              id("MathJax-script")
+            ]),
+            ""
+          ),
+          link(
+            toList([
+              rel("stylesheet"),
+              href(
+                "https://cdn.jsdelivr.net/gh/bitmaks/cm-web-fonts@latest/fonts.css"
+              )
+            ])
+          ),
+          style2(
+            toList([]),
+            "\n        .clickable {\n          color: #d8b4fe;\n        }\n        .center {\n          margin: auto;\n          max-width: min(1000px, 90vw);\n        }\n        a:hover {\n          text-decoration: underline;\n        }\n      "
+          )
+        ])
+      ),
+      body(
+        toList([style(toList([["padding", "20px"]]))]),
+        toList([box2(toList([]), toList([page]))])
+      )
+    ])
+  );
+}
+
+// build/dev/javascript/personal_site/pages/writings/small_phone.mjs
+function view4() {
+  return p(
+    toList([
+      class$("center"),
+      style(toList([["text-align", "justify"]]))
+    ]),
+    toList([
+      text(
+        "The Pebble watch has always been really interesting to me. I don't want very much from a smartwatch, and an e-paper display seemed perfect, as did the customizability. Unfortunately, Pebble was eaten by Fitbit, which was in turn absored by Google, where technologies go to die. After much harassment, the valiant "
+      ),
+      href_text("https://ericmigi.com/", "Eric Migicovsky"),
+      text(
+        " got Google to open-source the unused technology, renewing hope for the enthusiast fans that have been holding on for 8 long years through continued support and a "
+      ),
+      href_text("https://repebble.com/", "revival"),
+      text(
+        ". Of course, Apple being Apple has fortified their walled garden to severely limit any non-Apple Watch smartwatches (though luckily "
+      ),
+      href_text(
+        "https://www.theverge.com/news/632718/europe-digital-markets-act-apple-interoperability-smartwatches",
+        "the EU is finally getting on that"
+      ),
+      text(")."),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text(
+        "Seeing Apple's malevolence for the umpteenth time, I reflected again on why I switched back to iOS to begin with. I don't think I had much of a reason apart from wanting to see what iOS on a phone after so long (and the fact that my Android broke ( \u0361\xB0 \u0296\u032F \u0361\xB0)). I miss being excited by hardware technology, growing up with the rapid improvement of the first half of the 2010s. It seems like very little has changed in the world of consumer technology since around 2017. Sure, things get faster, but to what end? I think the laman was satisfied long ago, and even I've been disinterested for a while apart from foldables and Apple silicon. "
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text(
+        "I hate that companies chase market trends and profitability above all else. The "
+      ),
+      href_text(
+        "https://www.youtube.com/watch?v=FJgTKx-rg18",
+        "enthusiast trap"
+      ),
+      text(
+        " saddens me to no end, luring in consumers in a simple bid for market share before being able to pivot into a more competitive but larger category. A niche that is apparently not popular enough is that of the one-handable device, considering Apple and Asus' discontinuation of their (relatively) compact lines in 2022 and 2024 respectively. Seeing this, our aforementioned hero made a "
+      ),
+      href_text("https://smallandroidphone.com/", "petition"),
+      text(
+        " to tell manufacturers not to disregard us, but alas, this has borne no fruit thus far. "
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text(
+        "To me, this is a michrocosm of the tyranny of the majority inherent to capitalism. Demand does not mean demand, as it measures not only how large a group wants something but also how much they are willing to pay for it, and how often. Anecdotally speaking, people with small phones tend not to upgrade very often (though this may just be a byproduct of how slim their options are), and since the screen size is smaller, a compactified sku is typically sold at a lower price and with smaller margins (even if only marginally so). So when the majority are satisfied with something that everyone needs, what's the issue with forcing the minority to conform? After all, what else can they do?"
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text(
+        "Another confounding factor is, of course, government interest. While this doesn't much apply here, I'm also passionate about transit: I despise the "
+      ),
+      href_text(
+        "https://medium.com/radical-urbanist/cars-gets-billions-in-hidden-subsidies-b3bf9e6bfafc",
+        "subsidies"
+      ),
+      text(" and "),
+      href_text(
+        "https://home.treasury.gov/data/troubled-assets-relief-program/automotive-programs/overview",
+        "bailouts"
+      ),
+      text(" and "),
+      href_text(
+        "https://www.urban.org/policy-centers/cross-center-initiatives/state-and-local-finance-initiative/state-and-local-backgrounders/highway-and-road-expenditures",
+        "public works"
+      ),
+      text(
+        " that all contribute to terrible infrastructure that harms communities and the world as a whole while creating a privatized, exorbitantly expensive commodity that's for all intents and purposes required to function within society. What's even more infuriating is the fact that North America was "
+      ),
+      i(toList([]), toList([text("built ")])),
+      text(
+        "along railroads that the government chose to rip out, along with other forms of transit, just to artificially spur an enormous industry that they could proceed to propagandize until it sickeningly became a point of "
+      ),
+      i(toList([]), toList([text("pride.")])),
+      text(
+        " The closest historical analog I can think of is the Opium Wars, but this was done "
+      ),
+      i(
+        toList([]),
+        toList([text("domestically for profit and control")])
+      ),
+      text(" and got the targets hooked to the point that "),
+      i(toList([]), toList([text("they don't even notice")])),
+      text(" and now serve as agents of the status quo."),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text("While small phones perhaps wouldn't "),
+      href_text(
+        "https://www.motortrend.com/features/why-americas-roads-keep-getting-deadlier-safety-research/",
+        "save as many lives as small cars"
+      ),
+      text(
+        ", both are much-needed remedies for industires that are so far removed from providing any actual utility to consumers that they now actively harm lives while charging a premium to both individuals and society; a common argument in favour of smaller phones is that they reduce screentime, which I believe is unilaterally good (at least holistically). (I don't need to make the comparison between smartphones and opium myself, do I?)"
+      ),
+      br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
+      text(
+        `On a hopeful (perhaps delusionally so) note, Nothing's expected CMF Phone 2 recently leaked, and sources are saying (with no actual evidence apart from dubious eyeballing) that it has a 5.2\u20135.5" display, placing it firmly in iPhone mini territory. Even in this cruel, cruel world, there is hope after all! (At least until this is deconfirmed.)`
+      )
+    ])
+  );
+}
+function meta2(acc) {
+  return prepend(
+    [
+      "small_phone",
+      "Where small phone ( \u2022\u032F\u0301 ^ \u2022\u032F\u0300)",
+      text("Small phone big transit where ( \u2022\u032F\u0301 ^ \u2022\u032F\u0300)"),
+      view4,
+      "2025-03-19"
+    ],
+    acc
+  );
+}
 
 // build/dev/javascript/personal_site/pages/writings/tuples.mjs
-function view4() {
+function view5() {
   return div(
     toList([]),
     toList([
@@ -3362,6 +3561,24 @@ function view4() {
     ])
   );
 }
+function meta3(acc) {
+  return prepend(
+    [
+      "tuples",
+      "How are tuples?",
+      div(
+        toList([]),
+        toList([
+          i(toList([]), toList([text("How")])),
+          text(" are tuples?")
+        ])
+      ),
+      view5,
+      "2025-03-12"
+    ],
+    acc
+  );
+}
 
 // build/dev/javascript/personal_site/refresh.ffi.mjs
 var refresh = () => {
@@ -3369,64 +3586,11 @@ var refresh = () => {
     MathJax.typeset();
   }, 0);
 };
-
-// build/dev/javascript/personal_site/styling.mjs
-function hoverable_text(el) {
-  return div(
-    toList([
-      class$(
-        "transition-colors duration-200 ease-in-out hover:text-purple-300"
-      )
-    ]),
-    toList([el])
-  );
-}
-var styles = /* @__PURE__ */ toList([
-  ["font-family", "CMU Serif-Regular !important"],
-  ["font-size", "13pt"],
-  ["color", "White"],
-  ["background-color", "#20201E"],
-  ["min-height", "100vh"],
-  ["height", "100%"],
-  ["margin", "0"]
-]);
-function mathjax_wrapper(page) {
-  return html(
-    toList([style(styles)]),
-    toList([
-      head(
-        toList([]),
-        toList([
-          script(
-            toList([
-              src(
-                "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-              ),
-              id("MathJax-script")
-            ]),
-            ""
-          ),
-          link(
-            toList([
-              rel("stylesheet"),
-              href(
-                "https://cdn.jsdelivr.net/gh/bitmaks/cm-web-fonts@latest/fonts.css"
-              )
-            ])
-          ),
-          style2(
-            toList([]),
-            "\n        .clickable {\n          color: #d8b4fe;\n        }\n        .center {\n          margin: auto;\n          max-width: min(1000px, 90vw);\n        }\n      "
-          )
-        ])
-      ),
-      body(
-        toList([style(toList([["padding", "20px"]]))]),
-        toList([box2(toList([]), toList([page]))])
-      )
-    ])
-  );
-}
+var retitle = (newTitle) => {
+  setTimeout(() => {
+    document.title = newTitle;
+  });
+};
 
 // build/dev/javascript/personal_site/personal_site.mjs
 var OnRouteChange = class extends CustomType {
@@ -3435,37 +3599,6 @@ var OnRouteChange = class extends CustomType {
     this[0] = x0;
   }
 };
-function on_route_change(uri) {
-  let $ = path_segments(uri.path);
-  if ($.hasLength(1) && $.head === "resume") {
-    return new OnRouteChange(new Resume2());
-  } else if ($.hasLength(2) && $.head === "writings") {
-    let title = $.tail.head;
-    return new OnRouteChange(new Writings(title));
-  } else if ($.hasLength(1) && $.head === "writings") {
-    return new OnRouteChange(new Writings(""));
-  } else {
-    return new OnRouteChange(new Home());
-  }
-}
-function init3(_) {
-  return [
-    new Model2(
-      (() => {
-        let $ = (() => {
-          let _pipe = do_initial_uri();
-          let _pipe$1 = unwrap(_pipe, empty);
-          return on_route_change(_pipe$1);
-        })();
-        {
-          let x = $[0];
-          return x;
-        }
-      })()
-    ),
-    init2(on_route_change)
-  ];
-}
 function view_nav() {
   return box2(
     toList([
@@ -3497,29 +3630,61 @@ function view_nav() {
     ])
   );
 }
+function update(_, msg) {
+  {
+    let route = msg[0];
+    return [
+      new Model2(route),
+      (() => {
+        refresh();
+        return none();
+      })()
+    ];
+  }
+}
+function on_route_change(uri) {
+  let $ = path_segments(uri.path);
+  if ($.hasLength(1) && $.head === "resume") {
+    retitle("R\xE9sum\xE9");
+    return new OnRouteChange(new Resume2());
+  } else if ($.hasLength(2) && $.head === "writings") {
+    let title = $.tail.head;
+    return new OnRouteChange(new Writings(title));
+  } else if ($.hasLength(1) && $.head === "writings") {
+    return new OnRouteChange(new Writings(""));
+  } else {
+    retitle("Endolite");
+    return new OnRouteChange(new Home());
+  }
+}
+function init3(_) {
+  return [
+    new Model2(
+      (() => {
+        let $ = (() => {
+          let _pipe = do_initial_uri();
+          let _pipe$1 = unwrap(_pipe, empty);
+          return on_route_change(_pipe$1);
+        })();
+        {
+          let x = $[0];
+          return x;
+        }
+      })()
+    ),
+    init2(on_route_change)
+  ];
+}
 function view_writing(title) {
-  let writings = toList([
-    [
-      "authority_despair_michigan",
-      text("Authority, Despair, and M!ch!gan!"),
-      view3,
-      "2025/03/13"
-    ],
-    [
-      "tuples",
-      div(
-        toList([]),
-        toList([
-          i(toList([]), toList([text("How")])),
-          text(" are tuples?")
-        ])
-      ),
-      view4,
-      "2025/03/12"
-    ]
-  ]);
+  let writings = (() => {
+    let _pipe = toList([]);
+    let _pipe$1 = meta3(_pipe);
+    let _pipe$2 = meta(_pipe$1);
+    return meta2(_pipe$2);
+  })();
   let $ = title === "";
   if ($) {
+    retitle("Writings");
     return div(
       toList([style(toList([["margin", "20px"]]))]),
       map(
@@ -3540,10 +3705,10 @@ function view_writing(title) {
               hoverable_text(
                 a(
                   toList([href("/writings/" + x[0])]),
-                  toList([x[1]])
+                  toList([x[2]])
                 )
               ),
-              p(toList([]), toList([text(x[3])]))
+              p(toList([]), toList([text(x[4])]))
             ])
           );
         }
@@ -3558,6 +3723,7 @@ function view_writing(title) {
         });
         if ($1.hasLength(1)) {
           let a2 = $1.head;
+          retitle(a2[1]);
           return toList([
             h1(
               toList([
@@ -3565,17 +3731,21 @@ function view_writing(title) {
                   toList([["font-size", "24pt"], ["text-align", "center"]])
                 )
               ]),
-              toList([a2[1]])
+              toList([a2[2]])
             ),
-            h2(
+            div(
+              toList([style(toList([["text-align", "center"]]))]),
               toList([
-                style(
-                  toList([["font-size", "12pt"], ["text-align", "center"]])
+                time(
+                  toList([
+                    style(toList([["font-size", "12pt"]])),
+                    attribute("datetime", a2[4])
+                  ]),
+                  toList([text(a2[4])])
                 )
-              ]),
-              toList([text(a2[3])])
+              ])
             ),
-            a2[2]()
+            a2[3]()
           ]);
         } else {
           throw makeError(
@@ -3591,7 +3761,7 @@ function view_writing(title) {
     );
   }
 }
-function view5(model) {
+function view6(model) {
   let page = (() => {
     let $ = model.route;
     if ($ instanceof Resume2) {
@@ -3613,25 +3783,13 @@ function view5(model) {
     ])
   );
 }
-function update(_, msg) {
-  {
-    let route = msg[0];
-    return [
-      new Model2(route),
-      (() => {
-        refresh();
-        return none();
-      })()
-    ];
-  }
-}
 function main() {
   let app = application(
     init3,
     update,
     (x) => {
       let _pipe = x;
-      let _pipe$1 = view5(_pipe);
+      let _pipe$1 = view6(_pipe);
       return mathjax_wrapper(_pipe$1);
     }
   );
@@ -3640,7 +3798,7 @@ function main() {
     throw makeError(
       "let_assert",
       "personal_site",
-      27,
+      28,
       "main",
       "Pattern match failed, no pattern matched the value.",
       { value: $ }

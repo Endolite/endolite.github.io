@@ -3,3 +3,9 @@ export const refresh = () => {
     MathJax.typeset();
   }, 0);
 };
+
+export const retitle = (newTitle) => {
+  setTimeout(() => {
+    document.title = newTitle;
+  });
+};

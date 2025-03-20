@@ -2,7 +2,20 @@ import lustre/attribute
 import lustre/element
 import lustre/element/html
 
-pub fn view() {
+pub fn meta(acc) {
+  [
+    #(
+      "authority_despair_michigan",
+      "Authority, Despair, and M!ch!gan!",
+      element.text("Authority, Despair, and M!ch!gan!"),
+      view,
+      "2025-03-13",
+    ),
+    ..acc
+  ]
+}
+
+fn view() {
   html.p(
     [attribute.class("center"), attribute.style([#("text-align", "justify")])],
     [
@@ -225,7 +238,7 @@ pub fn view() {
       ),
       html.br([attribute.style([#("margin-bottom", "0.5em")])]),
       element.text(
-        "The subsequent few tracks exemplify the overt Christian theming with direct gratitude towards Jesus and Abraham, and ",
+        "The subsequent few tracks exemplify the overt Christian theming with direct gratitude towards Jesus and Abraham. ",
       ),
       html.cite([], [element.text("We Won't Need Legs To Stand")]),
       element.text(
@@ -288,7 +301,7 @@ pub fn view() {
       ),
       html.br([attribute.style([#("margin-bottom", "0.5em")])]),
       element.text(
-        "Choosing to be blind to alternatives is one thing, but there's only so much that can be done to deny immediate reality. Again, those for and against the system are mutually opposed, each attributing deficiencies to the other in a stalemate that benefits the former by virtue of incumbency. Dissatisfaction with the status quo leads very quickly to dissatisfaction, which is of course untenable. If this yields despair, the status quo is unchanged; further, this despair may beget even deeper devotion out of othering and deflection. ",
+        "Choosing to be blind to alternatives is one thing, but there's only so much that can be done to deny immediate reality. Again, those for and against the system are mutually opposed, each attributing deficiencies to the other in a stalemate that benefits the former by virtue of incumbency. Dissatisfaction with the status quo leads very quickly to apathy, which is of course untenable. If this yields despair, the status quo is unchanged; further, this despair may beget even deeper devotion out of othering and deflection. ",
       ),
       html.br([attribute.style([#("margin-bottom", "0.5em")])]),
       element.text(
