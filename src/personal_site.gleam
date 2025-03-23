@@ -20,6 +20,16 @@ import pages/writings/authority_despair_michigan
 import pages/writings/small_phone
 import pages/writings/tuples
 
+@external(javascript, "./refresh.ffi.mjs", "refresh")
+fn refresh() -> Nil {
+  Nil
+}
+
+@external(javascript, "./refresh.ffi.mjs", "retitle")
+fn retitle(_title: String) -> Nil {
+  Nil
+}
+
 pub fn main() {
   let app =
     lustre.application(init, update, fn(x) {
@@ -168,14 +178,4 @@ fn view_writing(title: String) {
         _ -> panic
       })
   }
-}
-
-@external(javascript, "./refresh.ffi.mjs", "refresh")
-fn refresh() -> Nil {
-  Nil
-}
-
-@external(javascript, "./refresh.ffi.mjs", "retitle")
-fn retitle(_title: String) -> Nil {
-  Nil
 }

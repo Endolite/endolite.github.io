@@ -3321,7 +3321,26 @@ function mathjax_wrapper(page) {
       ),
       body(
         toList([style(toList([["padding", "20px"]]))]),
-        toList([box2(toList([]), toList([page]))])
+        toList([
+          box2(
+            toList([]),
+            toList([
+              div(
+                toList([
+                  style(
+                    toList([["max-height", "0"], ["color", "rgba(0, 0, 0, 0)"]])
+                  )
+                ]),
+                toList([
+                  text(
+                    "\\(\n          \\require{action}\n          \\require{boldsymbol}\n          \\require{bussproofs}\n          \\require{cases}\n          \\require{centernot}\n          \\require{mathtools}\n          \\require{mhchem}\n          \\require{physics}\n          \\require{upgreek}\n          \\require{verb}\n\n          % Categories\n            \\DeclareMathOperator{\\Aut}{Aut}\n            \\DeclareMathOperator{\\End}{End}\n            \\DeclareMathOperator{\\hom}{hom}\n            \\DeclareMathOperator{\\Iso}{Iso}\n            \\DeclareMathOperator{\\ob}{ob}\n            \\newcommand{\\op}[1]{#1^{\\text{op}}}\n            % Arrows\n              \\DeclareMathOperator{\\lff}{\\leftrightsquigarrow}\n              \\DeclareMathOperator{\\lrar}{\\leftrightarrow}\n              \\DeclareMathOperator{\\hra}{\\hookrightarrow}\n              \\DeclareMathOperator{\\impto}{\\dashrightarrow}\n              \\DeclareMathOperator{\\opto}{\\leftrightarrows}\n              \\DeclareMathOperator{\\parto}{\\rightrightarrows}\n              \\DeclareMathOperator{\\qlff}{\\quad\\lff\\quad}\n              \\DeclareMathOperator{\\qlto}{\\quad\\leadsto\\quad}\n              \\DeclareMathOperator{\\rat}{\\rightarrowtail}\n              \\DeclareMathOperator{\\rest}{{\\restriction}}\n              \\DeclareMathOperator{\\rsq}{\\rightsquigarrow}\n              \\DeclareMathOperator{\\thra}{\\twoheadrightarrow}\n              % Labelled arrows\n                \\newcommand{\\xto}[1]{\\xrightarrow{#1}}\n          % Combinatorics\n            \\DeclareMathOperator{\\cyc}{cyc}\n            \\DeclareMathOperator{\\Des}{Des}\n            \\DeclareMathOperator{\\des}{des}\n            \\newcommand{\\en}[2]{\\genfrac{\\langle}{\\rangle}{0pt}{}{#1}{#2}}\n            \\DeclareMathOperator{\\girth}{girth}\n            \\DeclareMathOperator{\\maj}{maj}\n            \\DeclareMathOperator{\\inv}{inv}\n            \\DeclareMathOperator{\\indeg}{indeg}\n            \\newcommand{\\multi}[2]{\\left(\\kern-.3em\\left(\\genfrac{}{}{0pt}{}{#1}{#2}\\right)\\kern-.3em\\right)}\n            \\newcommand{\\npr}[2]{#1^{\\qty\\(#2)}}\n            \\DeclareMathOperator{\\outdeg}{outdeg}\n            \\DeclareMathOperator{\\per}{per}\n            \\DeclareMathOperator{\\stimes}{\\mathbin{\\square}}\n          % CS\n            \\DeclareMathOperator{\\BV}{BV}\n            \\DeclareMathOperator{\\Da}{\\Downarrow}\n            \\DeclareMathOperator{\\depth}{depth}\n            \\newcommand{\\evit}[1]{\\ev{\\tit{#1}}}\n            \\newcommand{\\evt}[1]{\\ev{\\t{#1}}}\n            \\DeclareMathOperator{\\FV}{FV}\n            \\newcommand{\\hoare}[3]{\\qty(\\abs{#1})#2\\qty(\\abs{#3})}\n            \\newcommand{\\lop}[3]{(\\(#1\\) \\(#2\\) \\(#3\\))}\n            \\newcommand{\\lopt}[3]{\\text{(\\(\\#1\\) \\(#2\\) \\(#3\\))}}\n            \\DeclareMathOperator{\\rename}{rename}\n            \\newcommand{\\rep}[1]{\\texttt{\u27E6#1\u27E7}}\n            \\newcommand{\\repm}[1]{\u27E6#1\u27E7}\n            \\DeclareMathOperator{\\step}{step}\n          % Differentials\n            \\newcommand{\\vnabla}{\\vec{\\nabla}}\n          % Functions\n            \\DeclareMathOperator{\\cis}{cis}\n            \\newcommand{\\ceil}[1]{\\left\\lceil #1 \\right\\rceil}\n            \\DeclareMathOperator{\\erfc}{erfc}\n            \\newcommand{\\floor}[1]{\\left\\lfloor #1 \\right\\rfloor}\n            \\DeclareMathOperator{\\supp}{supp}\n            \\DeclareMathOperator{\\sgn}{sgn}\n            \\DeclareMathOperator{\\sinc}{sinc}\n            \\DeclareMathOperator{\\Uscr}{\\mathscr{U}}\n            % Transforms\n              \\DeclareMathOperator{\\Ell}{\\mathscr{L}}\n              \\DeclareMathOperator{\\id}{id}\n          % Geometry\n            \\DeclareMathOperator{\\vol}{vol}\n          % Groups\n            \\DeclareMathOperator{\\aut}{aut}\n            \\DeclareMathOperator{\\Hom}{Hom}\n            \\DeclareMathOperator{\\lcm}{lcm}\n            \\DeclareMathOperator{\\ord}{ord}\n            % Rings\n              \\DeclareMathOperator{\\char}{char}\n          % Integrals\n            \\newcommand{\\oiint}{{\\subset\\!\\supset} \\llap{\\iint}}\n            \\newcommand{\\oiiint}{{\\large{\\subset\\!\\supset}} \\llap{\\iiint}}\n            \\newcommand{\\Ft}{\\mathcal{F}}\n          % Lamina\n            \\newcommand{\\bbar}[1]{\\bar{\\bar{#1}}}\n          % Logic\n            \\DeclareMathOperator{\\Atom}{Atom}\n            \\DeclareMathOperator{\\CNF}{CNF}\n            \\DeclareMathOperator{\\DNF}{DNF}\n            \\DeclareMathOperator{\\Form}{Form}\n            \\DeclareMathOperator{\\Func}{Func}\n            \\newcommand{\\simp}{\\Longrightarrow}\n            \\newcommand{\\smp}{\\Rightarrow}\n            \\newcommand{\\siff}{\\Longleftrightarrow}\n            \\newcommand{\\sff}{\\Leftrightarrow}\n            \\newcommand{\\seq}{\\vdash\\!\\dashv}\n            \\DeclareMathOperator{\\Sent}{Sent}\n            \\DeclareMathOperator{\\Term}{Term}\n            \\DeclareMathOperator{\\Th}{Th}\n            \\newcommand{\\teq}{\\models\\!\\mid}\n          % Matrices\n            \\DeclareMathOperator{\\adj}{adj}\n            \\DeclareMathOperator{\\Col}{Col}\n            \\DeclareMathOperator{\\diag}{diag}\n            \\DeclareMathOperator{\\Null}{null}\n            \\DeclareMathOperator{\\nullity}{nullity}\n            \\DeclareMathOperator{\\REF}{REF}\n            \\newcommand{\\row}[1]{\\overrightarrow{\\mathrm{row}_{#1}}}\n            \\DeclareMathOperator{\\Row}{Row}\n            \\DeclareMathOperator{\\RREF}{RREF}\n          % Measure Theory\n            \\DeclareMathOperator{\\Bor}{Bor}\n            \\DeclareMathOperator{\\esssup}{ess\\sup}\n            \\DeclareMathOperator{\\Simp}{S{\\small IMP}}\n            \\DeclareMathOperator{\\Step}{S{\\small TEP}}\n            \\DeclareMathOperator{\\Trig}{Trig}\n          % Numbers\n            \\let\\Im\\relax\n            \\DeclareMathOperator{\\Im}{Im}\n            \\let\\Re\\relax\n            \\DeclareMathOperator{\\Re}{Re}\n          % Probability/Statistics\n            \\DeclareMathOperator{\\AUC}{AUC}\n            \\DeclareMathOperator{\\Bias}{Bias}\n            \\DeclareMathOperator{\\Cov}{Cov}\n            \\DeclareMathOperator{\\Exp}{\\mathbb{E}}\n            \\newcommand{\\IQR}{\\mathrm{IQR}}\n            \\DeclareMathOperator{\\loss}{loss}\n            \\DeclareMathOperator{\\median}{median}\n            \\DeclareMathOperator{\\MSE}{MSE}\n            \\DeclareMathOperator{\\SSE}{SSE}\n            \\DeclareMathOperator{\\sd}{sd}\n            \\DeclareMathOperator{\\Var}{Var}\n            % ISDs\n              \\DeclareMathOperator{\\BS}{BS}\n              \\DeclareMathOperator{\\IBS}{IBS}\n              \\DeclareMathOperator{\\KM}{KM}\n            % Distributions\n              \\DeclareMathOperator{\\1}{\\mathbb{1}}\n              \\DeclareMathOperator{\\Binomial}{Bin}\n              \\DeclareMathOperator{\\Bin}{Bin}\n              \\DeclareMathOperator{\\Exponential}{Exp}\n              \\DeclareMathOperator{\\Expo}{Exp}\n              \\DeclareMathOperator{\\Geometric}{Geom}\n              \\DeclareMathOperator{\\Geom}{Geom}\n              \\DeclareMathOperator{\\Hypergeometric}{Hyp}\n              \\DeclareMathOperator{\\Hyp}{Hyp}\n              \\DeclareMathOperator{\\Multinomial}{Mult}\n              \\DeclareMathOperator{\\Mult}{Mult}\n              \\DeclareMathOperator{\\NB}{NB}\n              \\DeclareMathOperator{\\Norm}{\\mathcal{N}}\n              \\DeclareMathOperator{\\Poisson}{Pois}\n              \\DeclareMathOperator{\\Pois}{Pois}\n              \\DeclareMathOperator{\\Uniform}{Uniform}\n            % Tests\n              \\newcommand{\\pval}{p\\text{-value}}\n          % Relations\n            \\DeclareMathOperator{\\codom}{codom}\n            \\DeclareMathOperator{\\dom}{dom}\n            \\DeclareMathOperator{\\field}{field}\n            \\DeclareMathOperator{\\graph}{graph}\n            \\DeclareMathOperator{\\ran}{ran}\n            \\newcommand{\\treq}{\\triangleq}\n            % Arrows\n              \\newcommand{\\lrarr}{\\leftrightarrow}\n              \\newcommand{\\Lrarr}{\\Leftrightarrow}\n          % Sets\n            \\newcommand{\\cmp}{\\mathsf{c}}\n            \\DeclareMathOperator{\\glb}{glb}\n            \\DeclareMathOperator{\\lub}{lub}\n            \\newcommand{\\Mid}{\\hspace{1.25mm}\\middle|\\hspace{1.25mm}}\n            \\renewcommand{\\P}{\\mathcal{P}}\n            \\DeclareMathOperator{\\Perm}{Perm}\n            \\DeclareMathOperator{\\sdf}{\\mathbin{\\triangle}}\n            \\newcommand{\\sub}{\\subset}\n            \\newcommand{\\sube}{\\subseteq}\n            \\newcommand{\\supe}{\\supseteq}\n          % Sequences\n            \\DeclareMathOperator{\\LIM}{LIM}\n            \\DeclareMathOperator*{\\liminf}{\\mathop{\\lim\\inf}}\n            \\DeclareMathOperator*{\\limsup}{\\lim\\sup}\n          % Topology\n            \\DeclareMathOperator{\\Cl}{Cl}\n            \\DeclareMathOperator*{\\boxtop}{\\square}\n            \\DeclareMathOperator{\\diam}{diam}\n            \\DeclareMathOperator{\\dist}{dist}\n            \\DeclareMathOperator{\\Ext}{Ext}\n            \\DeclareMathOperator{\\ext}{ext}\n            \\DeclareMathOperator{\\Int}{Int}\n          % Vectors\n            \\DeclareMathOperator{\\comp}{comp}\n            \\newcommand{\\coord}[3]{{}_{#1}\\qty[#2]_{#3}}\n            \\renewcommand{\\curl}{\\mathrm{curl}}\n            \\DeclareMathOperator{\\divg}{div}\n            \\newcommand{\\norms}[1]{\\left|\\!\\left|\\!\\left|#1\\right|\\!\\right|\\!\\right|}\n            \\newcommand{\\normt}[1]{\\Vert #1 \\Vert}\n            \\DeclareMathOperator{\\orth}{orth}\n            \\DeclareMathOperator{\\proj}{proj}\n            \\DeclareMathOperator{\\span}{span}\n            \\renewcommand{\\Vec}[1]{\\overrightarrow{#1}}\n\n          % Symbols\n            % Sets\n              \\newcommand{\\A}{\\mathcal{A}}\n              \\DeclareMathOperator{\\B}{\\mathcal{B}}\n              \\newcommand{\\BB}{\\mathcal{B}}\n              \\newcommand{\\C}{\\mathbb{C}}\n              \\newcommand{\\CC}{\\mathcal{C}}\n              \\newcommand{\\D}{\\mathcal{D}}\n              \\newcommand{\\F}{\\mathbb{F}}\n              \\newcommand{\\G}{\\mathcal{G}}\n              \\newcommand{\\H}{\\mathbb{H}}\n              \\newcommand{\\Hs}{\\mathcal{H}}\n              \\newcommand{\\I}{\\mathbb{I}}\n              \\newcommand{\\J}{\\mathcal{J}}\n              \\newcommand{\\K}{\\mathbb{K}}\n              \\newcommand{\\Kc}{\\mathcal{K}}\n              \\newcommand{\\L}{\\mathcal{L}}\n              \\newcommand{\\M}{\\mathcal{M}}\n              \\newcommand{\\N}{\\mathbb{N}}\n              \\DeclareMathOperator{\\O}{\\mathcal{O}}\n              \\newcommand{\\Q}{\\mathbb{Q}}\n              \\newcommand{\\Qc}{\\mathcal{Q}}\n              \\newcommand{\\R}{\\mathbb{R}}\n              \\newcommand{\\RR}{\\mathcal{R}}\n              \\renewcommand{\\S}{\\mathbb{S}}\n              \\newcommand{\\SS}{\\mathcal{S}}\n              \\newcommand{\\T}{\\mathbb{T}}\n              \\newcommand{\\U}{\\mathcal{U}}\n              \\newcommand{\\V}{\\mathbb{V}}\n              \\newcommand{\\W}{\\mathbb{W}}\n              \\newcommand{\\Ws}{\\mathcal{W}}\n              \\newcommand{\\X}{\\mathfrak{X}}\n              \\newcommand{\\Y}{\\mathfrak{Y}}\n              \\newcommand{\\Z}{\\mathbb{Z}}\n              % Cardinality\n                \\newcommand{\\cf}{\\mathfrak{c}}\n              % Topology\n                \\newcommand{\\Fm}{\\mathrm{F}}\n                \\newcommand{\\Gm}{\\mathrm{G}}\n            % Greek Letters\n              \\newcommand{\\Alpha}{\\mathrm{A}}\n              \\newcommand{\\emf}{\\mathcal{E}}\n              \\newcommand{\\Iota}{\\mathrm{I}}\n              \\newcommand{\\Mu}{\\mathrm{M}}\n              \\newcommand{\\Tau}{\\mathcal{T}}\n          % Vectors\n            \\newcommand{\\vps}{\\hspace{0.5mm}}\n            % Unit Vectors\n              \\newcommand{\\vi}{\\text{\\^i}}\n              \\newcommand{\\vj}{\\text{\\^j}}\n              \\newcommand{\\vk}{\\text{\\^k}}\n              \\newcommand{\\vr}{\\hat{r}}\n              \\newcommand{\\vphi}{\\hat{\\varphi}}\n\n          % Miscellaneous/Utilities\n            \\newcommand{\\and}{\\text{ and }}\n            \\newcommand{\\And}{\\qquad \\text{and} \\qquad}\n            \\newcommand{\\andown}[2]{\\underset{#2}{\\underbrace{#1}}}\n            \\newcommand{\\anup}[2]{\\overset{#2}{\\overbrace{#1}}}\n            \\newcommand{\\bb}[1]{\\mathbb{#1}}\n            \\newcommand{\\bf}[1]{\\textbf{#1}}\n            \\newcommand{\\bs}[1]{\\boldsymbol{#1}}\n            \\renewcommand{\\cal}[1]{\\mathcal{#1}}\n            \\newcommand{\\clabel}[2]{\\begin{array}{c} #1 \\ #2 \\end{array}}\n            \\newcommand{\\enquote}[1]{``#1''}\n            \\newcommand{\\hsp}[1]{\\hspace{#1}}\n            \\newcommand{\\mb}[1]{\\mathbin{#1}}\n            \\renewcommand{\\not}{\\centernot}\n            \\newcommand{\\oline}[1]{\\overline{#1}}\n            \\renewcommand{\\rm}[1]{\\mathrm{#1}}\n            \\newcommand{\\sc}[1]{{\\small #1}}\n            \\renewcommand{\\sf}[1]{\\textsf{#1}}\n            \\newcommand{\\subt}[2]{#1_{\\text{#2}}}\n            \\newcommand{\\subttt}[2]{#1_{\\texttt{#2}}}\n            \\newcommand{\\supt}[2]{#1^{\\text{#2}}}\n            \\newcommand{\\system}[1]{\\left\\{\\begin{aligned}#1\\end{aligned}\\right.}\n            \\newcommand{\\t}[1]{\\text{#1}}\n            \\newcommand{\\tbf}[1]{\\textbf{#1}}\n            \\newcommand{\\tit}[1]{\\textit{#1}}\n            \\newcommand{\\ttt}[1]{\\texttt{#1}}\n            \\newcommand{\\uline}[1]{\\underline{#1}}\n          \\)"
+                  )
+                ])
+              ),
+              page
+            ])
+          )
+        ])
       )
     ])
   );
@@ -3417,7 +3436,7 @@ function view4() {
         "save as many lives as small cars"
       ),
       text(
-        ", both are much-needed remedies for industires that are so far removed from providing any actual utility to consumers that they now actively harm lives while charging a premium to both individuals and society; a common argument in favour of smaller phones is that they reduce screentime, which I believe is unilaterally good (at least holistically). (I don't need to make the comparison between smartphones and opium myself, do I?)"
+        ", both are much-needed remedies for industries that are so far removed from providing any actual utility to consumers that they now actively harm lives while charging a premium to both individuals and society; a common argument in favour of smaller phones is that they reduce screentime, which I believe is unilaterally good (at least holistically). (I don't need to make the comparison between smartphones and opium myself, do I?)"
       ),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text(
@@ -3430,7 +3449,7 @@ function meta2(acc) {
   return prepend(
     [
       "small_phone",
-      "Where small phone ( \u2022\u032F\u0301 ^ \u2022\u032F\u0300)",
+      "Small phone big transit where ( \u2022\u032F\u0301 ^ \u2022\u032F\u0300)",
       text("Small phone big transit where ( \u2022\u032F\u0301 ^ \u2022\u032F\u0300)"),
       view4,
       "2025-03-19"
@@ -3451,11 +3470,11 @@ function view5() {
         ]),
         toList([
           text(
-            "Consider the humble pair, \\((x, y)\\). It's not exactly groundbreaking, but it's not immediately trivial from the ZF axioms either, since a set \\(\\{x, y\\}\\) is inherently unordered. The traditional definition of a pair is\n          \\[(x, y) \\triangleq \\{\\{x\\}, \\{\\{x, y\\}\\}\\]\n      Ah, so a tuple is just a set ordered by inclusion, how simple! Surely, then,\n        \\[(x_i)_{i = 1}^n = \\left\\{\\{x_i\\}_{i = 1}^j\\right\\}_{j = 1}^n\\]\n      This is what I genuinely believed for an embarrassingly long time, but the trouble with this is that an ordered set is "
+            "Consider the humble pair, \\((x, y)\\). It's not exactly groundbreaking, but it's not immediately trivial from the ZF axioms either, since a set \\(\\{x, y\\}\\) is inherently unordered. The traditional definition of a pair is\n          \\[(x, y) \\treq \\qty{\\qty{x}, \\qty{\\qty{x, y}}}\\]\n      Ah, so a tuple is just a set ordered by inclusion, how simple! Surely, then,\n        \\[(x_i)_{i = 1}^n = \\left\\{\\{x_i\\}_{i = 1}^j\\right\\}_{j = 1}^n\\]\n      This is what I genuinely believed for an embarrassingly long time, but the trouble with this is that an ordered set is "
           ),
           i(toList([]), toList([text("itself ")])),
           text(
-            "a pair of a set and a relation, and a relation is also just a set of pairs. We just got past Russell's paradox, so we can't exactly afford any more self-reference. (I know this can be defined as a separate isomorphic entity; that's kind of the point of this, as you'll soon find out.) Tuples are instead recursively defined with nesting (in a manner resembling lists in the \\(\\lambda\\)-calculus):\n        \\[\\begin{align*}\n          (x, y, z) &\\triangleq \\bigl(x, (y, z)\\bigr) \\\\\n            &= \\{\\{x\\}, \\{x, (y, z)\\}\\} \\\\\n            &= \\{\\{x\\}, \\{x, \\{\\{y\\}, \\{y, z\\}\\}\\}\\}\n        \\end{align*}\\]\n      Okay, this isn't the prettiest thing in the world, but it certainly does work. It also implies that Cartesian exponentiation is right-associative, which is interesting. Speaking of which, Cartesian and set exponentiation differ. To see this, let us first review the set-theoretic notions of relations and functions."
+            "a pair of a set and a relation, and a relation is also just a set of pairs. We just got past Russell's paradox, so we can't exactly afford any more self-reference. (I know this can be defined as a separate isomorphic entity; that's kind of the point of this, as you'll soon find out.) Tuples are instead recursively defined with nesting (in a manner resembling lists in the \\(\\lambda\\)-calculus):\n        \\[\\begin{align*}\n          (x, y, z) &\\treq \\bigl(x, (y, z)\\bigr) \\\\\n            &= \\qty{\\qty{x}, \\qty{x, (y, z)}} \\\\\n            &= \\qty{\\qty{x}, \\qty{x, \\qty{\\qty{y}, \\qty{y, z}}}}\n        \\end{align*}\\]\n      Okay, this isn't the prettiest thing in the world, but it certainly does work. It also implies that Cartesian exponentiation is right-associative, which is interesting. Speaking of which, Cartesian and set exponentiation differ. To see this, let us first review the set-theoretic notions of relations and functions."
           ),
           br(
             toList([style(toList([["margin-bottom", "0.5em"]]))])
@@ -3599,49 +3618,6 @@ var OnRouteChange = class extends CustomType {
     this[0] = x0;
   }
 };
-function view_nav() {
-  return box2(
-    toList([
-      style(
-        toList([
-          ["display", "flex"],
-          ["justify-content", "space-between"],
-          ["font-size", "16pt"]
-        ])
-      ),
-      variant(new Primary())
-    ]),
-    toList([
-      hoverable_text(
-        a(
-          toList([href("/resume")]),
-          toList([text("R\xE9sum\xE9")])
-        )
-      ),
-      hoverable_text(
-        a(toList([href("/")]), toList([text("Home")]))
-      ),
-      hoverable_text(
-        a(
-          toList([href("/writings")]),
-          toList([text("Writings")])
-        )
-      )
-    ])
-  );
-}
-function update(_, msg) {
-  {
-    let route = msg[0];
-    return [
-      new Model2(route),
-      (() => {
-        refresh();
-        return none();
-      })()
-    ];
-  }
-}
 function on_route_change(uri) {
   let $ = path_segments(uri.path);
   if ($.hasLength(1) && $.head === "resume") {
@@ -3674,6 +3650,49 @@ function init3(_) {
     ),
     init2(on_route_change)
   ];
+}
+function update(_, msg) {
+  {
+    let route = msg[0];
+    return [
+      new Model2(route),
+      (() => {
+        refresh();
+        return none();
+      })()
+    ];
+  }
+}
+function view_nav() {
+  return box2(
+    toList([
+      style(
+        toList([
+          ["display", "flex"],
+          ["justify-content", "space-between"],
+          ["font-size", "16pt"]
+        ])
+      ),
+      variant(new Primary())
+    ]),
+    toList([
+      hoverable_text(
+        a(
+          toList([href("/resume")]),
+          toList([text("R\xE9sum\xE9")])
+        )
+      ),
+      hoverable_text(
+        a(toList([href("/")]), toList([text("Home")]))
+      ),
+      hoverable_text(
+        a(
+          toList([href("/writings")]),
+          toList([text("Writings")])
+        )
+      )
+    ])
+  );
 }
 function view_writing(title) {
   let writings = (() => {
@@ -3751,7 +3770,7 @@ function view_writing(title) {
           throw makeError(
             "panic",
             "personal_site",
-            168,
+            178,
             "view_writing",
             "`panic` expression evaluated.",
             {}
@@ -3798,7 +3817,7 @@ function main() {
     throw makeError(
       "let_assert",
       "personal_site",
-      28,
+      38,
       "main",
       "Pattern match failed, no pattern matched the value.",
       { value: $ }
