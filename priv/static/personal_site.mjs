@@ -10,8 +10,8 @@ var CustomType = class {
 var List = class {
   static fromArray(array3, tail) {
     let t = tail || new Empty();
-    for (let i2 = array3.length - 1; i2 >= 0; --i2) {
-      t = new NonEmpty(array3[i2], t);
+    for (let i3 = array3.length - 1; i3 >= 0; --i3) {
+      t = new NonEmpty(array3[i3], t);
     }
     return t;
   }
@@ -171,8 +171,8 @@ var BitArray = class {
     }
     const wholeByteCount = Math.trunc(this.bitSize / 8);
     if (this.bitOffset === 0 && other.bitOffset === 0) {
-      for (let i2 = 0; i2 < wholeByteCount; i2++) {
-        if (this.rawBuffer[i2] !== other.rawBuffer[i2]) {
+      for (let i3 = 0; i3 < wholeByteCount; i3++) {
+        if (this.rawBuffer[i3] !== other.rawBuffer[i3]) {
           return false;
         }
       }
@@ -184,9 +184,9 @@ var BitArray = class {
         }
       }
     } else {
-      for (let i2 = 0; i2 < wholeByteCount; i2++) {
-        const a2 = bitArrayByteAt(this.rawBuffer, this.bitOffset, i2);
-        const b2 = bitArrayByteAt(other.rawBuffer, other.bitOffset, i2);
+      for (let i3 = 0; i3 < wholeByteCount; i3++) {
+        const a2 = bitArrayByteAt(this.rawBuffer, this.bitOffset, i3);
+        const b2 = bitArrayByteAt(other.rawBuffer, other.bitOffset, i3);
         if (a2 !== b2) {
           return false;
         }
@@ -336,7 +336,7 @@ function unequalDates(a2, b2) {
   return a2 instanceof Date && (a2 > b2 || a2 < b2);
 }
 function unequalBuffers(a2, b2) {
-  return !(a2 instanceof BitArray) && a2.buffer instanceof ArrayBuffer && a2.BYTES_PER_ELEMENT && !(a2.byteLength === b2.byteLength && a2.every((n, i2) => n === b2[i2]));
+  return !(a2 instanceof BitArray) && a2.buffer instanceof ArrayBuffer && a2.BYTES_PER_ELEMENT && !(a2.byteLength === b2.byteLength && a2.every((n, i3) => n === b2[i3]));
 }
 function unequalArrays(a2, b2) {
   return Array.isArray(a2) && a2.length !== b2.length;
@@ -446,16 +446,16 @@ function hashMerge(a2, b2) {
 function hashString(s) {
   let hash = 0;
   const len = s.length;
-  for (let i2 = 0; i2 < len; i2++) {
-    hash = Math.imul(31, hash) + s.charCodeAt(i2) | 0;
+  for (let i3 = 0; i3 < len; i3++) {
+    hash = Math.imul(31, hash) + s.charCodeAt(i3) | 0;
   }
   return hash;
 }
 function hashNumber(n) {
   tempDataView.setFloat64(0, n);
-  const i2 = tempDataView.getInt32(0);
+  const i3 = tempDataView.getInt32(0);
   const j = tempDataView.getInt32(4);
-  return Math.imul(73244475, i2 >> 16 ^ i2) ^ j;
+  return Math.imul(73244475, i3 >> 16 ^ i3) ^ j;
 }
 function hashBigInt(n) {
   return hashString(n.toString());
@@ -482,8 +482,8 @@ function hashObject(o) {
     o = new Uint8Array(o);
   }
   if (Array.isArray(o) || o instanceof Uint8Array) {
-    for (let i2 = 0; i2 < o.length; i2++) {
-      h = Math.imul(31, h) + getHash(o[i2]) | 0;
+    for (let i3 = 0; i3 < o.length; i3++) {
+      h = Math.imul(31, h) + getHash(o[i3]) | 0;
     }
   } else if (o instanceof Set) {
     o.forEach((v) => {
@@ -495,8 +495,8 @@ function hashObject(o) {
     });
   } else {
     const keys2 = Object.keys(o);
-    for (let i2 = 0; i2 < keys2.length; i2++) {
-      const k = keys2[i2];
+    for (let i3 = 0; i3 < keys2.length; i3++) {
+      const k = keys2[i3];
       const v = o[k];
       h = h + hashMerge(getHash(v), hashString(k)) | 0;
     }
@@ -563,8 +563,8 @@ function index(bitmap, bit) {
 function cloneAndSet(arr, at, val) {
   const len = arr.length;
   const out = new Array(len);
-  for (let i2 = 0; i2 < len; ++i2) {
-    out[i2] = arr[i2];
+  for (let i3 = 0; i3 < len; ++i3) {
+    out[i3] = arr[i3];
   }
   out[at] = val;
   return out;
@@ -572,28 +572,28 @@ function cloneAndSet(arr, at, val) {
 function spliceIn(arr, at, val) {
   const len = arr.length;
   const out = new Array(len + 1);
-  let i2 = 0;
+  let i3 = 0;
   let g = 0;
-  while (i2 < at) {
-    out[g++] = arr[i2++];
+  while (i3 < at) {
+    out[g++] = arr[i3++];
   }
   out[g++] = val;
-  while (i2 < len) {
-    out[g++] = arr[i2++];
+  while (i3 < len) {
+    out[g++] = arr[i3++];
   }
   return out;
 }
 function spliceOut(arr, at) {
   const len = arr.length;
   const out = new Array(len - 1);
-  let i2 = 0;
+  let i3 = 0;
   let g = 0;
-  while (i2 < at) {
-    out[g++] = arr[i2++];
+  while (i3 < at) {
+    out[g++] = arr[i3++];
   }
-  ++i2;
-  while (i2 < len) {
-    out[g++] = arr[i2++];
+  ++i3;
+  while (i3 < len) {
+    out[g++] = arr[i3++];
   }
   return out;
 }
@@ -725,10 +725,10 @@ function assocIndex(root, shift, hash, key, val, addedLeaf) {
       nodes[jdx] = assocIndex(EMPTY, shift + SHIFT, hash, key, val, addedLeaf);
       let j = 0;
       let bitmap = root.bitmap;
-      for (let i2 = 0; i2 < 32; i2++) {
+      for (let i3 = 0; i3 < 32; i3++) {
         if ((bitmap & 1) !== 0) {
           const node = root.array[j++];
-          nodes[i2] = node;
+          nodes[i3] = node;
         }
         bitmap = bitmap >>> 1;
       }
@@ -789,9 +789,9 @@ function assocCollision(root, shift, hash, key, val, addedLeaf) {
 }
 function collisionIndexOf(root, key) {
   const size = root.array.length;
-  for (let i2 = 0; i2 < size; i2++) {
-    if (isEqual(key, root.array[i2].k)) {
-      return i2;
+  for (let i3 = 0; i3 < size; i3++) {
+    if (isEqual(key, root.array[i3].k)) {
+      return i3;
     }
   }
   return -1;
@@ -873,27 +873,27 @@ function withoutArray(root, shift, hash, key) {
     if (root.size <= MIN_ARRAY_NODE) {
       const arr = root.array;
       const out = new Array(root.size - 1);
-      let i2 = 0;
+      let i3 = 0;
       let j = 0;
       let bitmap = 0;
-      while (i2 < idx) {
-        const nv = arr[i2];
+      while (i3 < idx) {
+        const nv = arr[i3];
         if (nv !== void 0) {
           out[j] = nv;
-          bitmap |= 1 << i2;
+          bitmap |= 1 << i3;
           ++j;
         }
-        ++i2;
+        ++i3;
       }
-      ++i2;
-      while (i2 < arr.length) {
-        const nv = arr[i2];
+      ++i3;
+      while (i3 < arr.length) {
+        const nv = arr[i3];
         if (nv !== void 0) {
           out[j] = nv;
-          bitmap |= 1 << i2;
+          bitmap |= 1 << i3;
           ++j;
         }
-        ++i2;
+        ++i3;
       }
       return {
         type: INDEX_NODE,
@@ -973,8 +973,8 @@ function forEach(root, fn) {
   }
   const items = root.array;
   const size = items.length;
-  for (let i2 = 0; i2 < size; i2++) {
-    const item = items[i2];
+  for (let i3 = 0; i3 < size; i3++) {
+    const item = items[i3];
     if (item === void 0) {
       continue;
     }
@@ -994,8 +994,8 @@ var Dict = class _Dict {
   static fromObject(o) {
     const keys2 = Object.keys(o);
     let m = _Dict.new();
-    for (let i2 = 0; i2 < keys2.length; i2++) {
-      const k = keys2[i2];
+    for (let i3 = 0; i3 < keys2.length; i3++) {
+      const k = keys2[i3];
       m = m.set(k, o[k]);
     }
     return m;
@@ -1918,13 +1918,13 @@ function lustreServerEventHandler(event) {
     data: include.reduce(
       (data2, property) => {
         const path = property.split(".");
-        for (let i2 = 0, o = data2, e = event; i2 < path.length; i2++) {
-          if (i2 === path.length - 1) {
-            o[path[i2]] = e[path[i2]];
+        for (let i3 = 0, o = data2, e = event; i3 < path.length; i3++) {
+          if (i3 === path.length - 1) {
+            o[path[i3]] = e[path[i3]];
           } else {
-            o[path[i2]] ??= {};
-            e = e[path[i2]];
-            o = o[path[i2]];
+            o[path[i3]] ??= {};
+            e = e[path[i3]];
+            o = o[path[i3]];
           }
         }
         return data2;
@@ -2008,13 +2008,13 @@ var LustreClientApplication = class _LustreClientApplication {
    *
    * @returns {Gleam.Ok<(action: Lustre.Action<Lustre.Client, Msg>>) => void>}
    */
-  static start({ init: init4, update: update2, view: view7 }, selector, flags) {
+  static start({ init: init4, update: update2, view: view8 }, selector, flags) {
     if (!is_browser())
       return new Error(new NotABrowser());
     const root = selector instanceof HTMLElement ? selector : document.querySelector(selector);
     if (!root)
       return new Error(new ElementNotFound(selector));
-    const app = new _LustreClientApplication(root, init4(flags), update2, view7);
+    const app = new _LustreClientApplication(root, init4(flags), update2, view8);
     return new Ok((action) => app.send(action));
   }
   /**
@@ -2025,11 +2025,11 @@ var LustreClientApplication = class _LustreClientApplication {
    *
    * @returns {LustreClientApplication}
    */
-  constructor(root, [init4, effects], update2, view7) {
+  constructor(root, [init4, effects], update2, view8) {
     this.root = root;
     this.#model = init4;
     this.#update = update2;
-    this.#view = view7;
+    this.#view = view8;
     this.#tickScheduled = window.setTimeout(
       () => this.#tick(effects.all.toArray(), true),
       0
@@ -2144,20 +2144,20 @@ var LustreClientApplication = class _LustreClientApplication {
 };
 var start = LustreClientApplication.start;
 var LustreServerApplication = class _LustreServerApplication {
-  static start({ init: init4, update: update2, view: view7, on_attribute_change }, flags) {
+  static start({ init: init4, update: update2, view: view8, on_attribute_change }, flags) {
     const app = new _LustreServerApplication(
       init4(flags),
       update2,
-      view7,
+      view8,
       on_attribute_change
     );
     return new Ok((action) => app.send(action));
   }
-  constructor([model, effects], update2, view7, on_attribute_change) {
+  constructor([model, effects], update2, view8, on_attribute_change) {
     this.#model = model;
     this.#update = update2;
-    this.#view = view7;
-    this.#html = view7(model);
+    this.#view = view8;
+    this.#html = view8(model);
     this.#onAttributeChange = on_attribute_change;
     this.#renderers = /* @__PURE__ */ new Map();
     this.#handlers = handlers(this.#html);
@@ -2258,11 +2258,11 @@ var is_browser = () => globalThis.window && window.document;
 
 // build/dev/javascript/lustre/lustre.mjs
 var App = class extends CustomType {
-  constructor(init4, update2, view7, on_attribute_change) {
+  constructor(init4, update2, view8, on_attribute_change) {
     super();
     this.init = init4;
     this.update = update2;
-    this.view = view7;
+    this.view = view8;
     this.on_attribute_change = on_attribute_change;
   }
 };
@@ -2274,8 +2274,8 @@ var ElementNotFound = class extends CustomType {
 };
 var NotABrowser = class extends CustomType {
 };
-function application(init4, update2, view7) {
-  return new App(init4, update2, view7, new None());
+function application(init4, update2, view8) {
+  return new App(init4, update2, view8, new None());
 }
 function start2(app, selector, flags) {
   return guard(
@@ -2329,6 +2329,9 @@ function ol(attrs, children2) {
 }
 function p(attrs, children2) {
   return element("p", attrs, children2);
+}
+function ul(attrs, children2) {
+  return element("ul", attrs, children2);
 }
 function a(attrs, children2) {
   return element("a", attrs, children2);
@@ -2686,7 +2689,7 @@ function view2() {
       ],
       [
         "PMATH 450 \u2013 Lebesgue Integration and Fourier Analysis",
-        "Lebesgue integration has been my white whale in math for a long time, and it this course was certainly as difficult as I expected, though maybe moreso due to the Fourier analysis; still really fun, and finally motivated the material from Linear Algebra 2"
+        "Lebesgue integration has been my white whale in math for a long time, and this course was certainly as difficult as I expected, though maybe moreso due to the Fourier analysis; still really fun, and finally motivated the material from Linear Algebra 2"
       ],
       [
         "MATH 249 \u2013 Introduction to Combinatorics",
@@ -2734,7 +2737,7 @@ function view2() {
       [
         "CS 146 \u2013 Elementary Algorithm Design and Data Abstraction",
         text(
-          "Course title is the vaguest possible for a CS course, but it was a great well-motivated introduction to imperative programming; now I can pretend to understand compilers"
+          "Course title is the vaguest possible for a CS course, but it was a great well-motivated (if perhaps overly dense) introduction to imperative programming; now I can pretend to understand compilers"
         )
       ],
       [
@@ -2944,6 +2947,7 @@ function view3() {
         "). It makes no call to action beyond acknowledgement, and its innocent motivation is accentuated by the exclamation in the title and the song itself's jaunty 5/4. This pseudo-na\xEFvet\xE9 continues into the reminiscence and appreciation of "
       ),
       cite(toList([]), toList([text("Say Yes! to M!ch!gan!")])),
+      text("."),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text(
         "Facing the bleakness of reality can lead to the empty despair described in "
@@ -3264,6 +3268,12 @@ function meta(acc) {
 }
 
 // build/dev/javascript/personal_site/styling.mjs
+function br2(size) {
+  return br(toList([style(toList([["margin-bottom", size]]))]));
+}
+function i2(text3) {
+  return i(toList([]), toList([text(text3)]));
+}
 function hoverable_text(el) {
   return div(
     toList([
@@ -3274,6 +3284,15 @@ function hoverable_text(el) {
     toList([el])
   );
 }
+function hr2() {
+  return hr(
+    toList([
+      style(
+        toList([["margin-top", "0.5em"], ["margin-bottom", "0.5em"]])
+      )
+    ])
+  );
+}
 function href_text(link2, text3) {
   return a(
     toList([href(link2), class$("clickable")]),
@@ -3281,7 +3300,7 @@ function href_text(link2, text3) {
   );
 }
 var styles = /* @__PURE__ */ toList([
-  ["font-family", "CMU Serif-Regular !important"],
+  ["font-family", "Computer Modern Serif !important"],
   ["font-size", "13pt"],
   ["color", "White"],
   ["background-color", "#20201E"],
@@ -3308,6 +3327,7 @@ function mathjax_wrapper(page) {
           link(
             toList([
               rel("stylesheet"),
+              attribute("type", "text/css"),
               href(
                 "https://cdn.jsdelivr.net/gh/bitmaks/cm-web-fonts@latest/fonts.css"
               )
@@ -3346,8 +3366,261 @@ function mathjax_wrapper(page) {
   );
 }
 
-// build/dev/javascript/personal_site/pages/writings/small_phone.mjs
+// build/dev/javascript/personal_site/pages/writings/on_epistemology.mjs
 function view4() {
+  return p(
+    toList([
+      class$("center"),
+      style(toList([["text-align", "justify"]]))
+    ]),
+    toList([
+      text(
+        "A statement within a given model can be evaluated as true, false, unprovable, undisprovable, or independent (e.g. the "
+      ),
+      href_text(
+        "https://plato.stanford.edu/entries/continuum-hypothesis/",
+        "Continuum Hypothesis"
+      ),
+      text(
+        "), but these proofs are often incredibly tedious from the axioms. In the language \\(\\L\\) of predicate logic, strings are comprised of "
+      ),
+      ul(
+        toList([
+          style(
+            toList([
+              ["list-style", "circle"],
+              ["list-style-position", "outside"],
+              ["margin-left", "1em"]
+            ])
+          )
+        ]),
+        toList([
+          li(
+            toList([]),
+            toList([
+              text(
+                "connectives \\(\\lnot\\), \\(\\land\\), \\(\\lor\\), \\(\\smp\\), and \\(\\sff\\);"
+              )
+            ])
+          ),
+          li(
+            toList([]),
+            toList([
+              text(
+                "free variable symbols \\(u\\), \\(v\\), \\(w\\), \\(u_1\\),\u2026;"
+              )
+            ])
+          ),
+          li(
+            toList([]),
+            toList([
+              text(
+                "bound variable symbols \\(x\\), \\(y\\), \\(z\\), \\(x_1\\),\u2026;"
+              )
+            ])
+          ),
+          li(
+            toList([]),
+            toList([
+              text("quantifiers \\(\\forall\\) and \\(\\exists\\);")
+            ])
+          ),
+          li(
+            toList([]),
+            toList([
+              text("punctuation symbols "),
+              q(toList([]), toList([text("(")])),
+              text(", "),
+              q(toList([]), toList([text(")")])),
+              text(", and"),
+              q(toList([]), toList([text(",")])),
+              text(";")
+            ])
+          ),
+          li(
+            toList([]),
+            toList([
+              text(
+                "constant symbols \\(a\\), \\(b\\), \\(c\\), \\(a_1\\),\u2026;"
+              )
+            ])
+          ),
+          li(
+            toList([]),
+            toList([
+              text(
+                "relation symbols \\(F\\), \\(G\\), \\(H\\), \\(P\\), \\(F_1\\),\u2026;"
+              )
+            ])
+          ),
+          li(
+            toList([]),
+            toList([
+              text(
+                "function symbols \\(f\\), \\(g\\), \\(h\\), \\(f_1\\),\u2026; and"
+              )
+            ])
+          ),
+          li(
+            toList([]),
+            toList([
+              text(
+                "an (optional) equality binary relation \\(\\approx\\)."
+              )
+            ])
+          )
+        ])
+      ),
+      text(
+        "\n        The syntax of \\(\\L\\) is given as follows:\n          \\[\\begin{align*}\n            \\evit{BinCon} &::= {\\land} \\mid {\\lor} \\mid {\\smp} \\mid {\\sff} \\\\\n            \\evit{FreeVar} &::= u \\mid v \\mid w \\mid w_1 \\mid \\cdots \\\\\n            \\evit{BoundVar} &::= x \\mid y \\mid z \\mid x_1 \\mid \\cdots \\\\\n            \\evit{Quant} &::= {\\forall} \\mid {\\exists} \\\\\n            \\evit{Const} &::= a \\mid b \\mid c \\mid a_1 \\mid \\cdots \\\\\n            \\evit{Rel} &::= F \\mid G \\mid H \\mid P \\mid F_1 \\mid \\cdots \\\\\n            \\evit{Func} &::= f \\mid g \\mid h \\mid f_1 \\mid \\cdots \\\\\n            \\evit{Term} &::= \\evit{Const} \\mid \\evit{FreeVar} \\mid \\evit{Func}(\\evit{Term}\\ttt{+}) \\tag{Term} \\\\\n            \\evit{Atom} &::= \\evit{Rel}(\\evit{Term}) \\mid (\\evit{Term} \\approx \\evit{Term}) \\tag{Atom} \\\\\n            \\evit{Form} &::= \\evit{Atom} \\mid (\\lnot \\evit{Atom}) \\mid (\\evit{Atom} \\evit{BinCon} \\evit{Atom}) \\tag{Formula} \\\\\n              &\\qquad\\mid \\evit{Quant}\\evit{BoundVar}\\evit{Form}\n          \\end{align*}\\]\n      "
+      ),
+      text(
+        "This allows formulas to be made but does not give them any meaning, as no valuation has been defined. Even without evaluation, though, the validity of statements should be justifiable from rules of the system alone; \\(a \\sff a\\) should always evaluate to true, for example. With this as motivation, rules of formal deduction can be defined. To this end, let \\(\\Sigma\\) denote a set of formulas."
+      ),
+      div(
+        toList([
+          class$("border"),
+          style(
+            toList([
+              ["padding", "1em"],
+              ["margin-top", "0.5em"],
+              ["margin-bottom", "0.5em"]
+            ])
+          )
+        ]),
+        toList([
+          text(
+            "\n          A formula should trivially prove itself:\n            \\[\\begin{prooftree}\n              \\AXC{}\n              \\LeftLabel{Reflexivity} \\RightLabel{ (Ref)} \\UIC{\\(A \\vdash A\\)}\n            \\end{prooftree}\\]\n          Adding premises to an argument should not affect its conclusion:\n            \\[\\begin{prooftree}\n                \\AXC{\\(\\Sigma \\vdash A\\)}\n                \\LeftLabel{Addition of premises} \\RightLabel{ (+)} \\UIC{\\(\\Sigma \\cup \\Sigma' \\vdash A\\)}\n            \\end{prooftree}\\]\n          If a set of premises along with the negation of an additional formula \\(A\\) is able to prove another formula \\(B\\) along with its negation, then the premises are inconsistent with \\(\\lnot A\\), so the premises must prove \\(A\\):\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\cup \\qty{\\lnot A} \\vdash B\\)} \\AXC{\\(\\Sigma \\cup \\qty{\\lnot A} \\vdash \\lnot B\\)} \\\n              \\LeftLabel{\\(\\lnot\\) elimination} \\RightLabel{ \\(({\\lnot}{-})\\)} \\BIC{\\(\\Sigma \\vdash A\\)}\n            \\end{prooftree}\\]\n          If a set of premises proves that \\(A\\) implies \\(B\\) as well as \\(A\\) itself, then it must also prove \\(B\\):\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash A \\smp B\\)} \\AXC{\\(\\Sigma \\vdash A\\)} \\\\\n              \\LeftLabel{\\(\\smp\\) elimination} \\RightLabel{ \\(({\\smp}{-})\\)} \\BIC{\\(\\Sigma \\vdash B\\)}\n            \\end{prooftree}\\]\n          Similarly, if a set of premises proves a statement \\(B\\), then removing some element \\(A\\) from the premises should yield a new set proving that \\(A \\smp B\\):\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\cup \\qty{A} \\smp B\\)} \\\\\n              \\LeftLabel{\\(\\smp\\) introduction} \\RightLabel{ \\(({\\smp}{+})\\)} \\UIC{\\(\\Sigma \\vdash A \\smp B\\)}\n            \\end{prooftree}\\]\n          Proving the validity of multiple statements should prove each individually:\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash A \\land B\\)} \\\\\n              \\LeftLabel{\\(\\land\\) elimination} \\RightLabel{ \\(({\\land}{-})\\)} \\UIC{\\(\\Sigma \\vdash A \\qquad \\Sigma \\vdash B\\)}\n            \\end{prooftree}\\]\n          The converse should also hold:\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash A\\)} \\AXC{\\(\\Sigma \\vdash B\\)} \\\\\n              \\LeftLabel{\\(\\land\\) introduction} \\RightLabel{ \\(({\\land}{+})\\)} \\BIC{\\(\\Sigma \\vdash A \\land B\\)}\n            \\end{prooftree}\\]\n          If adding either \\(A\\) or \\(B\\) as a premise suffices, then adding \\(A \\lor B\\) should as well:\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\cup \\qty{A} \\vdash C\\)} \\AXC{\\(\\Sigma \\cup \\qty{B} \\vdash C\\)} \\\\\n              \\LeftLabel{\\(\\lor\\) elimination} \\RightLabel{ \\(({\\lor}{-})\\)} \\BIC{\\(\\Sigma \\cup \\qty{A \\lor B} \\vdash C\\)}\n            \\end{prooftree}\\]\n          Proving \\(A\\) should also prove \\(A \\lor B\\), and \\(\\lor\\) should be commutative:\n            \\[\\begin{prooftree}\n                \\AXC{\\(\\Sigma \\vdash A\\)}\n                \\LeftLabel{\\(\\lor\\) introduction} \\RightLabel{ \\(({\\lor}{+})\\)} \\UIC{\\(\\Sigma \\vdash A \\lor B \\qquad \\Sigma \\vdash B \\lor B\\)}\n            \\end{prooftree}\\]\n          A proof of \\(A \\sff B\\) should prove \\(A\\) if and only if it proves \\(B\\):\n            \\[\n              \\begin{prooftree}\n                \\AXC{\\(\\Sigma \\vdash A \\sff B\\)} \\AXC{\\(\\Sigma \\vdash A\\)} \\\n                \\LeftLabel{\\(\\sff\\) elimination} \\BIC{\\(\\Sigma \\vdash B\\)}\n              \\end{prooftree} \\quad \\begin{prooftree}\n                \\AXC{\\(\\Sigma \\vdash A \\sff B\\)} \\AXC{\\(\\Sigma \\vdash B\\)} \\\n                \\RightLabel{ \\(({\\sff}{-})\\)} \\BIC{\\(\\Sigma \\vdash A\\)}\n              \\end{prooftree}\n            \\]\n          If adding \\(A\\) as a premise proves \\(B\\) and\\(x\\)\n        "
+          ),
+          i2("vice versa, "),
+          text(
+            "\n          the premises prove \\(A \\sff B\\):\n          \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\cup \\qty{A} \\vdash B\\)} \\AXC{\\(\\Sigma \\cup \\qty{B} \\vdash A\\)}\n              \\LeftLabel{\\(\\sff\\) introduction} \\RightLabel{ \\(({\\sff}{+})\\)} \\BIC{\\(\\Sigma \\vdash A \\sff B\\)}\n          \\end{prooftree}\\]\n        "
+          )
+        ])
+      ),
+      text(
+        "\n        From these, new rules can be derived. For example, a set of premises should prove all of its elements:\n          \\[\\begin{prooftree}\n             \\AXC{\\(A \\in \\Sigma\\)} \\UIC{\\(\\Sigma \\cup \\qty{A} = \\Sigma\\)}\n             \\AXC{(Ref)} \\UIC{\\(A \\vdash A\\)} \\AXC{(+)}\n            \\LeftLabel{Membership rule } \\RightLabel{ \\((\\in)\\)} \\TIC{\\(\\Sigma \\cup \\qty{A} \\vdash A\\)}\n          \\end{prooftree}\\]\n        Proofs quickly grow tediously long, though; consider a proof that \\(\\qty{A \\sff B} \\vdash (A \\smp B) \\land (B \\smp A)\\):\n          \\[\\begin{alignat}{3}\n            (1) &&\\qquad \\qty{A \\sff B, A} &\\vdash A \\sff B \\qquad&& (\\in) \\\\\n            (2) &&\\qquad &\\vdash A \\qquad&&(\\in) \\\\\n            (3) &&\\qquad &\\vdash B \\qquad&& (1), (2), ({\\sff}{-}) \\\\\n            (4) &&\\qquad \\qty{A \\sff B} &\\vdash A \\smp B \\qquad&& (3), ({\\smp}{+}) \\\\\n            (5) &&\\qquad \\qty{A \\sff B, B} &\\vdash A \\sff B \\qquad&& (\\in) \\\\\n            (6) &&\\qquad &\\vdash B \\qquad&&(\\in) \\\\\n            (7) &&\\qquad &\\vdash A \\qquad&& (5), (6), ({\\sff}{-}) \\\\\n            (8) &&\\qquad \\qty{A \\sff B} &\\vdash A \\smp B \\qquad&& (7), ({\\smp}{+}) \\\\\n            (9) &&\\qquad \\qty{A \\sff B} &\\vdash (A \\smp B) \\land (B \\smp A) \\qquad&& (4), (8), ({\\land}{+})\n          \\end{alignat}\\]\n        The rules given thus far only suffice for propositional logic, so let's add a few more!\n      "
+      ),
+      div(
+        toList([
+          class$("border"),
+          style(
+            toList([
+              ["padding", "1em"],
+              ["margin-top", "0.5em"],
+              ["margin-bottom", "0.5em"]
+            ])
+          )
+        ]),
+        toList([
+          text(
+            "Proving that something holds for all \\(x\\) proves that it holds for any arbitrary term \\(t\\) "
+          ),
+          i2("a fortiori: "),
+          text(
+            "\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash \\forall x A(x)\\)}\n              \\LeftLabel{\\(\\forall\\) elimination} \\RightLabel{ \\(({\\forall}{-}\\))} \\UIC{\\(\\Sigma \\vdash A(t)\\)}\n            \\end{prooftree}\\]\n          Conversely, proving that something holds for some \\(u\\) that has no assumptions imposed upon it proves that it holds for all \\(x\\):\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash A(u)\\)} \\AXC{\\(u\\) not occurring in \\(\\Sigma\\)}\n              \\LeftLabel{\\(\\forall\\) introduction} \\RightLabel{ \\(({\\forall}{+})\\)} \\BIC{\\(\\Sigma \\vdash \\forall x A(x)\\)}\n            \\end{prooftree}\\]\n          When \\(u\\) is completely arbitrary, then assuming \\(A(u)\\) is the same as assuming that \\(A(x)\\) holds for some \\(x\\):\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\cup \\qty{A(u)} \\vdash B\\)} \\AXC{\\(u\\) not appearing in \\(\\Sigma\\) or \\(B\\)}\n              \\LeftLabel{\\(\\exists\\) elimination} \\RightLabel{ \\(({\\exists}{+}\\))} \\BIC{\\(\\Sigma \\cup \\qty{\\exists x A(x)} \\vdash B\\)}\n            \\end{prooftree}\\]\n          Proving that a statement holds for any \\(t\\) proves\n        "
+          ),
+          i2("a fortiori "),
+          text(
+            "\n          that it holds for some \\(x\\):\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash A(t)\\)}\n              \\LeftLabel{\\(\\exists\\) introduction} \\RightLabel{ \\(({\\exists}{+})\\)} \\UIC{\\(\\Sigma \\vdash \\exists x A(x)\\)}\n            \\end{prooftree}\\]\n          If \\(t_1 \\approx t_2\\), then \\(A(t_1)\\) implies \\(A(t_2)\\) (where not all occurrences of \\(t_1\\) need be replaced):\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash A(t)\\)} \\AXC{\\(t_1 \\approx t_2\\)}\n              \\LeftLabel{\\(\\approx\\) elimination} \\RightLabel{ \\(({\\approx}{-})\\)} \\BIC{\\(\\Sigma \\vdash A(t_2)\\)}\n            \\end{prooftree}\\]\n          Equivalence is reflexive:\n          \\[\\begin{prooftree}\n            \\AXC{}\n            \\LeftLabel{\\(\\approx\\) introduction} \\RightLabel{ \\(({\\approx}{+})\\)} \\UIC{\\(\\varnothing \\vdash u \\approx u\\)}\n          \\end{prooftree}\\]\n        "
+          )
+        ])
+      ),
+      text(
+        "This is now exactly sufficient for describing first-order logic semantically through a single (meta-)relation! (There are simpler ways to do this, like "
+      ),
+      href_text(
+        "https://en.wikipedia.org/wiki/Resolution_(logic)",
+        "Resolution"
+      ),
+      text(
+        ", but it is not immediately evident how they imply the individual semantics of each syntactical element, at least for the purposes of introducing formal deduction.) Now we can prove more statements: letting \\(\\Sigma = \\qty{\\forall x(A(x) \\smp C(x)), \\forall x(B(x) \\smp D(x)))}\\),\n          \\[\\begin{alignat}{3}\n            (1) &&\\qquad \\Sigma \\cup \\qty{A(t)} &\\vdash A(t) \\qquad&& (\\in) \\\\\n            (2) && &\\vdash \\forall x(A(x) \\smp C(x)) \\qquad&& (\\in) \\\\\n            (3) && &\\vdash A(t) \\smp C(t) \\qquad&& (2), ({\\forall}{-}) \\\\\n            (4) && &\\vdash C(t) \\qquad&& (1), (3), ({\\smp}{-}) \\\\\n            (5) && &\\vdash C(t) \\lor D(t) \\qquad&& (4), ({\\lor}{+}) \\\\\n            (6) && &\\vdash \\exists x(C(x) \\lor D(x)) \\quad&& (5), ({\\exists}{+}) \\\\\n            (7) &&\\qquad \\Sigma \\cup \\qty{B(t)} &\\vdash B(t) \\qquad&& (\\in) \\\\\n            (8) && &\\vdash \\forall x(B(x) \\smp D(x)) \\qquad&& (\\in) \\\\\n            (9) && &\\vdash A(t) \\smp D(t) \\qquad&& (8), ({\\forall}{-}) \\\\\n            (10) && &\\vdash C(t) \\qquad&& (7), (9), ({\\smp}{-}) \\\\\n            (11) && &\\vdash C(t) \\lor D(t) \\qquad&& (10), ({\\lor}{+}) \\\\\n            (12) && &\\vdash \\exists x(C(x) \\lor D(x)) \\quad&& (11), ({\\exists}{+}) \\\\\n            (13) &&\\qquad \\Sigma \\cup \\qty{A(t) \\lor B(t)} &\\vdash \\exists x(C(x) \\lor D(x)) \\qquad&& (6), (12), ({\\lor}{-}) \\\\\n            (14) &&\\qquad \\Sigma \\cup \\qty{\\exists x(A(x) \\lor B(x))} &\\vdash \\exists x(C(x) \\lor D(x)) \\quad&& (13), ({\\exists}-) \\\\\n            (15) &&\\qquad \\Sigma &\\vdash \\exists x(A(x) \\lor B(x)) \\smp \\exists x(C(x) \\lor D(x)) \\quad&& (14), ({\\smp}{+})\n          \\end{alignat}\\]\n        No way, adding more rules made the system more complicated \u222A\uFF65\u03C9\uFF65\u222A. In exchange, though, we gain the full expressive power of first-order logic!\n      "
+      ),
+      hr2(),
+      text(
+        "\n        In my eyes, much of the joy of mathematics comes from this underlying formal system that can generally be taken for granted. Abstracting so far above logic counterintuitively makes the immediate emergent properties extremely relevant, as they butterfly into more useful specific cases depending on the field of discourse and the degree of abstraction. Of course, my only exposure to logic is through computer science rather than philosophy or math, and model theory and category theory are a bit strange to be learning before even a formal treatment of abstract algebra, so I'll hold off a bit before expounding on this.\n      "
+      ),
+      br(toList([])),
+      text(
+        "I would, however, like to pontificate about the more pragmatic philosophy of truth. In reality, there are no underlying axioms (apart from physics, I suppose). Even then, we know only what our senses tell us. It's not meaningful to ponder the validity of one's own perception, lest we devolve into self-contained "
+      ),
+      href_text(
+        "https://en.wikipedia.org/wiki/Boltzmann_brain",
+        "Boltzmann brains"
+      ),
+      text(
+        ", but individual perspectives are of course inherently subjective. I will never see most of the world, or interact with most of its people, or eat most of its foods, or hear most of its music. From this, I make two extrapolations: "
+      ),
+      ol(
+        toList([
+          style(
+            toList([
+              ["list-style", "decimal"],
+              ["list-style-position", "outside"],
+              ["margin-left", "1em"]
+            ])
+          )
+        ]),
+        toList([
+          li(
+            toList([]),
+            toList([
+              text(
+                "Obviously, it isn't possible to know everything, nor is there a need to. It's not possible not to live in a bubble both spacial and temporal, so all I can hope to do is to see a fraction of a fraction of this small slice. It would be ridiculous to suppose that this bubble just so happens to be representative of everything else; given how miniscule the sample is, it would only make sense that any averages I observe are far from reality. "
+              )
+            ])
+          ),
+          li(
+            toList([]),
+            toList([
+              text(
+                "When faced with a reality I can't hope to understand, I have very, very little ground to stand in opposition. Without receiving communication, I have no way of knowing what's happening outside of my world, but this isn't justification for na\xEFvet\xE9. One of the wonders of Web \\(2.0\\) is that it's never been easier to hear from an incredibly diverse population. As such, it's best to place weight on firsthand information while being conscientious of the unfortunate web of ulterior motives begotten by the profit motive."
+              )
+            ])
+          )
+        ])
+      ),
+      text(
+        "These took me far too long to come to thanks to the sophistry of pseudo-logic peddled by proponents of so-called meritocrats. For a time, I attempted to reconcile the incongruity between perspectives, but that gets increasingly difficult as the people rhetorically pushing some of those perspectives demonstrably do not have my own interest in mind. Communication is built on mutual understanding, which is diametrically opposed with a system founded on exploitation. Allowing oneself to facetiously sell an ideology has the added bonus of justifying the status quo, giving solace to many and absolving some amount of guilt from the abusers of the system."
+      ),
+      br2("0.5em"),
+      text(
+        "It's painfully easy to forget the logical foundations we take for granted. Especially easy to miss is the fact that "
+      ),
+      i2(
+        "these foundations exist to describe existing systems, not the other way around. "
+      ),
+      text(
+        "Applying rules where they don't belong is made simpler when you aren't exposed to a world where those rules don't arise. If all you know is binary, the "
+      ),
+      href_text(
+        "https://en.wikipedia.org/wiki/Freshman's_dream",
+        "Freshman's dream"
+      ),
+      text(
+        " is trivial, after all:\n          \\[\\begin{align*}\n            ([a]_2 +_2 [b]_2)^2 &= \\qty[(a + b)^2]_2 = \\qty[a^2 + 2ab + b^2]_2 \\\\\n              &= \\qty[a^2]_2 +_2 [2ab]_2 +_2 \\qty[b^2]_2 = \\qty[a]_2^2 +_2 \\qty[b]_2^2\n          \\end{align*}\\]\n      "
+      ),
+      text(
+        "Pondering the nature of truth has gotten me nowhere quickly. I had a particularly bad period when I was about 10, realizing the tautology of reality and starting to distrust it as a result. After a bit, though, I realized how useless thinking about all of this is. Math is only interesting because we acknowledge assumptions and limitations explicitly. Reality is only interesting when you acknowledge the limitations of truth."
+      )
+    ])
+  );
+}
+function meta2(acc) {
+  return prepend(
+    [
+      "on_epistemology",
+      "On Epistemology",
+      text("On Epistemology"),
+      view4,
+      "2025-03-26"
+    ],
+    acc
+  );
+}
+
+// build/dev/javascript/personal_site/pages/writings/small_phone.mjs
+function view5() {
   return p(
     toList([
       class$("center"),
@@ -3440,18 +3713,18 @@ function view4() {
       ),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text(
-        `On a hopeful (perhaps delusionally so) note, Nothing's expected CMF Phone 2 recently leaked, and sources are saying (with no actual evidence apart from dubious eyeballing) that it has a 5.2\u20135.5" display, placing it firmly in iPhone mini territory. Even in this cruel, cruel world, there is hope after all! (At least until this is deconfirmed.)`
+        `On a hopeful (perhaps delusionally so) note, Nothing's expected CMF Phone 2 recently leaked, and sources are saying (with no actual evidence apart from dubious eyeballing) that it has a \\(5.2\\)\u2013\\(5.5\\)" display, placing it firmly in iPhone mini territory. Even in this cruel, cruel world, there is hope after all! (At least until this is deconfirmed.)`
       )
     ])
   );
 }
-function meta2(acc) {
+function meta3(acc) {
   return prepend(
     [
       "small_phone",
       "Small phone big transit where ( \u2022\u032F\u0301 ^ \u2022\u032F\u0300)",
       text("Small phone big transit where ( \u2022\u032F\u0301 ^ \u2022\u032F\u0300)"),
-      view4,
+      view5,
       "2025-03-19"
     ],
     acc
@@ -3459,7 +3732,7 @@ function meta2(acc) {
 }
 
 // build/dev/javascript/personal_site/pages/writings/tuples.mjs
-function view5() {
+function view6() {
   return div(
     toList([]),
     toList([
@@ -3482,7 +3755,7 @@ function view5() {
           text("A "),
           b(toList([]), toList([text("relation ")])),
           text(
-            "with domain \\(X\\) and codomain \\(Y\\) is some\n        \\[R \\subseteq X \\times Y \\triangleq \\{(x, y) \\mid x \\in X, y \\in Y\\}\\]\n      \\(x \\in X\\) is related \\(y \\in Y\\) by \\(R\\) when \\((x, y) \\in R\\). A"
+            "with domain \\(X\\) and codomain \\(Y\\) is some\n            \\[R \\sube X \\times Y \\treq \\qty{(x, y) \\mid x \\in X, y \\in Y}\\]\n          \\(x \\in X\\) is related \\(y \\in Y\\) by \\(R\\) when \\((x, y) \\in R\\). A"
           ),
           b(toList([]), toList([text(" function ")])),
           text(
@@ -3490,13 +3763,13 @@ function view5() {
           ),
           b(toList([]), toList([text("choice function ")])),
           text(
-            "on an indexed family of sets \\(\\{X_y\\}_{y \\in Y}\\) is a function \\(f: Y \\to \\bigcup_{y \\in Y} X_y\\) such that each \\(y \\in Y\\) maps to an element of \\(X_y\\); that is, a choice function is a way to "
+            "on an indexed family of sets \\(\\qty{X_y}_{y \\in Y}\\) is a function \\(f: Y \\to \\bigcup_{y \\in Y} X_y\\) such that each \\(y \\in Y\\) maps to an element of \\(X_y\\); that is, a choice function is a way to "
           ),
           i(toList([]), toList([text("choose ")])),
           text("an element from a given index. The "),
           b(toList([]), toList([text("product ")])),
           text(
-            "over the collection is the set of all such choice functions. When each \\(X_y\\) is the same, this can be regarded as the \\(Y\\)-fold product of \\(X\\), or \\(X^Y\\). This is a simply collection of functions \\(f: Y \\to X\\) such that for each \\(y \\in Y\\), \\(f(y) \\in X\\), which happens to characterize functions \\(f: Y \\to X\\). A crucial consideration to make is that natural numbers are themselves sets (as Von Neumann ordinals), defined recursively with \\(0 \\triangleq \\varnothing\\) and \\(n + 1 \\triangleq n \\cup \\{n\\}\\). In general, \\(n = \\{i\\}_{i = 0}^{n - 1}\\), so an element of \\(X^n\\) is a function that takes a natural number less than \\(n\\) and maps it to an element of \\(X\\). (This can be thought of as a 0-index list.) Expanding definitions, this yields\n        \\[X^2 = \\{f \\in \\mathcal{P}(2 \\times X) \\mid \\forall n \\in 2, \\exists! x \\in X, (n, x) \\in f\\}\\]\n      An element of \\(X^2\\) is a function \\(f: 2 \\to X\\) of the form \\(\\{(0, x_0), (1, x_1)\\}\\), which is decidedly not a pair \\((x_0, x_1)\\). This is analogous to a sequence, though, as an element of \\(X^\\mathbb{N}\\). This should be clear from the definition alone, since \\(\\mathbb{N}\\) can be regarded as the limit of \\(n\\) as you keep adding 1, being the union of "
+            "over the collection is the set of all such choice functions. When each \\(X_y\\) is the same, this can be regarded as the \\(Y\\)-fold product of \\(X\\), or \\(X^Y\\). This is a simply collection of functions \\(f: Y \\to X\\) such that for each \\(y \\in Y\\), \\(f(y) \\in X\\), which happens to characterize all functions \\(f: Y \\to X\\). A crucial consideration to make is that natural numbers are themselves sets (as Von Neumann ordinals), defined recursively with \\(0 \\triangleq \\varnothing\\) and \\(n + 1 \\triangleq n \\cup \\qty{n}\\). In general, \\(n = \\qty{i}_{i = 0}^{n - 1}\\), so an element of \\(X^n\\) is a function that takes a natural number less than \\(n\\) and maps it to an element of \\(X\\). (This can be thought of as a 0-indexed list.) Expanding definitions, this yields\n            \\[X^2 = \\qty{f \\in \\mathcal{P}(2 \\times X) \\mid \\forall n \\in 2, \\exists! x \\in X, (n, x) \\in f}\\]\n          An element of \\(X^2\\) is a function \\(f: 2 \\to X\\) of the form \\(\\qty{(0, x_0), (1, x_1)}\\), which is decidedly not a pair \\((x_0, x_1)\\). This is analogous to a sequence, though. This should be clear from the definition alone, since \\(\\mathbb{N}\\) can be regarded as the limit of \\(n\\) as you keep adding 1, being the union of "
           ),
           i(toList([]), toList([text("all ")])),
           text(
@@ -3573,14 +3846,14 @@ function view5() {
             toList([style(toList([["margin-bottom", "0.5em"]]))])
           ),
           text(
-            "It's trivial to see that all of these definitions are equivalent for most purposes, so this amounts to pedantry; while abuse of notation can certainly be an issue in mathematics, it's good to know when to draw the line. I'm no set theorist, so I think I'll leave it at that."
+            "It's trivial to see that all of these definitions are order-isomorphic, so this amounts to pedantry; while abuse of notation can certainly be an issue in mathematics, it's good to know when to draw the line. I'm no set theorist, so I think I'll leave it at that."
           )
         ])
       )
     ])
   );
 }
-function meta3(acc) {
+function meta4(acc) {
   return prepend(
     [
       "tuples",
@@ -3592,7 +3865,7 @@ function meta3(acc) {
           text(" are tuples?")
         ])
       ),
-      view5,
+      view6,
       "2025-03-12"
     ],
     acc
@@ -3697,9 +3970,10 @@ function view_nav() {
 function view_writing(title) {
   let writings = (() => {
     let _pipe = toList([]);
-    let _pipe$1 = meta3(_pipe);
+    let _pipe$1 = meta4(_pipe);
     let _pipe$2 = meta(_pipe$1);
-    return meta2(_pipe$2);
+    let _pipe$3 = meta3(_pipe$2);
+    return meta2(_pipe$3);
   })();
   let $ = title === "";
   if ($) {
@@ -3770,7 +4044,7 @@ function view_writing(title) {
           throw makeError(
             "panic",
             "personal_site",
-            178,
+            180,
             "view_writing",
             "`panic` expression evaluated.",
             {}
@@ -3780,7 +4054,7 @@ function view_writing(title) {
     );
   }
 }
-function view6(model) {
+function view7(model) {
   let page = (() => {
     let $ = model.route;
     if ($ instanceof Resume2) {
@@ -3808,7 +4082,7 @@ function main() {
     update,
     (x) => {
       let _pipe = x;
-      let _pipe$1 = view6(_pipe);
+      let _pipe$1 = view7(_pipe);
       return mathjax_wrapper(_pipe$1);
     }
   );
@@ -3817,7 +4091,7 @@ function main() {
     throw makeError(
       "let_assert",
       "personal_site",
-      38,
+      39,
       "main",
       "Pattern match failed, no pattern matched the value.",
       { value: $ }

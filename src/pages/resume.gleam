@@ -69,7 +69,7 @@ pub fn view() {
         ),
         #(
           "PMATH 450 – Lebesgue Integration and Fourier Analysis",
-          "Lebesgue integration has been my white whale in math for a long time, and it this course was certainly as difficult as I expected, though maybe moreso due to the Fourier analysis; still really fun, and finally motivated the material from Linear Algebra 2",
+          "Lebesgue integration has been my white whale in math for a long time, and this course was certainly as difficult as I expected, though maybe moreso due to the Fourier analysis; still really fun, and finally motivated the material from Linear Algebra 2",
         ),
         #(
           "MATH 249 – Introduction to Combinatorics",
@@ -77,12 +77,12 @@ pub fn view() {
         ),
         #(
           "STAT 230 – Probability",
-          "Simple introduction to probability with annoying problems and an emphasis on knowing the applicability of distributions; sadly untheoretical, I wanted measure theory ( • ᴖ • ｡)"
+          "Simple introduction to probability with annoying problems and an emphasis on knowing the applicability of distributions; sadly untheoretical, I wanted measure theory ( • ᴖ • ｡)",
         ),
         #(
           "STAT 231 – Statistics",
-          "Rigorous introduction to theoretical statistics focusing on estimation and emphasizing consciousness of assumptions; also tested R for some reason; lots and lots of memorization, but open-note ʅ(°_°)ʃ"
-        )
+          "Rigorous introduction to theoretical statistics focusing on estimation and emphasizing consciousness of assumptions; also tested R for some reason; lots and lots of memorization, but open-note ʅ(°_°)ʃ",
+        ),
       ],
       fn(x) {
         case x {
@@ -114,7 +114,7 @@ pub fn view() {
         #(
           "CS 146 – Elementary Algorithm Design and Data Abstraction",
           element.text(
-            "Course title is the vaguest possible for a CS course, but it was a great well-motivated introduction to imperative programming; now I can pretend to understand compilers",
+            "Course title is the vaguest possible for a CS course, but it was a great well-motivated (if perhaps overly dense) introduction to imperative programming; now I can pretend to understand compilers",
           ),
         ),
         #(

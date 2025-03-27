@@ -89,6 +89,7 @@ fn view() {
         "). It makes no call to action beyond acknowledgement, and its innocent motivation is accentuated by the exclamation in the title and the song itself's jaunty 5/4. This pseudo-naïveté continues into the reminiscence and appreciation of ",
       ),
       html.cite([], [element.text("Say Yes! to M!ch!gan!")]),
+      element.text("."),
       html.br([attribute.style([#("margin-bottom", "0.5em")])]),
       element.text(
         "Facing the bleakness of reality can lead to the empty despair described in ",

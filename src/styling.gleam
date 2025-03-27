@@ -3,6 +3,15 @@ import lustre/element
 import lustre/element/html
 import lustre/ui
 
+
+pub fn br(size) {
+  html.br([attribute.style([#("margin-bottom", size)])])
+}
+
+pub fn i(text) {
+  html.i([], [element.text(text)])
+}
+
 pub fn hoverable_text(el) {
   html.div(
     [
@@ -14,6 +23,12 @@ pub fn hoverable_text(el) {
   )
 }
 
+pub fn hr() {
+  html.hr([
+    attribute.style([#("margin-top", "0.5em"), #("margin-bottom", "0.5em")]),
+  ])
+}
+
 pub fn href_text(link, text) {
   html.a([attribute.href(link), attribute.class("clickable")], [
     element.text(text),
@@ -21,8 +36,7 @@ pub fn href_text(link, text) {
 }
 
 const styles = [
-  #("font-family", "CMU Serif-Regular !important"),
-  //#("font-weight", "575"),
+  #("font-family", "Computer Modern Serif !important"),
   #("font-size", "13pt"),
   #("color", "White"),
   #("background-color", "#20201E"),
@@ -45,6 +59,7 @@ pub fn mathjax_wrapper(page) {
       ),
       html.link([
         attribute.rel("stylesheet"),
+        attribute.attribute("type", "text/css"),
         attribute.href(
           "https://cdn.jsdelivr.net/gh/bitmaks/cm-web-fonts@latest/fonts.css",
         ),

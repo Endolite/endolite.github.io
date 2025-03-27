@@ -104,7 +104,7 @@ pub fn view() {
       ),
       html.br([attribute.style([#("margin-bottom", "0.5em")])]),
       element.text(
-        "On a hopeful (perhaps delusionally so) note, Nothing's expected CMF Phone 2 recently leaked, and sources are saying (with no actual evidence apart from dubious eyeballing) that it has a 5.2–5.5\" display, placing it firmly in iPhone mini territory. Even in this cruel, cruel world, there is hope after all! (At least until this is deconfirmed.)",
+        "On a hopeful (perhaps delusionally so) note, Nothing's expected CMF Phone 2 recently leaked, and sources are saying (with no actual evidence apart from dubious eyeballing) that it has a \\(5.2\\)–\\(5.5\\)\" display, placing it firmly in iPhone mini territory. Even in this cruel, cruel world, there is hope after all! (At least until this is deconfirmed.)",
       ),
     ],
   )

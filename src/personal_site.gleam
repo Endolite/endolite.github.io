@@ -17,6 +17,7 @@ import pages/home
 import pages/resume
 
 import pages/writings/authority_despair_michigan
+import pages/writings/on_epistemology
 import pages/writings/small_phone
 import pages/writings/tuples
 
@@ -124,6 +125,7 @@ fn view_writing(title: String) {
     |> tuples.meta
     |> authority_despair_michigan.meta
     |> small_phone.meta
+    |> on_epistemology.meta
   case title == "" {
     True -> {
       retitle("Writings")
