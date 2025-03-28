@@ -177,7 +177,7 @@ fn view() {
                 \\RightLabel{ \\(({\\sff}{-})\\)} \\BIC{\\(\\Sigma \\vdash A\\)}
               \\end{prooftree}
             \\]
-          If adding \\(A\\) as a premise proves \\(B\\) and\\(x\\)
+          If adding \\(A\\) as a premise proves \\(B\\) and
         ",
           ),
           styling.i("vice versa, "),
@@ -198,7 +198,8 @@ fn view() {
           \\[\\begin{prooftree}
              \\AXC{\\(A \\in \\Sigma\\)} \\UIC{\\(\\Sigma \\cup \\qty{A} = \\Sigma\\)}
              \\AXC{(Ref)} \\UIC{\\(A \\vdash A\\)} \\AXC{(+)}
-            \\LeftLabel{Membership rule } \\RightLabel{ \\((\\in)\\)} \\TIC{\\(\\Sigma \\cup \\qty{A} \\vdash A\\)}
+             \\BIC{\\(\\Sigma \\cup \\qty{A} \\vdash A\\)}
+            \\LeftLabel{Membership rule } \\RightLabel{ \\((\\in)\\)} \\BIC{\\(\\Sigma \\vdash A\\)}
           \\end{prooftree}\\]
         Proofs quickly grow tediously long, though; consider a proof that \\(\\qty{A \\sff B} \\vdash (A \\smp B) \\land (B \\smp A)\\):
           \\[\\begin{alignat}{3}
@@ -242,8 +243,8 @@ fn view() {
             \\end{prooftree}\\]
           When \\(u\\) is completely arbitrary, then assuming \\(A(u)\\) is the same as assuming that \\(A(x)\\) holds for some \\(x\\):
             \\[\\begin{prooftree}
-              \\AXC{\\(\\Sigma \\cup \\qty{A(u)} \\vdash B\\)} \\AXC{\\(u\\) not appearing in \\(\\Sigma\\) or \\(B\\)}
-              \\LeftLabel{\\(\\exists\\) elimination} \\RightLabel{ \\(({\\exists}{+}\\))} \\BIC{\\(\\Sigma \\cup \\qty{\\exists x A(x)} \\vdash B\\)}
+              \\AXC{\\(\\Sigma \\cup \\qty{A(u)} \\vdash B\\)} \\AXC{\\(u\\) not occurring in \\(\\Sigma\\) or \\(B\\)}
+              \\LeftLabel{\\(\\exists\\) elimination} \\RightLabel{ \\(({\\exists}{-}\\))} \\BIC{\\(\\Sigma \\cup \\qty{\\exists x A(x)} \\vdash B\\)}
             \\end{prooftree}\\]
           Proving that a statement holds for any \\(t\\) proves
         ",
@@ -348,11 +349,11 @@ fn view() {
         "these foundations exist to describe existing systems, not the other way around. ",
       ),
       element.text(
-        "Applying rules where they don't belong is made simpler when you aren't exposed to a world where those rules don't arise. If all you know is binary, the ",
+        "Applying rules where they don't belong is made simpler when you aren't exposed to a world where those rules don't arise; if all you know is \\(\\Z/2\\Z\\), the ",
       ),
       styling.href_text(
         "https://en.wikipedia.org/wiki/Freshman's_dream",
-        "Freshman's dream",
+        "freshman's dream",
       ),
       element.text(
         " is trivial, after all:
@@ -377,14 +378,29 @@ fn view() {
       element.text(
         "that govern our facts. Take climate change, for example: scientists make independent assessments of a situation, find that they all share a common thread, notice a correlation, are able to reason a causal relationship, and then relay that information to the others. Science definitionally values observation, which is then assessed mathematically. The reason that this is touted as truthful is that we have historically tested its results and predictions and evaluated them as a crucial system for furthering human progress. Truth is our interpretation of the world, so a value system built on evaluating that world as close to axiomatically as possible allows us to imitate reality with our own system of truths, just as with the abstraction of first-order logic. (After all, physics is just a field of mathematics, as are all other sciences o(≧∇≦o).)",
       ),
-      html.br([]),
+      styling.br("0.5em"),
       element.text(
         "In this case, the difference between reality and truth is largely a philosophical technicality. Science is our attempt to distill reality into comprehensible truth. Choosing to value the scientific method is still a value judgement, though, and one that ",
       ),
       styling.i("cannot be taken for granted. "),
       element.text(
-        "A problem with trying to accurately portray reality is that it captures the good and the bad (though of course it does not specify which is which). Who's to say whether human lives or a made-up number is more valuable, after all?",
+        "An issue with trying to accurately portray reality is that it captures the good and the bad, though it of course does not specify which is which. (Who's to say whether human lives or a made-up number is more valuable, after all?) The power of rhetoric comes from its ability to frame judgement and truth alike as objective and natural, or at the very least in a persuasive light.",
       ),
+      html.br([]),
+      element.text(
+        "It seems natural to always want the truth to align with reality as closely as possible, but when reality is disadvantageous to a cause, it is always excluded from the truth, be it ex- or implicitly. The Enlightenment was characterized by a rejection of blind truth in pursuit of representing reality as it is, rather than falling back on societal truths. This cultural shift required a change in the dissemination of information from authority; it was no longer enough to simply cite God. When ethos is no longer enough, it's time for pathos and logos. Moralistic nationalism under the guise of objectivity has become the hallmark of fascist movements for the past several centuries, which shows no signs of slowing. On the other hand, science remains a tool for manipulating public interest. With the sudden relevance of STEM in the past century and the sheer abstraction inherent to the modern sciences, it's easier than ever to peddle lies posing as skepticism or rationality. Technology has been characterized by bubbles, from dot-com to Web 2.0 to the App Store to Web 3.0 to AI to quantum computing. Perhaps an even better example is the growing anti-intellectual movement headed by none other than ",
+      ),
+      styling.href_text(
+        "https://www.cnn.com/2025/02/01/politics/rfk-jr-fact-check-confirmation-heading/index.html",
+        "the quivering cave troll at the head of the HHS"
+      ),
+      element.text(
+        ". (While morals may be subjective, inconsistency is directly observable.)"
+      ),
+      html.br([]),
+      element.text(
+        "Meta-studies are how consensus is formally assessed, but they are colloquially irrelevant. People are often very passionate yet hardly invested in issues close to their identity, lest they be challenged. So when a large group of people distrusts another group of people, it's not terribly difficult to play into that distrust to peddle snake oil. When truth is part of your identity, you eschew any hope of self-criticality, becoming a mere tool for someone else's perogative. The scientific process of revision is what enables progress, not a dogmatic fixation on truth. "
+      )
     ],
   )
 }
