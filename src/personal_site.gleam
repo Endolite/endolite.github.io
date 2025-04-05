@@ -10,26 +10,22 @@ import lustre/ui
 import lustre/ui/cluster
 import modem
 
-import model
 import styling
 
 import pages/home
 import pages/resume
 
 import pages/writings/authority_despair_michigan
+import pages/writings/cognitive_empathy_ladder
 import pages/writings/on_epistemology
 import pages/writings/small_phone
 import pages/writings/tuples
 
-@external(javascript, "./refresh.ffi.mjs", "refresh")
-fn refresh() -> Nil {
-  Nil
-}
+@external(javascript, "./utils.ffi.mjs", "refresh")
+fn refresh() -> Nil
 
-@external(javascript, "./refresh.ffi.mjs", "retitle")
-fn retitle(_title: String) -> Nil {
-  Nil
-}
+@external(javascript, "./utils.ffi.mjs", "retitle")
+fn retitle(_title: String) -> Nil
 
 pub fn main() {
   let app =
@@ -40,9 +36,19 @@ pub fn main() {
 }
 
 // Model
-fn init(_flags) -> #(model.Model, Effect(Msg)) {
+pub type Model {
+  Model(route: Route)
+}
+
+pub type Route {
+  Home
+  Resume
+  Writings(String)
+}
+
+fn init(_flags) -> #(Model, Effect(Msg)) {
   #(
-    model.Model(
+    Model(
       route: case
         modem.initial_uri() |> result.unwrap(uri.empty) |> on_route_change
       {
@@ -57,25 +63,25 @@ fn on_route_change(uri: Uri) -> Msg {
   case uri.path_segments(uri.path) {
     ["resume"] -> {
       retitle("Résumé")
-      OnRouteChange(model.Resume)
+      OnRouteChange(Resume)
     }
-    ["writings", title] -> OnRouteChange(model.Writings(title))
-    ["writings"] -> OnRouteChange(model.Writings(""))
+    ["writings", title] -> OnRouteChange(Writings(title))
+    ["writings"] -> OnRouteChange(Writings(""))
     _ -> {
       retitle("Endolite")
-      OnRouteChange(model.Home)
+      OnRouteChange(Home)
     }
   }
 }
 
 // Update
 pub opaque type Msg {
-  OnRouteChange(model.Route)
+  OnRouteChange(Route)
 }
 
-fn update(_model: model.Model, msg: Msg) -> #(model.Model, Effect(Msg)) {
+fn update(_model: Model, msg: Msg) -> #(Model, Effect(Msg)) {
   case msg {
-    OnRouteChange(route) -> #(model.Model(route:), {
+    OnRouteChange(route) -> #(Model(route:), {
       refresh()
       effect.none()
     })
@@ -83,10 +89,10 @@ fn update(_model: model.Model, msg: Msg) -> #(model.Model, Effect(Msg)) {
 }
 
 // View
-fn view(model: model.Model) -> Element(Msg) {
+fn view(model: Model) -> Element(Msg) {
   let page = case model.route {
-    model.Resume -> resume.view()
-    model.Writings(title) -> view_writing(title)
+    Resume -> resume.view()
+    Writings(title) -> view_writing(title)
     _ -> home.view()
   }
 
@@ -126,6 +132,7 @@ fn view_writing(title: String) {
     |> authority_despair_michigan.meta
     |> small_phone.meta
     |> on_epistemology.meta
+    |> cognitive_empathy_ladder.meta
   case title == "" {
     True -> {
       retitle("Writings")

@@ -63,7 +63,7 @@ fn view() {
             html.q([], [element.text("(")]),
             element.text(", "),
             html.q([], [element.text(")")]),
-            element.text(", and"),
+            element.text(", and "),
             html.q([], [element.text(",")]),
             element.text(";"),
           ]),
@@ -94,7 +94,7 @@ fn view() {
         The syntax of \\(\\L\\) is given as follows:
           \\[\\begin{align*}
             \\evit{BinCon} &::= {\\land} \\mid {\\lor} \\mid {\\smp} \\mid {\\sff} \\\\
-            \\evit{FreeVar} &::= u \\mid v \\mid w \\mid w_1 \\mid \\cdots \\\\
+            \\evit{FreeVar} &::= u \\mid v \\mid w \\mid u_1 \\mid \\cdots \\\\
             \\evit{BoundVar} &::= x \\mid y \\mid z \\mid x_1 \\mid \\cdots \\\\
             \\evit{Quant} &::= {\\forall} \\mid {\\exists} \\\\
             \\evit{Const} &::= a \\mid b \\mid c \\mid a_1 \\mid \\cdots \\\\
@@ -279,8 +279,9 @@ fn view() {
         "Resolution",
       ),
       element.text(
-        ", but it is not immediately evident how they imply the individual semantics of each syntactical element, at least for the purposes of introducing formal deduction.) Now we can prove more statements: letting \\(\\Sigma = \\qty{\\forall x(A(x) \\smp C(x)), \\forall x(B(x) \\smp D(x))}\\),
+        ", but it is not immediately evident how they imply the individual semantics of each syntactical element, at least for the purposes of introducing formal deduction.) Now we can prove more statements:
           \\[\\begin{alignat}{3}
+            && \\Sigma &= \\qty{\\forall x(A(x) \\smp C(x)), \\forall x(B(x) \\smp D(x))} \\\\
             (1) &&\\qquad \\Sigma \\cup \\qty{A(t)} &\\vdash A(t) \\qquad&& (\\in) \\\\
             (2) && &\\vdash \\forall x(A(x) \\smp C(x)) \\qquad&& (\\in) \\\\
             (3) && &\\vdash A(t) \\smp C(t) \\qquad&& (2), ({\\forall}{-}) \\\\
@@ -339,7 +340,7 @@ fn view() {
         ],
       ),
       element.text(
-        "These took me far too long to come to thanks to the sophistry of pseudo-logic peddled by proponents of so-called meritocrats. For a time, I attempted to reconcile the incongruity between perspectives, but that gets increasingly difficult as the people rhetorically pushing some of those perspectives demonstrably do not have my own interest in mind. Communication is built on mutual understanding, which is diametrically opposed with a system founded on exploitation. Allowing oneself to facetiously sell an ideology has the added bonus of justifying the status quo, giving solace to many and absolving some amount of guilt from the abusers of the system.",
+        "These took me far too long to come to thanks to the sophistry of pseudo-logic peddled by proponents of so-called meritocracy. For a time, I attempted to reconcile the incongruity between perspectives, but that gets increasingly difficult as the people rhetorically pushing some of those perspectives demonstrably do not have my own interest in mind. Communication is built on mutual understanding, which is diametrically opposed with a system founded on exploitation. Allowing oneself to facetiously sell an ideology has the added bonus of justifying the status quo, giving solace to many and absolving some amount of guilt from the abusers of the system.",
       ),
       styling.br("0.5em"),
       element.text(
@@ -388,19 +389,14 @@ fn view() {
       ),
       html.br([]),
       element.text(
-        "It seems natural to always want the truth to align with reality as closely as possible, but when reality is disadvantageous to a cause, it is always excluded from the truth, be it ex- or implicitly. The Enlightenment was characterized by a rejection of blind truth in pursuit of representing reality as it is, rather than falling back on societal truths. This cultural shift required a change in the dissemination of information from authority; it was no longer enough to simply cite God. When ethos is no longer enough, it's time for pathos and logos. Moralistic nationalism under the guise of objectivity has become the hallmark of fascist movements for the past several centuries, which shows no signs of slowing. On the other hand, science remains a tool for manipulating public interest. With the sudden relevance of STEM in the past century and the sheer abstraction inherent to the modern sciences, it's easier than ever to peddle lies posing as skepticism or rationality. Technology has been characterized by bubbles, from dot-com to Web 2.0 to the App Store to Web 3.0 to AI to quantum computing. Perhaps an even better example is the growing anti-intellectual movement headed by none other than ",
+        "It seems natural to always want the truth to align with reality as closely as possible, but when reality is disadvantageous to a cause, it is always excluded from the truth, be it ex- or implicitly. The Enlightenment was characterized by a rejection of blind truth in pursuit of representing reality as it is, rather than falling back on societal truths. This cultural shift required a change in the dissemination of information from authority; it was no longer enough to simply cite God. When ethos is no longer sufficient, it's time for pathos and logos. Moralistic nationalism under the guise of objectivity has become the hallmark of fascist movements for the past several centuries, which show no signs of slowing. On the other hand, science remains a tool for manipulating public interest. With the sudden relevance of STEM in the past century and the sheer abstraction inherent to the modern sciences, it's easier than ever to peddle lies posing as skepticism or rationality. Technology has been characterized by speculative bubbles built on such false promises, from dot-com to Web 2.0 to the App Store to Web 3.0 to AI to quantum computing. Perhaps an even better example is the growing anti-intellectual movement headed by ",
       ),
-      styling.href_text(
-        "https://www.cnn.com/2025/02/01/politics/rfk-jr-fact-check-confirmation-heading/index.html",
-        "the quivering cave troll at the head of the HHS"
-      ),
-      element.text(
-        ". (While morals may be subjective, inconsistency is directly observable.)"
-      ),
+      styling.i("certain "),
+      element.text(" sociopolitical groups. (I wonder why…)"),
       html.br([]),
       element.text(
-        "Meta-studies are how consensus is formally assessed, but they are colloquially irrelevant. People are often very passionate yet hardly invested in issues close to their identity, lest they be challenged. So when a large group of people distrusts another group of people, it's not terribly difficult to play into that distrust to peddle snake oil. When truth is part of your identity, you eschew any hope of self-criticality, becoming a mere tool for someone else's perogative. The scientific process of revision is what enables progress, not a dogmatic fixation on truth. "
-      )
+        "Meta-studies are how consensus is formally assessed, but they are colloquially irrelevant. People are often very passionate yet hardly invested in issues close to their identity, lest they be challenged. So when a large group of people distrusts another group of people, it's not terribly difficult to play into that distrust to peddle snake oil. When truth is part of your identity, you eschew any hope of self-criticality, becoming a mere tool for someone else's prerogative. The scientific process of revision is what enables progress, not a dogmatic fixation on truth. ",
+      ),
     ],
   )
 }

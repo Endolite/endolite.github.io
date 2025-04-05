@@ -2008,13 +2008,13 @@ var LustreClientApplication = class _LustreClientApplication {
    *
    * @returns {Gleam.Ok<(action: Lustre.Action<Lustre.Client, Msg>>) => void>}
    */
-  static start({ init: init4, update: update2, view: view8 }, selector, flags) {
+  static start({ init: init4, update: update2, view: view9 }, selector, flags) {
     if (!is_browser())
       return new Error(new NotABrowser());
     const root = selector instanceof HTMLElement ? selector : document.querySelector(selector);
     if (!root)
       return new Error(new ElementNotFound(selector));
-    const app = new _LustreClientApplication(root, init4(flags), update2, view8);
+    const app = new _LustreClientApplication(root, init4(flags), update2, view9);
     return new Ok((action) => app.send(action));
   }
   /**
@@ -2025,11 +2025,11 @@ var LustreClientApplication = class _LustreClientApplication {
    *
    * @returns {LustreClientApplication}
    */
-  constructor(root, [init4, effects], update2, view8) {
+  constructor(root, [init4, effects], update2, view9) {
     this.root = root;
     this.#model = init4;
     this.#update = update2;
-    this.#view = view8;
+    this.#view = view9;
     this.#tickScheduled = window.setTimeout(
       () => this.#tick(effects.all.toArray(), true),
       0
@@ -2144,20 +2144,20 @@ var LustreClientApplication = class _LustreClientApplication {
 };
 var start = LustreClientApplication.start;
 var LustreServerApplication = class _LustreServerApplication {
-  static start({ init: init4, update: update2, view: view8, on_attribute_change }, flags) {
+  static start({ init: init4, update: update2, view: view9, on_attribute_change }, flags) {
     const app = new _LustreServerApplication(
       init4(flags),
       update2,
-      view8,
+      view9,
       on_attribute_change
     );
     return new Ok((action) => app.send(action));
   }
-  constructor([model, effects], update2, view8, on_attribute_change) {
+  constructor([model, effects], update2, view9, on_attribute_change) {
     this.#model = model;
     this.#update = update2;
-    this.#view = view8;
-    this.#html = view8(model);
+    this.#view = view9;
+    this.#html = view9(model);
     this.#onAttributeChange = on_attribute_change;
     this.#renderers = /* @__PURE__ */ new Map();
     this.#handlers = handlers(this.#html);
@@ -2258,11 +2258,11 @@ var is_browser = () => globalThis.window && window.document;
 
 // build/dev/javascript/lustre/lustre.mjs
 var App = class extends CustomType {
-  constructor(init4, update2, view8, on_attribute_change) {
+  constructor(init4, update2, view9, on_attribute_change) {
     super();
     this.init = init4;
     this.update = update2;
-    this.view = view8;
+    this.view = view9;
     this.on_attribute_change = on_attribute_change;
   }
 };
@@ -2274,8 +2274,8 @@ var ElementNotFound = class extends CustomType {
 };
 var NotABrowser = class extends CustomType {
 };
-function application(init4, update2, view8) {
-  return new App(init4, update2, view8, new None());
+function application(init4, update2, view9) {
+  return new App(init4, update2, view9, new None());
 }
 function start2(app, selector, flags) {
   return guard(
@@ -2556,24 +2556,6 @@ function init2(handler) {
     }
   );
 }
-
-// build/dev/javascript/personal_site/model.mjs
-var Model2 = class extends CustomType {
-  constructor(route) {
-    super();
-    this.route = route;
-  }
-};
-var Home = class extends CustomType {
-};
-var Resume2 = class extends CustomType {
-};
-var Writings = class extends CustomType {
-  constructor(x0) {
-    super();
-    this[0] = x0;
-  }
-};
 
 // build/dev/javascript/personal_site/pages/home.mjs
 function view() {
@@ -3293,10 +3275,10 @@ function hr2() {
     ])
   );
 }
-function href_text(link2, text3) {
+function href_text(llink, ttext) {
   return a(
-    toList([href(link2), class$("clickable")]),
-    toList([text(text3)])
+    toList([href(llink), class$("clickable")]),
+    toList([text(ttext)])
   );
 }
 var styles = /* @__PURE__ */ toList([
@@ -3335,7 +3317,7 @@ function mathjax_wrapper(page) {
           ),
           style2(
             toList([]),
-            "\n        .clickable {\n          color: #d8b4fe;\n        }\n        .center {\n          margin: auto;\n          max-width: min(1000px, 90vw);\n        }\n        a:hover {\n          text-decoration: underline;\n        }\n      "
+            "\n        .clickable {\n          color: #d8b4fe;\n        }\n        .center {\n          margin: auto;\n          max-width: min(1000px, 90vw);\n        }\n        a:hover {\n          text-decoration: underline;\n        }\n        .element {\n            font-feature-settings: 'liga' 1;\n            -webkit-font-feature-settings: 'liga' 1;\n            text-rendering: optimizeLegibility;\n        }\n      "
           )
         ])
       ),
@@ -3366,8 +3348,83 @@ function mathjax_wrapper(page) {
   );
 }
 
-// build/dev/javascript/personal_site/pages/writings/on_epistemology.mjs
+// build/dev/javascript/personal_site/pages/writings/cognitive_empathy_ladder.mjs
 function view4() {
+  return p(
+    toList([
+      class$("center"),
+      style(toList([["text-align", "justify"]]))
+    ]),
+    toList([
+      text(
+        "I'm really grateful for where I am and the decisions and dumb luck that got me here. I'm very well-off in every regard apart from being a white noncitizen. I've spent nearly my entire life in North America, though, and in part due to wanting to feel like an American, I have little to no connection to my heritage. My perception is entirely coloured by the relatives and friends I see when returning home and my parents' history. "
+      ),
+      br2("0.5em"),
+      text(
+        "My father was remarkably unambitious, studying just enough to get to the next step (if that). He wanted to be a computer scientist, but his English mark was too low, so he settled for medicine; he wanted to be a physician but ended up settling for anaesthesiology due to competition. He made a few incredibly lucky decisions without thinking too much about it, and we somehow ended up here. This isn't just luck, obviously. He's an incredibly single-mindedly hard worker, enabled by his genuine enjoyment of his field. We got to be well-off by the time I was about 10, but before that we struggled a fair bit. (This struggling is still relative, though.)"
+      ),
+      br2("0.5em"),
+      text(
+        "From what he says, his work ethic was forged by the fierce environment of India, where this is the norm. Intense capitalism and population density mean that you need to do so much more to stand out. Part of what this entails is being cutthroat with others. The people able to leave India, especially to the U.S., are the most affluent to begin with. Sure, that doesn't necessarily translate to comparable proportional wealth, but wealth and conservatism evidently correlate: those with wealth are wont to hoard it. This, in tandem with the ruthless competition of the visa process itself means that first-generation Indian immigrants are generally very, very conservative. Under capitalism, cognitive empathy is a boon while emotional empathy is a liability. Knowing there are countless others with the same goal of emigrating, naturalized first-generation immigrants want to keep others out. They don't dislike the system, they just have a delusion of their place in it. They then proceed to act surprised when it turns out that the fascist nationalists also happen to be racists. "
+      ),
+      br2("0.5em"),
+      text(
+        "Speaking anectotally, the of the naturalized Indian immigrants I know voted for Trump, which is especially disheartening living in a swing state. This isn't a phenomenon at all unique to Indians, of course; most of the naturalized immigrants I know in general voted for Trump. By the time you realize you're not part of the in-group, it's already too late. This applied even to American-born whites that pretend they aren't just a number to someone higher up. "
+      ),
+      br2("0.5em"),
+      text(
+        "On a perhaps more individual scale, class also has a clear impact on one's relation to wealth. While it's true that "
+      ),
+      href_text(
+        "https://www.stlouisfed.org/publications/page-one-economics/2017/01/03/education-income-and-wealth",
+        "wealth and education correlate"
+      ),
+      text(", as do "),
+      href_text(
+        "https://www.pewresearch.org/politics/2024/04/09/partisanship-by-race-ethnicity-and-education/",
+        "education and progressiveness"
+      ),
+      text(
+        ", the composed correlation manifests in detached if perhaps well-meaning ways. (Performative progressivism is certainly a far better outcome than explicit evil, so long as it begets non-performative change.) Within a certain window of the upper-middle class that I've spent a fair amount of time around, though, money becomes an afterthought. Especially coming from somewhat humbler origins, the option to not have to think so much about money is itself the luxury. The mega-rich are of course driven by pure greed and seek infinite growth, but the upper-middle class ends up finding apathy not through nihilism but rather through complacency."
+      ),
+      br2("0.5em"),
+      text(
+        "I'm used to being stingy while still being wont to please others, which isn't a great combination, since it amounts to overstepping my own boundaries and then being sad about it later \u222A\uFF65\u03C9\uFF65\u222A. I do still generally expect people to compensate me in some way at some point, usually through treating me to something at another time, but I'm not frugal to the point of keeping a balance. I don't really think this is a "
+      ),
+      i2("good "),
+      text(
+        "habit, but it's somewhat okay for the time being, since the things I interact with on a regular basis are relatively inconsequential. I don't know whether I think about money more or less than I should, but I don't enjoy it either way, neither do most people apart from psychopaths, bargain-hunters, and numismatists. "
+      ),
+      br2("0.5em"),
+      text(
+        "It is always a bit sobering (mayhap even sonderous) to see someone in a vastly different class than you're used to interacting with; the human capacity for annoyance and complacency is seemingly tied very closely with how well one's immediate needs are met. I don't think there's a sweet spot per se, but I think that the fact that this is something anyone has to think about in the first place is stupid when we have enough resources for a global baseline far higher than it is now. The lack of such a baseline is perhaps what motivates the stark performative differences in wealth I've seen some of, from lower-middle- anxious conformity to upper-middle- progressivism to upper-class conservatism. Those that ascend the ladder in particular are very prone to wanting to pull it up behind them, since emotional empathy is something only afforded by those rich enough to have their needs met without being so rich that their self-worth comes from a number more valuable to them than life itself. "
+      ),
+      br2("0.5em"),
+      text(
+        "Sympathy is further obfuscated by the sheer abstraction of human lives in a global economy built on exploitation. In such an interconnected web, it's a given that any good or service involved significant harm to a living thing somewhere along its path to you, be it directly, indirectly, or even yet unrealized but inevitable (i.e., carbon footprint). This pincer of nihilism and obfuscation makes it so that whether or not you want to care, you won't soon enough. After all, heightened emotions with no viable action are rather exhausting, especially in a system that constantly reminds you quantifiably of how little influence you have relative to the richest men in the world."
+      ),
+      br2("0.5em"),
+      text(
+        "There's still a line between ignorance and nihilism, though. For a while, I was ignorant enough for the former, but enough prodding led me inevitably to intense loathing of the status quo: I've been left in a state of annoyance that I have no meaningful way of expressing productively (without risk of being deported, I suppose). (I'm assuming that the government doesn't care enough to read this in the month I have left in the country since it isn't on any social media platform, but God knows there's no telling what they'll do.) Divorcing oneself from the big picture is perhaps the objectively best route in a vulnerable position, but I don't want to lose my emotional empathy\u2014I don't want to let it simmer long enough that it goes flat and dies down by the time I'm in a position to actually do anything even as insignificant as voting. I think that forcing myself to disengage leads me nowhere quickly, though, maybe because I have very little ambition for my own personal life (outside of living somewhere with good transit \uA4B0\u0E51\u2022\u0325\uFE4F\u2022\u0325\u0E51\uA4B1) but quite a lot of passion for the big picture (such as the proliferation of transit ( \u035C\u3002 \u0361\u0296 \u035C\u3002)). Instead, I meaninglessly synthesize the terrible, nebulous now into coherent information for my future decisions. The one thing that does significantly affect me is immigration policy and racism, so I have a bonus incentive now too!"
+      )
+    ])
+  );
+}
+function meta2(acc) {
+  return prepend(
+    [
+      "cognitive_empathy_ladder",
+      "Cognitive Empathy and the Ladder",
+      text("Cognitive Empathy and the Ladder"),
+      view4,
+      "2025-04-04"
+    ],
+    acc
+  );
+}
+
+// build/dev/javascript/personal_site/pages/writings/on_epistemology.mjs
+function view5() {
   return p(
     toList([
       class$("center"),
@@ -3432,7 +3489,7 @@ function view4() {
               q(toList([]), toList([text("(")])),
               text(", "),
               q(toList([]), toList([text(")")])),
-              text(", and"),
+              text(", and "),
               q(toList([]), toList([text(",")])),
               text(";")
             ])
@@ -3472,7 +3529,7 @@ function view4() {
         ])
       ),
       text(
-        "\n        The syntax of \\(\\L\\) is given as follows:\n          \\[\\begin{align*}\n            \\evit{BinCon} &::= {\\land} \\mid {\\lor} \\mid {\\smp} \\mid {\\sff} \\\\\n            \\evit{FreeVar} &::= u \\mid v \\mid w \\mid w_1 \\mid \\cdots \\\\\n            \\evit{BoundVar} &::= x \\mid y \\mid z \\mid x_1 \\mid \\cdots \\\\\n            \\evit{Quant} &::= {\\forall} \\mid {\\exists} \\\\\n            \\evit{Const} &::= a \\mid b \\mid c \\mid a_1 \\mid \\cdots \\\\\n            \\evit{Rel} &::= F \\mid G \\mid H \\mid P \\mid F_1 \\mid \\cdots \\\\\n            \\evit{Func} &::= f \\mid g \\mid h \\mid f_1 \\mid \\cdots \\\\\n            \\evit{Term} &::= \\evit{Const} \\mid \\evit{FreeVar} \\mid \\evit{Func}(\\evit{Term}\\ttt{+}) \\tag{Term} \\\\\n            \\evit{Atom} &::= \\evit{Rel}(\\evit{Term}) \\mid (\\evit{Term} \\approx \\evit{Term}) \\tag{Atom} \\\\\n            \\evit{Form} &::= \\evit{Atom} \\mid (\\lnot \\evit{Atom}) \\mid (\\evit{Atom} \\evit{BinCon} \\evit{Atom}) \\tag{Formula} \\\\\n              &\\qquad\\mid \\evit{Quant}\\evit{BoundVar}\\evit{Form}\n          \\end{align*}\\]\n      "
+        "\n        The syntax of \\(\\L\\) is given as follows:\n          \\[\\begin{align*}\n            \\evit{BinCon} &::= {\\land} \\mid {\\lor} \\mid {\\smp} \\mid {\\sff} \\\\\n            \\evit{FreeVar} &::= u \\mid v \\mid w \\mid u_1 \\mid \\cdots \\\\\n            \\evit{BoundVar} &::= x \\mid y \\mid z \\mid x_1 \\mid \\cdots \\\\\n            \\evit{Quant} &::= {\\forall} \\mid {\\exists} \\\\\n            \\evit{Const} &::= a \\mid b \\mid c \\mid a_1 \\mid \\cdots \\\\\n            \\evit{Rel} &::= F \\mid G \\mid H \\mid P \\mid F_1 \\mid \\cdots \\\\\n            \\evit{Func} &::= f \\mid g \\mid h \\mid f_1 \\mid \\cdots \\\\\n            \\evit{Term} &::= \\evit{Const} \\mid \\evit{FreeVar} \\mid \\evit{Func}(\\evit{Term}\\ttt{+}) \\tag{Term} \\\\\n            \\evit{Atom} &::= \\evit{Rel}(\\evit{Term}) \\mid (\\evit{Term} \\approx \\evit{Term}) \\tag{Atom} \\\\\n            \\evit{Form} &::= \\evit{Atom} \\mid (\\lnot \\evit{Atom}) \\mid (\\evit{Atom} \\evit{BinCon} \\evit{Atom}) \\tag{Formula} \\\\\n              &\\qquad\\mid \\evit{Quant}\\evit{BoundVar}\\evit{Form}\n          \\end{align*}\\]\n      "
       ),
       text(
         "This allows formulas to be made but does not give them any meaning, as no valuation has been defined. Even without evaluation, though, the validity of statements should be justifiable from rules of the system alone; \\(a \\sff a\\) should always evaluate to true, for example. With this as motivation, rules of formal deduction can be defined. To this end, let \\(\\Sigma\\) denote a set of formulas."
@@ -3534,7 +3591,7 @@ function view4() {
         "Resolution"
       ),
       text(
-        ", but it is not immediately evident how they imply the individual semantics of each syntactical element, at least for the purposes of introducing formal deduction.) Now we can prove more statements: letting \\(\\Sigma = \\qty{\\forall x(A(x) \\smp C(x)), \\forall x(B(x) \\smp D(x))}\\),\n          \\[\\begin{alignat}{3}\n            (1) &&\\qquad \\Sigma \\cup \\qty{A(t)} &\\vdash A(t) \\qquad&& (\\in) \\\\\n            (2) && &\\vdash \\forall x(A(x) \\smp C(x)) \\qquad&& (\\in) \\\\\n            (3) && &\\vdash A(t) \\smp C(t) \\qquad&& (2), ({\\forall}{-}) \\\\\n            (4) && &\\vdash C(t) \\qquad&& (1), (3), ({\\smp}{-}) \\\\\n            (5) && &\\vdash C(t) \\lor D(t) \\qquad&& (4), ({\\lor}{+}) \\\\\n            (6) && &\\vdash \\exists x(C(x) \\lor D(x)) \\quad&& (5), ({\\exists}{+}) \\\\\n            (7) &&\\qquad \\Sigma \\cup \\qty{B(t)} &\\vdash B(t) \\qquad&& (\\in) \\\\\n            (8) && &\\vdash \\forall x(B(x) \\smp D(x)) \\qquad&& (\\in) \\\\\n            (9) && &\\vdash A(t) \\smp D(t) \\qquad&& (8), ({\\forall}{-}) \\\\\n            (10) && &\\vdash C(t) \\qquad&& (7), (9), ({\\smp}{-}) \\\\\n            (11) && &\\vdash C(t) \\lor D(t) \\qquad&& (10), ({\\lor}{+}) \\\\\n            (12) && &\\vdash \\exists x(C(x) \\lor D(x)) \\quad&& (11), ({\\exists}{+}) \\\\\n            (13) &&\\qquad \\Sigma \\cup \\qty{A(t) \\lor B(t)} &\\vdash \\exists x(C(x) \\lor D(x)) \\qquad&& (6), (12), ({\\lor}{-}) \\\\\n            (14) &&\\qquad \\Sigma \\cup \\qty{\\exists x(A(x) \\lor B(x))} &\\vdash \\exists x(C(x) \\lor D(x)) \\quad&& (13), ({\\exists}-) \\\\\n            (15) &&\\qquad \\Sigma &\\vdash \\exists x(A(x) \\lor B(x)) \\smp \\exists x(C(x) \\lor D(x)) \\quad&& (14), ({\\smp}{+})\n          \\end{alignat}\\]\n        No way, adding more rules made the system more complicated \u222A\uFF65\u03C9\uFF65\u222A. In exchange, though, we gain the full expressive power of first-order logic! With this, set theory can be formally abstracted into the rest of mathematics.\n      "
+        ", but it is not immediately evident how they imply the individual semantics of each syntactical element, at least for the purposes of introducing formal deduction.) Now we can prove more statements:\n          \\[\\begin{alignat}{3}\n            && \\Sigma &= \\qty{\\forall x(A(x) \\smp C(x)), \\forall x(B(x) \\smp D(x))} \\\\\n            (1) &&\\qquad \\Sigma \\cup \\qty{A(t)} &\\vdash A(t) \\qquad&& (\\in) \\\\\n            (2) && &\\vdash \\forall x(A(x) \\smp C(x)) \\qquad&& (\\in) \\\\\n            (3) && &\\vdash A(t) \\smp C(t) \\qquad&& (2), ({\\forall}{-}) \\\\\n            (4) && &\\vdash C(t) \\qquad&& (1), (3), ({\\smp}{-}) \\\\\n            (5) && &\\vdash C(t) \\lor D(t) \\qquad&& (4), ({\\lor}{+}) \\\\\n            (6) && &\\vdash \\exists x(C(x) \\lor D(x)) \\quad&& (5), ({\\exists}{+}) \\\\\n            (7) &&\\qquad \\Sigma \\cup \\qty{B(t)} &\\vdash B(t) \\qquad&& (\\in) \\\\\n            (8) && &\\vdash \\forall x(B(x) \\smp D(x)) \\qquad&& (\\in) \\\\\n            (9) && &\\vdash A(t) \\smp D(t) \\qquad&& (8), ({\\forall}{-}) \\\\\n            (10) && &\\vdash C(t) \\qquad&& (7), (9), ({\\smp}{-}) \\\\\n            (11) && &\\vdash C(t) \\lor D(t) \\qquad&& (10), ({\\lor}{+}) \\\\\n            (12) && &\\vdash \\exists x(C(x) \\lor D(x)) \\quad&& (11), ({\\exists}{+}) \\\\\n            (13) &&\\qquad \\Sigma \\cup \\qty{A(t) \\lor B(t)} &\\vdash \\exists x(C(x) \\lor D(x)) \\qquad&& (6), (12), ({\\lor}{-}) \\\\\n            (14) &&\\qquad \\Sigma \\cup \\qty{\\exists x(A(x) \\lor B(x))} &\\vdash \\exists x(C(x) \\lor D(x)) \\quad&& (13), ({\\exists}-) \\\\\n            (15) &&\\qquad \\Sigma &\\vdash \\exists x(A(x) \\lor B(x)) \\smp \\exists x(C(x) \\lor D(x)) \\quad&& (14), ({\\smp}{+})\n          \\end{alignat}\\]\n        No way, adding more rules made the system more complicated \u222A\uFF65\u03C9\uFF65\u222A. In exchange, though, we gain the full expressive power of first-order logic! With this, set theory can be formally abstracted into the rest of mathematics.\n      "
       ),
       hr2(),
       text(
@@ -3581,7 +3638,7 @@ function view4() {
         ])
       ),
       text(
-        "These took me far too long to come to thanks to the sophistry of pseudo-logic peddled by proponents of so-called meritocrats. For a time, I attempted to reconcile the incongruity between perspectives, but that gets increasingly difficult as the people rhetorically pushing some of those perspectives demonstrably do not have my own interest in mind. Communication is built on mutual understanding, which is diametrically opposed with a system founded on exploitation. Allowing oneself to facetiously sell an ideology has the added bonus of justifying the status quo, giving solace to many and absolving some amount of guilt from the abusers of the system."
+        "These took me far too long to come to thanks to the sophistry of pseudo-logic peddled by proponents of so-called meritocracy. For a time, I attempted to reconcile the incongruity between perspectives, but that gets increasingly difficult as the people rhetorically pushing some of those perspectives demonstrably do not have my own interest in mind. Communication is built on mutual understanding, which is diametrically opposed with a system founded on exploitation. Allowing oneself to facetiously sell an ideology has the added bonus of justifying the status quo, giving solace to many and absolving some amount of guilt from the abusers of the system."
       ),
       br2("0.5em"),
       text(
@@ -3625,29 +3682,24 @@ function view4() {
       ),
       br(toList([])),
       text(
-        "It seems natural to always want the truth to align with reality as closely as possible, but when reality is disadvantageous to a cause, it is always excluded from the truth, be it ex- or implicitly. The Enlightenment was characterized by a rejection of blind truth in pursuit of representing reality as it is, rather than falling back on societal truths. This cultural shift required a change in the dissemination of information from authority; it was no longer enough to simply cite God. When ethos is no longer enough, it's time for pathos and logos. Moralistic nationalism under the guise of objectivity has become the hallmark of fascist movements for the past several centuries, which shows no signs of slowing. On the other hand, science remains a tool for manipulating public interest. With the sudden relevance of STEM in the past century and the sheer abstraction inherent to the modern sciences, it's easier than ever to peddle lies posing as skepticism or rationality. Technology has been characterized by bubbles, from dot-com to Web 2.0 to the App Store to Web 3.0 to AI to quantum computing. Perhaps an even better example is the growing anti-intellectual movement headed by none other than "
+        "It seems natural to always want the truth to align with reality as closely as possible, but when reality is disadvantageous to a cause, it is always excluded from the truth, be it ex- or implicitly. The Enlightenment was characterized by a rejection of blind truth in pursuit of representing reality as it is, rather than falling back on societal truths. This cultural shift required a change in the dissemination of information from authority; it was no longer enough to simply cite God. When ethos is no longer sufficient, it's time for pathos and logos. Moralistic nationalism under the guise of objectivity has become the hallmark of fascist movements for the past several centuries, which show no signs of slowing. On the other hand, science remains a tool for manipulating public interest. With the sudden relevance of STEM in the past century and the sheer abstraction inherent to the modern sciences, it's easier than ever to peddle lies posing as skepticism or rationality. Technology has been characterized by speculative bubbles built on such false promises, from dot-com to Web 2.0 to the App Store to Web 3.0 to AI to quantum computing. Perhaps an even better example is the growing anti-intellectual movement headed by "
       ),
-      href_text(
-        "https://www.cnn.com/2025/02/01/politics/rfk-jr-fact-check-confirmation-heading/index.html",
-        "the quivering cave troll at the head of the HHS"
-      ),
-      text(
-        ". (While morals may be subjective, inconsistency is directly observable.)"
-      ),
+      i2("certain "),
+      text(" sociopolitical groups. (I wonder why\u2026)"),
       br(toList([])),
       text(
-        "Meta-studies are how consensus is formally assessed, but they are colloquially irrelevant. People are often very passionate yet hardly invested in issues close to their identity, lest they be challenged. So when a large group of people distrusts another group of people, it's not terribly difficult to play into that distrust to peddle snake oil. When truth is part of your identity, you eschew any hope of self-criticality, becoming a mere tool for someone else's perogative. The scientific process of revision is what enables progress, not a dogmatic fixation on truth. "
+        "Meta-studies are how consensus is formally assessed, but they are colloquially irrelevant. People are often very passionate yet hardly invested in issues close to their identity, lest they be challenged. So when a large group of people distrusts another group of people, it's not terribly difficult to play into that distrust to peddle snake oil. When truth is part of your identity, you eschew any hope of self-criticality, becoming a mere tool for someone else's prerogative. The scientific process of revision is what enables progress, not a dogmatic fixation on truth. "
       )
     ])
   );
 }
-function meta2(acc) {
+function meta3(acc) {
   return prepend(
     [
       "on_epistemology",
       "On Epistemology",
       text("On Epistemology"),
-      view4,
+      view5,
       "2025-03-26"
     ],
     acc
@@ -3655,7 +3707,7 @@ function meta2(acc) {
 }
 
 // build/dev/javascript/personal_site/pages/writings/small_phone.mjs
-function view5() {
+function view6() {
   return p(
     toList([
       class$("center"),
@@ -3753,13 +3805,13 @@ function view5() {
     ])
   );
 }
-function meta3(acc) {
+function meta4(acc) {
   return prepend(
     [
       "small_phone",
       "Small phone big transit where ( \u2022\u032F\u0301 ^ \u2022\u032F\u0300)",
       text("Small phone big transit where ( \u2022\u032F\u0301 ^ \u2022\u032F\u0300)"),
-      view5,
+      view6,
       "2025-03-19"
     ],
     acc
@@ -3767,7 +3819,7 @@ function meta3(acc) {
 }
 
 // build/dev/javascript/personal_site/pages/writings/tuples.mjs
-function view6() {
+function view7() {
   return div(
     toList([]),
     toList([
@@ -3888,7 +3940,7 @@ function view6() {
     ])
   );
 }
-function meta4(acc) {
+function meta5(acc) {
   return prepend(
     [
       "tuples",
@@ -3900,14 +3952,14 @@ function meta4(acc) {
           text(" are tuples?")
         ])
       ),
-      view6,
+      view7,
       "2025-03-12"
     ],
     acc
   );
 }
 
-// build/dev/javascript/personal_site/refresh.ffi.mjs
+// build/dev/javascript/personal_site/utils.ffi.mjs
 var refresh = () => {
   setTimeout(() => {
     MathJax.typeset();
@@ -3920,6 +3972,22 @@ var retitle = (newTitle) => {
 };
 
 // build/dev/javascript/personal_site/personal_site.mjs
+var Model2 = class extends CustomType {
+  constructor(route) {
+    super();
+    this.route = route;
+  }
+};
+var Home = class extends CustomType {
+};
+var Resume2 = class extends CustomType {
+};
+var Writings = class extends CustomType {
+  constructor(x0) {
+    super();
+    this[0] = x0;
+  }
+};
 var OnRouteChange = class extends CustomType {
   constructor(x0) {
     super();
@@ -4005,10 +4073,11 @@ function view_nav() {
 function view_writing(title) {
   let writings = (() => {
     let _pipe = toList([]);
-    let _pipe$1 = meta4(_pipe);
+    let _pipe$1 = meta5(_pipe);
     let _pipe$2 = meta(_pipe$1);
-    let _pipe$3 = meta3(_pipe$2);
-    return meta2(_pipe$3);
+    let _pipe$3 = meta4(_pipe$2);
+    let _pipe$4 = meta3(_pipe$3);
+    return meta2(_pipe$4);
   })();
   let $ = title === "";
   if ($) {
@@ -4079,7 +4148,7 @@ function view_writing(title) {
           throw makeError(
             "panic",
             "personal_site",
-            180,
+            187,
             "view_writing",
             "`panic` expression evaluated.",
             {}
@@ -4089,7 +4158,7 @@ function view_writing(title) {
     );
   }
 }
-function view7(model) {
+function view8(model) {
   let page = (() => {
     let $ = model.route;
     if ($ instanceof Resume2) {
@@ -4117,7 +4186,7 @@ function main() {
     update,
     (x) => {
       let _pipe = x;
-      let _pipe$1 = view7(_pipe);
+      let _pipe$1 = view8(_pipe);
       return mathjax_wrapper(_pipe$1);
     }
   );
@@ -4126,7 +4195,7 @@ function main() {
     throw makeError(
       "let_assert",
       "personal_site",
-      39,
+      35,
       "main",
       "Pattern match failed, no pattern matched the value.",
       { value: $ }

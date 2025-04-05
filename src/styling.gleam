@@ -3,7 +3,6 @@ import lustre/element
 import lustre/element/html
 import lustre/ui
 
-
 pub fn br(size) {
   html.br([attribute.style([#("margin-bottom", size)])])
 }
@@ -29,9 +28,9 @@ pub fn hr() {
   ])
 }
 
-pub fn href_text(link, text) {
-  html.a([attribute.href(link), attribute.class("clickable")], [
-    element.text(text),
+pub fn href_text(link llink, text ttext) {
+  html.a([attribute.href(llink), attribute.class("clickable")], [
+    element.text(ttext),
   ])
 }
 
@@ -46,6 +45,7 @@ const styles = [
 ]
 
 pub fn mathjax_wrapper(page) {
+  // let preamble = simplifile.read(from: "./latex_preamble.txt")
   html.html([attribute.style(styles)], [
     html.head([], [
       html.script(
@@ -76,6 +76,11 @@ pub fn mathjax_wrapper(page) {
         }
         a:hover {
           text-decoration: underline;
+        }
+        .element {
+            font-feature-settings: 'liga' 1;
+            -webkit-font-feature-settings: 'liga' 1;
+            text-rendering: optimizeLegibility;
         }
       ",
       ),
