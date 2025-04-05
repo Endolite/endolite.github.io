@@ -3253,6 +3253,12 @@ function meta(acc) {
 function br2(size) {
   return br(toList([style(toList([["margin-bottom", size]]))]));
 }
+function equation(text3) {
+  return div(
+    toList([class$("equation")]),
+    toList([text(text3)])
+  );
+}
 function i2(text3) {
   return i(toList([]), toList([text(text3)]));
 }
@@ -3317,7 +3323,7 @@ function mathjax_wrapper(page) {
           ),
           style2(
             toList([]),
-            "\n        .clickable {\n          color: #d8b4fe;\n        }\n        .center {\n          margin: auto;\n          max-width: min(1000px, 90vw);\n        }\n        a:hover {\n          text-decoration: underline;\n        }\n        .element {\n            font-feature-settings: 'liga' 1;\n            -webkit-font-feature-settings: 'liga' 1;\n            text-rendering: optimizeLegibility;\n        }\n      "
+            "\n        .clickable {\n          color: #d8b4fe;\n        }\n        .center {\n          margin: auto;\n          max-width: min(1000px, 90vw);\n        }\n        a:hover {\n          text-decoration: underline;\n        }\n        .element {\n            font-feature-settings: 'liga' 1;\n            -webkit-font-feature-settings: 'liga' 1;\n            text-rendering: optimizeLegibility;\n        }\n        .equation {\n          width: 100%;\n          overflow-x: auto;\n          white-space:nowrap;\n        }\n      "
           )
         ])
       ),
@@ -3528,8 +3534,14 @@ function view5() {
           )
         ])
       ),
-      text(
-        "\n        The syntax of \\(\\L\\) is given as follows:\n          \\[\\begin{align*}\n            \\evit{BinCon} &::= {\\land} \\mid {\\lor} \\mid {\\smp} \\mid {\\sff} \\\\\n            \\evit{FreeVar} &::= u \\mid v \\mid w \\mid u_1 \\mid \\cdots \\\\\n            \\evit{BoundVar} &::= x \\mid y \\mid z \\mid x_1 \\mid \\cdots \\\\\n            \\evit{Quant} &::= {\\forall} \\mid {\\exists} \\\\\n            \\evit{Const} &::= a \\mid b \\mid c \\mid a_1 \\mid \\cdots \\\\\n            \\evit{Rel} &::= F \\mid G \\mid H \\mid P \\mid F_1 \\mid \\cdots \\\\\n            \\evit{Func} &::= f \\mid g \\mid h \\mid f_1 \\mid \\cdots \\\\\n            \\evit{Term} &::= \\evit{Const} \\mid \\evit{FreeVar} \\mid \\evit{Func}(\\evit{Term}\\ttt{+}) \\tag{Term} \\\\\n            \\evit{Atom} &::= \\evit{Rel}(\\evit{Term}) \\mid (\\evit{Term} \\approx \\evit{Term}) \\tag{Atom} \\\\\n            \\evit{Form} &::= \\evit{Atom} \\mid (\\lnot \\evit{Atom}) \\mid (\\evit{Atom} \\evit{BinCon} \\evit{Atom}) \\tag{Formula} \\\\\n              &\\qquad\\mid \\evit{Quant}\\evit{BoundVar}\\evit{Form}\n          \\end{align*}\\]\n      "
+      text("The syntax of \\(\\L\\) is given as follows:"),
+      div(
+        toList([class$("equation")]),
+        toList([
+          text(
+            "\\[\\begin{align*}\n          \\evit{BinCon} &::= {\\land} \\mid {\\lor} \\mid {\\smp} \\mid {\\sff} \\\\\n          \\evit{FreeVar} &::= u \\mid v \\mid w \\mid u_1 \\mid \\cdots \\\\\n          \\evit{BoundVar} &::= x \\mid y \\mid z \\mid x_1 \\mid \\cdots \\\\\n          \\evit{Quant} &::= {\\forall} \\mid {\\exists} \\\\\n          \\evit{Const} &::= a \\mid b \\mid c \\mid a_1 \\mid \\cdots \\\\\n          \\evit{Rel} &::= F \\mid G \\mid H \\mid P \\mid F_1 \\mid \\cdots \\\\\n          \\evit{Func} &::= f \\mid g \\mid h \\mid f_1 \\mid \\cdots \\\\\n          \\evit{Term} &::= \\evit{Const} \\mid \\evit{FreeVar} \\mid \\evit{Func}(\\evit{Term}\\ttt{+}) \\tag{Term} \\\\\n          \\evit{Atom} &::= \\evit{Rel}(\\evit{Term}) \\mid (\\evit{Term} \\approx \\evit{Term}) \\tag{Atom} \\\\\n          \\evit{Form} &::= \\evit{Atom} \\mid (\\lnot \\evit{Atom}) \\mid (\\evit{Atom} \\evit{BinCon} \\evit{Atom}) \\tag{Formula} \\\\\n            &\\qquad\\mid \\evit{Quant}\\evit{BoundVar}\\evit{Form}\n        \\end{align*}\\]"
+          )
+        ])
       ),
       text(
         "This allows formulas to be made but does not give them any meaning, as no valuation has been defined. Even without evaluation, though, the validity of statements should be justifiable from rules of the system alone; \\(a \\sff a\\) should always evaluate to true, for example. With this as motivation, rules of formal deduction can be defined. To this end, let \\(\\Sigma\\) denote a set of formulas."
@@ -3546,17 +3558,84 @@ function view5() {
           )
         ]),
         toList([
-          text(
-            "\n          A formula should trivially prove itself:\n            \\[\\begin{prooftree}\n              \\AXC{}\n              \\LeftLabel{Reflexivity} \\RightLabel{ (Ref)} \\UIC{\\(A \\vdash A\\)}\n            \\end{prooftree}\\]\n          Adding premises to an argument should not affect its conclusion:\n            \\[\\begin{prooftree}\n                \\AXC{\\(\\Sigma \\vdash A\\)}\n                \\LeftLabel{Addition of premises} \\RightLabel{ (+)} \\UIC{\\(\\Sigma \\cup \\Sigma' \\vdash A\\)}\n            \\end{prooftree}\\]\n          If a set of premises along with the negation of an additional formula \\(A\\) is able to prove another formula \\(B\\) along with its negation, then the premises are inconsistent with \\(\\lnot A\\), so the premises must prove \\(A\\):\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\cup \\qty{\\lnot A} \\vdash B\\)} \\AXC{\\(\\Sigma \\cup \\qty{\\lnot A} \\vdash \\lnot B\\)} \\\n              \\LeftLabel{\\(\\lnot\\) elimination} \\RightLabel{ \\(({\\lnot}{-})\\)} \\BIC{\\(\\Sigma \\vdash A\\)}\n            \\end{prooftree}\\]\n          If a set of premises proves that \\(A\\) implies \\(B\\) as well as \\(A\\) itself, then it must also prove \\(B\\):\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash A \\smp B\\)} \\AXC{\\(\\Sigma \\vdash A\\)} \\\\\n              \\LeftLabel{\\(\\smp\\) elimination} \\RightLabel{ \\(({\\smp}{-})\\)} \\BIC{\\(\\Sigma \\vdash B\\)}\n            \\end{prooftree}\\]\n          Similarly, if a set of premises proves a statement \\(B\\), then removing some element \\(A\\) from the premises should yield a new set proving that \\(A \\smp B\\):\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\cup \\qty{A} \\smp B\\)} \\\\\n              \\LeftLabel{\\(\\smp\\) introduction} \\RightLabel{ \\(({\\smp}{+})\\)} \\UIC{\\(\\Sigma \\vdash A \\smp B\\)}\n            \\end{prooftree}\\]\n          Proving the validity of multiple statements should prove each individually:\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash A \\land B\\)} \\\\\n              \\LeftLabel{\\(\\land\\) elimination} \\RightLabel{ \\(({\\land}{-})\\)} \\UIC{\\(\\Sigma \\vdash A \\qquad \\Sigma \\vdash B\\)}\n            \\end{prooftree}\\]\n          The converse should also hold:\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash A\\)} \\AXC{\\(\\Sigma \\vdash B\\)} \\\\\n              \\LeftLabel{\\(\\land\\) introduction} \\RightLabel{ \\(({\\land}{+})\\)} \\BIC{\\(\\Sigma \\vdash A \\land B\\)}\n            \\end{prooftree}\\]\n          If adding either \\(A\\) or \\(B\\) as a premise suffices, then adding \\(A \\lor B\\) should as well:\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\cup \\qty{A} \\vdash C\\)} \\AXC{\\(\\Sigma \\cup \\qty{B} \\vdash C\\)} \\\\\n              \\LeftLabel{\\(\\lor\\) elimination} \\RightLabel{ \\(({\\lor}{-})\\)} \\BIC{\\(\\Sigma \\cup \\qty{A \\lor B} \\vdash C\\)}\n            \\end{prooftree}\\]\n          Proving \\(A\\) should also prove \\(A \\lor B\\), and \\(\\lor\\) should be commutative:\n            \\[\\begin{prooftree}\n                \\AXC{\\(\\Sigma \\vdash A\\)}\n                \\LeftLabel{\\(\\lor\\) introduction} \\RightLabel{ \\(({\\lor}{+})\\)} \\UIC{\\(\\Sigma \\vdash A \\lor B \\qquad \\Sigma \\vdash B \\lor B\\)}\n            \\end{prooftree}\\]\n          A proof of \\(A \\sff B\\) should prove \\(A\\) if and only if it proves \\(B\\):\n            \\[\n              \\begin{prooftree}\n                \\AXC{\\(\\Sigma \\vdash A \\sff B\\)} \\AXC{\\(\\Sigma \\vdash A\\)} \\\n                \\LeftLabel{\\(\\sff\\) elimination} \\BIC{\\(\\Sigma \\vdash B\\)}\n              \\end{prooftree} \\quad \\begin{prooftree}\n                \\AXC{\\(\\Sigma \\vdash A \\sff B\\)} \\AXC{\\(\\Sigma \\vdash B\\)} \\\n                \\RightLabel{ \\(({\\sff}{-})\\)} \\BIC{\\(\\Sigma \\vdash A\\)}\n              \\end{prooftree}\n            \\]\n          If adding \\(A\\) as a premise proves \\(B\\) and\n        "
+          text("A formula should trivially prove itself:"),
+          equation(
+            "\n              \\[\\begin{prooftree}\n                \\AXC{}\n                \\LeftLabel{Reflexivity} \\RightLabel{ (Ref)} \\UIC{\\(A \\vdash A\\)}\n              \\end{prooftree}\\]\n          "
           ),
-          i2("vice versa, "),
           text(
-            "\n          the premises prove \\(A \\sff B\\):\n          \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\cup \\qty{A} \\vdash B\\)} \\AXC{\\(\\Sigma \\cup \\qty{B} \\vdash A\\)}\n              \\LeftLabel{\\(\\sff\\) introduction} \\RightLabel{ \\(({\\sff}{+})\\)} \\BIC{\\(\\Sigma \\vdash A \\sff B\\)}\n          \\end{prooftree}\\]\n        "
+            "Adding premises to an argument should not affect its conclusion:"
+          ),
+          equation(
+            "\n            \\[\\begin{prooftree}\n                \\AXC{\\(\\Sigma \\vdash A\\)}\n                \\LeftLabel{Addition of premises} \\RightLabel{ (+)} \\UIC{\\(\\Sigma \\cup \\Sigma' \\vdash A\\)}\n            \\end{prooftree}\\]\n          "
+          ),
+          text(
+            "If a set of premises along with the negation of an additional formula \\(A\\) is able to prove another formula \\(B\\) along with its negation, then the premises are inconsistent with \\(\\lnot A\\), so the premises must prove \\(A\\):"
+          ),
+          equation(
+            "\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\cup \\qty{\\lnot A} \\vdash B\\)} \\AXC{\\(\\Sigma \\cup \\qty{\\lnot A} \\vdash \\lnot B\\)} \\\n              \\LeftLabel{\\(\\lnot\\) elimination} \\RightLabel{ \\(({\\lnot}{-})\\)} \\BIC{\\(\\Sigma \\vdash A\\)}\n            \\end{prooftree}\\]\n          "
+          ),
+          text(
+            "If a set of premises proves that \\(A\\) implies \\(B\\) as well as \\(A\\) itself, then it must also prove \\(B\\):"
+          ),
+          equation(
+            "\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash A \\smp B\\)} \\AXC{\\(\\Sigma \\vdash A\\)} \\\\\n              \\LeftLabel{\\(\\smp\\) elimination} \\RightLabel{ \\(({\\smp}{-})\\)} \\BIC{\\(\\Sigma \\vdash B\\)}\n            \\end{prooftree}\\]\n          "
+          ),
+          text(
+            "Similarly, if a set of premises proves a statement \\(B\\), then removing some element \\(A\\) from the premises should yield a new set proving that \\(A \\smp B\\):"
+          ),
+          equation(
+            "\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\cup \\qty{A} \\smp B\\)} \\\\\n              \\LeftLabel{\\(\\smp\\) introduction} \\RightLabel{ \\(({\\smp}{+})\\)} \\UIC{\\(\\Sigma \\vdash A \\smp B\\)}\n            \\end{prooftree}\\]\n          "
+          ),
+          text(
+            "Proving the validity of multiple statements should prove each individually:"
+          ),
+          equation(
+            "\n          \\[\\begin{prooftree}\n            \\AXC{\\(\\Sigma \\vdash A \\land B\\)} \\\\\n            \\LeftLabel{\\(\\land\\) elimination} \\RightLabel{ \\(({\\land}{-})\\)} \\UIC{\\(\\Sigma \\vdash A \\qquad \\Sigma \\vdash B\\)}\n          \\end{prooftree}\\]\n          "
+          ),
+          text("The converse should also hold:"),
+          equation(
+            "\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash A\\)} \\AXC{\\(\\Sigma \\vdash B\\)} \\\\\n              \\LeftLabel{\\(\\land\\) introduction} \\RightLabel{ \\(({\\land}{+})\\)} \\BIC{\\(\\Sigma \\vdash A \\land B\\)}\n            \\end{prooftree}\\]\n          "
+          ),
+          text(
+            "\n            If adding either \\(A\\) or \\(B\\) as a premise suffices, then adding \\(A \\lor B\\) should as well:\n          "
+          ),
+          equation(
+            "\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\cup \\qty{A} \\vdash C\\)} \\AXC{\\(\\Sigma \\cup \\qty{B} \\vdash C\\)} \\\\\n              \\LeftLabel{\\(\\lor\\) elimination} \\RightLabel{ \\(({\\lor}{-})\\)} \\BIC{\\(\\Sigma \\cup \\qty{A \\lor B} \\vdash C\\)}\n            \\end{prooftree}\\]\n          "
+          ),
+          text(
+            "Proving \\(A\\) should also prove \\(A \\lor B\\), and \\(\\lor\\) should be commutative:"
+          ),
+          equation(
+            "\n            \\[\\begin{prooftree}\n                \\AXC{\\(\\Sigma \\vdash A\\)}\n                \\LeftLabel{\\(\\lor\\) introduction} \\RightLabel{ \\(({\\lor}{+})\\)} \\UIC{\\(\\Sigma \\vdash A \\lor B \\qquad \\Sigma \\vdash B \\lor B\\)}\n            \\end{prooftree}\\]\n          "
+          ),
+          text(
+            "\n            A proof of \\(A \\sff B\\) should prove \\(A\\) if and only if it proves \\(B\\):\n          "
+          ),
+          equation(
+            "\n            \\[\n              \\begin{prooftree}\n                \\AXC{\\(\\Sigma \\vdash A \\sff B\\)} \\AXC{\\(\\Sigma \\vdash A\\)} \\\n                \\LeftLabel{\\(\\sff\\) elimination} \\BIC{\\(\\Sigma \\vdash B\\)}\n              \\end{prooftree} \\quad \\begin{prooftree}\n                \\AXC{\\(\\Sigma \\vdash A \\sff B\\)} \\AXC{\\(\\Sigma \\vdash B\\)} \\\n                \\RightLabel{ \\(({\\sff}{-})\\)} \\BIC{\\(\\Sigma \\vdash A\\)}\n              \\end{prooftree}\n            \\]\n          "
+          ),
+          text("If adding \\(A\\) as a premise proves \\(B\\) and"),
+          i2("vice versa, "),
+          text("the premises prove \\(A \\sff B\\):"),
+          equation(
+            "\n            \\[\\begin{prooftree}\n                \\AXC{\\(\\Sigma \\cup \\qty{A} \\vdash B\\)} \\AXC{\\(\\Sigma \\cup \\qty{B} \\vdash A\\)}\n                \\LeftLabel{\\(\\sff\\) introduction} \\RightLabel{ \\(({\\sff}{+})\\)} \\BIC{\\(\\Sigma \\vdash A \\sff B\\)}\n            \\end{prooftree}\\]\n          "
           )
         ])
       ),
       text(
-        "\n        From these, new rules can be derived. For example, a set of premises should prove all of its elements:\n          \\[\\begin{prooftree}\n             \\AXC{\\(A \\in \\Sigma\\)} \\UIC{\\(\\Sigma \\cup \\qty{A} = \\Sigma\\)}\n             \\AXC{(Ref)} \\UIC{\\(A \\vdash A\\)} \\AXC{(+)}\n             \\BIC{\\(\\Sigma \\cup \\qty{A} \\vdash A\\)}\n            \\LeftLabel{Membership rule } \\RightLabel{ \\((\\in)\\)} \\BIC{\\(\\Sigma \\vdash A\\)}\n          \\end{prooftree}\\]\n        Proofs quickly grow tediously long, though; consider a proof that \\(\\qty{A \\sff B} \\vdash (A \\smp B) \\land (B \\smp A)\\):\n          \\[\\begin{alignat}{3}\n            (1) &&\\qquad \\qty{A \\sff B, A} &\\vdash A \\sff B \\qquad&& (\\in) \\\\\n            (2) &&\\qquad &\\vdash A \\qquad&&(\\in) \\\\\n            (3) &&\\qquad &\\vdash B \\qquad&& (1), (2), ({\\sff}{-}) \\\\\n            (4) &&\\qquad \\qty{A \\sff B} &\\vdash A \\smp B \\qquad&& (3), ({\\smp}{+}) \\\\\n            (5) &&\\qquad \\qty{A \\sff B, B} &\\vdash A \\sff B \\qquad&& (\\in) \\\\\n            (6) &&\\qquad &\\vdash B \\qquad&&(\\in) \\\\\n            (7) &&\\qquad &\\vdash A \\qquad&& (5), (6), ({\\sff}{-}) \\\\\n            (8) &&\\qquad \\qty{A \\sff B} &\\vdash A \\smp B \\qquad&& (7), ({\\smp}{+}) \\\\\n            (9) &&\\qquad \\qty{A \\sff B} &\\vdash (A \\smp B) \\land (B \\smp A) \\qquad&& (4), (8), ({\\land}{+})\n          \\end{alignat}\\]\n        The rules given thus far only suffice for propositional logic, so let's add a few more!\n      "
+        "From these, new rules can be derived. For example, a set of premises should prove all of its elements:"
+      ),
+      equation(
+        "\n        \\[\\begin{prooftree}\n           \\AXC{\\(A \\in \\Sigma\\)} \\UIC{\\(\\Sigma \\cup \\qty{A} = \\Sigma\\)}\n           \\AXC{(Ref)} \\UIC{\\(A \\vdash A\\)} \\AXC{(+)}\n           \\BIC{\\(\\Sigma \\cup \\qty{A} \\vdash A\\)}\n          \\LeftLabel{Membership rule } \\RightLabel{ \\((\\in)\\)} \\BIC{\\(\\Sigma \\vdash A\\)}\n        \\end{prooftree}\\]\n      "
+      ),
+      text(
+        "\n        Proofs quickly grow tediously long, though; consider a proof that \\(\\qty{A \\sff B} \\vdash (A \\smp B) \\land (B \\smp A)\\):"
+      ),
+      equation(
+        "\n        \\[\\begin{alignat}{3}\n          (1) &&\\qquad \\qty{A \\sff B, A} &\\vdash A \\sff B \\qquad&& (\\in) \\\\\n          (2) &&\\qquad &\\vdash A \\qquad&&(\\in) \\\\\n          (3) &&\\qquad &\\vdash B \\qquad&& (1), (2), ({\\sff}{-}) \\\\\n          (4) &&\\qquad \\qty{A \\sff B} &\\vdash A \\smp B \\qquad&& (3), ({\\smp}{+}) \\\\\n          (5) &&\\qquad \\qty{A \\sff B, B} &\\vdash A \\sff B \\qquad&& (\\in) \\\\\n          (6) &&\\qquad &\\vdash B \\qquad&&(\\in) \\\\\n          (7) &&\\qquad &\\vdash A \\qquad&& (5), (6), ({\\sff}{-}) \\\\\n          (8) &&\\qquad \\qty{A \\sff B} &\\vdash A \\smp B \\qquad&& (7), ({\\smp}{+}) \\\\\n          (9) &&\\qquad \\qty{A \\sff B} &\\vdash (A \\smp B) \\land (B \\smp A) \\qquad&& (4), (8), ({\\land}{+})\n        \\end{alignat}\\]\n      "
+      ),
+      text(
+        "The rules given thus far only suffice for propositional logic, so let's add a few more!"
       ),
       div(
         toList([
@@ -3574,12 +3653,36 @@ function view5() {
             "Proving that something holds for all \\(x\\) proves that it holds for any arbitrary term \\(t\\) "
           ),
           i2("a fortiori: "),
-          text(
-            "\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash \\forall x A(x)\\)}\n              \\LeftLabel{\\(\\forall\\) elimination} \\RightLabel{ \\(({\\forall}{-}\\))} \\UIC{\\(\\Sigma \\vdash A(t)\\)}\n            \\end{prooftree}\\]\n          Conversely, proving that something holds for some \\(u\\) that has no assumptions imposed upon it proves that it holds for all \\(x\\):\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash A(u)\\)} \\AXC{\\(u\\) not occurring in \\(\\Sigma\\)}\n              \\LeftLabel{\\(\\forall\\) introduction} \\RightLabel{ \\(({\\forall}{+})\\)} \\BIC{\\(\\Sigma \\vdash \\forall x A(x)\\)}\n            \\end{prooftree}\\]\n          When \\(u\\) is completely arbitrary, then assuming \\(A(u)\\) is the same as assuming that \\(A(x)\\) holds for some \\(x\\):\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\cup \\qty{A(u)} \\vdash B\\)} \\AXC{\\(u\\) not occurring in \\(\\Sigma\\) or \\(B\\)}\n              \\LeftLabel{\\(\\exists\\) elimination} \\RightLabel{ \\(({\\exists}{-}\\))} \\BIC{\\(\\Sigma \\cup \\qty{\\exists x A(x)} \\vdash B\\)}\n            \\end{prooftree}\\]\n          Proving that a statement holds for any \\(t\\) proves\n        "
+          equation(
+            "\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash \\forall x A(x)\\)}\n              \\LeftLabel{\\(\\forall\\) elimination} \\RightLabel{ \\(({\\forall}{-}\\))} \\UIC{\\(\\Sigma \\vdash A(t)\\)}\n            \\end{prooftree}\\]\n          "
           ),
-          i2("a fortiori "),
           text(
-            "\n          that it holds for some \\(x\\):\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash A(t)\\)}\n              \\LeftLabel{\\(\\exists\\) introduction} \\RightLabel{ \\(({\\exists}{+})\\)} \\UIC{\\(\\Sigma \\vdash \\exists x A(x)\\)}\n            \\end{prooftree}\\]\n          If \\(t_1 \\approx t_2\\), then \\(A(t_1)\\) implies \\(A(t_2)\\) (where not all occurrences of \\(t_1\\) need be replaced):\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash A(t)\\)} \\AXC{\\(t_1 \\approx t_2\\)}\n              \\LeftLabel{\\(\\approx\\) elimination} \\RightLabel{ \\(({\\approx}{-})\\)} \\BIC{\\(\\Sigma \\vdash A(t_2)\\)}\n            \\end{prooftree}\\]\n          Equivalence is reflexive:\n          \\[\\begin{prooftree}\n            \\AXC{}\n            \\LeftLabel{\\(\\approx\\) introduction} \\RightLabel{ \\(({\\approx}{+})\\)} \\UIC{\\(\\varnothing \\vdash u \\approx u\\)}\n          \\end{prooftree}\\]\n        "
+            "Conversely, proving that something holds for some \\(u\\) that has no assumptions imposed upon it proves that it holds for all \\(x\\):"
+          ),
+          equation(
+            "\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash A(u)\\)} \\AXC{\\(u\\) not occurring in \\(\\Sigma\\)}\n              \\LeftLabel{\\(\\forall\\) introduction} \\RightLabel{ \\(({\\forall}{+})\\)} \\BIC{\\(\\Sigma \\vdash \\forall x A(x)\\)}\n            \\end{prooftree}\\]\n          "
+          ),
+          text(
+            "When \\(u\\) is completely arbitrary, then assuming \\(A(u)\\) is the same as assuming that \\(A(x)\\) holds for some \\(x\\):"
+          ),
+          equation(
+            "\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\cup \\qty{A(u)} \\vdash B\\)} \\AXC{\\(u\\) not occurring in \\(\\Sigma\\) or \\(B\\)}\n              \\LeftLabel{\\(\\exists\\) elimination} \\RightLabel{ \\(({\\exists}{-}\\))} \\BIC{\\(\\Sigma \\cup \\qty{\\exists x A(x)} \\vdash B\\)}\n            \\end{prooftree}\\]\n          "
+          ),
+          text("Proving that a statement holds for any \\(t\\) proves"),
+          i2("a fortiori "),
+          text("that it holds for some \\(x\\):"),
+          equation(
+            "\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash A(t)\\)}\n              \\LeftLabel{\\(\\exists\\) introduction} \\RightLabel{ \\(({\\exists}{+})\\)} \\UIC{\\(\\Sigma \\vdash \\exists x A(x)\\)}\n            \\end{prooftree}\\]\n          "
+          ),
+          text(
+            "If \\(t_1 \\approx t_2\\), then \\(A(t_1)\\) implies \\(A(t_2)\\) (where not all occurrences of \\(t_1\\) need be replaced):"
+          ),
+          equation(
+            "\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\vdash A(t)\\)} \\AXC{\\(t_1 \\approx t_2\\)}\n              \\LeftLabel{\\(\\approx\\) elimination} \\RightLabel{ \\(({\\approx}{-})\\)} \\BIC{\\(\\Sigma \\vdash A(t_2)\\)}\n            \\end{prooftree}\\]\n          "
+          ),
+          text("Equivalence is reflexive:"),
+          equation(
+            "\n            \\[\\begin{prooftree}\n              \\AXC{}\n              \\LeftLabel{\\(\\approx\\) introduction} \\RightLabel{ \\(({\\approx}{+})\\)} \\UIC{\\(\\varnothing \\vdash u \\approx u\\)}\n            \\end{prooftree}\\]\n          "
           )
         ])
       ),
@@ -3591,11 +3694,17 @@ function view5() {
         "Resolution"
       ),
       text(
-        ", but it is not immediately evident how they imply the individual semantics of each syntactical element, at least for the purposes of introducing formal deduction.) Now we can prove more statements:\n          \\[\\begin{alignat}{3}\n            && \\Sigma &= \\qty{\\forall x(A(x) \\smp C(x)), \\forall x(B(x) \\smp D(x))} \\\\\n            (1) &&\\qquad \\Sigma \\cup \\qty{A(t)} &\\vdash A(t) \\qquad&& (\\in) \\\\\n            (2) && &\\vdash \\forall x(A(x) \\smp C(x)) \\qquad&& (\\in) \\\\\n            (3) && &\\vdash A(t) \\smp C(t) \\qquad&& (2), ({\\forall}{-}) \\\\\n            (4) && &\\vdash C(t) \\qquad&& (1), (3), ({\\smp}{-}) \\\\\n            (5) && &\\vdash C(t) \\lor D(t) \\qquad&& (4), ({\\lor}{+}) \\\\\n            (6) && &\\vdash \\exists x(C(x) \\lor D(x)) \\quad&& (5), ({\\exists}{+}) \\\\\n            (7) &&\\qquad \\Sigma \\cup \\qty{B(t)} &\\vdash B(t) \\qquad&& (\\in) \\\\\n            (8) && &\\vdash \\forall x(B(x) \\smp D(x)) \\qquad&& (\\in) \\\\\n            (9) && &\\vdash A(t) \\smp D(t) \\qquad&& (8), ({\\forall}{-}) \\\\\n            (10) && &\\vdash C(t) \\qquad&& (7), (9), ({\\smp}{-}) \\\\\n            (11) && &\\vdash C(t) \\lor D(t) \\qquad&& (10), ({\\lor}{+}) \\\\\n            (12) && &\\vdash \\exists x(C(x) \\lor D(x)) \\quad&& (11), ({\\exists}{+}) \\\\\n            (13) &&\\qquad \\Sigma \\cup \\qty{A(t) \\lor B(t)} &\\vdash \\exists x(C(x) \\lor D(x)) \\qquad&& (6), (12), ({\\lor}{-}) \\\\\n            (14) &&\\qquad \\Sigma \\cup \\qty{\\exists x(A(x) \\lor B(x))} &\\vdash \\exists x(C(x) \\lor D(x)) \\quad&& (13), ({\\exists}-) \\\\\n            (15) &&\\qquad \\Sigma &\\vdash \\exists x(A(x) \\lor B(x)) \\smp \\exists x(C(x) \\lor D(x)) \\quad&& (14), ({\\smp}{+})\n          \\end{alignat}\\]\n        No way, adding more rules made the system more complicated \u222A\uFF65\u03C9\uFF65\u222A. In exchange, though, we gain the full expressive power of first-order logic! With this, set theory can be formally abstracted into the rest of mathematics.\n      "
+        ", but it is not immediately evident how they imply the individual semantics of each syntactical element, at least for the purposes of introducing formal deduction.) Now we can prove more statements:"
+      ),
+      equation(
+        "\n        \\[\\begin{alignat}{3}\n          && \\Sigma &= \\qty{\\forall x(A(x) \\smp C(x)), \\forall x(B(x) \\smp D(x))} \\\\\n          (1) &&\\qquad \\Sigma \\cup \\qty{A(t)} &\\vdash A(t) \\qquad&& (\\in) \\\\\n          (2) && &\\vdash \\forall x(A(x) \\smp C(x)) \\qquad&& (\\in) \\\\\n          (3) && &\\vdash A(t) \\smp C(t) \\qquad&& (2), ({\\forall}{-}) \\\\\n          (4) && &\\vdash C(t) \\qquad&& (1), (3), ({\\smp}{-}) \\\\\n          (5) && &\\vdash C(t) \\lor D(t) \\qquad&& (4), ({\\lor}{+}) \\\\\n          (6) && &\\vdash \\exists x(C(x) \\lor D(x)) \\quad&& (5), ({\\exists}{+}) \\\\\n          (7) &&\\qquad \\Sigma \\cup \\qty{B(t)} &\\vdash B(t) \\qquad&& (\\in) \\\\\n          (8) && &\\vdash \\forall x(B(x) \\smp D(x)) \\qquad&& (\\in) \\\\\n          (9) && &\\vdash A(t) \\smp D(t) \\qquad&& (8), ({\\forall}{-}) \\\\\n          (10) && &\\vdash C(t) \\qquad&& (7), (9), ({\\smp}{-}) \\\\\n          (11) && &\\vdash C(t) \\lor D(t) \\qquad&& (10), ({\\lor}{+}) \\\\\n          (12) && &\\vdash \\exists x(C(x) \\lor D(x)) \\quad&& (11), ({\\exists}{+}) \\\\\n          (13) &&\\qquad \\Sigma \\cup \\qty{A(t) \\lor B(t)} &\\vdash \\exists x(C(x) \\lor D(x)) \\qquad&& (6), (12), ({\\lor}{-}) \\\\\n          (14) &&\\qquad \\Sigma \\cup \\qty{\\exists x(A(x) \\lor B(x))} &\\vdash \\exists x(C(x) \\lor D(x)) \\quad&& (13), ({\\exists}-) \\\\\n          (15) &&\\qquad \\Sigma &\\vdash \\exists x(A(x) \\lor B(x)) \\smp \\exists x(C(x) \\lor D(x)) \\quad&& (14), ({\\smp}{+})\n        \\end{alignat}\\]\n      "
+      ),
+      text(
+        "No way, adding more rules made the system more complicated \u222A\uFF65\u03C9\uFF65\u222A. In exchange, though, we gain the full expressive power of first-order logic! With this, set theory can be formally abstracted into the rest of mathematics."
       ),
       hr2(),
       text(
-        "\n        In my eyes, much of the joy of mathematics comes from this underlying formal system that can generally be taken for granted. Abstracting so far above logic counterintuitively makes the immediate emergent properties extremely relevant, as they butterfly into more useful specific cases depending on the field of discourse and the degree of abstraction. Of course, my only exposure to logic is through computer science rather than philosophy or math, and model theory and category theory are a bit strange to be learning before even a formal treatment of abstract algebra, so I'll hold off a bit before expounding on this.\n      "
+        "In my eyes, much of the joy of mathematics comes from this underlying formal system that can generally be taken for granted. Abstracting so far above logic counterintuitively makes the immediate emergent properties extremely relevant, as they butterfly into more useful specific cases depending on the field of discourse and the degree of abstraction. Of course, my only exposure to logic is through computer science rather than philosophy or math, and model theory and category theory are a bit strange to be learning before even a formal treatment of abstract algebra, so I'll hold off a bit before expounding on this."
       ),
       br(toList([])),
       text(
@@ -3654,8 +3763,9 @@ function view5() {
         "https://en.wikipedia.org/wiki/Freshman's_dream",
         "freshman's dream"
       ),
-      text(
-        " is trivial, after all:\n          \\[\\begin{align*}\n            ([a]_2 +_2 [b]_2)^2 &= \\qty[(a + b)^2]_2 = \\qty[a^2 + 2ab + b^2]_2 \\\\\n              &= \\qty[a^2]_2 +_2 [2ab]_2 +_2 \\qty[b^2]_2 = \\qty[a]_2^2 +_2 \\qty[b]_2^2\n          \\end{align*}\\]\n      "
+      text(" is trivial, after all:"),
+      equation(
+        "\n        \\[\\begin{align*}\n          ([a]_2 +_2 [b]_2)^2 &= \\qty[(a + b)^2]_2 = \\qty[a^2 + 2ab + b^2]_2 \\\\\n            &= \\qty[a^2]_2 +_2 [2ab]_2 +_2 \\qty[b^2]_2 = \\qty[a]_2^2 +_2 \\qty[b]_2^2\n        \\end{align*}\\]\n      "
       ),
       text(
         "Pondering the nature of truth has gotten me nowhere quickly. I had a particularly bad period when I was about 10, realizing the tautology of reality and starting to distrust it as a result. After a bit, though, I realized how useless thinking about all of this is. Math is only interesting because we acknowledge assumptions and limitations explicitly. Reality is only interesting when you acknowledge the limitations of truth."
@@ -3834,15 +3944,25 @@ function view7() {
           ),
           i(toList([]), toList([text("itself ")])),
           text(
-            "a pair of a set and a relation, and a relation is also just a set of pairs. We just got past Russell's paradox, so we can't exactly afford any more self-reference. (I know this can be defined as a separate isomorphic entity; that's kind of the point of this, as you'll soon find out.) Tuples are instead recursively defined with nesting (in a manner resembling lists in the \\(\\lambda\\)-calculus):\n        \\[\\begin{align*}\n          (x, y, z) &\\treq \\bigl(x, (y, z)\\bigr) \\\\\n            &= \\qty{\\qty{x}, \\qty{x, (y, z)}} \\\\\n            &= \\qty{\\qty{x}, \\qty{x, \\qty{\\qty{y}, \\qty{y, z}}}}\n        \\end{align*}\\]\n      Okay, this isn't the prettiest thing in the world, but it certainly does work. It also implies that Cartesian exponentiation is right-associative, which is interesting. Speaking of which, Cartesian and set exponentiation differ. To see this, let us first review the set-theoretic notions of relations and functions."
+            "a pair of a set and a relation, and a relation is also just a set of pairs. We just got past Russell's paradox, so we can't exactly afford any more self-reference. (I know this can be defined as a separate isomorphic entity; that's kind of the point of this, as you'll soon find out.) Tuples are instead recursively defined with nesting (in a manner resembling lists in the \\(\\lambda\\)-calculus):"
+          ),
+          equation(
+            "\n          \\[\\begin{align*}\n            (x, y, z) &\\treq \\bigl(x, (y, z)\\bigr) \\\\\n              &= \\qty{\\qty{x}, \\qty{x, (y, z)}} \\\\\n              &= \\qty{\\qty{x}, \\qty{x, \\qty{\\qty{y}, \\qty{y, z}}}}\n          \\end{align*}\\]\n        "
+          ),
+          text(
+            "\n          Okay, this isn't the prettiest thing in the world, but it certainly does work. It also implies that Cartesian exponentiation is right-associative, which is interesting. Speaking of which, Cartesian and set exponentiation differ. To see this, let us first review the set-theoretic notions of relations and functions."
           ),
           br(
             toList([style(toList([["margin-bottom", "0.5em"]]))])
           ),
           text("A "),
           b(toList([]), toList([text("relation ")])),
+          text("with domain \\(X\\) and codomain \\(Y\\) is some"),
+          equation(
+            "\n          \\[R \\sube X \\times Y \\treq \\qty{(x, y) \\mid x \\in X, y \\in Y}\\]\n        "
+          ),
           text(
-            "with domain \\(X\\) and codomain \\(Y\\) is some\n            \\[R \\sube X \\times Y \\treq \\qty{(x, y) \\mid x \\in X, y \\in Y}\\]\n          \\(x \\in X\\) is related \\(y \\in Y\\) by \\(R\\) when \\((x, y) \\in R\\). A"
+            "\n          \\(x \\in X\\) is related \\(y \\in Y\\) by \\(R\\) when \\((x, y) \\in R\\). A,\n        "
           ),
           b(toList([]), toList([text(" function ")])),
           text(
@@ -3856,7 +3976,13 @@ function view7() {
           text("an element from a given index. The "),
           b(toList([]), toList([text("product ")])),
           text(
-            "over the collection is the set of all such choice functions. When each \\(X_y\\) is the same, this can be regarded as the \\(Y\\)-fold product of \\(X\\), or \\(X^Y\\). This is a simply collection of functions \\(f: Y \\to X\\) such that for each \\(y \\in Y\\), \\(f(y) \\in X\\), which happens to characterize all functions \\(f: Y \\to X\\). A crucial consideration to make is that natural numbers are themselves sets (as Von Neumann ordinals), defined recursively with \\(0 \\triangleq \\varnothing\\) and \\(n + 1 \\triangleq n \\cup \\qty{n}\\). In general, \\(n = \\qty{i}_{i = 0}^{n - 1}\\), so an element of \\(X^n\\) is a function that takes a natural number less than \\(n\\) and maps it to an element of \\(X\\). (This can be thought of as a 0-indexed list.) Expanding definitions, this yields\n            \\[X^2 = \\qty{f \\in \\mathcal{P}(2 \\times X) \\mid \\forall n \\in 2, \\exists! x \\in X, (n, x) \\in f}\\]\n          An element of \\(X^2\\) is a function \\(f: 2 \\to X\\) of the form \\(\\qty{(0, x_0), (1, x_1)}\\), which is decidedly not a pair \\((x_0, x_1)\\). This is analogous to a sequence, though. This should be clear from the definition alone, since \\(\\mathbb{N}\\) can be regarded as the limit of \\(n\\) as you keep adding 1, being the union of "
+            "over the collection is the set of all such choice functions. When each \\(X_y\\) is the same, this can be regarded as the \\(Y\\)-fold product of \\(X\\), or \\(X^Y\\). This is a simply collection of functions \\(f: Y \\to X\\) such that for each \\(y \\in Y\\), \\(f(y) \\in X\\), which happens to characterize all functions \\(f: Y \\to X\\). A crucial consideration to make is that natural numbers are themselves sets (as Von Neumann ordinals), defined recursively with \\(0 \\triangleq \\varnothing\\) and \\(n + 1 \\triangleq n \\cup \\qty{n}\\). In general, \\(n = \\qty{i}_{i = 0}^{n - 1}\\), so an element of \\(X^n\\) is a function that takes a natural number less than \\(n\\) and maps it to an element of \\(X\\). (This can be thought of as a 0-indexed list.) Expanding definitions, this yields"
+          ),
+          equation(
+            "\n          \\[X^2 = \\qty{f \\in \\mathcal{P}(2 \\times X) \\mid \\forall n \\in 2, \\exists! x \\in X, (n, x) \\in f}\\]\n        "
+          ),
+          text(
+            "\n          An element of \\(X^2\\) is a function \\(f: 2 \\to X\\) of the form \\(\\qty{(0, x_0), (1, x_1)}\\), which is decidedly not a pair \\((x_0, x_1)\\). This is analogous to a sequence, though. This should be clear from the definition alone, since \\(\\mathbb{N}\\) can be regarded as the limit of \\(n\\) as you keep adding 1, being the union of "
           ),
           i(toList([]), toList([text("all ")])),
           text(

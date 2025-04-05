@@ -7,6 +7,10 @@ pub fn br(size) {
   html.br([attribute.style([#("margin-bottom", size)])])
 }
 
+pub fn equation(text) {
+  html.div([attribute.class("equation")], [element.text(text)])
+}
+
 pub fn i(text) {
   html.i([], [element.text(text)])
 }
@@ -81,6 +85,11 @@ pub fn mathjax_wrapper(page) {
             font-feature-settings: 'liga' 1;
             -webkit-font-feature-settings: 'liga' 1;
             text-rendering: optimizeLegibility;
+        }
+        .equation {
+          width: 100%;
+          overflow-x: auto;
+          white-space:nowrap;
         }
       ",
       ),

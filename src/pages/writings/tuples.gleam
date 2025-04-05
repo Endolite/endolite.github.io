@@ -2,6 +2,8 @@ import lustre/attribute
 import lustre/element
 import lustre/element/html
 
+import styling
+
 pub fn meta(acc) {
   [
     #(
@@ -32,22 +34,28 @@ pub fn view() {
         ),
         html.i([], [element.text("itself ")]),
         element.text(
-          "a pair of a set and a relation, and a relation is also just a set of pairs. We just got past Russell's paradox, so we can't exactly afford any more self-reference. (I know this can be defined as a separate isomorphic entity; that's kind of the point of this, as you'll soon find out.) Tuples are instead recursively defined with nesting (in a manner resembling lists in the \\(\\lambda\\)-calculus):
-        \\[\\begin{align*}
-          (x, y, z) &\\treq \\bigl(x, (y, z)\\bigr) \\\\
-            &= \\qty{\\qty{x}, \\qty{x, (y, z)}} \\\\
-            &= \\qty{\\qty{x}, \\qty{x, \\qty{\\qty{y}, \\qty{y, z}}}}
-        \\end{align*}\\]
-      Okay, this isn't the prettiest thing in the world, but it certainly does work. It also implies that Cartesian exponentiation is right-associative, which is interesting. Speaking of which, Cartesian and set exponentiation differ. To see this, let us first review the set-theoretic notions of relations and functions.",
+          "a pair of a set and a relation, and a relation is also just a set of pairs. We just got past Russell's paradox, so we can't exactly afford any more self-reference. (I know this can be defined as a separate isomorphic entity; that's kind of the point of this, as you'll soon find out.) Tuples are instead recursively defined with nesting (in a manner resembling lists in the \\(\\lambda\\)-calculus):"
+        ),
+        styling.equation("
+          \\[\\begin{align*}
+            (x, y, z) &\\treq \\bigl(x, (y, z)\\bigr) \\\\
+              &= \\qty{\\qty{x}, \\qty{x, (y, z)}} \\\\
+              &= \\qty{\\qty{x}, \\qty{x, \\qty{\\qty{y}, \\qty{y, z}}}}
+          \\end{align*}\\]
+        "),
+        element.text("
+          Okay, this isn't the prettiest thing in the world, but it certainly does work. It also implies that Cartesian exponentiation is right-associative, which is interesting. Speaking of which, Cartesian and set exponentiation differ. To see this, let us first review the set-theoretic notions of relations and functions.",
         ),
         html.br([attribute.style([#("margin-bottom", "0.5em")])]),
         element.text("A "),
         html.b([], [element.text("relation ")]),
-        element.text(
-          "with domain \\(X\\) and codomain \\(Y\\) is some
-            \\[R \\sube X \\times Y \\treq \\qty{(x, y) \\mid x \\in X, y \\in Y}\\]
-          \\(x \\in X\\) is related \\(y \\in Y\\) by \\(R\\) when \\((x, y) \\in R\\). A",
-        ),
+        element.text("with domain \\(X\\) and codomain \\(Y\\) is some"),
+        styling.equation("
+          \\[R \\sube X \\times Y \\treq \\qty{(x, y) \\mid x \\in X, y \\in Y}\\]
+        "),
+        element.text("
+          \\(x \\in X\\) is related \\(y \\in Y\\) by \\(R\\) when \\((x, y) \\in R\\). A,
+        "),
         html.b([], [element.text(" function ")]),
         element.text(
           "is simply a relation such that each \\(x \\in X\\) is related to exactly one \\(y \\in Y\\) (passing the vertical-line test, so to speak). A
@@ -61,8 +69,12 @@ pub fn view() {
         element.text("an element from a given index. The "),
         html.b([], [element.text("product ")]),
         element.text(
-          "over the collection is the set of all such choice functions. When each \\(X_y\\) is the same, this can be regarded as the \\(Y\\)-fold product of \\(X\\), or \\(X^Y\\). This is a simply collection of functions \\(f: Y \\to X\\) such that for each \\(y \\in Y\\), \\(f(y) \\in X\\), which happens to characterize all functions \\(f: Y \\to X\\). A crucial consideration to make is that natural numbers are themselves sets (as Von Neumann ordinals), defined recursively with \\(0 \\triangleq \\varnothing\\) and \\(n + 1 \\triangleq n \\cup \\qty{n}\\). In general, \\(n = \\qty{i}_{i = 0}^{n - 1}\\), so an element of \\(X^n\\) is a function that takes a natural number less than \\(n\\) and maps it to an element of \\(X\\). (This can be thought of as a 0-indexed list.) Expanding definitions, this yields
-            \\[X^2 = \\qty{f \\in \\mathcal{P}(2 \\times X) \\mid \\forall n \\in 2, \\exists! x \\in X, (n, x) \\in f}\\]
+          "over the collection is the set of all such choice functions. When each \\(X_y\\) is the same, this can be regarded as the \\(Y\\)-fold product of \\(X\\), or \\(X^Y\\). This is a simply collection of functions \\(f: Y \\to X\\) such that for each \\(y \\in Y\\), \\(f(y) \\in X\\), which happens to characterize all functions \\(f: Y \\to X\\). A crucial consideration to make is that natural numbers are themselves sets (as Von Neumann ordinals), defined recursively with \\(0 \\triangleq \\varnothing\\) and \\(n + 1 \\triangleq n \\cup \\qty{n}\\). In general, \\(n = \\qty{i}_{i = 0}^{n - 1}\\), so an element of \\(X^n\\) is a function that takes a natural number less than \\(n\\) and maps it to an element of \\(X\\). (This can be thought of as a 0-indexed list.) Expanding definitions, this yields"
+        ),
+        styling.equation("
+          \\[X^2 = \\qty{f \\in \\mathcal{P}(2 \\times X) \\mid \\forall n \\in 2, \\exists! x \\in X, (n, x) \\in f}\\]
+        "),
+        element.text("
           An element of \\(X^2\\) is a function \\(f: 2 \\to X\\) of the form \\(\\qty{(0, x_0), (1, x_1)}\\), which is decidedly not a pair \\((x_0, x_1)\\). This is analogous to a sequence, though. This should be clear from the definition alone, since \\(\\mathbb{N}\\) can be regarded as the limit of \\(n\\) as you keep adding 1, being the union of ",
         ),
         html.i([], [element.text("all ")]),
