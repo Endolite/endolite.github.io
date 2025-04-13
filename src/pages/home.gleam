@@ -1,14 +1,18 @@
 import lustre/attribute
 import lustre/element
 import lustre/element/html
+import styling
 
 pub fn view() {
   html.p(
     [attribute.class("center"), attribute.style([#("margin-top", "20px")])],
     [
-      element.text(
-        "Hi, I'm an undergraduate UWaterloo BCS 27'. I made this website for no reason other than wanting to learn ",
+      element.text("Hi, I'm a BCS '27 at UWaterloo. I made, "),
+      styling.href_text(
+        "https://github.com/Endolite/endolite.github.io",
+        "this website",
       ),
+      element.text(" for no reason other than wanting to learn "),
       html.a(
         [attribute.href("https://gleam.run/"), attribute.class("clickable")],
         [element.text("Gleam")],

@@ -89,11 +89,15 @@ fn view() {
           ]),
         ],
       ),
-      element.text(
-        "The syntax of \\(\\L\\) is given as follows:",
+      element.text("The syntax of \\(\\L\\) is given in "),
+      styling.href_text(
+        "https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form",
+        "EBNF",
       ),
-      html.div([attribute.class("equation")], [element.text(
-        "\\[\\begin{align*}
+      element.text("  as follows:"),
+      html.div([attribute.class("equation")], [
+        element.text(
+          "\\[\\begin{align*}
           \\evit{BinCon} &::= {\\land} \\mid {\\lor} \\mid {\\smp} \\mid {\\sff} \\\\
           \\evit{FreeVar} &::= u \\mid v \\mid w \\mid u_1 \\mid \\cdots \\\\
           \\evit{BoundVar} &::= x \\mid y \\mid z \\mid x_1 \\mid \\cdots \\\\
@@ -101,13 +105,16 @@ fn view() {
           \\evit{Const} &::= a \\mid b \\mid c \\mid a_1 \\mid \\cdots \\\\
           \\evit{Rel} &::= F \\mid G \\mid H \\mid P \\mid F_1 \\mid \\cdots \\\\
           \\evit{Func} &::= f \\mid g \\mid h \\mid f_1 \\mid \\cdots \\\\
-          \\evit{Term} &::= \\evit{Const} \\mid \\evit{FreeVar} \\mid \\evit{Func}(\\evit{Term}\\ttt{+}) \\tag{Term} \\\\
-          \\evit{Atom} &::= \\evit{Rel}(\\evit{Term}) \\mid (\\evit{Term} \\approx \\evit{Term}) \\tag{Atom} \\\\
-          \\evit{Form} &::= \\evit{Atom} \\mid (\\lnot \\evit{Atom}) \\mid (\\evit{Atom} \\evit{BinCon} \\evit{Atom}) \\tag{Formula} \\\\
-            &\\qquad\\mid \\evit{Quant}\\evit{BoundVar}\\evit{Form}
-        \\end{align*}\\]"
-      )]
-      ),
+          \\evit{Term} &::= \\evit{Const} \\mid \\evit{FreeVar} \\tag{Term} \\\\
+            &\\qquad\\mid \\evit{Func}, \\t{‘‘(''}, [\\evit{Term}], \\qty{\\t{‘‘,''}, \\evit{Term}}, \\t{‘‘)''} \\\\
+          \\evit{Atom} &::= \\evit{Rel}, \\t{‘‘(''}, \\evit{Term}, \\t{‘‘)''} \\tag{Atom} \\\\
+            &\\qquad\\mid \\t{‘‘(''}, \\evit{Term}, \\t{‘‘\\(\\approx\\)''}, \\evit{Term}, \\t{‘‘)''} \\\\
+          \\evit{Form} &::= \\evit{Atom} \\mid \\t{‘‘(''}, \\t{‘‘\\(\\lnot\\)''},  \\evit{Atom}, \\t{‘‘)''} \\tag{Formula} \\\\
+            &\\qquad\\mid \\t{‘‘(''}, \\evit{Atom}, \\evit{BinCon}, \\evit{Atom}, \\t{‘‘)''} \\\\
+            &\\qquad\\mid \\evit{Quant}, \\evit{BoundVar}, \\evit{Form}
+        \\end{align*}\\]",
+        ),
+      ]),
       element.text(
         "This allows formulas to be made but does not give them any meaning, as no valuation has been defined. Even without evaluation, though, the validity of statements should be justifiable from rules of the system alone; \\(a \\sff a\\) should always evaluate to true, for example. With this as motivation, rules of formal deduction can be defined. To this end, let \\(\\Sigma\\) denote a set of formulas.",
       ),
@@ -122,86 +129,109 @@ fn view() {
         ],
         [
           element.text("A formula should trivially prove itself:"),
-          styling.equation("
+          styling.equation(
+            "
               \\[\\begin{prooftree}
                 \\AXC{}
                 \\LeftLabel{Reflexivity} \\RightLabel{ (Ref)} \\UIC{\\(A \\vdash A\\)}
               \\end{prooftree}\\]
-          "),
-          element.text(
-            "Adding premises to an argument should not affect its conclusion:"
+          ",
           ),
-          styling.equation("
+          element.text(
+            "Adding premises to an argument should not affect its conclusion:",
+          ),
+          styling.equation(
+            "
             \\[\\begin{prooftree}
                 \\AXC{\\(\\Sigma \\vdash A\\)}
                 \\LeftLabel{Addition of premises} \\RightLabel{ (+)} \\UIC{\\(\\Sigma \\cup \\Sigma' \\vdash A\\)}
             \\end{prooftree}\\]
-          "),
-          element.text(
-            "If a set of premises along with the negation of an additional formula \\(A\\) is able to prove another formula \\(B\\) along with its negation, then the premises are inconsistent with \\(\\lnot A\\), so the premises must prove \\(A\\):"
+          ",
           ),
-          styling.equation("
+          element.text(
+            "If a set of premises along with the negation of an additional formula \\(A\\) is able to prove another formula \\(B\\) along with its negation, then the premises are inconsistent with \\(\\lnot A\\), so the premises must prove \\(A\\):",
+          ),
+          styling.equation(
+            "
             \\[\\begin{prooftree}
               \\AXC{\\(\\Sigma \\cup \\qty{\\lnot A} \\vdash B\\)} \\AXC{\\(\\Sigma \\cup \\qty{\\lnot A} \\vdash \\lnot B\\)} \\
               \\LeftLabel{\\(\\lnot\\) elimination} \\RightLabel{ \\(({\\lnot}{-})\\)} \\BIC{\\(\\Sigma \\vdash A\\)}
             \\end{prooftree}\\]
-          "),
-          element.text(
-            "If a set of premises proves that \\(A\\) implies \\(B\\) as well as \\(A\\) itself, then it must also prove \\(B\\):"
+          ",
           ),
-          styling.equation("
+          element.text(
+            "If a set of premises proves that \\(A\\) implies \\(B\\) as well as \\(A\\) itself, then it must also prove \\(B\\):",
+          ),
+          styling.equation(
+            "
             \\[\\begin{prooftree}
               \\AXC{\\(\\Sigma \\vdash A \\smp B\\)} \\AXC{\\(\\Sigma \\vdash A\\)} \\\\
               \\LeftLabel{\\(\\smp\\) elimination} \\RightLabel{ \\(({\\smp}{-})\\)} \\BIC{\\(\\Sigma \\vdash B\\)}
             \\end{prooftree}\\]
-          "),
-          element.text(
-            "Similarly, if a set of premises proves a statement \\(B\\), then removing some element \\(A\\) from the premises should yield a new set proving that \\(A \\smp B\\):"
+          ",
           ),
-          styling.equation("
+          element.text(
+            "Similarly, if a set of premises proves a statement \\(B\\), then removing some element \\(A\\) from the premises should yield a new set proving that \\(A \\smp B\\):",
+          ),
+          styling.equation(
+            "
             \\[\\begin{prooftree}
               \\AXC{\\(\\Sigma \\cup \\qty{A} \\smp B\\)} \\\\
               \\LeftLabel{\\(\\smp\\) introduction} \\RightLabel{ \\(({\\smp}{+})\\)} \\UIC{\\(\\Sigma \\vdash A \\smp B\\)}
             \\end{prooftree}\\]
-          "),
-          element.text(
-            "Proving the validity of multiple statements should prove each individually:"
+          ",
           ),
-          styling.equation("
+          element.text(
+            "Proving the validity of multiple statements should prove each individually:",
+          ),
+          styling.equation(
+            "
           \\[\\begin{prooftree}
             \\AXC{\\(\\Sigma \\vdash A \\land B\\)} \\\\
             \\LeftLabel{\\(\\land\\) elimination} \\RightLabel{ \\(({\\land}{-})\\)} \\UIC{\\(\\Sigma \\vdash A \\qquad \\Sigma \\vdash B\\)}
           \\end{prooftree}\\]
-          "),
+          ",
+          ),
           element.text("The converse should also hold:"),
-          styling.equation("
+          styling.equation(
+            "
             \\[\\begin{prooftree}
               \\AXC{\\(\\Sigma \\vdash A\\)} \\AXC{\\(\\Sigma \\vdash B\\)} \\\\
               \\LeftLabel{\\(\\land\\) introduction} \\RightLabel{ \\(({\\land}{+})\\)} \\BIC{\\(\\Sigma \\vdash A \\land B\\)}
             \\end{prooftree}\\]
-          "),
-          element.text("
+          ",
+          ),
+          element.text(
+            "
             If adding either \\(A\\) or \\(B\\) as a premise suffices, then adding \\(A \\lor B\\) should as well:
-          "),
-          styling.equation("
+          ",
+          ),
+          styling.equation(
+            "
             \\[\\begin{prooftree}
               \\AXC{\\(\\Sigma \\cup \\qty{A} \\vdash C\\)} \\AXC{\\(\\Sigma \\cup \\qty{B} \\vdash C\\)} \\\\
               \\LeftLabel{\\(\\lor\\) elimination} \\RightLabel{ \\(({\\lor}{-})\\)} \\BIC{\\(\\Sigma \\cup \\qty{A \\lor B} \\vdash C\\)}
             \\end{prooftree}\\]
-          "),
-          element.text(
-            "Proving \\(A\\) should also prove \\(A \\lor B\\), and \\(\\lor\\) should be commutative:"
+          ",
           ),
-          styling.equation("
+          element.text(
+            "Proving \\(A\\) should also prove \\(A \\lor B\\), and \\(\\lor\\) should be commutative:",
+          ),
+          styling.equation(
+            "
             \\[\\begin{prooftree}
                 \\AXC{\\(\\Sigma \\vdash A\\)}
                 \\LeftLabel{\\(\\lor\\) introduction} \\RightLabel{ \\(({\\lor}{+})\\)} \\UIC{\\(\\Sigma \\vdash A \\lor B \\qquad \\Sigma \\vdash B \\lor B\\)}
             \\end{prooftree}\\]
-          "),
-          element.text("
+          ",
+          ),
+          element.text(
+            "
             A proof of \\(A \\sff B\\) should prove \\(A\\) if and only if it proves \\(B\\):
-          "),
-          styling.equation("
+          ",
+          ),
+          styling.equation(
+            "
             \\[
               \\begin{prooftree}
                 \\AXC{\\(\\Sigma \\vdash A \\sff B\\)} \\AXC{\\(\\Sigma \\vdash A\\)} \\
@@ -211,33 +241,40 @@ fn view() {
                 \\RightLabel{ \\(({\\sff}{-})\\)} \\BIC{\\(\\Sigma \\vdash A\\)}
               \\end{prooftree}
             \\]
-          "),
-          element.text("If adding \\(A\\) as a premise proves \\(B\\) and"),
+          ",
+          ),
+          element.text("If adding \\(A\\) as a premise proves \\(B\\) and "),
           styling.i("vice versa, "),
           element.text("the premises prove \\(A \\sff B\\):"),
-          styling.equation("
+          styling.equation(
+            "
             \\[\\begin{prooftree}
                 \\AXC{\\(\\Sigma \\cup \\qty{A} \\vdash B\\)} \\AXC{\\(\\Sigma \\cup \\qty{B} \\vdash A\\)}
                 \\LeftLabel{\\(\\sff\\) introduction} \\RightLabel{ \\(({\\sff}{+})\\)} \\BIC{\\(\\Sigma \\vdash A \\sff B\\)}
             \\end{prooftree}\\]
-          ")
+          ",
+          ),
         ],
       ),
       element.text(
-        "From these, new rules can be derived. For example, a set of premises should prove all of its elements:"
+        "From these, new rules can be derived. For example, a set of premises should prove all of its elements:",
       ),
-      styling.equation("
+      styling.equation(
+        "
         \\[\\begin{prooftree}
            \\AXC{\\(A \\in \\Sigma\\)} \\UIC{\\(\\Sigma \\cup \\qty{A} = \\Sigma\\)}
            \\AXC{(Ref)} \\UIC{\\(A \\vdash A\\)} \\AXC{(+)}
            \\BIC{\\(\\Sigma \\cup \\qty{A} \\vdash A\\)}
           \\LeftLabel{Membership rule } \\RightLabel{ \\((\\in)\\)} \\BIC{\\(\\Sigma \\vdash A\\)}
         \\end{prooftree}\\]
-      "),
-      element.text("
-        Proofs quickly grow tediously long, though; consider a proof that \\(\\qty{A \\sff B} \\vdash (A \\smp B) \\land (B \\smp A)\\):"
+      ",
       ),
-      styling.equation("
+      element.text(
+        "
+        Proofs quickly grow tediously long, though; consider a proof that \\(\\qty{A \\sff B} \\vdash (A \\smp B) \\land (B \\smp A)\\):",
+      ),
+      styling.equation(
+        "
         \\[\\begin{alignat}{3}
           (1) &&\\qquad \\qty{A \\sff B, A} &\\vdash A \\sff B \\qquad&& (\\in) \\\\
           (2) &&\\qquad &\\vdash A \\qquad&&(\\in) \\\\
@@ -249,8 +286,11 @@ fn view() {
           (8) &&\\qquad \\qty{A \\sff B} &\\vdash A \\smp B \\qquad&& (7), ({\\smp}{+}) \\\\
           (9) &&\\qquad \\qty{A \\sff B} &\\vdash (A \\smp B) \\land (B \\smp A) \\qquad&& (4), (8), ({\\land}{+})
         \\end{alignat}\\]
-      "),
-      element.text("The rules given thus far only suffice for propositional logic, so let's add a few more!"),
+      ",
+      ),
+      element.text(
+        "The rules given thus far only suffice for propositional logic, so let's add a few more!",
+      ),
       html.div(
         [
           attribute.class("border"),
@@ -265,55 +305,67 @@ fn view() {
             "Proving that something holds for all \\(x\\) proves that it holds for any arbitrary term \\(t\\) ",
           ),
           styling.i("a fortiori: "),
-          styling.equation("
+          styling.equation(
+            "
             \\[\\begin{prooftree}
               \\AXC{\\(\\Sigma \\vdash \\forall x A(x)\\)}
               \\LeftLabel{\\(\\forall\\) elimination} \\RightLabel{ \\(({\\forall}{-}\\))} \\UIC{\\(\\Sigma \\vdash A(t)\\)}
             \\end{prooftree}\\]
-          "),
-          element.text(
-            "Conversely, proving that something holds for some \\(u\\) that has no assumptions imposed upon it proves that it holds for all \\(x\\):"
+          ",
           ),
-          styling.equation("
+          element.text(
+            "Conversely, proving that something holds for some \\(u\\) that has no assumptions imposed upon it proves that it holds for all \\(x\\):",
+          ),
+          styling.equation(
+            "
             \\[\\begin{prooftree}
               \\AXC{\\(\\Sigma \\vdash A(u)\\)} \\AXC{\\(u\\) not occurring in \\(\\Sigma\\)}
               \\LeftLabel{\\(\\forall\\) introduction} \\RightLabel{ \\(({\\forall}{+})\\)} \\BIC{\\(\\Sigma \\vdash \\forall x A(x)\\)}
             \\end{prooftree}\\]
-          "),
-          element.text(
-            "When \\(u\\) is completely arbitrary, then assuming \\(A(u)\\) is the same as assuming that \\(A(x)\\) holds for some \\(x\\):"
+          ",
           ),
-          styling.equation("
+          element.text(
+            "When \\(u\\) is completely arbitrary, then assuming \\(A(u)\\) is the same as assuming that \\(A(x)\\) holds for some \\(x\\):",
+          ),
+          styling.equation(
+            "
             \\[\\begin{prooftree}
               \\AXC{\\(\\Sigma \\cup \\qty{A(u)} \\vdash B\\)} \\AXC{\\(u\\) not occurring in \\(\\Sigma\\) or \\(B\\)}
               \\LeftLabel{\\(\\exists\\) elimination} \\RightLabel{ \\(({\\exists}{-}\\))} \\BIC{\\(\\Sigma \\cup \\qty{\\exists x A(x)} \\vdash B\\)}
             \\end{prooftree}\\]
-          "),
+          ",
+          ),
           element.text("Proving that a statement holds for any \\(t\\) proves"),
           styling.i("a fortiori "),
           element.text("that it holds for some \\(x\\):"),
-          styling.equation("
+          styling.equation(
+            "
             \\[\\begin{prooftree}
               \\AXC{\\(\\Sigma \\vdash A(t)\\)}
               \\LeftLabel{\\(\\exists\\) introduction} \\RightLabel{ \\(({\\exists}{+})\\)} \\UIC{\\(\\Sigma \\vdash \\exists x A(x)\\)}
             \\end{prooftree}\\]
-          "),
-          element.text(
-            "If \\(t_1 \\approx t_2\\), then \\(A(t_1)\\) implies \\(A(t_2)\\) (where not all occurrences of \\(t_1\\) need be replaced):"
+          ",
           ),
-          styling.equation("
+          element.text(
+            "If \\(t_1 \\approx t_2\\), then \\(A(t_1)\\) implies \\(A(t_2)\\) (where not all occurrences of \\(t_1\\) need be replaced):",
+          ),
+          styling.equation(
+            "
             \\[\\begin{prooftree}
               \\AXC{\\(\\Sigma \\vdash A(t)\\)} \\AXC{\\(t_1 \\approx t_2\\)}
               \\LeftLabel{\\(\\approx\\) elimination} \\RightLabel{ \\(({\\approx}{-})\\)} \\BIC{\\(\\Sigma \\vdash A(t_2)\\)}
             \\end{prooftree}\\]
-          "),
+          ",
+          ),
           element.text("Equivalence is reflexive:"),
-          styling.equation("
+          styling.equation(
+            "
             \\[\\begin{prooftree}
               \\AXC{}
               \\LeftLabel{\\(\\approx\\) introduction} \\RightLabel{ \\(({\\approx}{+})\\)} \\UIC{\\(\\varnothing \\vdash u \\approx u\\)}
             \\end{prooftree}\\]
-          "),
+          ",
+          ),
         ],
       ),
       element.text(
@@ -324,9 +376,10 @@ fn view() {
         "Resolution",
       ),
       element.text(
-        ", but it is not immediately evident how they imply the individual semantics of each syntactical element, at least for the purposes of introducing formal deduction.) Now we can prove more statements:"
+        ", but it is not immediately evident how they imply the individual semantics of each syntactical element, at least for the purposes of introducing formal deduction.) Now we can prove more statements:",
       ),
-      styling.equation("
+      styling.equation(
+        "
         \\[\\begin{alignat}{3}
           && \\Sigma &= \\qty{\\forall x(A(x) \\smp C(x)), \\forall x(B(x) \\smp D(x))} \\\\
           (1) &&\\qquad \\Sigma \\cup \\qty{A(t)} &\\vdash A(t) \\qquad&& (\\in) \\\\
@@ -345,9 +398,10 @@ fn view() {
           (14) &&\\qquad \\Sigma \\cup \\qty{\\exists x(A(x) \\lor B(x))} &\\vdash \\exists x(C(x) \\lor D(x)) \\quad&& (13), ({\\exists}-) \\\\
           (15) &&\\qquad \\Sigma &\\vdash \\exists x(A(x) \\lor B(x)) \\smp \\exists x(C(x) \\lor D(x)) \\quad&& (14), ({\\smp}{+})
         \\end{alignat}\\]
-      "),
+      ",
+      ),
       element.text(
-        "No way, adding more rules made the system more complicated ∪･ω･∪. In exchange, though, we gain the full expressive power of first-order logic! With this, set theory can be formally abstracted into the rest of mathematics."
+        "No way, adding more rules made the system more complicated ∪･ω･∪. In exchange, though, we gain the full expressive power of first-order logic! With this, set theory can be formally abstracted into the rest of mathematics.",
       ),
       styling.hr(),
       element.text(
@@ -403,12 +457,14 @@ fn view() {
         "freshman's dream",
       ),
       element.text(" is trivial, after all:"),
-      styling.equation("
+      styling.equation(
+        "
         \\[\\begin{align*}
           ([a]_2 +_2 [b]_2)^2 &= \\qty[(a + b)^2]_2 = \\qty[a^2 + 2ab + b^2]_2 \\\\
             &= \\qty[a^2]_2 +_2 [2ab]_2 +_2 \\qty[b^2]_2 = \\qty[a]_2^2 +_2 \\qty[b]_2^2
         \\end{align*}\\]
-      "),
+      ",
+      ),
       element.text(
         "Pondering the nature of truth has gotten me nowhere quickly. I had a particularly bad period when I was about 10, realizing the tautology of reality and starting to distrust it as a result. After a bit, though, I realized how useless thinking about all of this is. Math is only interesting because we acknowledge assumptions and limitations explicitly. Reality is only interesting when you acknowledge the limitations of truth.",
       ),
@@ -418,7 +474,7 @@ fn view() {
       ),
       html.br([]),
       element.text(
-        "A social truth can come from consensus, but this consensus is an aggregate of subjectivities that is then aggregated and finally observed subjectively once more. Through so many filters, its value becomes more dubious. I believe it is ",
+        "A social truth can come from consensus, but this consensus is an aggregate of subjectivities that is itself aggregated and finally observed subjectively once more. Through so many filters, its value becomes more dubious. I believe it is ",
       ),
       styling.i("values "),
       element.text(
@@ -440,7 +496,7 @@ fn view() {
       element.text(" sociopolitical groups. (I wonder why…)"),
       html.br([]),
       element.text(
-        "Meta-studies are how consensus is formally assessed, but they are colloquially irrelevant. People are often very passionate yet hardly invested in issues close to their identity, lest they be challenged. So when a large group of people distrusts another group of people, it's not terribly difficult to play into that distrust to peddle snake oil. When truth is part of your identity, you eschew any hope of self-criticality, becoming a mere tool for someone else's prerogative. The scientific process of revision is what enables progress, not a dogmatic fixation on truth. ",
+        "Meta-studies are how consensus is formally assessed, but they are colloquially irrelevant. People are often very passionate yet hardly invested in issues close to their identity, lest they be challenged. Any investment that is there often takes the form of an echo chamber, made ever easier by algorithms designed to feed us what we want to hear (so long as it doesn't hurt business!). So when a large group of people distrusts another group of people, it's not terribly difficult to play into that distrust to peddle snake oil. When truth is part of your identity, you eschew any hope of self-criticism, becoming a mere tool for someone else's prerogative. The scientific process of revision is what enables progress, not a dogmatic fixation on truth. ",
       ),
     ],
   )

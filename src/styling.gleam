@@ -88,6 +88,7 @@ pub fn mathjax_wrapper(page) {
         }
         .equation {
           width: 100%;
+          max-width: 100%;
           overflow-x: auto;
           white-space:nowrap;
         }
@@ -376,7 +377,7 @@ pub fn mathjax_wrapper(page) {
             \\newcommand{\\bs}[1]{\\boldsymbol{#1}}
             \\renewcommand{\\cal}[1]{\\mathcal{#1}}
             \\newcommand{\\clabel}[2]{\\begin{array}{c} #1 \\ #2 \\end{array}}
-            \\newcommand{\\enquote}[1]{``#1''}
+            \\newcommand{\\enquote}[1]{‘‘#1''}
             \\newcommand{\\hsp}[1]{\\hspace{#1}}
             \\newcommand{\\mb}[1]{\\mathbin{#1}}
             \\renewcommand{\\not}{\\centernot}

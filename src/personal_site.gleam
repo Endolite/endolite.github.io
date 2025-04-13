@@ -10,6 +10,8 @@ import lustre/ui
 import lustre/ui/cluster
 import modem
 
+//import tardis
+
 import styling
 
 import pages/home
@@ -28,11 +30,13 @@ fn refresh() -> Nil
 fn retitle(_title: String) -> Nil
 
 pub fn main() {
-  let app =
-    lustre.application(init, update, fn(x) {
-      x |> view |> styling.mathjax_wrapper
-    })
-  let assert Ok(_) = lustre.start(app, "#app", Nil)
+  //let assert Ok(main) = tardis.single("main")
+  lustre.application(init, update, fn(x) {
+    x |> view |> styling.mathjax_wrapper
+  })
+  //|> tardis.wrap(with: main)
+  |> lustre.start("#app", Nil)
+  //|> tardis.activate(with: main)
 }
 
 // Model

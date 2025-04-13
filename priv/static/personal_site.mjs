@@ -2557,6 +2557,111 @@ function init2(handler) {
   );
 }
 
+// build/dev/javascript/personal_site/styling.mjs
+function br2(size) {
+  return br(toList([style(toList([["margin-bottom", size]]))]));
+}
+function equation(text3) {
+  return div(
+    toList([class$("equation")]),
+    toList([text(text3)])
+  );
+}
+function i2(text3) {
+  return i(toList([]), toList([text(text3)]));
+}
+function hoverable_text(el) {
+  return div(
+    toList([
+      class$(
+        "transition-colors duration-200 ease-in-out hover:text-purple-300"
+      )
+    ]),
+    toList([el])
+  );
+}
+function hr2() {
+  return hr(
+    toList([
+      style(
+        toList([["margin-top", "0.5em"], ["margin-bottom", "0.5em"]])
+      )
+    ])
+  );
+}
+function href_text(llink, ttext) {
+  return a(
+    toList([href(llink), class$("clickable")]),
+    toList([text(ttext)])
+  );
+}
+var styles = /* @__PURE__ */ toList([
+  ["font-family", "Computer Modern Serif !important"],
+  ["font-size", "13pt"],
+  ["color", "White"],
+  ["background-color", "#20201E"],
+  ["min-height", "100vh"],
+  ["height", "100%"],
+  ["margin", "0"]
+]);
+function mathjax_wrapper(page) {
+  return html(
+    toList([style(styles)]),
+    toList([
+      head(
+        toList([]),
+        toList([
+          script(
+            toList([
+              src(
+                "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+              ),
+              id("MathJax-script")
+            ]),
+            ""
+          ),
+          link(
+            toList([
+              rel("stylesheet"),
+              attribute("type", "text/css"),
+              href(
+                "https://cdn.jsdelivr.net/gh/bitmaks/cm-web-fonts@latest/fonts.css"
+              )
+            ])
+          ),
+          style2(
+            toList([]),
+            "\n        .clickable {\n          color: #d8b4fe;\n        }\n        .center {\n          margin: auto;\n          max-width: min(1000px, 90vw);\n        }\n        a:hover {\n          text-decoration: underline;\n        }\n        .element {\n            font-feature-settings: 'liga' 1;\n            -webkit-font-feature-settings: 'liga' 1;\n            text-rendering: optimizeLegibility;\n        }\n        .equation {\n          width: 100%;\n          max-width: 100%;\n          overflow-x: auto;\n          white-space:nowrap;\n        }\n      "
+          )
+        ])
+      ),
+      body(
+        toList([style(toList([["padding", "20px"]]))]),
+        toList([
+          box2(
+            toList([]),
+            toList([
+              div(
+                toList([
+                  style(
+                    toList([["max-height", "0"], ["color", "rgba(0, 0, 0, 0)"]])
+                  )
+                ]),
+                toList([
+                  text(
+                    "\\(\n          \\require{action}\n          \\require{boldsymbol}\n          \\require{bussproofs}\n          \\require{cases}\n          \\require{centernot}\n          \\require{mathtools}\n          \\require{mhchem}\n          \\require{physics}\n          \\require{upgreek}\n          \\require{verb}\n\n          % Categories\n            \\DeclareMathOperator{\\Aut}{Aut}\n            \\DeclareMathOperator{\\End}{End}\n            \\DeclareMathOperator{\\hom}{hom}\n            \\DeclareMathOperator{\\Iso}{Iso}\n            \\DeclareMathOperator{\\ob}{ob}\n            \\newcommand{\\op}[1]{#1^{\\text{op}}}\n            % Arrows\n              \\DeclareMathOperator{\\lff}{\\leftrightsquigarrow}\n              \\DeclareMathOperator{\\lrar}{\\leftrightarrow}\n              \\DeclareMathOperator{\\hra}{\\hookrightarrow}\n              \\DeclareMathOperator{\\impto}{\\dashrightarrow}\n              \\DeclareMathOperator{\\opto}{\\leftrightarrows}\n              \\DeclareMathOperator{\\parto}{\\rightrightarrows}\n              \\DeclareMathOperator{\\qlff}{\\quad\\lff\\quad}\n              \\DeclareMathOperator{\\qlto}{\\quad\\leadsto\\quad}\n              \\DeclareMathOperator{\\rat}{\\rightarrowtail}\n              \\DeclareMathOperator{\\rest}{{\\restriction}}\n              \\DeclareMathOperator{\\rsq}{\\rightsquigarrow}\n              \\DeclareMathOperator{\\thra}{\\twoheadrightarrow}\n              % Labelled arrows\n                \\newcommand{\\xto}[1]{\\xrightarrow{#1}}\n          % Combinatorics\n            \\DeclareMathOperator{\\cyc}{cyc}\n            \\DeclareMathOperator{\\Des}{Des}\n            \\DeclareMathOperator{\\des}{des}\n            \\newcommand{\\en}[2]{\\genfrac{\\langle}{\\rangle}{0pt}{}{#1}{#2}}\n            \\DeclareMathOperator{\\girth}{girth}\n            \\DeclareMathOperator{\\maj}{maj}\n            \\DeclareMathOperator{\\inv}{inv}\n            \\DeclareMathOperator{\\indeg}{indeg}\n            \\newcommand{\\multi}[2]{\\left(\\kern-.3em\\left(\\genfrac{}{}{0pt}{}{#1}{#2}\\right)\\kern-.3em\\right)}\n            \\newcommand{\\npr}[2]{#1^{\\qty\\(#2)}}\n            \\DeclareMathOperator{\\outdeg}{outdeg}\n            \\DeclareMathOperator{\\per}{per}\n            \\DeclareMathOperator{\\stimes}{\\mathbin{\\square}}\n          % CS\n            \\DeclareMathOperator{\\BV}{BV}\n            \\DeclareMathOperator{\\Da}{\\Downarrow}\n            \\DeclareMathOperator{\\depth}{depth}\n            \\newcommand{\\evit}[1]{\\ev{\\tit{#1}}}\n            \\newcommand{\\evt}[1]{\\ev{\\t{#1}}}\n            \\DeclareMathOperator{\\FV}{FV}\n            \\newcommand{\\hoare}[3]{\\qty(\\abs{#1})#2\\qty(\\abs{#3})}\n            \\newcommand{\\lop}[3]{(\\(#1\\) \\(#2\\) \\(#3\\))}\n            \\newcommand{\\lopt}[3]{\\text{(\\(\\#1\\) \\(#2\\) \\(#3\\))}}\n            \\DeclareMathOperator{\\rename}{rename}\n            \\newcommand{\\rep}[1]{\\texttt{\u27E6#1\u27E7}}\n            \\newcommand{\\repm}[1]{\u27E6#1\u27E7}\n            \\DeclareMathOperator{\\step}{step}\n          % Differentials\n            \\newcommand{\\vnabla}{\\vec{\\nabla}}\n          % Functions\n            \\DeclareMathOperator{\\cis}{cis}\n            \\newcommand{\\ceil}[1]{\\left\\lceil #1 \\right\\rceil}\n            \\DeclareMathOperator{\\erfc}{erfc}\n            \\newcommand{\\floor}[1]{\\left\\lfloor #1 \\right\\rfloor}\n            \\DeclareMathOperator{\\supp}{supp}\n            \\DeclareMathOperator{\\sgn}{sgn}\n            \\DeclareMathOperator{\\sinc}{sinc}\n            \\DeclareMathOperator{\\Uscr}{\\mathscr{U}}\n            % Transforms\n              \\DeclareMathOperator{\\Ell}{\\mathscr{L}}\n              \\DeclareMathOperator{\\id}{id}\n          % Geometry\n            \\DeclareMathOperator{\\vol}{vol}\n          % Groups\n            \\DeclareMathOperator{\\aut}{aut}\n            \\DeclareMathOperator{\\Hom}{Hom}\n            \\DeclareMathOperator{\\lcm}{lcm}\n            \\DeclareMathOperator{\\ord}{ord}\n            % Rings\n              \\DeclareMathOperator{\\char}{char}\n          % Integrals\n            \\newcommand{\\oiint}{{\\subset\\!\\supset} \\llap{\\iint}}\n            \\newcommand{\\oiiint}{{\\large{\\subset\\!\\supset}} \\llap{\\iiint}}\n            \\newcommand{\\Ft}{\\mathcal{F}}\n          % Lamina\n            \\newcommand{\\bbar}[1]{\\bar{\\bar{#1}}}\n          % Logic\n            \\DeclareMathOperator{\\Atom}{Atom}\n            \\DeclareMathOperator{\\CNF}{CNF}\n            \\DeclareMathOperator{\\DNF}{DNF}\n            \\DeclareMathOperator{\\Form}{Form}\n            \\DeclareMathOperator{\\Func}{Func}\n            \\newcommand{\\simp}{\\Longrightarrow}\n            \\newcommand{\\smp}{\\Rightarrow}\n            \\newcommand{\\siff}{\\Longleftrightarrow}\n            \\newcommand{\\sff}{\\Leftrightarrow}\n            \\newcommand{\\seq}{\\vdash\\!\\dashv}\n            \\DeclareMathOperator{\\Sent}{Sent}\n            \\DeclareMathOperator{\\Term}{Term}\n            \\DeclareMathOperator{\\Th}{Th}\n            \\newcommand{\\teq}{\\models\\!\\mid}\n          % Matrices\n            \\DeclareMathOperator{\\adj}{adj}\n            \\DeclareMathOperator{\\Col}{Col}\n            \\DeclareMathOperator{\\diag}{diag}\n            \\DeclareMathOperator{\\Null}{null}\n            \\DeclareMathOperator{\\nullity}{nullity}\n            \\DeclareMathOperator{\\REF}{REF}\n            \\newcommand{\\row}[1]{\\overrightarrow{\\mathrm{row}_{#1}}}\n            \\DeclareMathOperator{\\Row}{Row}\n            \\DeclareMathOperator{\\RREF}{RREF}\n          % Measure Theory\n            \\DeclareMathOperator{\\Bor}{Bor}\n            \\DeclareMathOperator{\\esssup}{ess\\sup}\n            \\DeclareMathOperator{\\Simp}{S{\\small IMP}}\n            \\DeclareMathOperator{\\Step}{S{\\small TEP}}\n            \\DeclareMathOperator{\\Trig}{Trig}\n          % Numbers\n            \\let\\Im\\relax\n            \\DeclareMathOperator{\\Im}{Im}\n            \\let\\Re\\relax\n            \\DeclareMathOperator{\\Re}{Re}\n          % Probability/Statistics\n            \\DeclareMathOperator{\\AUC}{AUC}\n            \\DeclareMathOperator{\\Bias}{Bias}\n            \\DeclareMathOperator{\\Cov}{Cov}\n            \\DeclareMathOperator{\\Exp}{\\mathbb{E}}\n            \\newcommand{\\IQR}{\\mathrm{IQR}}\n            \\DeclareMathOperator{\\loss}{loss}\n            \\DeclareMathOperator{\\median}{median}\n            \\DeclareMathOperator{\\MSE}{MSE}\n            \\DeclareMathOperator{\\SSE}{SSE}\n            \\DeclareMathOperator{\\sd}{sd}\n            \\DeclareMathOperator{\\Var}{Var}\n            % ISDs\n              \\DeclareMathOperator{\\BS}{BS}\n              \\DeclareMathOperator{\\IBS}{IBS}\n              \\DeclareMathOperator{\\KM}{KM}\n            % Distributions\n              \\DeclareMathOperator{\\1}{\\mathbb{1}}\n              \\DeclareMathOperator{\\Binomial}{Bin}\n              \\DeclareMathOperator{\\Bin}{Bin}\n              \\DeclareMathOperator{\\Exponential}{Exp}\n              \\DeclareMathOperator{\\Expo}{Exp}\n              \\DeclareMathOperator{\\Geometric}{Geom}\n              \\DeclareMathOperator{\\Geom}{Geom}\n              \\DeclareMathOperator{\\Hypergeometric}{Hyp}\n              \\DeclareMathOperator{\\Hyp}{Hyp}\n              \\DeclareMathOperator{\\Multinomial}{Mult}\n              \\DeclareMathOperator{\\Mult}{Mult}\n              \\DeclareMathOperator{\\NB}{NB}\n              \\DeclareMathOperator{\\Norm}{\\mathcal{N}}\n              \\DeclareMathOperator{\\Poisson}{Pois}\n              \\DeclareMathOperator{\\Pois}{Pois}\n              \\DeclareMathOperator{\\Uniform}{Uniform}\n            % Tests\n              \\newcommand{\\pval}{p\\text{-value}}\n          % Relations\n            \\DeclareMathOperator{\\codom}{codom}\n            \\DeclareMathOperator{\\dom}{dom}\n            \\DeclareMathOperator{\\field}{field}\n            \\DeclareMathOperator{\\graph}{graph}\n            \\DeclareMathOperator{\\ran}{ran}\n            \\newcommand{\\treq}{\\triangleq}\n            % Arrows\n              \\newcommand{\\lrarr}{\\leftrightarrow}\n              \\newcommand{\\Lrarr}{\\Leftrightarrow}\n          % Sets\n            \\newcommand{\\cmp}{\\mathsf{c}}\n            \\DeclareMathOperator{\\glb}{glb}\n            \\DeclareMathOperator{\\lub}{lub}\n            \\newcommand{\\Mid}{\\hspace{1.25mm}\\middle|\\hspace{1.25mm}}\n            \\renewcommand{\\P}{\\mathcal{P}}\n            \\DeclareMathOperator{\\Perm}{Perm}\n            \\DeclareMathOperator{\\sdf}{\\mathbin{\\triangle}}\n            \\newcommand{\\sub}{\\subset}\n            \\newcommand{\\sube}{\\subseteq}\n            \\newcommand{\\supe}{\\supseteq}\n          % Sequences\n            \\DeclareMathOperator{\\LIM}{LIM}\n            \\DeclareMathOperator*{\\liminf}{\\mathop{\\lim\\inf}}\n            \\DeclareMathOperator*{\\limsup}{\\lim\\sup}\n          % Topology\n            \\DeclareMathOperator{\\Cl}{Cl}\n            \\DeclareMathOperator*{\\boxtop}{\\square}\n            \\DeclareMathOperator{\\diam}{diam}\n            \\DeclareMathOperator{\\dist}{dist}\n            \\DeclareMathOperator{\\Ext}{Ext}\n            \\DeclareMathOperator{\\ext}{ext}\n            \\DeclareMathOperator{\\Int}{Int}\n          % Vectors\n            \\DeclareMathOperator{\\comp}{comp}\n            \\newcommand{\\coord}[3]{{}_{#1}\\qty[#2]_{#3}}\n            \\renewcommand{\\curl}{\\mathrm{curl}}\n            \\DeclareMathOperator{\\divg}{div}\n            \\newcommand{\\norms}[1]{\\left|\\!\\left|\\!\\left|#1\\right|\\!\\right|\\!\\right|}\n            \\newcommand{\\normt}[1]{\\Vert #1 \\Vert}\n            \\DeclareMathOperator{\\orth}{orth}\n            \\DeclareMathOperator{\\proj}{proj}\n            \\DeclareMathOperator{\\span}{span}\n            \\renewcommand{\\Vec}[1]{\\overrightarrow{#1}}\n\n          % Symbols\n            % Sets\n              \\newcommand{\\A}{\\mathcal{A}}\n              \\DeclareMathOperator{\\B}{\\mathcal{B}}\n              \\newcommand{\\BB}{\\mathcal{B}}\n              \\newcommand{\\C}{\\mathbb{C}}\n              \\newcommand{\\CC}{\\mathcal{C}}\n              \\newcommand{\\D}{\\mathcal{D}}\n              \\newcommand{\\F}{\\mathbb{F}}\n              \\newcommand{\\G}{\\mathcal{G}}\n              \\newcommand{\\H}{\\mathbb{H}}\n              \\newcommand{\\Hs}{\\mathcal{H}}\n              \\newcommand{\\I}{\\mathbb{I}}\n              \\newcommand{\\J}{\\mathcal{J}}\n              \\newcommand{\\K}{\\mathbb{K}}\n              \\newcommand{\\Kc}{\\mathcal{K}}\n              \\newcommand{\\L}{\\mathcal{L}}\n              \\newcommand{\\M}{\\mathcal{M}}\n              \\newcommand{\\N}{\\mathbb{N}}\n              \\DeclareMathOperator{\\O}{\\mathcal{O}}\n              \\newcommand{\\Q}{\\mathbb{Q}}\n              \\newcommand{\\Qc}{\\mathcal{Q}}\n              \\newcommand{\\R}{\\mathbb{R}}\n              \\newcommand{\\RR}{\\mathcal{R}}\n              \\renewcommand{\\S}{\\mathbb{S}}\n              \\newcommand{\\SS}{\\mathcal{S}}\n              \\newcommand{\\T}{\\mathbb{T}}\n              \\newcommand{\\U}{\\mathcal{U}}\n              \\newcommand{\\V}{\\mathbb{V}}\n              \\newcommand{\\W}{\\mathbb{W}}\n              \\newcommand{\\Ws}{\\mathcal{W}}\n              \\newcommand{\\X}{\\mathfrak{X}}\n              \\newcommand{\\Y}{\\mathfrak{Y}}\n              \\newcommand{\\Z}{\\mathbb{Z}}\n              % Cardinality\n                \\newcommand{\\cf}{\\mathfrak{c}}\n              % Topology\n                \\newcommand{\\Fm}{\\mathrm{F}}\n                \\newcommand{\\Gm}{\\mathrm{G}}\n            % Greek Letters\n              \\newcommand{\\Alpha}{\\mathrm{A}}\n              \\newcommand{\\emf}{\\mathcal{E}}\n              \\newcommand{\\Iota}{\\mathrm{I}}\n              \\newcommand{\\Mu}{\\mathrm{M}}\n              \\newcommand{\\Tau}{\\mathcal{T}}\n          % Vectors\n            \\newcommand{\\vps}{\\hspace{0.5mm}}\n            % Unit Vectors\n              \\newcommand{\\vi}{\\text{\\^i}}\n              \\newcommand{\\vj}{\\text{\\^j}}\n              \\newcommand{\\vk}{\\text{\\^k}}\n              \\newcommand{\\vr}{\\hat{r}}\n              \\newcommand{\\vphi}{\\hat{\\varphi}}\n\n          % Miscellaneous/Utilities\n            \\newcommand{\\and}{\\text{ and }}\n            \\newcommand{\\And}{\\qquad \\text{and} \\qquad}\n            \\newcommand{\\andown}[2]{\\underset{#2}{\\underbrace{#1}}}\n            \\newcommand{\\anup}[2]{\\overset{#2}{\\overbrace{#1}}}\n            \\newcommand{\\bb}[1]{\\mathbb{#1}}\n            \\newcommand{\\bf}[1]{\\textbf{#1}}\n            \\newcommand{\\bs}[1]{\\boldsymbol{#1}}\n            \\renewcommand{\\cal}[1]{\\mathcal{#1}}\n            \\newcommand{\\clabel}[2]{\\begin{array}{c} #1 \\ #2 \\end{array}}\n            \\newcommand{\\enquote}[1]{\u2018\u2018#1''}\n            \\newcommand{\\hsp}[1]{\\hspace{#1}}\n            \\newcommand{\\mb}[1]{\\mathbin{#1}}\n            \\renewcommand{\\not}{\\centernot}\n            \\newcommand{\\oline}[1]{\\overline{#1}}\n            \\renewcommand{\\rm}[1]{\\mathrm{#1}}\n            \\newcommand{\\sc}[1]{{\\small #1}}\n            \\renewcommand{\\sf}[1]{\\textsf{#1}}\n            \\newcommand{\\subt}[2]{#1_{\\text{#2}}}\n            \\newcommand{\\subttt}[2]{#1_{\\texttt{#2}}}\n            \\newcommand{\\supt}[2]{#1^{\\text{#2}}}\n            \\newcommand{\\system}[1]{\\left\\{\\begin{aligned}#1\\end{aligned}\\right.}\n            \\newcommand{\\t}[1]{\\text{#1}}\n            \\newcommand{\\tbf}[1]{\\textbf{#1}}\n            \\newcommand{\\tit}[1]{\\textit{#1}}\n            \\newcommand{\\ttt}[1]{\\texttt{#1}}\n            \\newcommand{\\uline}[1]{\\underline{#1}}\n          \\)"
+                  )
+                ])
+              ),
+              page
+            ])
+          )
+        ])
+      )
+    ])
+  );
+}
+
 // build/dev/javascript/personal_site/pages/home.mjs
 function view() {
   return p(
@@ -2565,9 +2670,12 @@ function view() {
       style(toList([["margin-top", "20px"]]))
     ]),
     toList([
-      text(
-        "Hi, I'm an undergraduate UWaterloo BCS 27'. I made this website for no reason other than wanting to learn "
+      text("Hi, I'm a BCS '27 at UWaterloo. I made, "),
+      href_text(
+        "https://github.com/Endolite/endolite.github.io",
+        "this website"
       ),
+      text(" for no reason other than wanting to learn "),
       a(
         toList([
           href("https://gleam.run/"),
@@ -2743,7 +2851,7 @@ function view2() {
       [
         "CS 246 \u2013 Object-Oriented Software Development",
         text(
-          "Didn't go to a single lecture but still somehow passed; C++ is certainly a language"
+          "Didn't go to a single lecture or learn much of anything but still somehow passed; C++ is certainly a language"
         )
       ]
     ]),
@@ -2767,9 +2875,27 @@ function view2() {
       ],
       [
         "JAPAN 201R \u2013 Second-Year Japanese 1",
-        "Decent writing practice, but I didn't learn anything since it just covered the first half of Genki \u2161; I definitely need more speaking practice"
+        "Decent handwriting practice, but I didn't learn anything since it just covered the first half of Genki \u2161; I sorely need more speaking practice"
       ],
       ["MUSIC 116/117 \u2013 Music Ensemble", "I love jazz -=iii=<()"]
+    ]),
+    (x) => {
+      {
+        let a2 = x[0];
+        let b2 = x[1];
+        return [text(a2), text(b2)];
+      }
+    }
+  );
+  let activities = map(
+    toList([
+      ["Jazz Ensemble", "Trumpet/flugel player in W24 and F24"],
+      [
+        "Concert Band Club",
+        "Trumpet player in F23, W24, and F24; quintet lead in F24"
+      ],
+      ["Warriors Band", "Trumpet player in F23, W24, and F24"],
+      ["Animusic", "Trumpet player in F23 and F24"]
     ]),
     (x) => {
       {
@@ -2787,7 +2913,7 @@ function view2() {
       ],
       [
         "MCS 2423 \u2013 Differential Equations",
-        "Thoroughly computationally rigorous introduction to differential equations; I gravely oversetimated the imporatnce of differential equations for my career"
+        "Thoroughly computationally rigorous introduction to differential equations; I gravely overestimated the relevance of differential equations for my career"
       ],
       [
         "MCS 2523 \u2013 Discrete Math",
@@ -2822,6 +2948,7 @@ function view2() {
       details2(text("Math"), "3em", descriptions(courses_math)),
       details2(text("CS"), "3em", descriptions(courses_cs)),
       details2(text("Electives"), "3em", descriptions(courses_other)),
+      details2(text("Activities"), "2em", descriptions(activities)),
       subheading(
         text(
           "Lawrence Technological University (Dual Enrollment 22\u201323)"
@@ -3249,111 +3376,6 @@ function meta(acc) {
   );
 }
 
-// build/dev/javascript/personal_site/styling.mjs
-function br2(size) {
-  return br(toList([style(toList([["margin-bottom", size]]))]));
-}
-function equation(text3) {
-  return div(
-    toList([class$("equation")]),
-    toList([text(text3)])
-  );
-}
-function i2(text3) {
-  return i(toList([]), toList([text(text3)]));
-}
-function hoverable_text(el) {
-  return div(
-    toList([
-      class$(
-        "transition-colors duration-200 ease-in-out hover:text-purple-300"
-      )
-    ]),
-    toList([el])
-  );
-}
-function hr2() {
-  return hr(
-    toList([
-      style(
-        toList([["margin-top", "0.5em"], ["margin-bottom", "0.5em"]])
-      )
-    ])
-  );
-}
-function href_text(llink, ttext) {
-  return a(
-    toList([href(llink), class$("clickable")]),
-    toList([text(ttext)])
-  );
-}
-var styles = /* @__PURE__ */ toList([
-  ["font-family", "Computer Modern Serif !important"],
-  ["font-size", "13pt"],
-  ["color", "White"],
-  ["background-color", "#20201E"],
-  ["min-height", "100vh"],
-  ["height", "100%"],
-  ["margin", "0"]
-]);
-function mathjax_wrapper(page) {
-  return html(
-    toList([style(styles)]),
-    toList([
-      head(
-        toList([]),
-        toList([
-          script(
-            toList([
-              src(
-                "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-              ),
-              id("MathJax-script")
-            ]),
-            ""
-          ),
-          link(
-            toList([
-              rel("stylesheet"),
-              attribute("type", "text/css"),
-              href(
-                "https://cdn.jsdelivr.net/gh/bitmaks/cm-web-fonts@latest/fonts.css"
-              )
-            ])
-          ),
-          style2(
-            toList([]),
-            "\n        .clickable {\n          color: #d8b4fe;\n        }\n        .center {\n          margin: auto;\n          max-width: min(1000px, 90vw);\n        }\n        a:hover {\n          text-decoration: underline;\n        }\n        .element {\n            font-feature-settings: 'liga' 1;\n            -webkit-font-feature-settings: 'liga' 1;\n            text-rendering: optimizeLegibility;\n        }\n        .equation {\n          width: 100%;\n          overflow-x: auto;\n          white-space:nowrap;\n        }\n      "
-          )
-        ])
-      ),
-      body(
-        toList([style(toList([["padding", "20px"]]))]),
-        toList([
-          box2(
-            toList([]),
-            toList([
-              div(
-                toList([
-                  style(
-                    toList([["max-height", "0"], ["color", "rgba(0, 0, 0, 0)"]])
-                  )
-                ]),
-                toList([
-                  text(
-                    "\\(\n          \\require{action}\n          \\require{boldsymbol}\n          \\require{bussproofs}\n          \\require{cases}\n          \\require{centernot}\n          \\require{mathtools}\n          \\require{mhchem}\n          \\require{physics}\n          \\require{upgreek}\n          \\require{verb}\n\n          % Categories\n            \\DeclareMathOperator{\\Aut}{Aut}\n            \\DeclareMathOperator{\\End}{End}\n            \\DeclareMathOperator{\\hom}{hom}\n            \\DeclareMathOperator{\\Iso}{Iso}\n            \\DeclareMathOperator{\\ob}{ob}\n            \\newcommand{\\op}[1]{#1^{\\text{op}}}\n            % Arrows\n              \\DeclareMathOperator{\\lff}{\\leftrightsquigarrow}\n              \\DeclareMathOperator{\\lrar}{\\leftrightarrow}\n              \\DeclareMathOperator{\\hra}{\\hookrightarrow}\n              \\DeclareMathOperator{\\impto}{\\dashrightarrow}\n              \\DeclareMathOperator{\\opto}{\\leftrightarrows}\n              \\DeclareMathOperator{\\parto}{\\rightrightarrows}\n              \\DeclareMathOperator{\\qlff}{\\quad\\lff\\quad}\n              \\DeclareMathOperator{\\qlto}{\\quad\\leadsto\\quad}\n              \\DeclareMathOperator{\\rat}{\\rightarrowtail}\n              \\DeclareMathOperator{\\rest}{{\\restriction}}\n              \\DeclareMathOperator{\\rsq}{\\rightsquigarrow}\n              \\DeclareMathOperator{\\thra}{\\twoheadrightarrow}\n              % Labelled arrows\n                \\newcommand{\\xto}[1]{\\xrightarrow{#1}}\n          % Combinatorics\n            \\DeclareMathOperator{\\cyc}{cyc}\n            \\DeclareMathOperator{\\Des}{Des}\n            \\DeclareMathOperator{\\des}{des}\n            \\newcommand{\\en}[2]{\\genfrac{\\langle}{\\rangle}{0pt}{}{#1}{#2}}\n            \\DeclareMathOperator{\\girth}{girth}\n            \\DeclareMathOperator{\\maj}{maj}\n            \\DeclareMathOperator{\\inv}{inv}\n            \\DeclareMathOperator{\\indeg}{indeg}\n            \\newcommand{\\multi}[2]{\\left(\\kern-.3em\\left(\\genfrac{}{}{0pt}{}{#1}{#2}\\right)\\kern-.3em\\right)}\n            \\newcommand{\\npr}[2]{#1^{\\qty\\(#2)}}\n            \\DeclareMathOperator{\\outdeg}{outdeg}\n            \\DeclareMathOperator{\\per}{per}\n            \\DeclareMathOperator{\\stimes}{\\mathbin{\\square}}\n          % CS\n            \\DeclareMathOperator{\\BV}{BV}\n            \\DeclareMathOperator{\\Da}{\\Downarrow}\n            \\DeclareMathOperator{\\depth}{depth}\n            \\newcommand{\\evit}[1]{\\ev{\\tit{#1}}}\n            \\newcommand{\\evt}[1]{\\ev{\\t{#1}}}\n            \\DeclareMathOperator{\\FV}{FV}\n            \\newcommand{\\hoare}[3]{\\qty(\\abs{#1})#2\\qty(\\abs{#3})}\n            \\newcommand{\\lop}[3]{(\\(#1\\) \\(#2\\) \\(#3\\))}\n            \\newcommand{\\lopt}[3]{\\text{(\\(\\#1\\) \\(#2\\) \\(#3\\))}}\n            \\DeclareMathOperator{\\rename}{rename}\n            \\newcommand{\\rep}[1]{\\texttt{\u27E6#1\u27E7}}\n            \\newcommand{\\repm}[1]{\u27E6#1\u27E7}\n            \\DeclareMathOperator{\\step}{step}\n          % Differentials\n            \\newcommand{\\vnabla}{\\vec{\\nabla}}\n          % Functions\n            \\DeclareMathOperator{\\cis}{cis}\n            \\newcommand{\\ceil}[1]{\\left\\lceil #1 \\right\\rceil}\n            \\DeclareMathOperator{\\erfc}{erfc}\n            \\newcommand{\\floor}[1]{\\left\\lfloor #1 \\right\\rfloor}\n            \\DeclareMathOperator{\\supp}{supp}\n            \\DeclareMathOperator{\\sgn}{sgn}\n            \\DeclareMathOperator{\\sinc}{sinc}\n            \\DeclareMathOperator{\\Uscr}{\\mathscr{U}}\n            % Transforms\n              \\DeclareMathOperator{\\Ell}{\\mathscr{L}}\n              \\DeclareMathOperator{\\id}{id}\n          % Geometry\n            \\DeclareMathOperator{\\vol}{vol}\n          % Groups\n            \\DeclareMathOperator{\\aut}{aut}\n            \\DeclareMathOperator{\\Hom}{Hom}\n            \\DeclareMathOperator{\\lcm}{lcm}\n            \\DeclareMathOperator{\\ord}{ord}\n            % Rings\n              \\DeclareMathOperator{\\char}{char}\n          % Integrals\n            \\newcommand{\\oiint}{{\\subset\\!\\supset} \\llap{\\iint}}\n            \\newcommand{\\oiiint}{{\\large{\\subset\\!\\supset}} \\llap{\\iiint}}\n            \\newcommand{\\Ft}{\\mathcal{F}}\n          % Lamina\n            \\newcommand{\\bbar}[1]{\\bar{\\bar{#1}}}\n          % Logic\n            \\DeclareMathOperator{\\Atom}{Atom}\n            \\DeclareMathOperator{\\CNF}{CNF}\n            \\DeclareMathOperator{\\DNF}{DNF}\n            \\DeclareMathOperator{\\Form}{Form}\n            \\DeclareMathOperator{\\Func}{Func}\n            \\newcommand{\\simp}{\\Longrightarrow}\n            \\newcommand{\\smp}{\\Rightarrow}\n            \\newcommand{\\siff}{\\Longleftrightarrow}\n            \\newcommand{\\sff}{\\Leftrightarrow}\n            \\newcommand{\\seq}{\\vdash\\!\\dashv}\n            \\DeclareMathOperator{\\Sent}{Sent}\n            \\DeclareMathOperator{\\Term}{Term}\n            \\DeclareMathOperator{\\Th}{Th}\n            \\newcommand{\\teq}{\\models\\!\\mid}\n          % Matrices\n            \\DeclareMathOperator{\\adj}{adj}\n            \\DeclareMathOperator{\\Col}{Col}\n            \\DeclareMathOperator{\\diag}{diag}\n            \\DeclareMathOperator{\\Null}{null}\n            \\DeclareMathOperator{\\nullity}{nullity}\n            \\DeclareMathOperator{\\REF}{REF}\n            \\newcommand{\\row}[1]{\\overrightarrow{\\mathrm{row}_{#1}}}\n            \\DeclareMathOperator{\\Row}{Row}\n            \\DeclareMathOperator{\\RREF}{RREF}\n          % Measure Theory\n            \\DeclareMathOperator{\\Bor}{Bor}\n            \\DeclareMathOperator{\\esssup}{ess\\sup}\n            \\DeclareMathOperator{\\Simp}{S{\\small IMP}}\n            \\DeclareMathOperator{\\Step}{S{\\small TEP}}\n            \\DeclareMathOperator{\\Trig}{Trig}\n          % Numbers\n            \\let\\Im\\relax\n            \\DeclareMathOperator{\\Im}{Im}\n            \\let\\Re\\relax\n            \\DeclareMathOperator{\\Re}{Re}\n          % Probability/Statistics\n            \\DeclareMathOperator{\\AUC}{AUC}\n            \\DeclareMathOperator{\\Bias}{Bias}\n            \\DeclareMathOperator{\\Cov}{Cov}\n            \\DeclareMathOperator{\\Exp}{\\mathbb{E}}\n            \\newcommand{\\IQR}{\\mathrm{IQR}}\n            \\DeclareMathOperator{\\loss}{loss}\n            \\DeclareMathOperator{\\median}{median}\n            \\DeclareMathOperator{\\MSE}{MSE}\n            \\DeclareMathOperator{\\SSE}{SSE}\n            \\DeclareMathOperator{\\sd}{sd}\n            \\DeclareMathOperator{\\Var}{Var}\n            % ISDs\n              \\DeclareMathOperator{\\BS}{BS}\n              \\DeclareMathOperator{\\IBS}{IBS}\n              \\DeclareMathOperator{\\KM}{KM}\n            % Distributions\n              \\DeclareMathOperator{\\1}{\\mathbb{1}}\n              \\DeclareMathOperator{\\Binomial}{Bin}\n              \\DeclareMathOperator{\\Bin}{Bin}\n              \\DeclareMathOperator{\\Exponential}{Exp}\n              \\DeclareMathOperator{\\Expo}{Exp}\n              \\DeclareMathOperator{\\Geometric}{Geom}\n              \\DeclareMathOperator{\\Geom}{Geom}\n              \\DeclareMathOperator{\\Hypergeometric}{Hyp}\n              \\DeclareMathOperator{\\Hyp}{Hyp}\n              \\DeclareMathOperator{\\Multinomial}{Mult}\n              \\DeclareMathOperator{\\Mult}{Mult}\n              \\DeclareMathOperator{\\NB}{NB}\n              \\DeclareMathOperator{\\Norm}{\\mathcal{N}}\n              \\DeclareMathOperator{\\Poisson}{Pois}\n              \\DeclareMathOperator{\\Pois}{Pois}\n              \\DeclareMathOperator{\\Uniform}{Uniform}\n            % Tests\n              \\newcommand{\\pval}{p\\text{-value}}\n          % Relations\n            \\DeclareMathOperator{\\codom}{codom}\n            \\DeclareMathOperator{\\dom}{dom}\n            \\DeclareMathOperator{\\field}{field}\n            \\DeclareMathOperator{\\graph}{graph}\n            \\DeclareMathOperator{\\ran}{ran}\n            \\newcommand{\\treq}{\\triangleq}\n            % Arrows\n              \\newcommand{\\lrarr}{\\leftrightarrow}\n              \\newcommand{\\Lrarr}{\\Leftrightarrow}\n          % Sets\n            \\newcommand{\\cmp}{\\mathsf{c}}\n            \\DeclareMathOperator{\\glb}{glb}\n            \\DeclareMathOperator{\\lub}{lub}\n            \\newcommand{\\Mid}{\\hspace{1.25mm}\\middle|\\hspace{1.25mm}}\n            \\renewcommand{\\P}{\\mathcal{P}}\n            \\DeclareMathOperator{\\Perm}{Perm}\n            \\DeclareMathOperator{\\sdf}{\\mathbin{\\triangle}}\n            \\newcommand{\\sub}{\\subset}\n            \\newcommand{\\sube}{\\subseteq}\n            \\newcommand{\\supe}{\\supseteq}\n          % Sequences\n            \\DeclareMathOperator{\\LIM}{LIM}\n            \\DeclareMathOperator*{\\liminf}{\\mathop{\\lim\\inf}}\n            \\DeclareMathOperator*{\\limsup}{\\lim\\sup}\n          % Topology\n            \\DeclareMathOperator{\\Cl}{Cl}\n            \\DeclareMathOperator*{\\boxtop}{\\square}\n            \\DeclareMathOperator{\\diam}{diam}\n            \\DeclareMathOperator{\\dist}{dist}\n            \\DeclareMathOperator{\\Ext}{Ext}\n            \\DeclareMathOperator{\\ext}{ext}\n            \\DeclareMathOperator{\\Int}{Int}\n          % Vectors\n            \\DeclareMathOperator{\\comp}{comp}\n            \\newcommand{\\coord}[3]{{}_{#1}\\qty[#2]_{#3}}\n            \\renewcommand{\\curl}{\\mathrm{curl}}\n            \\DeclareMathOperator{\\divg}{div}\n            \\newcommand{\\norms}[1]{\\left|\\!\\left|\\!\\left|#1\\right|\\!\\right|\\!\\right|}\n            \\newcommand{\\normt}[1]{\\Vert #1 \\Vert}\n            \\DeclareMathOperator{\\orth}{orth}\n            \\DeclareMathOperator{\\proj}{proj}\n            \\DeclareMathOperator{\\span}{span}\n            \\renewcommand{\\Vec}[1]{\\overrightarrow{#1}}\n\n          % Symbols\n            % Sets\n              \\newcommand{\\A}{\\mathcal{A}}\n              \\DeclareMathOperator{\\B}{\\mathcal{B}}\n              \\newcommand{\\BB}{\\mathcal{B}}\n              \\newcommand{\\C}{\\mathbb{C}}\n              \\newcommand{\\CC}{\\mathcal{C}}\n              \\newcommand{\\D}{\\mathcal{D}}\n              \\newcommand{\\F}{\\mathbb{F}}\n              \\newcommand{\\G}{\\mathcal{G}}\n              \\newcommand{\\H}{\\mathbb{H}}\n              \\newcommand{\\Hs}{\\mathcal{H}}\n              \\newcommand{\\I}{\\mathbb{I}}\n              \\newcommand{\\J}{\\mathcal{J}}\n              \\newcommand{\\K}{\\mathbb{K}}\n              \\newcommand{\\Kc}{\\mathcal{K}}\n              \\newcommand{\\L}{\\mathcal{L}}\n              \\newcommand{\\M}{\\mathcal{M}}\n              \\newcommand{\\N}{\\mathbb{N}}\n              \\DeclareMathOperator{\\O}{\\mathcal{O}}\n              \\newcommand{\\Q}{\\mathbb{Q}}\n              \\newcommand{\\Qc}{\\mathcal{Q}}\n              \\newcommand{\\R}{\\mathbb{R}}\n              \\newcommand{\\RR}{\\mathcal{R}}\n              \\renewcommand{\\S}{\\mathbb{S}}\n              \\newcommand{\\SS}{\\mathcal{S}}\n              \\newcommand{\\T}{\\mathbb{T}}\n              \\newcommand{\\U}{\\mathcal{U}}\n              \\newcommand{\\V}{\\mathbb{V}}\n              \\newcommand{\\W}{\\mathbb{W}}\n              \\newcommand{\\Ws}{\\mathcal{W}}\n              \\newcommand{\\X}{\\mathfrak{X}}\n              \\newcommand{\\Y}{\\mathfrak{Y}}\n              \\newcommand{\\Z}{\\mathbb{Z}}\n              % Cardinality\n                \\newcommand{\\cf}{\\mathfrak{c}}\n              % Topology\n                \\newcommand{\\Fm}{\\mathrm{F}}\n                \\newcommand{\\Gm}{\\mathrm{G}}\n            % Greek Letters\n              \\newcommand{\\Alpha}{\\mathrm{A}}\n              \\newcommand{\\emf}{\\mathcal{E}}\n              \\newcommand{\\Iota}{\\mathrm{I}}\n              \\newcommand{\\Mu}{\\mathrm{M}}\n              \\newcommand{\\Tau}{\\mathcal{T}}\n          % Vectors\n            \\newcommand{\\vps}{\\hspace{0.5mm}}\n            % Unit Vectors\n              \\newcommand{\\vi}{\\text{\\^i}}\n              \\newcommand{\\vj}{\\text{\\^j}}\n              \\newcommand{\\vk}{\\text{\\^k}}\n              \\newcommand{\\vr}{\\hat{r}}\n              \\newcommand{\\vphi}{\\hat{\\varphi}}\n\n          % Miscellaneous/Utilities\n            \\newcommand{\\and}{\\text{ and }}\n            \\newcommand{\\And}{\\qquad \\text{and} \\qquad}\n            \\newcommand{\\andown}[2]{\\underset{#2}{\\underbrace{#1}}}\n            \\newcommand{\\anup}[2]{\\overset{#2}{\\overbrace{#1}}}\n            \\newcommand{\\bb}[1]{\\mathbb{#1}}\n            \\newcommand{\\bf}[1]{\\textbf{#1}}\n            \\newcommand{\\bs}[1]{\\boldsymbol{#1}}\n            \\renewcommand{\\cal}[1]{\\mathcal{#1}}\n            \\newcommand{\\clabel}[2]{\\begin{array}{c} #1 \\ #2 \\end{array}}\n            \\newcommand{\\enquote}[1]{``#1''}\n            \\newcommand{\\hsp}[1]{\\hspace{#1}}\n            \\newcommand{\\mb}[1]{\\mathbin{#1}}\n            \\renewcommand{\\not}{\\centernot}\n            \\newcommand{\\oline}[1]{\\overline{#1}}\n            \\renewcommand{\\rm}[1]{\\mathrm{#1}}\n            \\newcommand{\\sc}[1]{{\\small #1}}\n            \\renewcommand{\\sf}[1]{\\textsf{#1}}\n            \\newcommand{\\subt}[2]{#1_{\\text{#2}}}\n            \\newcommand{\\subttt}[2]{#1_{\\texttt{#2}}}\n            \\newcommand{\\supt}[2]{#1^{\\text{#2}}}\n            \\newcommand{\\system}[1]{\\left\\{\\begin{aligned}#1\\end{aligned}\\right.}\n            \\newcommand{\\t}[1]{\\text{#1}}\n            \\newcommand{\\tbf}[1]{\\textbf{#1}}\n            \\newcommand{\\tit}[1]{\\textit{#1}}\n            \\newcommand{\\ttt}[1]{\\texttt{#1}}\n            \\newcommand{\\uline}[1]{\\underline{#1}}\n          \\)"
-                  )
-                ])
-              ),
-              page
-            ])
-          )
-        ])
-      )
-    ])
-  );
-}
-
 // build/dev/javascript/personal_site/pages/writings/cognitive_empathy_ladder.mjs
 function view4() {
   return p(
@@ -3534,12 +3556,17 @@ function view5() {
           )
         ])
       ),
-      text("The syntax of \\(\\L\\) is given as follows:"),
+      text("The syntax of \\(\\L\\) is given in "),
+      href_text(
+        "https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form",
+        "EBNF"
+      ),
+      text("  as follows:"),
       div(
         toList([class$("equation")]),
         toList([
           text(
-            "\\[\\begin{align*}\n          \\evit{BinCon} &::= {\\land} \\mid {\\lor} \\mid {\\smp} \\mid {\\sff} \\\\\n          \\evit{FreeVar} &::= u \\mid v \\mid w \\mid u_1 \\mid \\cdots \\\\\n          \\evit{BoundVar} &::= x \\mid y \\mid z \\mid x_1 \\mid \\cdots \\\\\n          \\evit{Quant} &::= {\\forall} \\mid {\\exists} \\\\\n          \\evit{Const} &::= a \\mid b \\mid c \\mid a_1 \\mid \\cdots \\\\\n          \\evit{Rel} &::= F \\mid G \\mid H \\mid P \\mid F_1 \\mid \\cdots \\\\\n          \\evit{Func} &::= f \\mid g \\mid h \\mid f_1 \\mid \\cdots \\\\\n          \\evit{Term} &::= \\evit{Const} \\mid \\evit{FreeVar} \\mid \\evit{Func}(\\evit{Term}\\ttt{+}) \\tag{Term} \\\\\n          \\evit{Atom} &::= \\evit{Rel}(\\evit{Term}) \\mid (\\evit{Term} \\approx \\evit{Term}) \\tag{Atom} \\\\\n          \\evit{Form} &::= \\evit{Atom} \\mid (\\lnot \\evit{Atom}) \\mid (\\evit{Atom} \\evit{BinCon} \\evit{Atom}) \\tag{Formula} \\\\\n            &\\qquad\\mid \\evit{Quant}\\evit{BoundVar}\\evit{Form}\n        \\end{align*}\\]"
+            "\\[\\begin{align*}\n          \\evit{BinCon} &::= {\\land} \\mid {\\lor} \\mid {\\smp} \\mid {\\sff} \\\\\n          \\evit{FreeVar} &::= u \\mid v \\mid w \\mid u_1 \\mid \\cdots \\\\\n          \\evit{BoundVar} &::= x \\mid y \\mid z \\mid x_1 \\mid \\cdots \\\\\n          \\evit{Quant} &::= {\\forall} \\mid {\\exists} \\\\\n          \\evit{Const} &::= a \\mid b \\mid c \\mid a_1 \\mid \\cdots \\\\\n          \\evit{Rel} &::= F \\mid G \\mid H \\mid P \\mid F_1 \\mid \\cdots \\\\\n          \\evit{Func} &::= f \\mid g \\mid h \\mid f_1 \\mid \\cdots \\\\\n          \\evit{Term} &::= \\evit{Const} \\mid \\evit{FreeVar} \\tag{Term} \\\\\n            &\\qquad\\mid \\evit{Func}, \\t{\u2018\u2018(''}, [\\evit{Term}], \\qty{\\t{\u2018\u2018,''}, \\evit{Term}}, \\t{\u2018\u2018)''} \\\\\n          \\evit{Atom} &::= \\evit{Rel}, \\t{\u2018\u2018(''}, \\evit{Term}, \\t{\u2018\u2018)''} \\tag{Atom} \\\\\n            &\\qquad\\mid \\t{\u2018\u2018(''}, \\evit{Term}, \\t{\u2018\u2018\\(\\approx\\)''}, \\evit{Term}, \\t{\u2018\u2018)''} \\\\\n          \\evit{Form} &::= \\evit{Atom} \\mid \\t{\u2018\u2018(''}, \\t{\u2018\u2018\\(\\lnot\\)''},  \\evit{Atom}, \\t{\u2018\u2018)''} \\tag{Formula} \\\\\n            &\\qquad\\mid \\t{\u2018\u2018(''}, \\evit{Atom}, \\evit{BinCon}, \\evit{Atom}, \\t{\u2018\u2018)''} \\\\\n            &\\qquad\\mid \\evit{Quant}, \\evit{BoundVar}, \\evit{Form}\n        \\end{align*}\\]"
           )
         ])
       ),
@@ -3614,7 +3641,7 @@ function view5() {
           equation(
             "\n            \\[\n              \\begin{prooftree}\n                \\AXC{\\(\\Sigma \\vdash A \\sff B\\)} \\AXC{\\(\\Sigma \\vdash A\\)} \\\n                \\LeftLabel{\\(\\sff\\) elimination} \\BIC{\\(\\Sigma \\vdash B\\)}\n              \\end{prooftree} \\quad \\begin{prooftree}\n                \\AXC{\\(\\Sigma \\vdash A \\sff B\\)} \\AXC{\\(\\Sigma \\vdash B\\)} \\\n                \\RightLabel{ \\(({\\sff}{-})\\)} \\BIC{\\(\\Sigma \\vdash A\\)}\n              \\end{prooftree}\n            \\]\n          "
           ),
-          text("If adding \\(A\\) as a premise proves \\(B\\) and"),
+          text("If adding \\(A\\) as a premise proves \\(B\\) and "),
           i2("vice versa, "),
           text("the premises prove \\(A \\sff B\\):"),
           equation(
@@ -3776,7 +3803,7 @@ function view5() {
       ),
       br(toList([])),
       text(
-        "A social truth can come from consensus, but this consensus is an aggregate of subjectivities that is then aggregated and finally observed subjectively once more. Through so many filters, its value becomes more dubious. I believe it is "
+        "A social truth can come from consensus, but this consensus is an aggregate of subjectivities that is itself aggregated and finally observed subjectively once more. Through so many filters, its value becomes more dubious. I believe it is "
       ),
       i2("values "),
       text(
@@ -3798,7 +3825,7 @@ function view5() {
       text(" sociopolitical groups. (I wonder why\u2026)"),
       br(toList([])),
       text(
-        "Meta-studies are how consensus is formally assessed, but they are colloquially irrelevant. People are often very passionate yet hardly invested in issues close to their identity, lest they be challenged. So when a large group of people distrusts another group of people, it's not terribly difficult to play into that distrust to peddle snake oil. When truth is part of your identity, you eschew any hope of self-criticality, becoming a mere tool for someone else's prerogative. The scientific process of revision is what enables progress, not a dogmatic fixation on truth. "
+        "Meta-studies are how consensus is formally assessed, but they are colloquially irrelevant. People are often very passionate yet hardly invested in issues close to their identity, lest they be challenged. Any investment that is there often takes the form of an echo chamber, made ever easier by algorithms designed to feed us what we want to hear (so long as it doesn't hurt business!). So when a large group of people distrusts another group of people, it's not terribly difficult to play into that distrust to peddle snake oil. When truth is part of your identity, you eschew any hope of self-criticism, becoming a mere tool for someone else's prerogative. The scientific process of revision is what enables progress, not a dogmatic fixation on truth. "
       )
     ])
   );
@@ -4274,7 +4301,7 @@ function view_writing(title) {
           throw makeError(
             "panic",
             "personal_site",
-            187,
+            191,
             "view_writing",
             "`panic` expression evaluated.",
             {}
@@ -4307,27 +4334,16 @@ function view8(model) {
   );
 }
 function main() {
-  let app = application(
+  let _pipe = application(
     init3,
     update,
     (x) => {
-      let _pipe = x;
-      let _pipe$1 = view8(_pipe);
+      let _pipe2 = x;
+      let _pipe$1 = view8(_pipe2);
       return mathjax_wrapper(_pipe$1);
     }
   );
-  let $ = start2(app, "#app", void 0);
-  if (!$.isOk()) {
-    throw makeError(
-      "let_assert",
-      "personal_site",
-      35,
-      "main",
-      "Pattern match failed, no pattern matched the value.",
-      { value: $ }
-    );
-  }
-  return $;
+  return start2(_pipe, "#app", void 0);
 }
 
 // build/.lustre/entry.mjs

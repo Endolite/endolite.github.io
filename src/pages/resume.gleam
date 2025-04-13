@@ -138,7 +138,7 @@ pub fn view() {
         #(
           "CS 246 – Object-Oriented Software Development",
           element.text(
-            "Didn't go to a single lecture but still somehow passed; C++ is certainly a language",
+            "Didn't go to a single lecture or learn much of anything but still somehow passed; C++ is certainly a language",
           ),
         ),
       ],
@@ -162,9 +162,27 @@ pub fn view() {
         ),
         #(
           "JAPAN 201R – Second-Year Japanese 1",
-          "Decent writing practice, but I didn't learn anything since it just covered the first half of Genki Ⅱ; I definitely need more speaking practice",
+          "Decent handwriting practice, but I didn't learn anything since it just covered the first half of Genki Ⅱ; I sorely need more speaking practice",
         ),
         #("MUSIC 116/117 – Music Ensemble", "I love jazz -=iii=<()"),
+      ],
+      fn(x) {
+        case x {
+          #(a, b) -> #(element.text(a), element.text(b))
+        }
+      },
+    )
+
+  let activities =
+    list.map(
+      [
+        #("Jazz Ensemble", "Trumpet/flugel player in W24 and F24"),
+        #(
+          "Concert Band Club",
+          "Trumpet player in F23, W24, and F24; quintet lead in F24",
+        ),
+        #("Warriors Band", "Trumpet player in F23, W24, and F24"),
+        #("Animusic", "Trumpet player in F23 and F24"),
       ],
       fn(x) {
         case x {
@@ -182,7 +200,7 @@ pub fn view() {
         ),
         #(
           "MCS 2423 – Differential Equations",
-          "Thoroughly computationally rigorous introduction to differential equations; I gravely oversetimated the imporatnce of differential equations for my career",
+          "Thoroughly computationally rigorous introduction to differential equations; I gravely overestimated the relevance of differential equations for my career",
         ),
         #(
           "MCS 2523 – Discrete Math",
@@ -213,6 +231,7 @@ pub fn view() {
       details(element.text("Math"), "3em", descriptions(courses_math)),
       details(element.text("CS"), "3em", descriptions(courses_cs)),
       details(element.text("Electives"), "3em", descriptions(courses_other)),
+      details(element.text("Activities"), "2em", descriptions(activities)),
       subheading(element.text(
         "Lawrence Technological University (Dual Enrollment 22–23)",
       )),
