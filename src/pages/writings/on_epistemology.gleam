@@ -22,7 +22,7 @@ fn view() {
     [attribute.class("center"), attribute.style([#("text-align", "justify")])],
     [
       element.text(
-        "A statement within a given model can be evaluated as true, false, unprovable, undisprovable, or independent (e.g. the ",
+        "A statement within a given model can be evaluated as true, false, unprovable, undisprovable, or indeterminate (e.g. the ",
       ),
       styling.href_text(
         "https://plato.stanford.edu/entries/continuum-hypothesis/",
@@ -106,7 +106,7 @@ fn view() {
           \\evit{Rel} &::= F \\mid G \\mid H \\mid P \\mid F_1 \\mid \\cdots \\\\
           \\evit{Func} &::= f \\mid g \\mid h \\mid f_1 \\mid \\cdots \\\\
           \\evit{Term} &::= \\evit{Const} \\mid \\evit{FreeVar} \\tag{Term} \\\\
-            &\\qquad\\mid \\evit{Func}, \\t{‘‘(''}, [\\evit{Term}], \\qty{\\t{‘‘,''}, \\evit{Term}}, \\t{‘‘)''} \\\\
+            &\\qquad\\mid \\evit{Func}, \\t{‘‘(''}, [\\evit{Term}, \\qty{\\t{‘‘,''}, \\evit{Term}}], \\t{‘‘)''} \\\\
           \\evit{Atom} &::= \\evit{Rel}, \\t{‘‘(''}, \\evit{Term}, \\t{‘‘)''} \\tag{Atom} \\\\
             &\\qquad\\mid \\t{‘‘(''}, \\evit{Term}, \\t{‘‘\\(\\approx\\)''}, \\evit{Term}, \\t{‘‘)''} \\\\
           \\evit{Form} &::= \\evit{Atom} \\mid \\t{‘‘(''}, \\t{‘‘\\(\\lnot\\)''},  \\evit{Atom}, \\t{‘‘)''} \\tag{Formula} \\\\
@@ -116,7 +116,7 @@ fn view() {
         ),
       ]),
       element.text(
-        "This allows formulas to be made but does not give them any meaning, as no valuation has been defined. Even without evaluation, though, the validity of statements should be justifiable from rules of the system alone; \\(a \\sff a\\) should always evaluate to true, for example. With this as motivation, rules of formal deduction can be defined. To this end, let \\(\\Sigma\\) denote a set of formulas.",
+        "This allows formulas to be made but does not give them any meaning, as no valuation has been defined. Even without evaluation, though, the validity of statements should be justifiable from rules of the system alone; \\(a \\sff a\\) should always evaluate to true, for example. With this as motivation, rules of formal deduction can be defined. To this end, let \\(\\Sigma\\) denote a set of formulas and \\(A\\), \\(B\\), and \\(C\\) individual formulas, and let the meta-relation \\(\\vdash\\) be such that \\(\\Sigma \\vdash A\\) denotes that \\(A\\) is formally deducible from \\(\\Sigma\\).",
       ),
       html.div(
         [
@@ -133,7 +133,7 @@ fn view() {
             "
               \\[\\begin{prooftree}
                 \\AXC{}
-                \\LeftLabel{Reflexivity} \\RightLabel{ (Ref)} \\UIC{\\(A \\vdash A\\)}
+                \\LeftLabel{Reflexivity} \\RightLabel{ (Ref)} \\UIC{\\(\\qty{A} \\vdash A\\)}
               \\end{prooftree}\\]
           ",
           ),
@@ -263,7 +263,7 @@ fn view() {
         "
         \\[\\begin{prooftree}
            \\AXC{\\(A \\in \\Sigma\\)} \\UIC{\\(\\Sigma \\cup \\qty{A} = \\Sigma\\)}
-           \\AXC{(Ref)} \\UIC{\\(A \\vdash A\\)} \\AXC{(+)}
+           \\AXC{(Ref)} \\UIC{\\(\\qty{A} \\vdash A\\)} \\AXC{(+)}
            \\BIC{\\(\\Sigma \\cup \\qty{A} \\vdash A\\)}
           \\LeftLabel{Membership rule } \\RightLabel{ \\((\\in)\\)} \\BIC{\\(\\Sigma \\vdash A\\)}
         \\end{prooftree}\\]
@@ -271,7 +271,7 @@ fn view() {
       ),
       element.text(
         "
-        Proofs quickly grow tediously long, though; consider a proof that \\(\\qty{A \\sff B} \\vdash (A \\smp B) \\land (B \\smp A)\\):",
+        Proofs quickly grow tediously long, though; consider a proof that a biconditional proves the forward and reverse implications:",
       ),
       styling.equation(
         "
@@ -335,7 +335,7 @@ fn view() {
             \\end{prooftree}\\]
           ",
           ),
-          element.text("Proving that a statement holds for any \\(t\\) proves"),
+          element.text("Proving that a statement holds for any \\(t\\) proves "),
           styling.i("a fortiori "),
           element.text("that it holds for some \\(x\\):"),
           styling.equation(

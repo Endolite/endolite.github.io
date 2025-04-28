@@ -38,6 +38,10 @@ pub fn href_text(link llink, text ttext) {
   ])
 }
 
+pub fn q_text(text) {
+  html.q([], [element.text(text)])
+}
+
 const styles = [
   #("font-family", "Computer Modern Serif !important"),
   #("font-size", "13pt"),

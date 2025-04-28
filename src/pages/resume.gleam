@@ -3,6 +3,8 @@ import lustre/attribute
 import lustre/element
 import lustre/element/html
 
+import styling
+
 fn heading(elem) {
   html.h1([attribute.style([#("font-size", "16pt")])], [elem])
 }
@@ -40,6 +42,37 @@ fn descriptions(content) {
 }
 
 pub fn view() {
+  let projects = [
+    #(
+      styling.href_text(
+        "https://github.com/Endolite/tree-sitter-sil",
+        "SIL Tree-sitter",
+      ),
+      html.p([], [
+        element.text("A "),
+        styling.href_text(
+          "https://tree-sitter.github.io/tree-sitter/",
+          "Tree-sitter",
+        ),
+        element.text(
+          " grammar for SIL, the Simple Imperative Language used in UWaterloo's CS 442.",
+        ),
+      ]),
+    ),
+    #(
+      styling.href_text("https://github.com/Endolite/typst", "Typst"),
+      html.p([], [
+        element.text(
+          "I started getting tired of handwriting math problems that I wanted to work out, so I decided to start porting it over to ",
+        ),
+        styling.href_text("https://typst.app/", "Typst"),
+        element.text(
+          ", which I've been meaning to use more seriously for a while anyways. Easy live preview for multifile projects is so nice and the syntax is fine enough. It's really nice being able to more granularly and modularly configure document-wide settings, something I only really ever did the bare minimum of in \\(\\mathrm{\\LaTeX}\\). This isn't really a project as much as it is a dumping grounds for scratch work, but it's all I have to publicly show for all the time I've spent doing math ʕ •ᴥ• ʔ",
+        ),
+      ]),
+    ),
+  ]
+
   let courses_math =
     list.map(
       [
@@ -61,7 +94,7 @@ pub fn view() {
         ),
         #(
           "PMATH 333 – Introduction to Analysis",
-          "While this course made me realize that I like analysis more than algebra, it came at the cost really annoying proofs that were quite computational and required a lot of memorization",
+          "While this course made me realize that I like analysis more than algebra, it came at the cost of really annoying computational proofs that required a lot of memorization",
         ),
         #(
           "PMATH 351 – Real Analysis",
@@ -225,6 +258,8 @@ pub fn view() {
   html.div(
     [attribute.class("center"), attribute.style([#("margin-top", "20px")])],
     [
+      heading(element.text("Projects")),
+      descriptions(projects),
       heading(element.text("Education")),
       subheading(element.text("University of Waterloo (BCS 23–27)")),
       subsubheading(element.text("Courses")),

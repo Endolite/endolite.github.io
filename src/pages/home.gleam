@@ -20,7 +20,14 @@ pub fn view() {
       element.text(" (which was a great decision!)."),
       html.br([attribute.style([#("margin-bottom", "0.5em")])]),
       element.text(
-        "On my own time, I'm currently learning about formal language theory (CS 442), topology (Munkres ofc), and boolean algebras with application to analysis (Vladimirov).",
+        "On my own time, I'm currently learning about formal language theory (CS 442), topology (",
+      ),
+      styling.href_text(
+        "https://github.com/Endolite/typst/blob/master/Munkres/topology.pdf",
+        "Munkres ofc",
+      ),
+      element.text(
+        "), and boolean algebras with application to analysis (Vladimirov).",
       ),
       html.br([attribute.style([#("margin-bottom", "0.5em")])]),
       element.text("I'm "),

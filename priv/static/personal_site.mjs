@@ -1266,14 +1266,14 @@ function filter_loop(loop$list, loop$fun, loop$acc) {
     } else {
       let first$1 = list2.head;
       let rest$1 = list2.tail;
-      let new_acc = (() => {
-        let $ = fun(first$1);
-        if ($) {
-          return prepend(first$1, acc);
-        } else {
-          return acc;
-        }
-      })();
+      let _block;
+      let $ = fun(first$1);
+      if ($) {
+        _block = prepend(first$1, acc);
+      } else {
+        _block = acc;
+      }
+      let new_acc = _block;
       loop$list = rest$1;
       loop$fun = fun;
       loop$acc = new_acc;
@@ -1362,24 +1362,24 @@ function remove_dot_segments_loop(loop$input, loop$accumulator) {
     } else {
       let segment = input3.head;
       let rest = input3.tail;
-      let accumulator$1 = (() => {
-        if (segment === "") {
-          let accumulator$12 = accumulator;
-          return accumulator$12;
-        } else if (segment === ".") {
-          let accumulator$12 = accumulator;
-          return accumulator$12;
-        } else if (segment === ".." && accumulator.hasLength(0)) {
-          return toList([]);
-        } else if (segment === ".." && accumulator.atLeastLength(1)) {
-          let accumulator$12 = accumulator.tail;
-          return accumulator$12;
-        } else {
-          let segment$1 = segment;
-          let accumulator$12 = accumulator;
-          return prepend(segment$1, accumulator$12);
-        }
-      })();
+      let _block;
+      if (segment === "") {
+        let accumulator$12 = accumulator;
+        _block = accumulator$12;
+      } else if (segment === ".") {
+        let accumulator$12 = accumulator;
+        _block = accumulator$12;
+      } else if (segment === ".." && accumulator.hasLength(0)) {
+        _block = toList([]);
+      } else if (segment === ".." && accumulator.atLeastLength(1)) {
+        let accumulator$12 = accumulator.tail;
+        _block = accumulator$12;
+      } else {
+        let segment$1 = segment;
+        let accumulator$12 = accumulator;
+        _block = prepend(segment$1, accumulator$12);
+      }
+      let accumulator$1 = _block;
       loop$input = rest;
       loop$accumulator = accumulator$1;
     }
@@ -2686,7 +2686,14 @@ function view() {
       text(" (which was a great decision!)."),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text(
-        "On my own time, I'm currently learning about formal language theory (CS 442), topology (Munkres ofc), and boolean algebras with application to analysis (Vladimirov)."
+        "On my own time, I'm currently learning about formal language theory (CS 442), topology ("
+      ),
+      href_text(
+        "https://github.com/Endolite/typst/blob/master/Munkres/topology.pdf",
+        "Munkres ofc"
+      ),
+      text(
+        "), and boolean algebras with application to analysis (Vladimirov)."
       ),
       br(toList([style(toList([["margin-bottom", "0.5em"]]))])),
       text("I'm "),
@@ -2751,6 +2758,42 @@ function descriptions(content) {
   );
 }
 function view2() {
+  let projects = toList([
+    [
+      href_text(
+        "https://github.com/Endolite/tree-sitter-sil",
+        "SIL Tree-sitter"
+      ),
+      p(
+        toList([]),
+        toList([
+          text("A "),
+          href_text(
+            "https://tree-sitter.github.io/tree-sitter/",
+            "Tree-sitter"
+          ),
+          text(
+            " grammar for SIL, the Simple Imperative Language used in UWaterloo's CS 442."
+          )
+        ])
+      )
+    ],
+    [
+      href_text("https://github.com/Endolite/typst", "Typst"),
+      p(
+        toList([]),
+        toList([
+          text(
+            "I started getting tired of handwriting math problems that I wanted to work out, so I decided to start porting it over to "
+          ),
+          href_text("https://typst.app/", "Typst"),
+          text(
+            ", which I've been meaning to use more seriously for a while anyways. Easy live preview for multifile projects is so nice and the syntax is fine enough. It's really nice being able to more granularly and modularly configure document-wide settings, something I only really ever did the bare minimum of in \\(\\mathrm{\\LaTeX}\\). This isn't really a project as much as it is a dumping grounds for scratch work, but it's all I have to publicly show for all the time I've spent doing math \u0295 \u2022\u1D25\u2022 \u0294"
+          )
+        ])
+      )
+    ]
+  ]);
   let courses_math = map(
     toList([
       [
@@ -2771,7 +2814,7 @@ function view2() {
       ],
       [
         "PMATH 333 \u2013 Introduction to Analysis",
-        "While this course made me realize that I like analysis more than algebra, it came at the cost really annoying proofs that were quite computational and required a lot of memorization"
+        "While this course made me realize that I like analysis more than algebra, it came at the cost of really annoying computational proofs that required a lot of memorization"
       ],
       [
         "PMATH 351 \u2013 Real Analysis",
@@ -2942,6 +2985,8 @@ function view2() {
       style(toList([["margin-top", "20px"]]))
     ]),
     toList([
+      heading(text("Projects")),
+      descriptions(projects),
       heading(text("Education")),
       subheading(text("University of Waterloo (BCS 23\u201327)")),
       subsubheading(text("Courses")),
@@ -3460,7 +3505,7 @@ function view5() {
     ]),
     toList([
       text(
-        "A statement within a given model can be evaluated as true, false, unprovable, undisprovable, or independent (e.g. the "
+        "A statement within a given model can be evaluated as true, false, unprovable, undisprovable, or indeterminate (e.g. the "
       ),
       href_text(
         "https://plato.stanford.edu/entries/continuum-hypothesis/",
@@ -3566,12 +3611,12 @@ function view5() {
         toList([class$("equation")]),
         toList([
           text(
-            "\\[\\begin{align*}\n          \\evit{BinCon} &::= {\\land} \\mid {\\lor} \\mid {\\smp} \\mid {\\sff} \\\\\n          \\evit{FreeVar} &::= u \\mid v \\mid w \\mid u_1 \\mid \\cdots \\\\\n          \\evit{BoundVar} &::= x \\mid y \\mid z \\mid x_1 \\mid \\cdots \\\\\n          \\evit{Quant} &::= {\\forall} \\mid {\\exists} \\\\\n          \\evit{Const} &::= a \\mid b \\mid c \\mid a_1 \\mid \\cdots \\\\\n          \\evit{Rel} &::= F \\mid G \\mid H \\mid P \\mid F_1 \\mid \\cdots \\\\\n          \\evit{Func} &::= f \\mid g \\mid h \\mid f_1 \\mid \\cdots \\\\\n          \\evit{Term} &::= \\evit{Const} \\mid \\evit{FreeVar} \\tag{Term} \\\\\n            &\\qquad\\mid \\evit{Func}, \\t{\u2018\u2018(''}, [\\evit{Term}], \\qty{\\t{\u2018\u2018,''}, \\evit{Term}}, \\t{\u2018\u2018)''} \\\\\n          \\evit{Atom} &::= \\evit{Rel}, \\t{\u2018\u2018(''}, \\evit{Term}, \\t{\u2018\u2018)''} \\tag{Atom} \\\\\n            &\\qquad\\mid \\t{\u2018\u2018(''}, \\evit{Term}, \\t{\u2018\u2018\\(\\approx\\)''}, \\evit{Term}, \\t{\u2018\u2018)''} \\\\\n          \\evit{Form} &::= \\evit{Atom} \\mid \\t{\u2018\u2018(''}, \\t{\u2018\u2018\\(\\lnot\\)''},  \\evit{Atom}, \\t{\u2018\u2018)''} \\tag{Formula} \\\\\n            &\\qquad\\mid \\t{\u2018\u2018(''}, \\evit{Atom}, \\evit{BinCon}, \\evit{Atom}, \\t{\u2018\u2018)''} \\\\\n            &\\qquad\\mid \\evit{Quant}, \\evit{BoundVar}, \\evit{Form}\n        \\end{align*}\\]"
+            "\\[\\begin{align*}\n          \\evit{BinCon} &::= {\\land} \\mid {\\lor} \\mid {\\smp} \\mid {\\sff} \\\\\n          \\evit{FreeVar} &::= u \\mid v \\mid w \\mid u_1 \\mid \\cdots \\\\\n          \\evit{BoundVar} &::= x \\mid y \\mid z \\mid x_1 \\mid \\cdots \\\\\n          \\evit{Quant} &::= {\\forall} \\mid {\\exists} \\\\\n          \\evit{Const} &::= a \\mid b \\mid c \\mid a_1 \\mid \\cdots \\\\\n          \\evit{Rel} &::= F \\mid G \\mid H \\mid P \\mid F_1 \\mid \\cdots \\\\\n          \\evit{Func} &::= f \\mid g \\mid h \\mid f_1 \\mid \\cdots \\\\\n          \\evit{Term} &::= \\evit{Const} \\mid \\evit{FreeVar} \\tag{Term} \\\\\n            &\\qquad\\mid \\evit{Func}, \\t{\u2018\u2018(''}, [\\evit{Term}, \\qty{\\t{\u2018\u2018,''}, \\evit{Term}}], \\t{\u2018\u2018)''} \\\\\n          \\evit{Atom} &::= \\evit{Rel}, \\t{\u2018\u2018(''}, \\evit{Term}, \\t{\u2018\u2018)''} \\tag{Atom} \\\\\n            &\\qquad\\mid \\t{\u2018\u2018(''}, \\evit{Term}, \\t{\u2018\u2018\\(\\approx\\)''}, \\evit{Term}, \\t{\u2018\u2018)''} \\\\\n          \\evit{Form} &::= \\evit{Atom} \\mid \\t{\u2018\u2018(''}, \\t{\u2018\u2018\\(\\lnot\\)''},  \\evit{Atom}, \\t{\u2018\u2018)''} \\tag{Formula} \\\\\n            &\\qquad\\mid \\t{\u2018\u2018(''}, \\evit{Atom}, \\evit{BinCon}, \\evit{Atom}, \\t{\u2018\u2018)''} \\\\\n            &\\qquad\\mid \\evit{Quant}, \\evit{BoundVar}, \\evit{Form}\n        \\end{align*}\\]"
           )
         ])
       ),
       text(
-        "This allows formulas to be made but does not give them any meaning, as no valuation has been defined. Even without evaluation, though, the validity of statements should be justifiable from rules of the system alone; \\(a \\sff a\\) should always evaluate to true, for example. With this as motivation, rules of formal deduction can be defined. To this end, let \\(\\Sigma\\) denote a set of formulas."
+        "This allows formulas to be made but does not give them any meaning, as no valuation has been defined. Even without evaluation, though, the validity of statements should be justifiable from rules of the system alone; \\(a \\sff a\\) should always evaluate to true, for example. With this as motivation, rules of formal deduction can be defined. To this end, let \\(\\Sigma\\) denote a set of formulas and \\(A\\), \\(B\\), and \\(C\\) individual formulas, and let the meta-relation \\(\\vdash\\) be such that \\(\\Sigma \\vdash A\\) denotes that \\(A\\) is formally deducible from \\(\\Sigma\\)."
       ),
       div(
         toList([
@@ -3587,7 +3632,7 @@ function view5() {
         toList([
           text("A formula should trivially prove itself:"),
           equation(
-            "\n              \\[\\begin{prooftree}\n                \\AXC{}\n                \\LeftLabel{Reflexivity} \\RightLabel{ (Ref)} \\UIC{\\(A \\vdash A\\)}\n              \\end{prooftree}\\]\n          "
+            "\n              \\[\\begin{prooftree}\n                \\AXC{}\n                \\LeftLabel{Reflexivity} \\RightLabel{ (Ref)} \\UIC{\\(\\qty{A} \\vdash A\\)}\n              \\end{prooftree}\\]\n          "
           ),
           text(
             "Adding premises to an argument should not affect its conclusion:"
@@ -3653,10 +3698,10 @@ function view5() {
         "From these, new rules can be derived. For example, a set of premises should prove all of its elements:"
       ),
       equation(
-        "\n        \\[\\begin{prooftree}\n           \\AXC{\\(A \\in \\Sigma\\)} \\UIC{\\(\\Sigma \\cup \\qty{A} = \\Sigma\\)}\n           \\AXC{(Ref)} \\UIC{\\(A \\vdash A\\)} \\AXC{(+)}\n           \\BIC{\\(\\Sigma \\cup \\qty{A} \\vdash A\\)}\n          \\LeftLabel{Membership rule } \\RightLabel{ \\((\\in)\\)} \\BIC{\\(\\Sigma \\vdash A\\)}\n        \\end{prooftree}\\]\n      "
+        "\n        \\[\\begin{prooftree}\n           \\AXC{\\(A \\in \\Sigma\\)} \\UIC{\\(\\Sigma \\cup \\qty{A} = \\Sigma\\)}\n           \\AXC{(Ref)} \\UIC{\\(\\qty{A} \\vdash A\\)} \\AXC{(+)}\n           \\BIC{\\(\\Sigma \\cup \\qty{A} \\vdash A\\)}\n          \\LeftLabel{Membership rule } \\RightLabel{ \\((\\in)\\)} \\BIC{\\(\\Sigma \\vdash A\\)}\n        \\end{prooftree}\\]\n      "
       ),
       text(
-        "\n        Proofs quickly grow tediously long, though; consider a proof that \\(\\qty{A \\sff B} \\vdash (A \\smp B) \\land (B \\smp A)\\):"
+        "\n        Proofs quickly grow tediously long, though; consider a proof that a biconditional proves the forward and reverse implications:"
       ),
       equation(
         "\n        \\[\\begin{alignat}{3}\n          (1) &&\\qquad \\qty{A \\sff B, A} &\\vdash A \\sff B \\qquad&& (\\in) \\\\\n          (2) &&\\qquad &\\vdash A \\qquad&&(\\in) \\\\\n          (3) &&\\qquad &\\vdash B \\qquad&& (1), (2), ({\\sff}{-}) \\\\\n          (4) &&\\qquad \\qty{A \\sff B} &\\vdash A \\smp B \\qquad&& (3), ({\\smp}{+}) \\\\\n          (5) &&\\qquad \\qty{A \\sff B, B} &\\vdash A \\sff B \\qquad&& (\\in) \\\\\n          (6) &&\\qquad &\\vdash B \\qquad&&(\\in) \\\\\n          (7) &&\\qquad &\\vdash A \\qquad&& (5), (6), ({\\sff}{-}) \\\\\n          (8) &&\\qquad \\qty{A \\sff B} &\\vdash A \\smp B \\qquad&& (7), ({\\smp}{+}) \\\\\n          (9) &&\\qquad \\qty{A \\sff B} &\\vdash (A \\smp B) \\land (B \\smp A) \\qquad&& (4), (8), ({\\land}{+})\n        \\end{alignat}\\]\n      "
@@ -3695,7 +3740,9 @@ function view5() {
           equation(
             "\n            \\[\\begin{prooftree}\n              \\AXC{\\(\\Sigma \\cup \\qty{A(u)} \\vdash B\\)} \\AXC{\\(u\\) not occurring in \\(\\Sigma\\) or \\(B\\)}\n              \\LeftLabel{\\(\\exists\\) elimination} \\RightLabel{ \\(({\\exists}{-}\\))} \\BIC{\\(\\Sigma \\cup \\qty{\\exists x A(x)} \\vdash B\\)}\n            \\end{prooftree}\\]\n          "
           ),
-          text("Proving that a statement holds for any \\(t\\) proves"),
+          text(
+            "Proving that a statement holds for any \\(t\\) proves "
+          ),
           i2("a fortiori "),
           text("that it holds for some \\(x\\):"),
           equation(
@@ -4224,14 +4271,14 @@ function view_nav() {
   );
 }
 function view_writing(title) {
-  let writings = (() => {
-    let _pipe = toList([]);
-    let _pipe$1 = meta5(_pipe);
-    let _pipe$2 = meta(_pipe$1);
-    let _pipe$3 = meta4(_pipe$2);
-    let _pipe$4 = meta3(_pipe$3);
-    return meta2(_pipe$4);
-  })();
+  let _block;
+  let _pipe = toList([]);
+  let _pipe$1 = meta5(_pipe);
+  let _pipe$2 = meta(_pipe$1);
+  let _pipe$3 = meta4(_pipe$2);
+  let _pipe$4 = meta3(_pipe$3);
+  _block = meta2(_pipe$4);
+  let writings = _block;
   let $ = title === "";
   if ($) {
     retitle("Writings");
@@ -4312,17 +4359,17 @@ function view_writing(title) {
   }
 }
 function view8(model) {
-  let page = (() => {
-    let $ = model.route;
-    if ($ instanceof Resume2) {
-      return view2();
-    } else if ($ instanceof Writings) {
-      let title = $[0];
-      return view_writing(title);
-    } else {
-      return view();
-    }
-  })();
+  let _block;
+  let $ = model.route;
+  if ($ instanceof Resume2) {
+    _block = view2();
+  } else if ($ instanceof Writings) {
+    let title = $[0];
+    _block = view_writing(title);
+  } else {
+    _block = view();
+  }
+  let page = _block;
   return stack2(
     toList([]),
     toList([
